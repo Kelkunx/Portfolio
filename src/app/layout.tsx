@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <header className="bg-white border-b">
           <div className="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div className="text-lg font-semibold">Prénom NOM</div>
+            <div className="text-lg font-semibold">Léo JEGO</div>
             <nav className="space-x-4">
               <a href="/" className="hover:underline">Accueil</a>
               <a href="/projets" className="hover:underline">Projets</a>
@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <footer className="border-t mt-8">
           <div className="max-w-5xl mx-auto px-4 py-6 text-sm text-slate-600">
-            © {new Date().getFullYear()} Prénom NOM — Développeur web
+            © {new Date().getFullYear()} Léo JEGO — Développeur web
           </div>
         </footer>
       </body>

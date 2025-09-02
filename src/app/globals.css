@@ -1,9 +1,7 @@
 /* app/globals.css */
 
 /* Tailwind base + components + utilities */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 /* resets / custom global rules */
 html, body, #__next {

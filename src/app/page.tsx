@@ -5,7 +5,7 @@ export default function HomePage() {
   return (
     <section>
       <div className="py-12">
-        <h1 className="text-3xl md:text-5xl font-extrabold">Bonjour — je suis Prénom NOM.</h1>
+        <h1 className="text-3xl md:text-5xl font-extrabold">Bonjour — je suis Léo JEGO.</h1>
         <p className="mt-4 text-lg text-slate-700 max-w-2xl">
           Développeur web fullstack (React, Next.js, NestJS). J'aime construire des interfaces rapides, accessibles et maintenables.
         </p>
