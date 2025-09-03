@@ -8,6 +8,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import Link from 'next/link';
 
 export default function Header() {
   return (
@@ -19,13 +20,13 @@ export default function Header() {
           </Typography>
 
           <Box>
-            <Button href="/" sx={{ mr: 1 }}>
+            <Button href="/" component={Link} sx={{ mr: 1 }}>
               Accueil
             </Button>
-            <Button href="/projets" sx={{ mr: 1 }}>
+            <Button href="/projets" component={Link} sx={{ mr: 1 }}>
               Projets
             </Button>
-            <Button href="/contact" variant="outlined">
+            <Button href="/contact" component={Link} variant="outlined">
               Contact
             </Button>
           </Box>
