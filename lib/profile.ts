@@ -58,7 +58,7 @@ skills: [
   experiences: [
     {
       company: 'CGI',
-      role: 'Développeur en alternance',
+      role: 'Développeur web full-stack',
       start: 'Septembre 2024',
       end: 'Août 2025',
       location: 'Larmor-Plage, France',
@@ -81,7 +81,7 @@ skills: [
       role: 'Stagiaire (7 semaines)',
       start: 'Mai 2023',
       end: 'Juin 2023',
-      location: 'BZH, France',
+      location: 'Lorient, France',
       bullets: [
         "Création d'une solution de surveillance de la consommation électrique d'équipements.",
         "Mise en place d'une base de données et automatisation de la collecte de données.",

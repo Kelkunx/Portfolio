@@ -28,7 +28,15 @@ export default function ProjectCard({
     <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       {imageSrc && (
         <Box sx={{ aspectRatio: '16/9', overflow: 'hidden' }}>
-          <CardMedia component="img" image={imageSrc} alt={imageAlt || title} sx={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <CardMedia
+  component="img"
+  height="140"
+  image={imageSrc && imageSrc.trim() !== '' 
+    ? imageSrc 
+    : 'https://placehold.co/600x400?text=No+Image'}
+  alt={imageAlt || 'Image de projet'}
+/>
+
         </Box>
       )}
 

@@ -5,28 +5,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import ProjectCard from '../../components/ProjectCard';
 
-const projects = [
-  {
-    title: 'App commandes',
-    short: '',
-    description: 'React + NestJS',
-    slug: 'app-commandes',
-    imageSrc: '/images/app-commandes.png',
-    tech: ['React', 'NestJS', 'TypeScript'],
-    demoUrl: 'https://demo.example.com/app-commandes',
-    repoUrl: 'https://gitlab.com/ton-namespace/app-commandes',
-  },
-  {
-    title: 'Blog statique',
-    short:'',
-    description: 'Next.js + Markdown',
-    slug: 'blog-next',
-    imageSrc: '/images/blog-next.png',
-    tech: ['Next.js', 'Vercel'],
-    demoUrl: 'https://demo.example.com/blog-next',
-    repoUrl: 'https://github.com/ton-namespace/blog-next',
-  },
-];
+import { projects } from '../../../lib/projects';
 
 export default function ProjectsPage() {
   return (

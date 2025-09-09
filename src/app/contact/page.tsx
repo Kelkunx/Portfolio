@@ -1,31 +1,90 @@
-// src/app/contact/page.tsx (extrait)
-import React from 'react';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import ContactForm from '../../components/ContactForm';
-import Link from 'next/link';
+'use client';
 
-export const metadata = {
-  title: 'Contact — Léo JEGO',
-  description: 'Me contacter — Développeur web fullstack',
-};
+import React from 'react';
+import {
+  Container,
+  Typography,
+  Stack,
+  Button,
+  Box,
+  Paper,
+} from '@mui/material';
+import {
+  Email,
+  Phone,
+  LinkedIn,
+  GitHub,
+  PictureAsPdf,
+} from '@mui/icons-material';
 
 export default function ContactPage() {
   return (
-    <Container maxWidth="md" sx={{ py: 6 }}>
-      <Typography variant="h4" gutterBottom>
-        Contact
-      </Typography>
+    <Container maxWidth="sm" sx={{ py: 8 }}>
+      <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
+        <Box textAlign="center" mb={4}>
+          <Typography variant="h3" component="h1" gutterBottom>
+            Me contacter
+          </Typography>
+          <Typography variant="body1" color="text.secondary">
+            Vous pouvez me joindre facilement par email, téléphone ou via mes
+            réseaux pro.
+          </Typography>
+        </Box>
 
-      <Typography variant="body1" color="text.secondary" paragraph>
-        Tu peux m&apos;envoyer un message via ce formulaire ou m&apos;écrire directement par email :
-        <Link href="mailto:leo.jego56@gmail.com" style={{ marginLeft: 8 }}>leo.jego56@gmail.com</Link>.
-      </Typography>
+        <Stack spacing={2}>
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<Email />}
+            href="mailto:leo.jego56@gmail.com"
+            fullWidth
+          >
+            leo.jego56@gmail.com
+          </Button>
 
-      <Box sx={{ mt: 3 }}>
-        <ContactForm />
-      </Box>
+          <Button
+            variant="outlined"
+            startIcon={<Phone />}
+            href="tel:+33755648201"
+            fullWidth
+          >
+            +33 7 55 64 82 01
+          </Button>
+
+          <Button
+            variant="outlined"
+            startIcon={<LinkedIn />}
+            href="https://www.linkedin.com/in/leo-jego"
+            target="_blank"
+            rel="noopener noreferrer"
+            fullWidth
+          >
+            LinkedIn
+          </Button>
+
+          <Button
+            variant="outlined"
+            startIcon={<GitHub />}
+            href="https://github.com/Kelkunx"
+            target="_blank"
+            rel="noopener noreferrer"
+            fullWidth
+          >
+            GitHub
+          </Button>
+
+          <Button
+            variant="outlined"
+            startIcon={<PictureAsPdf />}
+            href="/cv-leo-jego.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            fullWidth
+          >
+            Télécharger mon CV (PDF)
+          </Button>
+        </Stack>
+      </Paper>
     </Container>
   );
 }

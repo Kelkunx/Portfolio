@@ -14,28 +14,47 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: 'app-commandes',
-    title: 'App Commandes',
-    short: "Import & gestion — front React + API NestJS",
+    slug: 'portfolio',
+    title: 'Portfolio personnel',
+    short: 'CV dynamique et vitrine de mes projets',
     description:
-      "Application interne de gestion des commandes. Front React (hooks, context), back NestJS (REST), import de fichiers CSV et tests E2E.",
-    imageSrc: '/images/app-commandes.png',
-    imageAlt: 'Capture App Commandes',
-    tech: ['React', 'NestJS', 'TypeScript'],
-    demoUrl: 'https://demo.example.com/app-commandes',
-    repoUrl: 'https://gitlab.com/ton-namespace/app-commandes',
-    date: '2025-06',
+      "Ce site web est mon portfolio personnel. "
+      + "Il présente mes compétences, mes expériences et mes projets. "
+      + "Développé avec Next.js et React, il utilise MUI pour le design et suit une architecture moderne. "
+      + "Il inclut une page contact avec mes coordonnées et un accès direct à mon CV en PDF.",
+    imageSrc: 'https://placehold.co/600x400?text=No+Image', // capture de ton portfolio une fois déployé
+    imageAlt: 'Capture du portfolio personnel',
+    tech: ['Next.js', 'React', 'TypeScript', 'MUI'],
+    demoUrl: 'https://leo-jego.vercel.app', // à mettre une fois déployé
+    repoUrl: 'https://github.com/Kelkunx/Portfolio', // si tu veux rendre public
+    date: '2025-09',
   },
   {
-    slug: 'blog-next',
-    title: 'Blog statique',
-    short: 'Blog statique performant avec Next.js & MDX',
-    description: 'Blog optimisé SEO, génération SSG, composants MDX réutilisables.',
-    imageSrc: '/images/blog-next.png',
-    imageAlt: 'Capture Blog Next',
-    tech: ['Next.js', 'Vercel'],
-    repoUrl: 'https://github.com/ton-namespace/blog-next',
-    date: '2024-11',
+    slug: 'news-dashboard-ai',
+    title: 'News Dashboard AI',
+    short: "Fil d'actualité intelligent avec IA et filtres personnalisés",
+    description:
+      "Application web affichant un fil d'actualité filtrable par catégories et mots-clés. "
+      + "Chaque article est accompagné d'un résumé court généré automatiquement par un modèle d'IA HuggingFace. "
+      + "Le projet combine un front React avec Tailwind CSS et un back NestJS pour l'agrégation des données.",
+    imageSrc: 'https://placehold.co/600x400?text=No+Image',
+    imageAlt: 'Capture du News Dashboard AI',
+    tech: ['React', 'NestJS', 'Tailwind', 'HuggingFace'],
+    repoUrl: 'https://github.com/Kelkunx/news-dashboard-ai', // à remplacer si tu publies
+    date: '2025-08',
   },
-  // autres projets...
+  {
+    slug: 'bts-baie-securisee',
+    title: 'Projet BTS — Baie serveur sécurisée',
+    short: "Mise en place d'une baie serveur sécurisée pour une entreprise fictive",
+    description:
+      "Projet scolaire réalisé en BTS : conception et mise en place d'une baie serveur sécurisée. "
+      + "Elle incluait un serveur Active Directory, un réseau ethernet et un réseau wifi, un NAS, un système de caméras avec détection de mouvement, "
+      + "et un monitoring de la température et de l'humidité. "
+      + "J'ai personnellement installé un serveur RADIUS relié à une borne wifi Cisco et configuré des capteurs de mouvement, de température et d'humidité avec Arduino.",
+    imageSrc: 'https://placehold.co/600x400?text=No+Image', // image illustrative
+    imageAlt: "Illustration d'une baie serveur sécurisée",
+    tech: ['Active Directory', 'Cisco', 'RADIUS', 'Arduino'],
+    date: '2024-06',
+  },
 ];
