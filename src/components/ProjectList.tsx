@@ -86,7 +86,7 @@ export default function ProjectsList({ projects }: Props) {
 
         {filtered.length === 0 && (
           <Box sx={{ p: 4 }}>
-            Aucune correspondance — essaie d'élargir ta recherche ou désactive le filtre.
+            Aucune correspondance — essaie d&apos;élargir ta recherche ou désactive le filtre.
           </Box>
         )}
       </Grid>

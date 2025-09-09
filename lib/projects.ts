@@ -1,4 +1,4 @@
-// lib/projects.ts
+// src/lib/projects.ts
 export type Project = {
   slug: string;
   title: string;
@@ -6,7 +6,7 @@ export type Project = {
   description: string;
   imageSrc?: string;
   imageAlt?: string;
-  tech: string[]; // ex: ['React', 'NestJS', 'TypeScript']
+  tech: string[];
   demoUrl?: string;
   repoUrl?: string;
   date?: string;
@@ -16,7 +16,7 @@ export const projects: Project[] = [
   {
     slug: 'app-commandes',
     title: 'App Commandes',
-    short: "Import de fichiers & gestion mails — front React + API NestJS",
+    short: "Import & gestion — front React + API NestJS",
     description:
       "Application interne de gestion des commandes. Front React (hooks, context), back NestJS (REST), import de fichiers CSV et tests E2E.",
     imageSrc: '/images/app-commandes.png',
@@ -37,5 +37,5 @@ export const projects: Project[] = [
     repoUrl: 'https://github.com/ton-namespace/blog-next',
     date: '2024-11',
   },
-  // ajoute d'autres projets...
+  // autres projets...
 ];

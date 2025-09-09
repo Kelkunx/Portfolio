@@ -1,6 +1,6 @@
-// app/projets/[slug]/page.tsx
+// src/app/projets/[slug]/page.tsx
 import React from 'react';
-import { projects, Project } from '../../../../lib/projects';
+import { projects, type Project } from '../../../../lib/projects';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -14,7 +14,7 @@ export async function generateStaticParams() {
 }
 
 export default function ProjectDetail({ params }: Params) {
-  const project = projects.find((p) => p.slug === params.slug);
+  const project: Project | undefined = projects.find((p) => p.slug === params.slug);
   if (!project) {
     return (
       <Container maxWidth="lg" sx={{ py: 8 }}>
@@ -40,7 +40,7 @@ export default function ProjectDetail({ params }: Params) {
       </Typography>
 
       <Box sx={{ mt: 2 }}>
-        <Typography component={"h5"} variant="subtitle1">Stack :</Typography>
+        <Typography variant="subtitle1">Stack :</Typography>
         <Box component="div" sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mt: 1 }}>
           {project.tech.map((t) => (
             <Box key={t} sx={{ px: 1.5, py: 0.5, bgcolor: 'grey.100', borderRadius: 1 }}>

@@ -1,4 +1,4 @@
-// app/contact/page.tsx
+// src/app/contact/page.tsx (extrait)
 import React from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -19,7 +19,7 @@ export default function ContactPage() {
       </Typography>
 
       <Typography variant="body1" color="text.secondary" paragraph>
-        Vous pouvez m'envoyer un message via ce formulaire ou m'écrire directement par email :
+        Tu peux m&apos;envoyer un message via ce formulaire ou m&apos;écrire directement par email :
         <Link href="mailto:leo.jego56@gmail.com" style={{ marginLeft: 8 }}>leo.jego56@gmail.com</Link>.
       </Typography>
 

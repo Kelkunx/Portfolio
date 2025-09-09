@@ -8,6 +8,7 @@ import ProjectCard from '../../components/ProjectCard';
 const projects = [
   {
     title: 'App commandes',
+    short: '',
     description: 'React + NestJS',
     slug: 'app-commandes',
     imageSrc: '/images/app-commandes.png',
@@ -17,6 +18,7 @@ const projects = [
   },
   {
     title: 'Blog statique',
+    short:'',
     description: 'Next.js + Markdown',
     slug: 'blog-next',
     imageSrc: '/images/blog-next.png',
@@ -38,6 +40,7 @@ export default function ProjectsPage() {
           <Grid key={p.slug} size={{ xs: 12, sm: 6, md: 4 }}>
             <ProjectCard
               title={p.title}
+              short={p.short}
               description={p.description}
               slug={p.slug}
               imageSrc={p.imageSrc}

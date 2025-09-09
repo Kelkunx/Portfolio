@@ -1,4 +1,4 @@
-// components/ContactForm.tsx
+// src/components/ContactForm.tsx
 'use client';
 import React, { useRef } from 'react';
 import Box from '@mui/material/Box';
@@ -20,6 +20,12 @@ const ContactSchema = z.object({
 });
 type ContactFormData = z.infer<typeof ContactSchema>;
 
+function getErrorMessage(err: unknown): string {
+  if (err instanceof Error) return err.message;
+  if (typeof err === 'string') return err;
+  return 'Erreur inconnue';
+}
+
 export default function ContactForm() {
   const statusRef = useRef<HTMLDivElement | null>(null);
   const { register, handleSubmit, reset, formState } = useForm<ContactFormData>({ resolver: zodResolver(ContactSchema) });
@@ -36,9 +42,9 @@ export default function ContactForm() {
       setStatus('success');
       reset();
       statusRef.current?.focus();
-    } catch (err: any) {
+    } catch (err: unknown) {
       setStatus('error');
-      setErrorMessage(err?.message || 'Erreur inconnue');
+      setErrorMessage(getErrorMessage(err));
       statusRef.current?.focus();
     }
   };
