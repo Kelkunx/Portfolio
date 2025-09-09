@@ -1,20 +1,55 @@
-/* app/globals.css */
+/* app/globals.css - include your existing tailwind imports or base styles above if needed */
 
-/* Tailwind base + components + utilities */
-@import "tailwindcss";
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: -1;
+}
+.skip-link:focus,
+.skip-link:active {
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 6px;
+  box-shadow: 0 4px 14px rgba(2,6,23,0.2);
+  z-index: 9999;
+  text-decoration: none;
+}
 
-/* resets / custom global rules */
-html, body, #__next {
-  height: 100%;
+/* Focus visible (accessible) */
+:focus {
+  outline: 3px solid rgba(59, 130, 246, 0.55);
+  outline-offset: 3px;
 }
-body {
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #ffffff;
-  color: #0f172a; /* slate-900 */
+
+/* respect user prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
-a:focus, button:focus {
-  outline: 3px solid rgba(59,130,246,0.3); /* good visible focus */
-  outline-offset: 2px;
+
+/* Optional: improve text contrast for printed CV & ensure print colors */
+@media print {
+  @page { size: A4; margin: 15mm; }
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; color-adjust: exact; }
 }
+
+/* Small utility: make all interactive elements have pointer cursor */
+button, a, input, textarea {
+  cursor: pointer;
+}
+
+/* you may keep other Tailwind / global rules below or above */

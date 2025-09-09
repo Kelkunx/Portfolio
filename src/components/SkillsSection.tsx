@@ -11,14 +11,14 @@ import { profile } from '../../lib/profile';
 export default function SkillsSection() {
   return (
     <Box sx={{ mt: 4 }}>
-      <Typography variant="h5" gutterBottom>
+      <Typography component={"h4"} variant="h5" gutterBottom>
         Compétences
       </Typography>
 
       <Stack spacing={3}>
         {profile.skills.map((group) => (
           <Box key={group.category}>
-            <Typography variant="subtitle1" sx={{ mb: 1 }}>
+            <Typography component={"h5"} variant="subtitle1" sx={{ mb: 1 }}>
               {group.category}
             </Typography>
 

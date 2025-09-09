@@ -19,7 +19,7 @@ export default function ContactPage() {
       </Typography>
 
       <Typography variant="body1" color="text.secondary" paragraph>
-        Tu peux m'envoyer un message via ce formulaire ou m'écrire directement par email :
+        Vous pouvez m'envoyer un message via ce formulaire ou m'écrire directement par email :
         <Link href="mailto:leo.jego56@gmail.com" style={{ marginLeft: 8 }}>leo.jego56@gmail.com</Link>.
       </Typography>
 

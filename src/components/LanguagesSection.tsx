@@ -16,7 +16,7 @@ export default function LanguagesSection() {
 
   return (
     <Box sx={{ mt: 4 }}>
-      <Typography variant="h5" gutterBottom>
+      <Typography component={"h4"} variant="h5" gutterBottom>
         Langues
       </Typography>
 

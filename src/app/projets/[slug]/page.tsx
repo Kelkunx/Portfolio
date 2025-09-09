@@ -40,7 +40,7 @@ export default function ProjectDetail({ params }: Params) {
       </Typography>
 
       <Box sx={{ mt: 2 }}>
-        <Typography variant="subtitle1">Stack :</Typography>
+        <Typography component={"h5"} variant="subtitle1">Stack :</Typography>
         <Box component="div" sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mt: 1 }}>
           {project.tech.map((t) => (
             <Box key={t} sx={{ px: 1.5, py: 0.5, bgcolor: 'grey.100', borderRadius: 1 }}>

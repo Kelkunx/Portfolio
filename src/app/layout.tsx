@@ -6,17 +6,18 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 export const metadata = {
-  title: 'Mon Portfolio — Léo JEGO',
-  description: 'Portfolio — Développeur web fullstack',
+  title: 'Portfolio - Léo JEGO',
+  description: 'Portfolio de Léo JEGO, développeur web fullstack (React, Next.js, NestJS)',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr">
       <body>
+        <a href="#main-content" className="skip-link">Aller au contenu</a>
         <Providers>
           <Header />
-          <main style={{ minHeight: '70vh' }}>{children}</main>
+          <main id="main-content">{children}</main>
           <Footer />
         </Providers>
       </body>

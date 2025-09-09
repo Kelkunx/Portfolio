@@ -14,7 +14,7 @@ function formatRange(start?: string, end?: string) {
 export default function ExperienceSection() {
   return (
     <Box sx={{ mt: 6 }}>
-      <Typography variant="h5" gutterBottom>
+      <Typography component={"h4"} variant="h5" gutterBottom>
         Expériences professionnelles
       </Typography>
 

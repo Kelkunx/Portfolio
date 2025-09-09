@@ -16,7 +16,7 @@ export default function CertificationsSection() {
 
   return (
     <Box sx={{ mt: 6 }}>
-      <Typography variant="h5" gutterBottom>
+      <Typography component={"h4"} variant="h5" gutterBottom>
         Certifications
       </Typography>
 

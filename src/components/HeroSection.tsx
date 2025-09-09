@@ -3,28 +3,45 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
+import Image from 'next/image';
 import { profile } from '../../lib/profile';
-import { LinkedIn, GitHub, Email, Phone } from '@mui/icons-material';
+import { LinkedIn, Email, Phone } from '@mui/icons-material';
 
 export default function HeroSection() {
   return (
-    <Box sx={{ py: 6 }}>
-      <Stack direction={{ xs: 'column', md: 'row' }} spacing={4} alignItems="center">
-        <Avatar alt={profile.name} src={profile.avatar} sx={{ width: 120, height: 120 }} />
+    <Box component="section" aria-labelledby="hero-heading" sx={{ py: 6 }}>
+      <Stack
+        direction={{ xs: 'column', md: 'row' }}
+        spacing={4}
+        alignItems="center"
+      >
+        <Box sx={{ flexShrink: 0 }}>
+          <Image
+            src={profile.avatar}
+            alt={`Portrait de ${profile.name}`}
+            width={120}
+            height={120}
+            style={{
+              borderRadius: '50%',
+              objectFit: 'cover',
+            }}
+            priority
+          />
+        </Box>
 
         <Box>
-          <Typography variant="h3" component="h1">
+          <Typography id="hero-heading" component="h1" variant="h3">
             {profile.name}
           </Typography>
-          <Typography variant="subtitle1" color="text.secondary" sx={{ mt: 1 }}>
+
+          <Typography component="h2" variant="subtitle1" color="text.secondary" sx={{ mt: 1 }}>
             {profile.title} — {profile.location}
           </Typography>
 
-          <Typography sx={{ mt: 2, maxWidth: '60ch' }} color="text.secondary">
+          <Typography component="h3" sx={{ mt: 2, maxWidth: '60ch' }} color="text.secondary">
             {profile.summary}
           </Typography>
 
@@ -32,13 +49,17 @@ export default function HeroSection() {
             <Button variant="contained" component={Link} href="/projets">
               Voir mes projets
             </Button>
-
-            <Button variant="outlined" component="a" href={profile.cvPdf} target="_blank" rel="noopener noreferrer">
+            <Button
+              variant="outlined"
+              component="a"
+              href={profile.cvPdf}
+              download
+            >
               Télécharger le CV (PDF)
             </Button>
           </Stack>
 
-          <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
+          <Stack direction="row" spacing={1} sx={{ mt: 2, flexWrap: 'wrap' }}>
             <Button
               variant="text"
               href={profile.linkedin}
@@ -48,7 +69,6 @@ export default function HeroSection() {
             >
               LinkedIn
             </Button>
-
             <Button
               variant="text"
               href={`mailto:${profile.email}`}
@@ -56,8 +76,11 @@ export default function HeroSection() {
             >
               {profile.email}
             </Button>
-
-            <Button variant="text" href={`tel:${profile.phone}`} startIcon={<Phone />}>
+            <Button
+              variant="text"
+              href={`tel:${profile.phone}`}
+              startIcon={<Phone />}
+            >
               {profile.phone}
             </Button>
           </Stack>

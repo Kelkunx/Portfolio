@@ -9,14 +9,14 @@ import { profile } from '../../lib/profile';
 export default function EducationSection() {
   return (
     <Box sx={{ mt: 6 }}>
-      <Typography variant="h5" gutterBottom>
+      <Typography component={"h4"} variant="h5" gutterBottom>
         Formations
       </Typography>
 
       <Stack spacing={2}>
         {profile.education.map((edu, i) => (
           <Box key={i}>
-            <Typography variant="subtitle1">
+            <Typography component={"h5"} variant="subtitle1">
               {edu.degree} — {edu.school}
             </Typography>
             <Typography variant="caption" color="text.secondary">
