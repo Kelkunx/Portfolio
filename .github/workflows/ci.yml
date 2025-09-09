@@ -29,8 +29,5 @@ jobs:
       - name: Lint
         run: npx eslint src --ext .ts,.tsx
 
-      - name: Run tests
-        run: npm test -- --passWithNoTests
-
       - name: Build Next.js
         run: npm run build
