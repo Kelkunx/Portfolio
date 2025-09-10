@@ -12,6 +12,7 @@ import Chip from '@mui/material/Chip';
 import Grid from '@mui/material/Grid'; // nouvelle API : use Grid with container + size prop
 import Divider from '@mui/material/Divider';
 import { Metadata } from 'next';
+import ImageLightbox from '../../../components/ImageLightbox';
 
 type Params = { params: { slug: string } };
 
@@ -45,10 +46,10 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     openGraph: {
       title: `${project.title} — Léo JEGO`,
       description: project.short ?? project.description,
-      url: `https://ton-domaine.com/projets/${project.slug}`,
+      url: `https://leo-jego.vercel.app/projets/${project.slug}`,
       images: [
         {
-          url: project.imageSrc ? `https://ton-domaine.com${project.imageSrc}` : placeholderDataUrl(project.title),
+          url: project.imageSrc ? `https://leo-jego.vercel.app${project.imageSrc}` : placeholderDataUrl(project.title),
           width: 1200,
           height: 630,
           alt: project.imageAlt || project.title,
@@ -82,10 +83,6 @@ export default function ProjectDetail({ params }: Params) {
 
   return (
     <Container maxWidth="lg" sx={{ py: 6 }}>
-      {/* Breadcrumb / Back */}
-      <Box sx={{ mb: 3 }}>
-        <Link href="/projets" aria-label="Retour à la liste des projets">&larr; Retour aux projets</Link>
-      </Box>
 
       {/* Utilisation de la nouvelle API Grid : parent container, enfants avec `size` */}
       <Grid container spacing={4}>
@@ -94,50 +91,14 @@ export default function ProjectDetail({ params }: Params) {
             {project.title}
           </Typography>
 
-          {published && (
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-              {published}
-            </Typography>
-          )}
-
-          <Box sx={{ width: '100%', height: { xs: 200, md: 380 }, position: 'relative', borderRadius: 1, overflow: 'hidden', mb: 3 }}>
-            <Image
-              src={imageSrc}
-              alt={project.imageAlt || project.title}
-              fill
-              style={{ objectFit: 'cover' }}
-              priority={true}
-            />
+          <Box sx={{ mb: 3 }}>
+            <ImageLightbox src={imageSrc} alt={project.imageAlt || project.title} thumbHeight={project.imageSrc ? ( { xs: 200, md: 380 } as any ) : 240} priority />
           </Box>
 
           <Typography component="section" variant="body1" paragraph>
             {project.description}
           </Typography>
 
-          {/* Liens / CTA */}
-          <Stack direction="row" spacing={2} sx={{ mt: 2, flexWrap: 'wrap' }}>
-            <Button
-              variant="contained"
-              color="primary"
-              href={project.demoUrl || '#'}
-              target={project.demoUrl ? '_blank' : undefined}
-              rel={project.demoUrl ? 'noopener noreferrer' : undefined}
-              disabled={!project.demoUrl}
-              aria-disabled={!project.demoUrl}
-            >
-              Voir la démo
-            </Button>
-
-            <Button
-              variant="outlined"
-              href={project.repoUrl || '#'}
-              target={project.repoUrl ? '_blank' : undefined}
-              rel={project.repoUrl ? 'noopener noreferrer' : undefined}
-              disabled={!project.repoUrl}
-            >
-              Voir le code
-            </Button>
-          </Stack>
         </Grid>
 
         <Grid size={{ xs: 12, md: 4 }}>
@@ -167,16 +128,16 @@ export default function ProjectDetail({ params }: Params) {
 
             <Stack spacing={1}>
               {project.demoUrl && (
-                <Button variant="text" href={project.demoUrl} target="_blank" rel="noopener noreferrer" startIcon={<span aria-hidden>🔗</span>}>
+                <Button variant="outlined" href={project.demoUrl} target="_blank" rel="noopener noreferrer" startIcon={<span aria-hidden>🔗</span>}>
                   Ouvrir la démo
                 </Button>
               )}
               {project.repoUrl && (
-                <Button variant="text" href={project.repoUrl} target="_blank" rel="noopener noreferrer" startIcon={<span aria-hidden>💻</span>}>
+                <Button variant="outlined" href={project.repoUrl} target="_blank" rel="noopener noreferrer" startIcon={<span aria-hidden>💻</span>}>
                   Voir le dépôt
                 </Button>
               )}
-              <Button variant="text" href="/contact">
+              <Button variant="outlined" href="/contact">
                 Me contacter au sujet de ce projet
               </Button>
             </Stack>
