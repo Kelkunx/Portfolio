@@ -7,7 +7,6 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     // Si tu n'as pas d'images externes, laisse remotePatterns vide
     // ou ajoute ici les hôtes autorisés :
-    // remotePatterns: [{ protocol: 'https', hostname: 'images.unsplash.com', pathname: '/**' }]
     remotePatterns: [],
   },
 
