@@ -57,6 +57,7 @@ export default function ImageLightbox({ src, alt = 'Image', thumbHeight = 200, p
         <IconButton
           onClick={() => setOpen(false)}
           aria-label="Fermer"
+          color='warning'
           sx={{ position: 'absolute', right: 8, top: 8, zIndex: 10 }}
         >
           <Close />

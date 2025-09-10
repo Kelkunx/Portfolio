@@ -37,7 +37,7 @@ export const projects: Project[] = [
       "Application web affichant un fil d'actualité filtrable par catégories et mots-clés. "
       + "Chaque article est accompagné d'un résumé court généré automatiquement par un modèle d'IA HuggingFace. "
       + "Le projet combine un front React avec Tailwind CSS et un back NestJS pour l'agrégation des données.",
-    imageSrc: 'images/capture-news.png', // capture de ton app une fois déployée
+    imageSrc: '/images/capture-news.png', // capture de ton app une fois déployée
     imageAlt: 'Capture du Dashboard News AI',
     tech: ['React', 'NestJS', 'Tailwind', 'HuggingFace'],
     demoUrl: 'https://dashboard-news-ai.vercel.app', // à mettre une fois déployé
