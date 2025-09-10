@@ -91,7 +91,7 @@ export default function ProjectDetail({ params }: Params) {
           </Typography>
 
           <Box sx={{ mb: 3 }}>
-            <ImageLightbox src={imageSrc} alt={project.imageAlt || project.title} thumbHeight={project.imageSrc ? ( { xs: 200, md: 380 } as any ) : 240} priority />
+            <ImageLightbox src={imageSrc} alt={project.imageAlt || project.title} thumbHeight={240} priority />
           </Box>
 
           <Typography component="section" variant="body1" paragraph>
