@@ -30,17 +30,18 @@ export const projects: Project[] = [
     date: '2025-09',
   },
   {
-    slug: 'news-dashboard-ai',
-    title: 'News Dashboard AI',
+    slug: 'dashboard-news-ai',
+    title: 'My News App',
     short: "Fil d'actualité intelligent avec IA et filtres personnalisés",
     description:
       "Application web affichant un fil d'actualité filtrable par catégories et mots-clés. "
       + "Chaque article est accompagné d'un résumé court généré automatiquement par un modèle d'IA HuggingFace. "
       + "Le projet combine un front React avec Tailwind CSS et un back NestJS pour l'agrégation des données.",
-    imageSrc: 'https://placehold.co/600x400?text=No+Image',
-    imageAlt: 'Capture du News Dashboard AI',
+    imageSrc: 'images/capture-news.png', // capture de ton app une fois déployée
+    imageAlt: 'Capture du Dashboard News AI',
     tech: ['React', 'NestJS', 'Tailwind', 'HuggingFace'],
-    repoUrl: 'https://github.com/Kelkunx/news-dashboard-ai', // à remplacer si tu publies
+    demoUrl: 'https://dashboard-news-ai.vercel.app', // à mettre une fois déployé
+    repoUrl: 'https://github.com/Kelkunx/dashboard-news-ai', // à remplacer si tu publies
     date: '2025-08',
   },
   {

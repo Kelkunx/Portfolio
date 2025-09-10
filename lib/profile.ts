@@ -78,7 +78,7 @@ skills: [
     },
     {
       company: 'IoT-BZH',
-      role: 'Stagiaire (7 semaines)',
+      role: 'Développeur IoT (stage)',
       start: 'Mai 2023',
       end: 'Juin 2023',
       location: 'Lorient, France',
