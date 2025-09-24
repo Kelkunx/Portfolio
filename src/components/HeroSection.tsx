@@ -49,7 +49,7 @@ export default function HeroSection() {
           </Typography>
 
           <Stack direction="row" spacing={2} sx={{ mt: 3 }}>
-            <Button variant="contained" color="primary" component={Link} href="/projets" startIcon={<LinkedIn />}>
+            <Button variant="contained" color="primary" component={Link} href="/projets">
               Voir mes projets
             </Button>
             <Button variant="outlined" color="secondary" component="a" href={profile.cvPdf} target="_blank" rel="noopener noreferrer">

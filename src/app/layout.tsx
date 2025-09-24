@@ -5,25 +5,38 @@ import Providers from './providers';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Inter } from 'next/font/google';
+import type { Metadata } from 'next';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
 
-export const metadata = {
-  title: 'Léo JEGO — Développeur Fullstack',
-  description: 'Portfolio de Léo JEGO — React, Next.js, NestJS. CV dynamique et projets.',
-  openGraph: {
-    title: 'Léo JEGO — Développeur Fullstack',
-    description: 'Portfolio — Projets, expériences et contact',
-    url: 'https://leo-jego.vercel.app',
-    siteName: 'Léo JEGO — Portfolio',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Léo JEGO — Développeur Fullstack',
-    description: 'Portfolio — Projets, expériences et contact',
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const title = 'Léo JEGO — Développeur Fullstack';
+  const description = 'Portfolio de Léo JEGO — React, Next.js, NestJS. CV dynamique et projets.';
+  const base = process.env.SITE_URL ?? 'https://leo-jego.vercel.app';
+
+  const v = process.env.NEXT_PUBLIC_OG_VERSION ?? String(Date.now());
+
+  const ogUrl = `${base}/api/og?title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent('Portfolio — Projets & CV')}&mode=dark&v=${v}`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: base,
+      siteName: 'Léo JEGO — Portfolio',
+      type: 'website',
+      images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Léo JEGO — Portfolio' }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [ogUrl],
+    },
+  };
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
