@@ -1,4 +1,3 @@
-// components/LanguagesSection.tsx
 'use client';
 import React from 'react';
 import Box from '@mui/material/Box';
@@ -9,14 +8,13 @@ import ListItemText from '@mui/material/ListItemText';
 import { profile } from '../../lib/profile';
 
 export default function LanguagesSection() {
-  // recherche d'une certification TOEIC (si présente)
   const toeic = (profile.certifications || []).find((c) =>
     c.name.toLowerCase().includes('toeic')
   );
 
   return (
     <Box sx={{ mt: 4 }}>
-      <Typography component={"h4"} variant="h5" gutterBottom>
+      <Typography component="h4" variant="h5" color="primary" gutterBottom>
         Langues
       </Typography>
 
@@ -25,7 +23,12 @@ export default function LanguagesSection() {
           const extra = lang.name.toLowerCase() === 'anglais' && toeic ? ` • TOEIC ${toeic.score}` : '';
           return (
             <ListItem key={lang.name} disableGutters>
-              <ListItemText primary={lang.name} secondary={lang.level + extra} />
+              <ListItemText
+                primary={lang.name}
+                secondary={lang.level + extra}
+                primaryTypographyProps={{ color: 'text.primary' }}
+                secondaryTypographyProps={{ color: 'text.secondary' }}
+              />
             </ListItem>
           );
         })}

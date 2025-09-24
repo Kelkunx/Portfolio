@@ -1,4 +1,3 @@
-// components/CertificationsSection.tsx
 'use client';
 import React from 'react';
 import Box from '@mui/material/Box';
@@ -16,7 +15,7 @@ export default function CertificationsSection() {
 
   return (
     <Box sx={{ mt: 6 }}>
-      <Typography component={"h4"} variant="h5" gutterBottom>
+      <Typography component="h4" variant="h5" color="primary" gutterBottom>
         Certifications
       </Typography>
 
@@ -24,7 +23,7 @@ export default function CertificationsSection() {
         {profile.certifications.map((c, i) => (
           <ListItem key={i} disableGutters>
             <ListItemIcon sx={{ minWidth: 36 }}>
-              <SchoolIcon color="primary" />
+              <SchoolIcon color="secondary" />
             </ListItemIcon>
 
             <ListItemText

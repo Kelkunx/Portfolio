@@ -1,4 +1,3 @@
-// components/EducationSection.tsx
 'use client';
 import React from 'react';
 import Box from '@mui/material/Box';
@@ -9,14 +8,14 @@ import { profile } from '../../lib/profile';
 export default function EducationSection() {
   return (
     <Box sx={{ mt: 6 }}>
-      <Typography component={"h4"} variant="h5" gutterBottom>
+      <Typography component="h4" variant="h5" color="primary" gutterBottom>
         Formations
       </Typography>
 
       <Stack spacing={2}>
         {profile.education.map((edu, i) => (
           <Box key={i}>
-            <Typography component={"h5"} variant="subtitle1">
+            <Typography component="h5" variant="subtitle1" color="text.primary">
               {edu.degree} — {edu.school}
             </Typography>
             <Typography variant="caption" color="text.secondary">

@@ -1,4 +1,3 @@
-// src/components/ProjectCard.tsx
 'use client';
 
 import React from 'react';
@@ -13,6 +12,11 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Link from 'next/link';
+import LaunchIcon from '@mui/icons-material/Launch';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import CodeIcon from '@mui/icons-material/Code';
+import StorageIcon from '@mui/icons-material/Storage';
+import LanguageIcon from '@mui/icons-material/Language';
 import type { Project } from '../../lib/projects';
 
 export default function ProjectCard({
@@ -26,6 +30,7 @@ export default function ProjectCard({
   repoUrl,
 }: Project) {
   const img = imageSrc && imageSrc.trim() !== '' ? imageSrc : 'https://placehold.co/600x400?text=No+Image';
+
   return (
     <motion.div
       whileHover={{ scale: 1.02, y: -6 }}
@@ -44,18 +49,12 @@ export default function ProjectCard({
         role="group"
         aria-label={`Projet ${title}`}
       >
-        {/* Image via CardMedia (MUI) */}
         <Box sx={{ aspectRatio: '16/9', overflow: 'hidden', width: '100%' }}>
           <CardMedia
             component="img"
             image={img}
             alt={imageAlt || title}
-            sx={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              display: 'block',
-            }}
+            sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           />
         </Box>
 
@@ -64,73 +63,61 @@ export default function ProjectCard({
             {title}
           </Typography>
 
-          {short ? (
+          {short && (
             <Typography variant="body2" color="text.secondary" paragraph>
               {short}
             </Typography>
-          ) : null}
+          )}
 
           {tech && tech.length > 0 && (
             <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ mt: 1 }}>
               {tech.map((t) => (
-                <Chip key={t} label={t} size="small" variant="outlined" />
+                <Chip
+                  key={t}
+                  label={t}
+                  size="small"
+                  variant="outlined"
+                  color="secondary"
+                />
               ))}
             </Stack>
           )}
         </CardContent>
 
-        <CardActions
-          sx={{
-            justifyContent: 'flex-end',
-            flexWrap: 'wrap',
-            gap: 1,
-            px: 2,
-            pb: 2,
-          }}
-        >
-          {/* Détails (route interne) */}
+        <CardActions sx={{ justifyContent: 'flex-end', flexWrap: 'wrap', gap: 1, px: 2, pb: 2 }}>
           <Button
             component={Link}
             href={`/projets/${slug}`}
             size="small"
             variant="text"
-            sx={{
-              textTransform: 'none',
-              transition: 'transform 160ms ease, box-shadow 160ms ease',
-              '&:hover': { transform: 'translateY(-3px)' },
-            }}
+            startIcon={<LaunchIcon />}
+            sx={{ textTransform: 'none', '&:hover': { transform: 'translateY(-3px)' } }}
             aria-label={`Voir les détails du projet ${title}`}
           >
             Détails
           </Button>
 
-          {/* Démo */}
           {demoUrl && (
             <Button
               size="small"
               href={demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              sx={{
-                textTransform: 'none',
-                '&:hover': { transform: 'translateY(-3px)' },
-              }}
+              startIcon={<LaunchIcon />}
+              sx={{ textTransform: 'none', '&:hover': { transform: 'translateY(-3px)' } }}
             >
               Démo
             </Button>
           )}
 
-          {/* Code */}
           {repoUrl && (
             <Button
               size="small"
               href={repoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              sx={{
-                textTransform: 'none',
-                '&:hover': { transform: 'translateY(-3px)' },
-              }}
+              startIcon={<GitHubIcon />}
+              sx={{ textTransform: 'none', '&:hover': { transform: 'translateY(-3px)' } }}
             >
               Code
             </Button>

@@ -1,4 +1,3 @@
-// components/HeroSection.tsx
 'use client';
 import React from 'react';
 import Box from '@mui/material/Box';
@@ -13,27 +12,31 @@ import { LinkedIn, Email, Phone } from '@mui/icons-material';
 export default function HeroSection() {
   return (
     <Box component="section" aria-labelledby="hero-heading" sx={{ py: 6 }}>
-      <Stack
-        direction={{ xs: 'column', md: 'row' }}
-        spacing={4}
-        alignItems="center"
-      >
+      <Stack direction={{ xs: 'column', md: 'row' }} spacing={4} alignItems="center">
         <Box sx={{ flexShrink: 0 }}>
-          <Image
-            src={profile.avatar}
-            alt={`Portrait de ${profile.name}`}
-            width={150}
-            height={150}
-            style={{
+          <Box
+            sx={{
+              width: 150,
+              height: 150,
               borderRadius: '50%',
-              objectFit: 'cover',
+              overflow: 'hidden',
+              boxShadow: 6,
+              display: 'inline-block',
             }}
-            priority
-          />
+          >
+            <Image
+              src={profile.avatar}
+              alt={`Portrait de ${profile.name}`}
+              width={150}
+              height={150}
+              style={{ objectFit: 'cover', display: 'block' }}
+              priority
+            />
+          </Box>
         </Box>
 
         <Box>
-          <Typography id="hero-heading" component="h1" variant="h3">
+          <Typography id="hero-heading" component="h1" variant="h3" color="primary">
             {profile.name}
           </Typography>
 
@@ -46,42 +49,22 @@ export default function HeroSection() {
           </Typography>
 
           <Stack direction="row" spacing={2} sx={{ mt: 3 }}>
-            <Button variant="contained" component={Link} href="/projets">
+            <Button variant="contained" color="primary" component={Link} href="/projets" startIcon={<LinkedIn />}>
               Voir mes projets
             </Button>
-            <Button
-              variant="outlined"
-              component="a"
-              href={profile.cvPdf}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Button variant="outlined" color="secondary" component="a" href={profile.cvPdf} target="_blank" rel="noopener noreferrer">
               Télécharger le CV (PDF)
             </Button>
           </Stack>
 
           <Stack direction="row" spacing={1} sx={{ mt: 2, flexWrap: 'wrap' }}>
-            <Button
-              variant="text"
-              href={profile.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              startIcon={<LinkedIn />}
-            >
+            <Button variant="text" color="info" href={profile.linkedin} target="_blank" rel="noopener noreferrer" startIcon={<LinkedIn />}>
               LinkedIn
             </Button>
-            <Button
-              variant="text"
-              href={`mailto:${profile.email}`}
-              startIcon={<Email />}
-            >
+            <Button variant="text" color="error" href={`mailto:${profile.email}`} startIcon={<Email />}>
               {profile.email}
             </Button>
-            <Button
-              variant="text"
-              href={`tel:${profile.phone}`}
-              startIcon={<Phone />}
-            >
+            <Button variant="text" color="success" href={`tel:${profile.phone}`} startIcon={<Phone />}>
               {profile.phone}
             </Button>
           </Stack>

@@ -1,4 +1,3 @@
-// src/components/ProjectsList.tsx
 'use client';
 
 import React, { useMemo, useState } from 'react';
@@ -49,9 +48,28 @@ export default function ProjectsList({ projects }: Props) {
         />
 
         <Stack direction="row" spacing={1} sx={{ overflowX: 'auto', py: 1 }}>
-          <Chip label="Tous" clickable color={!activeTech ? 'primary' : 'default'} onClick={() => setActiveTech(null)} />
+          <Chip
+            label="Tous"
+            clickable
+            color={!activeTech ? 'primary' : 'default'}
+            onClick={() => setActiveTech(null)}
+            sx={{
+              fontWeight: !activeTech ? 600 : 400,
+              textTransform: 'none',
+            }}
+          />
           {allTechs.map((t) => (
-            <Chip key={t} label={t} clickable color={activeTech === t ? 'primary' : 'default'} onClick={() => setActiveTech((cur) => (cur === t ? null : t))} />
+            <Chip
+              key={t}
+              label={t}
+              clickable
+              color={activeTech === t ? 'primary' : 'default'}
+              onClick={() => setActiveTech((cur) => (cur === t ? null : t))}
+              sx={{
+                fontWeight: activeTech === t ? 600 : 400,
+                textTransform: 'none',
+              }}
+            />
           ))}
         </Stack>
       </Box>

@@ -22,7 +22,7 @@ export default function ContactPage() {
     <Container maxWidth="sm" sx={{ py: 8 }}>
       <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
         <Box textAlign="center" mb={4}>
-          <Typography variant="h3" component="h1" gutterBottom>
+          <Typography variant="h3" component="h1" gutterBottom color="primary">
             Me contacter
           </Typography>
           <Typography variant="body1" color="text.secondary">
@@ -34,7 +34,7 @@ export default function ContactPage() {
         <Stack spacing={2}>
           <Button
             variant="contained"
-            color="primary"
+            color="error"
             startIcon={<Email />}
             href="mailto:leo.jego56@gmail.com"
             fullWidth
@@ -43,7 +43,8 @@ export default function ContactPage() {
           </Button>
 
           <Button
-            variant="outlined"
+            variant="contained"
+            color="warning"
             startIcon={<Phone />}
             href="tel:+33755648201"
             fullWidth
@@ -52,7 +53,8 @@ export default function ContactPage() {
           </Button>
 
           <Button
-            variant="outlined"
+            variant="contained"
+            color="info"
             startIcon={<LinkedIn />}
             href="https://www.linkedin.com/in/leo-jego"
             target="_blank"
@@ -63,7 +65,8 @@ export default function ContactPage() {
           </Button>
 
           <Button
-            variant="outlined"
+            variant="contained"
+            color="secondary"
             startIcon={<GitHub />}
             href="https://github.com/Kelkunx"
             target="_blank"

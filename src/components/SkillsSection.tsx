@@ -1,4 +1,3 @@
-// components/SkillsSection.tsx
 'use client';
 import React from 'react';
 import Box from '@mui/material/Box';
@@ -7,24 +6,40 @@ import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
 import { profile } from '../../lib/profile';
+import CodeIcon from '@mui/icons-material/Code';
+import StorageIcon from '@mui/icons-material/Storage';
+import BuildIcon from '@mui/icons-material/Build';
+import MemoryIcon from '@mui/icons-material/Memory';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+
+const categoryIcon: Record<string, React.ReactNode> = {
+  'Frontend': <CodeIcon fontSize="small" />,
+  'Backend / API': <BuildIcon fontSize="small" />,
+  'Bases de données': <StorageIcon fontSize="small" />,
+  'DevOps & Tests': <BuildIcon fontSize="small" />,
+  'Langages embarqués & Systèmes': <MemoryIcon fontSize="small" />,
+  'Autres': <MoreHorizIcon fontSize="small" />,
+};
 
 export default function SkillsSection() {
   return (
     <Box sx={{ mt: 4 }}>
-      <Typography component={"h4"} variant="h5" gutterBottom>
+      <Typography component="h4" variant="h5" color="primary" gutterBottom>
         Compétences
       </Typography>
 
       <Stack spacing={3}>
         {profile.skills.map((group) => (
           <Box key={group.category}>
-            <Typography component={"h5"} variant="subtitle1" sx={{ mb: 1 }}>
-              {group.category}
-            </Typography>
+            <Stack direction="row" alignItems="center" spacing={1} sx={{ mb: 1 }}>
+              <Box>{categoryIcon[group.category] || <MoreHorizIcon fontSize="small" />}</Box>
+              <Typography component="h5" variant="subtitle1">
+                {group.category}
+              </Typography>
+            </Stack>
 
             <Stack direction="row" spacing={1} flexWrap="wrap">
               {group.items.map((skill, idx) => {
-                // on met en avant les 2-3 premières compétences de chaque catégorie
                 const featured = idx < 3;
                 return (
                   <Chip
@@ -32,7 +47,7 @@ export default function SkillsSection() {
                     label={skill}
                     size="medium"
                     variant={featured ? 'filled' : 'outlined'}
-                    color={featured ? 'primary' : 'default'}
+                    color={featured ? 'primary' : 'secondary'}
                     sx={{ mr: 1, mb: 1 }}
                   />
                 );
@@ -45,7 +60,7 @@ export default function SkillsSection() {
       </Stack>
 
       <Typography variant="caption" color="text.secondary">
-        Les compétences sont regroupées par catégorie et présentées du plus maîtrisé vers le moins maîtrisé dans chaque groupe.
+        Les compétences sont regroupées par catégorie et présentées du plus maîtrisé vers le moins maîtrisé.
       </Typography>
     </Box>
   );

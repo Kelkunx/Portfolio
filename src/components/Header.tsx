@@ -1,4 +1,3 @@
-// components/Header.tsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -24,7 +23,7 @@ export default function Header() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
@@ -55,17 +54,16 @@ export default function Header() {
               justifyContent: 'space-between',
               minHeight: scrolled ? 56 : 72,
               transition: 'min-height 200ms ease',
-              px: { xs: 2, md: 0 }, // ajout de padding horizontal
+              px: { xs: 2, md: 0 },
             }}
           >
-            {/* Logo */}
             <Typography
               variant="h6"
               component={Link}
               href="/"
               sx={{
                 textDecoration: 'none',
-                color: 'inherit',
+                color: 'primary.main',
                 fontWeight: 700,
                 letterSpacing: '-0.5px',
               }}
@@ -73,14 +71,7 @@ export default function Header() {
               Léo JEGO
             </Typography>
 
-            {/* Desktop nav */}
-            <Box
-              sx={{
-                display: { xs: 'none', md: 'flex' },
-                alignItems: 'center',
-                gap: 2,
-              }}
-            >
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 2 }}>
               {navLinks.map((link) => (
                 <Button
                   key={link.href}
@@ -88,6 +79,7 @@ export default function Header() {
                   href={link.href}
                   sx={{ fontWeight: 500 }}
                   variant={link.label === 'Contact' ? 'outlined' : 'text'}
+                  color={link.label === 'Contact' ? 'secondary' : 'primary'}
                 >
                   {link.label}
                 </Button>
@@ -95,10 +87,9 @@ export default function Header() {
               <ThemeToggle />
             </Box>
 
-            {/* Mobile nav */}
             <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center', gap: 1 }}>
               <ThemeToggle />
-              <IconButton onClick={() => setMobileOpen((o) => !o)}>
+              <IconButton onClick={() => setMobileOpen((o) => !o)} color="primary" aria-label="ouvrir le menu">
                 <MenuIcon />
               </IconButton>
             </Box>
@@ -106,13 +97,12 @@ export default function Header() {
         </Container>
       </AppBar>
 
-      {/* Drawer mobile */}
       <Drawer anchor="right" open={mobileOpen} onClose={() => setMobileOpen(false)}>
         <Box sx={{ width: 240, p: 2 }}>
           <List>
             {navLinks.map((link) => (
               <ListItem key={link.href} disablePadding>
-                <ListItemButton component={Link} href={link.href}>
+                <ListItemButton component={Link} href={link.href} onClick={() => setMobileOpen(false)}>
                   <ListItemText primary={link.label} />
                 </ListItemButton>
               </ListItem>
