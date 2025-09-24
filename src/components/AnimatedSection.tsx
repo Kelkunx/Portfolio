@@ -4,6 +4,7 @@
 import React from 'react';
 import { motion, useReducedMotion, Variants } from 'framer-motion';
 import Box from '@mui/material/Box';
+import { SxProps, Theme } from '@mui/material/styles';
 
 const MotionBox = motion(Box);
 
@@ -22,7 +23,7 @@ export default function AnimatedSection({
   className,
 }: {
   children: React.ReactNode;
-  sx?: any; // permet d'overrider facilement le spacing si besoin
+  sx?: SxProps<Theme>; // permet d'overrider facilement le spacing si besoin
   className?: string;
 }) {
   const reduce = useReducedMotion();
@@ -38,7 +39,7 @@ export default function AnimatedSection({
       whileInView="visible"
       viewport={{ once: false, amount: 0.2 }}
       variants={variants}
-      sx={{...sx }}
+      sx={{ ...sx }}
       className={className}
     >
       {children}
