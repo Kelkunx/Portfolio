@@ -1,23 +1,28 @@
-// components/AnimatedSection.tsx
+// src/components/AnimatedSection.tsx
 'use client';
 
 import React from 'react';
 import { motion, useReducedMotion, Variants } from 'framer-motion';
+import Box from '@mui/material/Box';
+
+const MotionBox = motion(Box);
 
 const baseVariants: Variants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 28 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' },
+    transition: { duration: 0.55, ease: 'easeOut' },
   },
 };
 
 export default function AnimatedSection({
   children,
+  sx,
   className,
 }: {
   children: React.ReactNode;
+  sx?: any; // permet d'overrider facilement le spacing si besoin
   className?: string;
 }) {
   const reduce = useReducedMotion();
@@ -26,15 +31,17 @@ export default function AnimatedSection({
     ? { hidden: { opacity: 1, y: 0 }, visible: { opacity: 1, y: 0 } }
     : baseVariants;
 
+  // Par défaut on applique un padding vertical cohérent (responsive).
   return (
-    <motion.section
+    <MotionBox
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: false, amount: 0.2 }} // <-- rejoue à chaque scroll
+      viewport={{ once: false, amount: 0.2 }}
       variants={variants}
+      sx={{...sx }}
       className={className}
     >
       {children}
-    </motion.section>
+    </MotionBox>
   );
 }

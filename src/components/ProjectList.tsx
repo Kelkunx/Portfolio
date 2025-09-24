@@ -1,4 +1,4 @@
-// components/ProjectsList.tsx
+// src/components/ProjectsList.tsx
 'use client';
 
 import React, { useMemo, useState } from 'react';
@@ -9,7 +9,7 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import ProjectCard from './ProjectCard';
-import { Project } from '../../lib/projects';
+import type { Project } from '../../lib/projects';
 
 type Props = { projects: Project[] };
 
@@ -17,7 +17,6 @@ export default function ProjectsList({ projects }: Props) {
   const [query, setQuery] = useState('');
   const [activeTech, setActiveTech] = useState<string | null>(null);
 
-  // extraire la liste des techs uniques
   const allTechs = useMemo(() => {
     const s = new Set<string>();
     projects.forEach((p) => p.tech.forEach((t) => s.add(t)));
@@ -25,12 +24,13 @@ export default function ProjectsList({ projects }: Props) {
   }, [projects]);
 
   const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
     return projects.filter((p) => {
       const matchesQuery =
-        query.trim() === '' ||
-        p.title.toLowerCase().includes(query.toLowerCase()) ||
-        p.short.toLowerCase().includes(query.toLowerCase()) ||
-        p.description.toLowerCase().includes(query.toLowerCase());
+        q === '' ||
+        p.title.toLowerCase().includes(q) ||
+        p.short.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q);
       const matchesTech = !activeTech || p.tech.includes(activeTech);
       return matchesQuery && matchesTech;
     });
@@ -49,20 +49,9 @@ export default function ProjectsList({ projects }: Props) {
         />
 
         <Stack direction="row" spacing={1} sx={{ overflowX: 'auto', py: 1 }}>
-          <Chip
-            label="Tous"
-            clickable
-            color={!activeTech ? 'primary' : 'default'}
-            onClick={() => setActiveTech(null)}
-          />
+          <Chip label="Tous" clickable color={!activeTech ? 'primary' : 'default'} onClick={() => setActiveTech(null)} />
           {allTechs.map((t) => (
-            <Chip
-              key={t}
-              label={t}
-              clickable
-              color={activeTech === t ? 'primary' : 'default'}
-              onClick={() => setActiveTech((cur) => (cur === t ? null : t))}
-            />
+            <Chip key={t} label={t} clickable color={activeTech === t ? 'primary' : 'default'} onClick={() => setActiveTech((cur) => (cur === t ? null : t))} />
           ))}
         </Stack>
       </Box>
@@ -70,24 +59,16 @@ export default function ProjectsList({ projects }: Props) {
       <Grid container spacing={4} aria-live="polite">
         {filtered.map((p) => (
           <Grid key={p.slug} size={{ xs: 12, sm: 6, md: 4 }}>
-            <ProjectCard
-              title={p.title}
-              short={p.short}
-              description={p.description}
-              slug={p.slug}
-              imageSrc={p.imageSrc}
-              imageAlt={p.imageAlt}
-              tech={p.tech}
-              demoUrl={p.demoUrl}
-              repoUrl={p.repoUrl}
-            />
+            <Box sx={{ height: '100%' }}>
+              <ProjectCard {...p} />
+            </Box>
           </Grid>
         ))}
 
         {filtered.length === 0 && (
-          <Box sx={{ p: 4 }}>
-            Aucune correspondance — essaie d&apos;élargir ta recherche ou désactive le filtre.
-          </Box>
+          <Grid size={{ xs: 12 }}>
+            <Box sx={{ p: 4 }}>Aucune correspondance — essaie d&apos;élargir ta recherche ou désactive le filtre.</Box>
+          </Grid>
         )}
       </Grid>
     </Container>

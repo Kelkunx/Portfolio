@@ -22,8 +22,8 @@ export default function HeroSection() {
           <Image
             src={profile.avatar}
             alt={`Portrait de ${profile.name}`}
-            width={120}
-            height={120}
+            width={150}
+            height={150}
             style={{
               borderRadius: '50%',
               objectFit: 'cover',
@@ -53,7 +53,8 @@ export default function HeroSection() {
               variant="outlined"
               component="a"
               href={profile.cvPdf}
-              download
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Télécharger le CV (PDF)
             </Button>
