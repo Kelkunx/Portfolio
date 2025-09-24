@@ -14,23 +14,14 @@ export const metadata = {
   openGraph: {
     title: 'Léo JEGO — Développeur Fullstack',
     description: 'Portfolio — Projets, expériences et contact',
-    url: 'https://ton-domaine.com',
+    url: 'https://leo-jego.vercel.app',
     siteName: 'Léo JEGO — Portfolio',
-    images: [
-      {
-        url: 'https://ton-domaine.com/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Léo Jego — Portfolio',
-      },
-    ],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Léo JEGO — Développeur Fullstack',
     description: 'Portfolio — Projets, expériences et contact',
-    images: ['https://ton-domaine.com/og-image.png'],
   },
 };
 
