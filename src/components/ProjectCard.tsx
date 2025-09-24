@@ -14,9 +14,6 @@ import Box from '@mui/material/Box';
 import Link from 'next/link';
 import LaunchIcon from '@mui/icons-material/Launch';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import CodeIcon from '@mui/icons-material/Code';
-import StorageIcon from '@mui/icons-material/Storage';
-import LanguageIcon from '@mui/icons-material/Language';
 import type { Project } from '../../lib/projects';
 
 export default function ProjectCard({

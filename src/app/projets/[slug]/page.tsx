@@ -104,7 +104,6 @@ export default function ProjectDetail({ params }: Params) {
               alt={project.imageAlt || project.title}
               thumbHeight={240}
               priority
-              sx={{ borderRadius: 2, boxShadow: 3 }}
             />
           </Box>
 
