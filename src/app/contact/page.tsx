@@ -1,3 +1,4 @@
+// src/app/contact/page.tsx
 'use client';
 
 import React from 'react';
@@ -16,18 +17,36 @@ import {
   GitHub,
   PictureAsPdf,
 } from '@mui/icons-material';
+import { useLocale } from '../../context/LocaleContext';
+import { profile as profileFR } from '../../../lib/locales/fr/profile';
+import { profile as profileEN } from '../../../lib/locales/en/profile';
 
 export default function ContactPage() {
+  const { locale } = useLocale();
+  const profile = locale === 'fr' ? profileFR : profileEN;
+
+  const title = locale === 'fr' ? 'Me contacter' : 'Contact';
+  const subtitle =
+    locale === 'fr'
+      ? 'Vous pouvez me joindre facilement par email, téléphone ou via mes réseaux pro.'
+      : 'You can reach me easily via email, phone or my professional networks.';
+
+  const downloadCvLabel = locale === 'fr' ? 'Télécharger mon CV (PDF)' : 'Download my CV (PDF)';
+  const emailAria = locale === 'fr' ? 'Envoyer un email' : 'Send an email';
+  const phoneAria = locale === 'fr' ? 'Appeler' : 'Call';
+  const linkedInAria = locale === 'fr' ? 'Profil LinkedIn (ouvert dans un nouvel onglet)' : 'LinkedIn profile (opens in a new tab)';
+  const githubAria = locale === 'fr' ? 'Profil GitHub (ouvert dans un nouvel onglet)' : 'GitHub profile (opens in a new tab)';
+  const cvAria = locale === 'fr' ? "Télécharger le CV au format PDF" : 'Download CV as PDF';
+
   return (
     <Container maxWidth="sm" sx={{ py: 8 }}>
       <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
         <Box textAlign="center" mb={4}>
           <Typography variant="h3" component="h1" gutterBottom color="primary">
-            Me contacter
+            {title}
           </Typography>
           <Typography variant="body1" color="text.secondary">
-            Vous pouvez me joindre facilement par email, téléphone ou via mes
-            réseaux pro.
+            {subtitle}
           </Typography>
         </Box>
 
@@ -36,30 +55,33 @@ export default function ContactPage() {
             variant="contained"
             color="error"
             startIcon={<Email />}
-            href="mailto:leo.jego56@gmail.com"
+            href={`mailto:${profile.email}`}
             fullWidth
+            aria-label={emailAria}
           >
-            leo.jego56@gmail.com
+            {profile.email}
           </Button>
 
           <Button
             variant="contained"
             color="warning"
             startIcon={<Phone />}
-            href="tel:+33755648201"
+            href={`tel:${profile.phone}`}
             fullWidth
+            aria-label={phoneAria}
           >
-            +33 7 55 64 82 01
+            {profile.phone}
           </Button>
 
           <Button
             variant="contained"
             color="info"
             startIcon={<LinkedIn />}
-            href="https://www.linkedin.com/in/leo-jego"
+            href={profile.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             fullWidth
+            aria-label={linkedInAria}
           >
             LinkedIn
           </Button>
@@ -68,10 +90,11 @@ export default function ContactPage() {
             variant="contained"
             color="secondary"
             startIcon={<GitHub />}
-            href="https://github.com/Kelkunx"
+            href={'https://github.com/Kelkunx'}
             target="_blank"
             rel="noopener noreferrer"
             fullWidth
+            aria-label={githubAria}
           >
             GitHub
           </Button>
@@ -79,12 +102,13 @@ export default function ContactPage() {
           <Button
             variant="outlined"
             startIcon={<PictureAsPdf />}
-            href="/cv-leo-jego.pdf"
+            href={profile.cvPdf}
             target="_blank"
             rel="noopener noreferrer"
             fullWidth
+            aria-label={cvAria}
           >
-            Télécharger mon CV (PDF)
+            {downloadCvLabel}
           </Button>
         </Stack>
       </Paper>

@@ -8,13 +8,20 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import ProjectCard from './ProjectCard';
-import type { Project } from '../../lib/projects';
+import type { Project } from '../../lib/locales/fr/projects';
+import { useLocale } from '../context/LocaleContext';
+import { projects as projectsFR } from '../../lib/locales/fr/projects';
+import { projects as projectsEN } from '../../lib/locales/en/projects';
 
-type Props = { projects: Project[] };
+type Props = { projects?: Project[] };
 
-export default function ProjectsList({ projects }: Props) {
+export default function ProjectsList({ projects: projectsProp }: Props) {
+  const { locale } = useLocale();
   const [query, setQuery] = useState('');
   const [activeTech, setActiveTech] = useState<string | null>(null);
+
+  // choose projects according to prop > locale files
+  const projects = projectsProp ?? (locale === 'fr' ? projectsFR : projectsEN);
 
   const allTechs = useMemo(() => {
     const s = new Set<string>();
@@ -39,8 +46,8 @@ export default function ProjectsList({ projects }: Props) {
     <Container maxWidth="lg" sx={{ py: 4 }}>
       <Box sx={{ mb: 3, display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 2 }}>
         <TextField
-          aria-label="Recherche projets"
-          placeholder="Rechercher un projet (titre, description...)"
+          aria-label={locale === 'fr' ? 'Recherche projets' : 'Search projects'}
+          placeholder={locale === 'fr' ? 'Rechercher un projet (titre, description...)' : 'Search projects (title, description...)'}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           size="small"
@@ -49,7 +56,7 @@ export default function ProjectsList({ projects }: Props) {
 
         <Stack direction="row" spacing={1} sx={{ overflowX: 'auto', py: 1 }}>
           <Chip
-            label="Tous"
+            label={locale === 'fr' ? 'Tous' : 'All'}
             clickable
             color={!activeTech ? 'primary' : 'default'}
             onClick={() => setActiveTech(null)}
@@ -85,7 +92,11 @@ export default function ProjectsList({ projects }: Props) {
 
         {filtered.length === 0 && (
           <Grid size={{ xs: 12 }}>
-            <Box sx={{ p: 4 }}>Aucune correspondance — essaie d&apos;élargir ta recherche ou désactive le filtre.</Box>
+            <Box sx={{ p: 4 }}>
+              {locale === 'fr'
+                ? "Aucune correspondance — essaie d'élargir ta recherche ou désactive le filtre."
+                : 'No matches — try widening your search or disable the filter.'}
+            </Box>
           </Grid>
         )}
       </Grid>

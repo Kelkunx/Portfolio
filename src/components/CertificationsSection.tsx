@@ -7,17 +7,27 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import SchoolIcon from '@mui/icons-material/School';
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import Stack from '@mui/material/Stack';
 import Link from '@mui/material/Link';
-import { profile } from '../../lib/profile';
+import { useLocale } from '../context/LocaleContext';
+import { profile as profileFR } from '../../lib/locales/fr/profile';
+import { profile as profileEN } from '../../lib/locales/en/profile';
 
 export default function CertificationsSection() {
+  const { locale } = useLocale();
+  const profile = locale === 'fr' ? profileFR : profileEN;
+
   if (!profile.certifications || profile.certifications.length === 0) return null;
 
   return (
     <Box sx={{ mt: 6 }}>
-      <Typography component="h4" variant="h5" color="primary" gutterBottom>
-        Certifications
-      </Typography>
+      <Stack direction="row" alignItems="center" spacing={1} sx={{ mb: 2 }}>
+        <WorkspacePremiumIcon color="primary" />
+        <Typography component="h4" variant="h5" color="primary" gutterBottom>
+          {locale === 'en' ? 'Certifications' : 'Certifications'}
+        </Typography>
+      </Stack>
 
       <List>
         {profile.certifications.map((c, i) => (

@@ -5,7 +5,9 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
-import { profile } from '../../lib/profile';
+import { useLocale } from '../context/LocaleContext';
+import { profile as profileFR } from '../../lib/locales/fr/profile';
+import { profile as profileEN } from '../../lib/locales/en/profile';
 import CodeIcon from '@mui/icons-material/Code';
 import StorageIcon from '@mui/icons-material/Storage';
 import BuildIcon from '@mui/icons-material/Build';
@@ -19,13 +21,21 @@ const categoryIcon: Record<string, React.ReactNode> = {
   'DevOps & Tests': <BuildIcon fontSize="small" />,
   'Langages embarqués & Systèmes': <MemoryIcon fontSize="small" />,
   'Autres': <MoreHorizIcon fontSize="small" />,
+  // fallback for English keys (if needed)
+  'Databases': <StorageIcon fontSize="small" />,
+  'DevOps & Testing': <BuildIcon fontSize="small" />,
+  'Embedded & Systems': <MemoryIcon fontSize="small" />,
+  'Others': <MoreHorizIcon fontSize="small" />,
 };
 
 export default function SkillsSection() {
+  const { locale } = useLocale();
+  const profile = locale === 'fr' ? profileFR : profileEN;
+
   return (
     <Box sx={{ mt: 4 }}>
       <Typography component="h4" variant="h5" color="primary" gutterBottom>
-        Compétences
+        {locale === 'fr' ? 'Compétences' : 'Skills'}
       </Typography>
 
       <Stack spacing={3}>
@@ -60,7 +70,9 @@ export default function SkillsSection() {
       </Stack>
 
       <Typography variant="caption" color="text.secondary">
-        Les compétences sont regroupées par catégorie et présentées du plus maîtrisé vers le moins maîtrisé.
+        {locale === 'fr'
+          ? "Les compétences sont regroupées par catégorie et présentées du plus maîtrisé vers le moins maîtrisé."
+          : 'Skills are grouped by category and presented from most proficient to less proficient.'}
       </Typography>
     </Box>
   );

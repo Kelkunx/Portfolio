@@ -16,10 +16,13 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ThemeToggle from './ThemeToggle';
+import { useLocale } from '../context/LocaleContext';
+import LanguageToggle from './LanguageToggle';
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { locale, setLocale, t } = useLocale();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -28,9 +31,9 @@ export default function Header() {
   }, []);
 
   const navLinks = [
-    { label: 'Accueil', href: '/' },
-    { label: 'Projets', href: '/projets' },
-    { label: 'Contact', href: '/contact' },
+    { key: 'home', label: t.nav.home, href: '/' },
+    { key: 'projects', label: t.nav.projects, href: '/projets' },
+    { key: 'contact', label: t.nav.contact, href: '/contact' },
   ];
 
   return (
@@ -71,23 +74,31 @@ export default function Header() {
               Léo JEGO
             </Typography>
 
+            {/* Desktop nav */}
             <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 2 }}>
               {navLinks.map((link) => (
                 <Button
-                  key={link.href}
+                  key={link.key}
                   component={Link}
                   href={link.href}
                   sx={{ fontWeight: 500 }}
-                  variant={link.label === 'Contact' ? 'outlined' : 'text'}
-                  color={link.label === 'Contact' ? 'secondary' : 'primary'}
+                  variant={link.label === t.nav.contact ? 'outlined' : 'text'}
+                  color={link.label === t.nav.contact ? 'secondary' : 'primary'}
                 >
                   {link.label}
                 </Button>
               ))}
-              <ThemeToggle />
+
+              {/* Language selector + ThemeToggle */}
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <LanguageToggle />
+                <ThemeToggle />
+              </Box>
             </Box>
 
+            {/* Mobile nav */}
             <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center', gap: 1 }}>
+              <LanguageToggle />
               <ThemeToggle />
               <IconButton onClick={() => setMobileOpen((o) => !o)} color="primary" aria-label="ouvrir le menu">
                 <MenuIcon />
@@ -97,11 +108,12 @@ export default function Header() {
         </Container>
       </AppBar>
 
+      {/* Drawer mobile */}
       <Drawer anchor="right" open={mobileOpen} onClose={() => setMobileOpen(false)}>
         <Box sx={{ width: 240, p: 2 }}>
           <List>
             {navLinks.map((link) => (
-              <ListItem key={link.href} disablePadding>
+              <ListItem key={link.key} disablePadding>
                 <ListItemButton component={Link} href={link.href} onClick={() => setMobileOpen(false)}>
                   <ListItemText primary={link.label} />
                 </ListItemButton>

@@ -1,17 +1,24 @@
 // app/projets/page.tsx
+'use client';
+
 import React from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import ProjectCard from '../../components/ProjectCard';
-
-import { projects } from '../../../lib/projects';
+import { useLocale } from '../../context/LocaleContext';
+import { projects as projectsFR } from '../../../lib/locales/fr/projects';
+import { projects as projectsEN } from '../../../lib/locales/en/projects';
 
 export default function ProjectsPage() {
+  const { locale, t } = useLocale();
+
+  const projects = locale === 'fr' ? projectsFR : projectsEN;
+
   return (
     <Container maxWidth="lg" sx={{ py: 6 }}>
       <Typography variant="h4" component="h1" sx={{ mb: 3 }}>
-        Mes projets
+        {t.nav.projects}
       </Typography>
 
       <Grid container spacing={4}>
@@ -23,7 +30,7 @@ export default function ProjectsPage() {
               description={p.description}
               slug={p.slug}
               imageSrc={p.imageSrc}
-              imageAlt={`${p.title} - aperçu`}
+              imageAlt={p.imageAlt ?? `${p.title} - aperçu`}
               tech={p.tech}
               demoUrl={p.demoUrl}
               repoUrl={p.repoUrl}

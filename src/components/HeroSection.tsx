@@ -6,10 +6,15 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
 import Image from 'next/image';
-import { profile } from '../../lib/profile';
+import { useLocale } from '../context/LocaleContext';
+import { profile as profileFR } from '../../lib/locales/fr/profile';
+import { profile as profileEN } from '../../lib/locales/en/profile';
 import { LinkedIn, Email, Phone } from '@mui/icons-material';
 
 export default function HeroSection() {
+  const { locale } = useLocale();
+  const profile = locale === 'fr' ? profileFR : profileEN;
+
   return (
     <Box component="section" aria-labelledby="hero-heading" sx={{ py: 6 }}>
       <Stack direction={{ xs: 'column', md: 'row' }} spacing={4} alignItems="center">
@@ -50,10 +55,10 @@ export default function HeroSection() {
 
           <Stack direction="row" spacing={2} sx={{ mt: 3 }}>
             <Button variant="contained" color="primary" component={Link} href="/projets">
-              Voir mes projets
+              {locale === 'fr' ? 'Voir mes projets' : 'See my projects'}
             </Button>
             <Button variant="outlined" color="secondary" component="a" href={profile.cvPdf} target="_blank" rel="noopener noreferrer">
-              Télécharger le CV (PDF)
+              {locale === 'fr' ? 'Télécharger le CV (PDF)' : 'Download CV (PDF)'}
             </Button>
           </Stack>
 
