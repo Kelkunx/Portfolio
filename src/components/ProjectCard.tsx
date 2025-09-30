@@ -1,3 +1,4 @@
+// src/components/ProjectCard.tsx
 'use client';
 
 import React from 'react';
@@ -14,6 +15,8 @@ import Box from '@mui/material/Box';
 import Link from 'next/link';
 import LaunchIcon from '@mui/icons-material/Launch';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import { useRouter } from 'next/navigation';
+import { useLocale } from '../context/LocaleContext';
 import type { Project } from '../../lib/projects';
 
 export default function ProjectCard({
@@ -26,7 +29,26 @@ export default function ProjectCard({
   demoUrl,
   repoUrl,
 }: Project) {
+  const router = useRouter();
+  const { locale } = useLocale();
+
   const img = imageSrc && imageSrc.trim() !== '' ? imageSrc : 'https://placehold.co/600x400?text=No+Image';
+
+  const handleCardActivate = (e: React.MouseEvent | React.KeyboardEvent) => {
+    // If the event originated from a button/link inside the card, ignore it.
+    const target = (e.target as HTMLElement) || null;
+    if (target && target.closest('a,button')) return;
+
+    // Navigate to internal project page
+    router.push(`/projets/${slug}`);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleCardActivate(e);
+    }
+  };
 
   return (
     <motion.div
@@ -42,19 +64,30 @@ export default function ProjectCard({
           flexDirection: 'column',
           borderRadius: 2,
           overflow: 'hidden',
+          cursor: 'pointer',
+          '&:focus-visible': {
+            outline: (theme) => `3px solid ${theme.palette.primary.main}`,
+            outlineOffset: 4,
+          },
         }}
-        role="group"
-        aria-label={`Projet ${title}`}
+        role="link"
+        tabIndex={0}
+        aria-label={`${locale === 'en' ? 'Open project' : 'Ouvrir le projet'}: ${title}`}
+        onClick={handleCardActivate}
+        onKeyDown={handleKeyDown}
       >
-        <Box sx={{ aspectRatio: '16/9', overflow: 'hidden', width: '100%' }}>
+        {/* Image */}
+        <Box sx={{ aspectRatio: '16/9', overflow: 'hidden', width: '100%', backgroundColor: 'background.paper' }}>
           <CardMedia
             component="img"
             image={img}
             alt={imageAlt || title}
+            loading="lazy"
             sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           />
         </Box>
 
+        {/* Content */}
         <CardContent sx={{ flexGrow: 1 }}>
           <Typography component="h3" variant="h6" gutterBottom>
             {title}
@@ -75,48 +108,58 @@ export default function ProjectCard({
                   size="small"
                   variant="outlined"
                   color="secondary"
+                  aria-label={`${locale === 'en' ? 'Technology' : 'Technologie'} ${t}`}
                 />
               ))}
             </Stack>
           )}
         </CardContent>
 
+        {/* Actions (buttons are real anchors so they won't trigger the card navigation) */}
         <CardActions sx={{ justifyContent: 'flex-end', flexWrap: 'wrap', gap: 1, px: 2, pb: 2 }}>
           <Button
-            component={Link}
-            href={`/projets/${slug}`}
             size="small"
-            variant="text"
+            onClick={(e) => {
+              // stop propagation so the card onClick doesn't activate
+              e.stopPropagation();
+              router.push(`/projets/${slug}`);
+            }}
             startIcon={<LaunchIcon />}
             sx={{ textTransform: 'none', '&:hover': { transform: 'translateY(-3px)' } }}
-            aria-label={`Voir les détails du projet ${title}`}
+            aria-label={locale === 'en' ? `View details for ${title}` : `Voir les détails de ${title}`}
           >
-            Détails
+            {locale === 'en' ? 'Details' : 'Détails'}
           </Button>
 
           {demoUrl && (
             <Button
               size="small"
+              component={Link}
               href={demoUrl}
               target="_blank"
               rel="noopener noreferrer"
               startIcon={<LaunchIcon />}
+              onClick={(e) => e.stopPropagation()}
               sx={{ textTransform: 'none', '&:hover': { transform: 'translateY(-3px)' } }}
+              aria-label={locale === 'en' ? `Open demo for ${title}` : `Ouvrir la démo de ${title}`}
             >
-              Démo
+              {locale === 'en' ? 'Demo' : 'Démo'}
             </Button>
           )}
 
           {repoUrl && (
             <Button
               size="small"
+              component={Link}
               href={repoUrl}
               target="_blank"
               rel="noopener noreferrer"
               startIcon={<GitHubIcon />}
+              onClick={(e) => e.stopPropagation()}
               sx={{ textTransform: 'none', '&:hover': { transform: 'translateY(-3px)' } }}
+              aria-label={locale === 'en' ? `View source code for ${title}` : `Voir le code de ${title}`}
             >
-              Code
+              {locale === 'en' ? 'Code' : 'Code'}
             </Button>
           )}
         </CardActions>
