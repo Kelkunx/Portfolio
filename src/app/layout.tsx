@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import { Inter } from 'next/font/google';
 import type { Metadata } from 'next';
 import { LocaleProvider } from '../context/LocaleContext';
+import { Analytics } from '@vercel/analytics/next';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
 
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Footer />
           </LocaleProvider>
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
