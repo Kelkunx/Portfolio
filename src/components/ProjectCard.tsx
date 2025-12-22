@@ -17,7 +17,7 @@ import LaunchIcon from '@mui/icons-material/Launch';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { useRouter } from 'next/navigation';
 import { useLocale } from '../context/LocaleContext';
-import type { Project } from '../../lib/projects';
+import type { Project } from '../../lib/locales/fr/projects';
 
 export default function ProjectCard({
   slug,
