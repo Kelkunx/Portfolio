@@ -13,20 +13,60 @@ import StorageIcon from '@mui/icons-material/Storage';
 import BuildIcon from '@mui/icons-material/Build';
 import MemoryIcon from '@mui/icons-material/Memory';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import FactCheckIcon from '@mui/icons-material/FactCheck'; // pour tests & qualité
 
-const categoryIcon: Record<string, React.ReactNode> = {
-  'Frontend': <CodeIcon fontSize="small" />,
-  'Backend / API': <BuildIcon fontSize="small" />,
-  'Bases de données': <StorageIcon fontSize="small" />,
-  'DevOps & Tests': <BuildIcon fontSize="small" />,
-  'Langages embarqués & Systèmes': <MemoryIcon fontSize="small" />,
-  'Autres': <MoreHorizIcon fontSize="small" />,
-  // fallback for English keys (if needed)
-  'Databases': <StorageIcon fontSize="small" />,
-  'DevOps & Testing': <BuildIcon fontSize="small" />,
-  'Embedded & Systems': <MemoryIcon fontSize="small" />,
-  'Others': <MoreHorizIcon fontSize="small" />,
-};
+function getCategoryIcon(label: string): React.ReactNode {
+  const l = label.toLowerCase();
+
+  // Frontend
+  if (l.includes('front')) {
+    return <CodeIcon fontSize="small" />;
+  }
+
+  // Backend / API
+  if (l.includes('back') || l.includes('api')) {
+    return <BuildIcon fontSize="small" />;
+  }
+
+  // Bases de données / Databases
+  if (l.includes('base de données') || l.includes('database') || l.includes('data')) {
+    return <StorageIcon fontSize="small" />;
+  }
+
+  // Tests & Qualité / Testing & Quality
+  if (l.includes('test') || l.includes('qualit')) {
+    return <FactCheckIcon fontSize="small" />;
+  }
+
+  // DevOps
+  if (l.includes('devops')) {
+    return <BuildIcon fontSize="small" />;
+  }
+
+  // IoT, embarqué, systèmes / IoT & systems / embedded
+  if (
+    l.includes('iot') ||
+    l.includes('embarqué') ||
+    l.includes('embarqu') ||
+    l.includes('embedded') ||
+    l.includes('syst')
+  ) {
+    return <MemoryIcon fontSize="small" />;
+  }
+
+  // Automatisation / Automation / no-code
+  if (l.includes('auto') || l.includes('no-code') || l.includes('automation')) {
+    return <BuildIcon fontSize="small" />;
+  }
+
+  // Autres / Others / Other
+  if (l.includes('autre') || l.includes('other')) {
+    return <MoreHorizIcon fontSize="small" />;
+  }
+
+  // Fallback par défaut
+  return <MoreHorizIcon fontSize="small" />;
+}
 
 export default function SkillsSection() {
   const { locale } = useLocale();
@@ -42,7 +82,7 @@ export default function SkillsSection() {
         {profile.skills.map((group) => (
           <Box key={group.category}>
             <Stack direction="row" alignItems="center" spacing={1} sx={{ mb: 1 }}>
-              <Box>{categoryIcon[group.category] || <MoreHorizIcon fontSize="small" />}</Box>
+              <Box>{getCategoryIcon(group.category)}</Box>
               <Typography component="h5" variant="subtitle1">
                 {group.category}
               </Typography>
