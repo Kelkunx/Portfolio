@@ -19,23 +19,27 @@ export const profile = {
     },
     {
       category: 'Backend / API',
-      items: ['Node.js', 'NestJS', 'API REST', 'Express', 'GraphQL'],
+      items: ['Node.js', 'NestJS', 'Express', 'API REST'],
     },
     {
       category: 'Bases de données',
-      items: ['SQL', 'PostgreSQL', 'ORM (TypeORM/Prisma)'],
+      items: ['PostgreSQL', 'SQL', 'ORM (TypeORM / Prisma)'],
     },
     {
-      category: 'DevOps & Tests',
-      items: ['Git & GitLab CI', 'Docker', 'Tests unitaires & E2E'],
+      category: 'Tests & Qualité',
+      items: ['Tests unitaires', 'Tests d\'intégration', 'Tests E2E', 'SonarQube'],
     },
     {
-      category: 'Langages embarqués & Systèmes',
-      items: ['C / C++', 'Python', 'Arduino/IoT'],
+      category: 'DevOps',
+      items: ['Git', 'GitLab CI/CD', 'Docker'],
     },
     {
-      category: 'Autres',
-      items: ['Symfony', 'Java / Spring', 'C# / .NET'],
+      category: 'IoT & Systèmes',
+      items: ['Arduino', 'C / C++', 'Python', 'Raspberry Pi', 'MQTT'],
+    },
+    {
+      category: 'Automatisation',
+      items: ['Make', 'Zapier', 'Airtable'],
     },
   ],
 
