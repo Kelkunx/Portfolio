@@ -39,8 +39,18 @@ export default function ContactPage() {
   const cvAria = locale === 'fr' ? "Télécharger le CV au format PDF" : 'Download CV as PDF';
 
   return (
-    <Container maxWidth="sm" sx={{ py: 8 }}>
-      <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
+    <Container maxWidth="sm" sx={{ py: { xs: 6, md: 10 } }}>
+      <Paper
+        elevation={0}
+        sx={{
+          p: 4,
+          borderRadius: 'var(--radius-lg)',
+          border: '1px solid var(--border)',
+          backgroundColor: 'var(--surface-glass)',
+          boxShadow: 'var(--shadow-soft)',
+          backdropFilter: 'blur(var(--blur-glass))',
+        }}
+      >
         <Box textAlign="center" mb={4}>
           <Typography variant="h3" component="h1" gutterBottom color="primary">
             {title}

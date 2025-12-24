@@ -1,50 +1,52 @@
 // app/page.tsx
 'use client';
 import React from 'react';
-import Container from '@mui/material/Container';
 import HeroSection from '../components/HeroSection';
 import SkillsSection from '../components/SkillsSection';
 import LanguagesSection from '../components/LanguagesSection';
 import ExperienceSection from '../components/ExperienceSection';
 import EducationSection from '../components/EducationSection';
 import CertificationsSection from '../components/CertificationsSection';
+import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import AnimatedSection from '../components/AnimatedSection';
 
 export default function HomePage() {
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      <AnimatedSection>
+    <>
+      <AnimatedSection intent="showcase">
         <HeroSection />
       </AnimatedSection>
 
-      <Box
-        component="section"
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
-        <AnimatedSection>
-          <SkillsSection />
-        </AnimatedSection>
+      <Container maxWidth="lg" sx={{ pt: { xs: 2, md: 4 }, pb: { xs: 8, md: 12 } }}>
+        <Box
+          component="section"
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <AnimatedSection>
+            <SkillsSection />
+          </AnimatedSection>
 
-        <AnimatedSection>
-          <LanguagesSection />
-        </AnimatedSection>
+          <AnimatedSection>
+            <LanguagesSection />
+          </AnimatedSection>
 
-        <AnimatedSection>
-          <ExperienceSection />
-        </AnimatedSection>
+          <AnimatedSection>
+            <ExperienceSection />
+          </AnimatedSection>
 
-        <AnimatedSection>
-          <EducationSection />
-        </AnimatedSection>
+          <AnimatedSection>
+            <EducationSection />
+          </AnimatedSection>
 
-        <AnimatedSection>
-          <CertificationsSection />
-        </AnimatedSection>
-      </Box>
-    </Container>
+          <AnimatedSection>
+            <CertificationsSection />
+          </AnimatedSection>
+        </Box>
+      </Container>
+    </>
   );
 }

@@ -18,7 +18,7 @@ export async function GET(req: Request) {
           height: '630px',
           padding: 48,
           background: '#eef2ff',
-          fontFamily: 'Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial',
+          fontFamily: '"Space Grotesk", "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Arial',
         },
       },
       React.createElement('h1', { style: { fontSize: 52, fontWeight: 800, color: '#1f2937' } }, title),

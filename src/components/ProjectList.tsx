@@ -43,7 +43,7 @@ export default function ProjectsList({ projects: projectsProp }: Props) {
   }, [projects, query, activeTech]);
 
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
+    <Container maxWidth="lg" sx={{ py: { xs: 6, md: 8 } }}>
       <Box sx={{ mb: 3, display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 2 }}>
         <TextField
           aria-label={locale === 'fr' ? 'Recherche projets' : 'Search projects'}
@@ -59,10 +59,14 @@ export default function ProjectsList({ projects: projectsProp }: Props) {
             label={locale === 'fr' ? 'Tous' : 'All'}
             clickable
             color={!activeTech ? 'primary' : 'default'}
+            variant="outlined"
             onClick={() => setActiveTech(null)}
             sx={{
               fontWeight: !activeTech ? 600 : 400,
               textTransform: 'none',
+              borderColor: !activeTech ? 'var(--accent)' : 'var(--border)',
+              color: !activeTech ? 'var(--bg)' : 'var(--text-2)',
+              backgroundColor: !activeTech ? 'var(--accent)' : 'transparent',
             }}
           />
           {allTechs.map((t) => (
@@ -71,10 +75,14 @@ export default function ProjectsList({ projects: projectsProp }: Props) {
               label={t}
               clickable
               color={activeTech === t ? 'primary' : 'default'}
+              variant="outlined"
               onClick={() => setActiveTech((cur) => (cur === t ? null : t))}
               sx={{
                 fontWeight: activeTech === t ? 600 : 400,
                 textTransform: 'none',
+                borderColor: activeTech === t ? 'var(--accent)' : 'var(--border)',
+                color: activeTech === t ? 'var(--bg)' : 'var(--text-2)',
+                backgroundColor: activeTech === t ? 'var(--accent)' : 'transparent',
               }}
             />
           ))}
@@ -82,10 +90,10 @@ export default function ProjectsList({ projects: projectsProp }: Props) {
       </Box>
 
       <Grid container spacing={4} aria-live="polite">
-        {filtered.map((p) => (
+        {filtered.map((p, index) => (
           <Grid key={p.slug} size={{ xs: 12, sm: 6, md: 4 }}>
             <Box sx={{ height: '100%' }}>
-              <ProjectCard {...p} />
+              <ProjectCard {...p} revealDelay={index * 0.06} />
             </Box>
           </Grid>
         ))}

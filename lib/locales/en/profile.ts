@@ -62,10 +62,10 @@ export const profile = {
   experiences: [
     {
       company: 'Job Staging',
-      role: 'No-code & Automation Developer (intern)',
+      role: 'Developer',
       start: 'November 2025',
       end: 'December 2025',
-      location: 'Remote, France',
+      location: 'Vannes, France',
       bullets: [
         'Optimised and structured a no-code ATS (internal, client and partner): created and improved fields, statuses, advanced filters and exports (CVs / candidate profiles).',
         'Built advanced search features (CV, summary, location, degree, school, etc.) to improve candidate qualification and matching.',

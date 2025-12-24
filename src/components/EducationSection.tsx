@@ -13,8 +13,8 @@ export default function EducationSection() {
   const profile = locale === 'fr' ? profileFR : profileEN;
 
   return (
-    <Box sx={{ mt: 6 }}>
-      <Stack direction="row" alignItems="center" spacing={1} sx={{ mb: 2 }}>
+    <Box sx={{ mt: 8 }}>
+      <Stack direction="row" alignItems="center" spacing={1} sx={{ mb: 3 }}>
         <SchoolIcon color="primary" />
         <Typography component="h4" variant="h5" color="primary" gutterBottom>
           {locale === 'en' ? 'Education' : 'Formations'}
@@ -23,7 +23,20 @@ export default function EducationSection() {
 
       <Stack spacing={2}>
         {profile.education.map((edu, i) => (
-          <Box key={i}>
+          <Box
+            key={i}
+            sx={{
+              borderRadius: 'var(--radius-md)',
+              border: '1px solid var(--border)',
+              backgroundColor: 'var(--surface)',
+              p: 3,
+              transition: 'transform 200ms ease, box-shadow 220ms ease',
+              '&:hover': {
+                transform: 'translateY(-2px)',
+                boxShadow: 'var(--shadow-glow)',
+              },
+            }}
+          >
             <Typography component="h5" variant="subtitle1" color="text.primary">
               {edu.degree} — {edu.school}
             </Typography>
@@ -31,7 +44,7 @@ export default function EducationSection() {
               {edu.start} {edu.end ? `— ${edu.end}` : locale === 'en' ? '— present' : '— présent'}
             </Typography>
             {edu.notes && (
-              <Box component="ul" sx={{ mt: 1, ml: 0 }}>
+              <Box component="ul" sx={{ mt: 1.5, ml: 0 }}>
                 {edu.notes.map((n, idx) => (
                   <li key={idx}>
                     <Typography variant="body2" color="text.secondary">

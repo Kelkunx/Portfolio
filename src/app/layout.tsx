@@ -4,12 +4,29 @@ import React from 'react';
 import Providers from './providers';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { Inter } from 'next/font/google';
+import { Space_Grotesk, IBM_Plex_Sans, JetBrains_Mono } from 'next/font/google';
 import type { Metadata } from 'next';
 import { LocaleProvider } from '../context/LocaleContext';
 import { Analytics } from '@vercel/analytics/next';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-display',
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+});
+const ibmPlexSans = IBM_Plex_Sans({
+  subsets: ['latin'],
+  variable: '--font-body',
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+});
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+  weight: ['400', '500', '600'],
+});
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = 'Léo JEGO — Développeur Fullstack';
@@ -43,7 +60,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr">
-      <body className={inter.variable}>
+      <body className={`${spaceGrotesk.variable} ${ibmPlexSans.variable} ${jetBrainsMono.variable}`}>
         <Providers>
           <LocaleProvider>
             <a href="#main-content" className="skip-link">Aller au contenu</a>

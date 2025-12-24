@@ -16,13 +16,13 @@ export default function ProjectsPage() {
   const projects = locale === 'fr' ? projectsFR : projectsEN;
 
   return (
-    <Container maxWidth="lg" sx={{ py: 6 }}>
-      <Typography variant="h4" component="h1" sx={{ mb: 3 }}>
+    <Container maxWidth="lg" sx={{ py: { xs: 6, md: 8 } }}>
+      <Typography variant="h3" component="h1" sx={{ mb: 3, color: 'var(--text)' }}>
         {t.nav.projects}
       </Typography>
 
       <Grid container spacing={4}>
-        {projects.map((p) => (
+        {projects.map((p, index) => (
           <Grid key={p.slug} size={{ xs: 12, sm: 6, md: 4 }}>
             <ProjectCard
               title={p.title}
@@ -34,6 +34,7 @@ export default function ProjectsPage() {
               tech={p.tech}
               demoUrl={p.demoUrl}
               repoUrl={p.repoUrl}
+              revealDelay={index * 0.06}
             />
           </Grid>
         ))}

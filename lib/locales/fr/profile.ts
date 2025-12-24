@@ -62,10 +62,10 @@ export const profile = {
   experiences: [
     {
       company: 'Job Staging',
-      role: 'Stagiaire développeur no-code & automatisation',
+      role: 'Développeur',
       start: 'Novembre 2025',
       end: 'Décembre 2025',
-      location: 'Télétravail, France',
+      location: 'Vannes, France',
       bullets: [
         "Optimisation et structuration d'un ATS no-code (interne, client et partenaire) : création et amélioration des champs, statuts, filtres avancés et exports (CV / profils candidats).",
         "Développement de recherches avancées (CV, résumé, géographie, diplôme, école…) afin d'améliorer la qualification et le matching des candidatures.",
@@ -101,7 +101,7 @@ export const profile = {
     },
     {
       company: 'IoT-BZH',
-      role: 'Développeur IoT (stage)',
+      role: 'Développeur IoT',
       start: 'Mai 2023',
       end: 'Juin 2023',
       location: 'Lorient, France',

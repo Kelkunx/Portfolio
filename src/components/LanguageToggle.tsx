@@ -44,6 +44,13 @@ export default function LanguageToggle() {
         onClose={handleClose}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        PaperProps={{
+          sx: {
+            backgroundColor: 'var(--surface)',
+            border: '1px solid var(--border)',
+            boxShadow: 'var(--shadow-soft)',
+          },
+        }}
       >
         <MenuItem
           selected={locale === 'fr'}

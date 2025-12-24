@@ -41,12 +41,23 @@ export default function Header() {
       <AppBar
         position="sticky"
         color="inherit"
-        elevation={scrolled ? 3 : 0}
+        elevation={0}
         sx={{
-          borderBottom: scrolled ? 'none' : (theme) => `1px solid ${theme.palette.divider}`,
-          backdropFilter: 'blur(8px)',
-          backgroundColor: (theme) => theme.palette.background.paper + 'ee',
-          transition: 'all 250ms ease',
+          borderBottom: '1px solid transparent',
+          backdropFilter: 'blur(var(--blur-glass))',
+          backgroundColor: scrolled ? 'var(--surface-glass)' : 'transparent',
+          boxShadow: scrolled ? 'var(--shadow-soft)' : 'none',
+          transition: 'background-color 250ms ease, box-shadow 250ms ease',
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: '1px',
+            background: scrolled ? 'var(--grad-border)' : 'transparent',
+            opacity: 0.8,
+          },
         }}
       >
         <Container maxWidth="lg">
@@ -55,7 +66,7 @@ export default function Header() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              minHeight: scrolled ? 56 : 72,
+              minHeight: scrolled ? 60 : 78,
               transition: 'min-height 200ms ease',
               px: { xs: 2, md: 0 },
             }}
@@ -66,9 +77,12 @@ export default function Header() {
               href="/"
               sx={{
                 textDecoration: 'none',
-                color: 'primary.main',
+                color: 'var(--text)',
                 fontWeight: 700,
-                letterSpacing: '-0.5px',
+                letterSpacing: '-0.04em',
+                fontFamily: 'var(--font-display)',
+                transition: 'color 180ms ease',
+                '&:hover': { color: 'var(--accent)' },
               }}
             >
               Léo JEGO
@@ -76,18 +90,28 @@ export default function Header() {
 
             {/* Desktop nav */}
             <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 2 }}>
-              {navLinks.map((link) => (
-                <Button
-                  key={link.key}
-                  component={Link}
-                  href={link.href}
-                  sx={{ fontWeight: 500 }}
-                  variant={link.label === t.nav.contact ? 'outlined' : 'text'}
-                  color={link.label === t.nav.contact ? 'secondary' : 'primary'}
-                >
-                  {link.label}
-                </Button>
-              ))}
+              {navLinks.map((link) => {
+                const isCta = link.key === 'contact';
+                return (
+                  <Button
+                    key={link.key}
+                    component={Link}
+                    href={link.href}
+                    sx={{
+                      fontWeight: 500,
+                      color: isCta ? 'var(--text)' : 'var(--text-2)',
+                      '&:hover': {
+                        color: 'var(--text)',
+                        backgroundColor: isCta ? 'rgba(187, 154, 247, 0.12)' : 'rgba(125, 207, 255, 0.08)',
+                      },
+                    }}
+                    variant={isCta ? 'outlined' : 'text'}
+                    color={isCta ? 'secondary' : 'primary'}
+                  >
+                    {link.label}
+                  </Button>
+                );
+              })}
 
               {/* Language selector + ThemeToggle */}
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -109,7 +133,18 @@ export default function Header() {
       </AppBar>
 
       {/* Drawer mobile */}
-      <Drawer anchor="right" open={mobileOpen} onClose={() => setMobileOpen(false)}>
+      <Drawer
+        anchor="right"
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        PaperProps={{
+          sx: {
+            backgroundColor: 'var(--surface)',
+            color: 'var(--text)',
+            borderLeft: '1px solid var(--border)',
+          },
+        }}
+      >
         <Box sx={{ width: 240, p: 2 }}>
           <List>
             {navLinks.map((link) => (
