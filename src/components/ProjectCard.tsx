@@ -160,7 +160,7 @@ export default function ProjectCard({
         },
     hover: reduce
       ? { y: 0, scale: 1 }
-      : { y: -6, scale: 1.02, transition: { type: 'spring', stiffness: 280, damping: 26 } },
+      : { y: -6, scale: 1.02, transition: { type: 'spring' as const, stiffness: 280, damping: 26 } },
   };
 
   return (
