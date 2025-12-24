@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion, type Easing } from 'framer-motion';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
@@ -32,7 +32,7 @@ function getCategoryIcon(label: string): React.ReactNode {
   }
 
   // Bases de données / Databases
-  if (l.includes('base de données') || l.includes('database') || l.includes('data')) {
+  if (l.includes('bases de données') || l.includes('database') || l.includes('data')) {
     return <StorageIcon fontSize="small" />;
   }
 
@@ -108,6 +108,7 @@ export default function SkillsSection() {
         {profile.skills.map((group, index) => {
           const tone = getCategoryTone(group.category);
           const delay = Math.min(index * 0.08, 0.4);
+          const ease: Easing = [0.22, 1, 0.36, 1];
           const revealProps = reduce
             ? {}
             : {
@@ -116,7 +117,7 @@ export default function SkillsSection() {
                   opacity: 1,
                   y: 0,
                   filter: 'blur(0px)',
-                  transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1], delay },
+                  transition: { duration: 0.55, ease, delay },
                 },
                 viewport: { once: true, amount: 0.3 },
               };
