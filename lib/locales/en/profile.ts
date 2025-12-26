@@ -34,6 +34,14 @@ export const profile = {
       items: ['Git', 'GitLab CI/CD', 'Docker'],
     },
     {
+      category: 'IoT & Systems',
+      items: ['Arduino', 'C / C++', 'Python', 'Raspberry Pi', 'MQTT'],
+    },
+    {
+      category: 'Automation',
+      items: ['Make', 'Zapier', 'Airtable'],
+    },
+    {
       category: 'Cybersecurity',
       items: [
         'Security fundamentals',
@@ -42,14 +50,6 @@ export const profile = {
         'SIEM & log analysis',
         'Risk management',
       ],
-    },
-    {
-      category: 'IoT & Systems',
-      items: ['Arduino', 'C / C++', 'Python', 'Raspberry Pi', 'MQTT'],
-    },
-    {
-      category: 'Automation',
-      items: ['Make', 'Zapier', 'Airtable'],
     },
   ],
 
