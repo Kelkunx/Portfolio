@@ -15,6 +15,7 @@ import BuildIcon from '@mui/icons-material/Build';
 import MemoryIcon from '@mui/icons-material/Memory';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FactCheckIcon from '@mui/icons-material/FactCheck'; // pour tests & qualité
+import SecurityIcon from '@mui/icons-material/Security';
 
 const MotionBox = motion(Box);
 
@@ -44,6 +45,11 @@ function getCategoryIcon(label: string): React.ReactNode {
   // DevOps
   if (l.includes('devops')) {
     return <BuildIcon fontSize="small" />;
+  }
+
+  // Cybersecurity / Cybersécurité
+  if (l.includes('cyber') || l.includes('security') || l.includes('secur') || l.includes('sécur')) {
+    return <SecurityIcon fontSize="small" />;
   }
 
   // IoT, embarqué, systèmes / IoT & systems / embedded
@@ -79,6 +85,9 @@ function getCategoryTone(label: string): string {
   if (l.includes('base') || l.includes('database') || l.includes('data')) return 'var(--teal)';
   if (l.includes('test') || l.includes('qualit')) return 'var(--green)';
   if (l.includes('devops')) return 'var(--orange)';
+  if (l.includes('cyber') || l.includes('security') || l.includes('secur') || l.includes('sécur')) {
+    return 'var(--red)';
+  }
   if (l.includes('iot') || l.includes('embarqu') || l.includes('embedded')) return 'var(--purple)';
   if (l.includes('auto') || l.includes('no-code') || l.includes('automation')) return 'var(--magenta)';
   if (l.includes('autre') || l.includes('other')) return 'var(--muted)';

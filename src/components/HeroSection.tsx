@@ -18,7 +18,7 @@ import { LinkedIn, Email, Phone } from '@mui/icons-material';
 export default function HeroSection() {
   const { locale } = useLocale();
   const profile = locale === 'fr' ? profileFR : profileEN;
-  const highlightSkills = profile.skills.flatMap((group) => group.items).slice(0, 6);
+  const highlightSkills = ['React', 'TypeScript', 'Node.js', 'NestJS', 'Next.js', 'PostgreSQL'];
   const chipColors = ['info', 'secondary', 'success', 'warning'] as const;
 
   return (

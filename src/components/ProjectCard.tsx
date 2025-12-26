@@ -2,7 +2,7 @@
 'use client';
 
 import React from 'react';
-import { motion, useReducedMotion, type Easing } from 'framer-motion';
+import { motion, useReducedMotion, type Easing, type Variants } from 'framer-motion';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -147,21 +147,23 @@ export default function ProjectCard({
   };
 
   const ease: Easing = [0.22, 1, 0.36, 1];
-  const variants = {
-    hidden: reduce ? { opacity: 1, y: 0, scale: 1, filter: 'none' } : { opacity: 0, y: 18, scale: 0.98, filter: 'blur(6px)' },
-    visible: reduce
-      ? { opacity: 1, y: 0, scale: 1, filter: 'none' }
-      : {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          filter: 'blur(0px)',
-          transition: { duration: 0.6, ease, delay: revealDelay },
-        },
-    hover: reduce
-      ? { y: 0, scale: 1 }
-      : { y: -6, scale: 1.02, transition: { type: 'spring' as const, stiffness: 280, damping: 26 } },
+  const baseVariants: Variants = {
+    hidden: { opacity: 0, y: 18, scale: 0.98, filter: 'blur(6px)' },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      filter: 'blur(0px)',
+      transition: { duration: 0.6, ease, delay: revealDelay },
+    },
+    hover: { y: -6, scale: 1.02, transition: { type: 'spring' as const, stiffness: 280, damping: 26 } },
   };
+  const reducedVariants: Variants = {
+    hidden: { opacity: 1, y: 0, scale: 1, filter: 'none' },
+    visible: { opacity: 1, y: 0, scale: 1, filter: 'none' },
+    hover: { y: 0, scale: 1 },
+  };
+  const variants = reduce ? reducedVariants : baseVariants;
 
   return (
     <motion.div

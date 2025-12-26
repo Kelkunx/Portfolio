@@ -34,6 +34,16 @@ export const profile = {
       items: ['Git', 'GitLab CI/CD', 'Docker'],
     },
     {
+      category: 'Cybersecurity',
+      items: [
+        'Security fundamentals',
+        'Network security',
+        'Incident response',
+        'SIEM & log analysis',
+        'Risk management',
+      ],
+    },
+    {
       category: 'IoT & Systems',
       items: ['Arduino', 'C / C++', 'Python', 'Raspberry Pi', 'MQTT'],
     },
@@ -49,6 +59,14 @@ export const profile = {
   ],
 
   certifications: [
+    {
+      name: 'Google cybersecurity certificate',
+      issuer: 'Google',
+      score: '',
+      date: 'December 2025',
+      note: 'Professional certification - cybersecurity skills.',
+      url: 'https://coursera.org/share/7d181a1cdac95be23f289c4269da00d1',
+    },
     {
       name: 'TOEIC Listening and Reading',
       issuer: 'ETS',

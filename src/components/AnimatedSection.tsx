@@ -2,7 +2,7 @@
 'use client';
 
 import React from 'react';
-import { motion, useReducedMotion, Variants } from 'framer-motion';
+import { motion, useReducedMotion, Variants, type Easing } from 'framer-motion';
 import Box from '@mui/material/Box';
 import { SxProps, Theme } from '@mui/material/styles';
 
@@ -12,28 +12,30 @@ const MotionItem = motion.div;
 type Intent = 'soft' | 'showcase';
 type VariantState = Record<string, string | number>;
 type VariantConfig = { hidden: VariantState; visible: VariantState; transition: Record<string, unknown> };
+const easeSoft: Easing = [0.22, 1, 0.36, 1];
+const easeShowcase: Easing = [0.16, 1, 0.3, 1];
 
 const baseVariants: Record<Intent, VariantConfig> = {
   soft: {
     hidden: { opacity: 0, y: 20, scale: 0.98, filter: 'blur(6px)' },
     visible: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
-    transition: { duration: 0.65, ease: 'easeOut' },
+    transition: { duration: 0.65, ease: easeSoft },
   },
   showcase: {
     hidden: { opacity: 0, y: 30, scale: 0.96, filter: 'blur(10px)' },
     visible: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
-    transition: { duration: 0.9, ease: 'easeOut' },
+    transition: { duration: 0.9, ease: easeShowcase },
   },
 };
 
 const childVariants: Record<Intent, Variants> = {
   soft: {
     hidden: { opacity: 0, y: 12 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: easeSoft } },
   },
   showcase: {
     hidden: { opacity: 0, y: 16, filter: 'blur(4px)' },
-    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.55, ease: 'easeOut' } },
+    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.55, ease: easeShowcase } },
   },
 };
 
