@@ -1,7 +1,7 @@
 // lib/locales/en/profile.ts
 export const profile = {
   name: 'Léo JEGO',
-  age: 20,
+  age: 21,
   location: 'Guémené-sur-Scorff, France',
   phone: '+33 7 55 64 82 01',
   email: 'leo.jego56@gmail.com',
