@@ -1,271 +1,376 @@
-// src/app/projets/[slug]/page.tsx
 'use client';
 
 import React from 'react';
 import { useParams } from 'next/navigation';
-import { useLocale } from '../../../context/LocaleContext';
-import { projects as projectsFR, type Project as ProjectFR } from '../../../../lib/locales/fr/projects';
-import { projects as projectsEN, type Project as ProjectEN } from '../../../../lib/locales/en/projects';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Link from 'next/link';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
 import Grid from '@mui/material/Grid';
-import Divider from '@mui/material/Divider';
+import Link from 'next/link';
+import { ArrowOutward } from '@mui/icons-material';
 import ImageLightbox from '../../../components/ImageLightbox';
-
-type Project = ProjectFR | ProjectEN;
+import { useLocale } from '../../../context/LocaleContext';
+import { getProjects } from '../../../../lib/content';
+import { projectPlaceholderDataUrl } from '../../../../lib/project-placeholder';
 
 function formatDate(date?: string, locale = 'fr') {
   if (!date) return undefined;
-  try {
-    const d = new Date(date);
-    if (!Number.isFinite(d.getTime())) return date;
-    return d.toLocaleDateString(locale === 'en' ? 'en-US' : 'fr-FR', { year: 'numeric', month: 'long' });
-  } catch {
-    return date;
-  }
-}
+  const value = new Date(date);
+  if (Number.isNaN(value.getTime())) return date;
 
-function escapeXml(value: string) {
-  return value.replace(/[<>&'"]/g, (char) => {
-    switch (char) {
-      case '<':
-        return '&lt;';
-      case '>':
-        return '&gt;';
-      case '&':
-        return '&amp;';
-      case '"':
-        return '&quot;';
-      case "'":
-        return '&apos;';
-      default:
-        return char;
-    }
+  return value.toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', {
+    year: 'numeric',
+    month: 'long',
   });
-}
-
-function wrapText(value: string, maxChars: number) {
-  const words = value.split(/\s+/).filter(Boolean);
-  const lines: string[] = [];
-  let line = '';
-
-  words.forEach((word) => {
-    const next = line ? `${line} ${word}` : word;
-    if (next.length <= maxChars) {
-      line = next;
-      return;
-    }
-    if (line) lines.push(line);
-    line = word;
-  });
-
-  if (line) lines.push(line);
-  return lines;
-}
-
-function truncateLine(value: string, maxChars: number) {
-  if (value.length <= maxChars) return value;
-  return `${value.slice(0, Math.max(0, maxChars - 3)).trimEnd()}...`;
-}
-
-function placeholderDataUrl(title: string, locale: 'fr' | 'en', w = 1200, h = 675) {
-  const rawTitle = title.trim();
-  const subtitle = locale === 'fr' ? 'Apercu indisponible' : 'Preview unavailable';
-  const maxChars = rawTitle.length > 42 ? 20 : 26;
-  const lines = wrapText(rawTitle, maxChars);
-  const titleLines = lines.slice(0, 2);
-  if (lines.length > 2) {
-    titleLines[1] = truncateLine(lines.slice(1).join(' '), maxChars);
-  }
-  const baseTitleSize = Math.round(Math.max(40, Math.min(72, Math.min(w * 0.06, h * 0.12))));
-  const titleSize = titleLines.length > 1 ? Math.round(baseTitleSize * 0.82) : baseTitleSize;
-  const lineHeight = Math.round(titleSize * 1.2);
-  const titleY = Math.round(h * 0.5);
-  const firstDy = titleLines.length > 1 ? -Math.round(lineHeight / 2) : 0;
-  const titleTspans = titleLines
-    .map((line, index) => `<tspan x='50%' dy='${index === 0 ? firstDy : lineHeight}'>${escapeXml(line)}</tspan>`)
-    .join('');
-  const subtitleSize = Math.round(Math.max(16, Math.min(30, Math.min(w * 0.03, h * 0.06))));
-  const subtitleY = Math.round(titleY + (titleLines.length > 1 ? lineHeight : lineHeight * 0.9));
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${h}' viewBox='0 0 ${w} ${h}'>
-    <defs>
-      <linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'>
-        <stop offset='0%' stop-color='#1a1b26'/>
-        <stop offset='100%' stop-color='#16161e'/>
-      </linearGradient>
-      <radialGradient id='glow1' cx='85%' cy='15%' r='60%'>
-        <stop offset='0%' stop-color='#7dcfff' stop-opacity='0.25'/>
-        <stop offset='100%' stop-color='#7dcfff' stop-opacity='0'/>
-      </radialGradient>
-      <radialGradient id='glow2' cx='15%' cy='85%' r='55%'>
-        <stop offset='0%' stop-color='#bb9af7' stop-opacity='0.2'/>
-        <stop offset='100%' stop-color='#bb9af7' stop-opacity='0'/>
-      </radialGradient>
-      <pattern id='grid' width='64' height='64' patternUnits='userSpaceOnUse'>
-        <path d='M 64 0 L 0 0 0 64' fill='none' stroke='#3b4261' stroke-width='1' opacity='0.35'/>
-      </pattern>
-    </defs>
-    <rect width='100%' height='100%' fill='url(#bg)'/>
-    <rect width='100%' height='100%' fill='url(#grid)'/>
-    <rect width='100%' height='100%' fill='url(#glow1)'/>
-    <rect width='100%' height='100%' fill='url(#glow2)'/>
-    <rect x='72' y='72' width='${w - 144}' height='${h - 144}' rx='28' fill='#24283b' fill-opacity='0.6' stroke='#3b4261'/>
-    <text x='50%' y='${titleY}' text-anchor='middle' dominant-baseline='middle' fill='#c0caf5' font-family='IBM Plex Sans, Arial, sans-serif' font-size='${titleSize}' font-weight='600'>${titleTspans}</text>
-    <text x='50%' y='${subtitleY}' text-anchor='middle' dominant-baseline='middle' fill='#a9b1d6' font-family='IBM Plex Sans, Arial, sans-serif' font-size='${subtitleSize}'>${subtitle}</text>
-  </svg>`;
-  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
-}
-
-function getTechColor(tech: string) {
-  const t = tech.toLowerCase();
-  if (t.includes('react') || t.includes('next')) return 'primary';
-  if (t.includes('node') || t.includes('nest')) return 'success';
-  if (t.includes('ts') || t.includes('typescript')) return 'info';
-  if (t.includes('js') || t.includes('javascript')) return 'warning';
-  if (t.includes('python')) return 'error';
-  return 'secondary';
 }
 
 export default function ProjectDetailPage() {
   const params = useParams();
   const slug = params?.slug as string | undefined;
   const { locale } = useLocale();
-
-  const projects = locale === 'en' ? projectsEN : projectsFR;
-  const project: Project | undefined = slug ? projects.find((p) => p.slug === slug) : undefined;
+  const projects = getProjects(locale);
+  const projectIndex = slug ? projects.findIndex((item) => item.slug === slug) : -1;
+  const project = projectIndex >= 0 ? projects[projectIndex] : undefined;
+  const nextProject =
+    projectIndex >= 0 && projects.length > 1 ? projects[(projectIndex + 1) % projects.length] : undefined;
 
   if (!project) {
     return (
       <Container maxWidth="lg" sx={{ py: 8 }}>
-        <Typography component="h1" variant="h5">
-          {locale === 'en' ? 'Project not found' : 'Projet introuvable'}
+        <Typography component="h1" variant="h4" sx={{ color: 'var(--text)' }}>
+          {locale === 'fr' ? 'Projet introuvable' : 'Project not found'}
         </Typography>
-        <Box sx={{ mt: 2 }}>
-          <Link href="/projets">{locale === 'en' ? '← Back to project list' : '← Retour à la liste des projets'}</Link>
-        </Box>
+        <Button component={Link} href="/projets" sx={{ mt: 2, px: 0 }}>
+          {locale === 'fr' ? 'Retour aux projets' : 'Back to projects'}
+        </Button>
       </Container>
     );
   }
 
-  const imageSrc =
-    project.imageSrc && project.imageSrc.trim() !== ''
-      ? project.imageSrc
-      : placeholderDataUrl(project.title, locale, 1200, 675);
-
   const published = formatDate(project.date, locale);
+  const fallbackScreen = {
+    src: projectPlaceholderDataUrl(project.title, locale),
+    alt: project.imageAlt || project.title,
+    caption: locale === 'fr' ? 'Capture à venir.' : 'Screenshot coming soon.',
+  };
+  const screens = project.screens.length > 0 ? project.screens : [fallbackScreen];
+  const primaryScreen = screens[0];
 
   return (
     <Container maxWidth="lg" sx={{ py: { xs: 6, md: 8 } }}>
-      <Grid container spacing={4}>
-        <Grid size={{ xs: 12, md: 8 }}>
-          <Typography component="h1" variant="h4" gutterBottom color="primary">
-            {project.title}
-          </Typography>
-
-          <Box sx={{ mb: 3 }}>
-            <ImageLightbox
-              src={imageSrc}
-              alt={project.imageAlt || project.title}
-              priority
-            />
-          </Box>
-
-          <Typography component="section" variant="body1" paragraph>
-            {project.description}
-          </Typography>
-        </Grid>
-
-        <Grid size={{ xs: 12, md: 4 }}>
-          <Box
-            component="aside"
-            aria-labelledby="project-details-heading"
+      <Stack spacing={2} sx={{ mb: 5, maxWidth: 860 }}>
+        <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+          <Chip
+            label={project.status}
             sx={{
-              position: { xs: 'relative', md: 'sticky' },
-              top: { md: 92 },
-              mb: 4,
+              backgroundColor: 'rgba(125, 207, 255, 0.14)',
+              color: 'var(--text)',
+              border: '1px solid rgba(125, 207, 255, 0.3)',
+            }}
+          />
+          {published && (
+            <Chip
+              label={published}
+              variant="outlined"
+              sx={{
+                borderColor: 'rgba(187, 154, 247, 0.34)',
+                color: 'var(--text)',
+                backgroundColor: 'rgba(187, 154, 247, 0.1)',
+              }}
+            />
+          )}
+        </Box>
+
+        <Typography component="h1" variant="h2" sx={{ color: 'var(--text)', maxWidth: '14ch' }}>
+          {project.title}
+        </Typography>
+        <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.8 }}>
+          {project.tagline}
+        </Typography>
+      </Stack>
+
+      {primaryScreen && (
+        <Box sx={{ mb: 5 }}>
+          <ImageLightbox src={primaryScreen.src} alt={primaryScreen.alt} priority aspectRatio="16/9" />
+        </Box>
+      )}
+
+      <Grid container spacing={3} sx={{ mb: 5 }}>
+        <Grid size={{ xs: 12, md: 3 }}>
+          <Box
+            sx={{
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--border)',
               backgroundColor: 'var(--surface)',
-              p: 2.5,
+              p: 3,
+              height: '100%',
             }}
           >
-            <Typography id="project-details-heading" variant="h6" component="h2" gutterBottom>
-              {locale === 'en' ? 'Details' : 'Détails'}
+            <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
+              {locale === 'fr' ? 'Contexte' : 'Context'}
             </Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ mt: 1, lineHeight: 1.8 }}>
+              {project.context}
+            </Typography>
+          </Box>
+        </Grid>
 
-            <Box sx={{ mb: 2 }}>
-              <Typography variant="subtitle2" color="text.secondary">
-                {locale === 'en' ? 'Technologies' : 'Technos'}
+        <Grid size={{ xs: 12, md: 3 }}>
+          <Box
+            sx={{
+              borderRadius: 'var(--radius-md)',
+              border: '1px solid var(--border)',
+              backgroundColor: 'var(--surface)',
+              p: 3,
+              height: '100%',
+            }}
+          >
+            <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
+              {locale === 'fr' ? 'Problème' : 'Problem'}
+            </Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ mt: 1, lineHeight: 1.8 }}>
+              {project.problem}
+            </Typography>
+          </Box>
+        </Grid>
+
+        <Grid size={{ xs: 12, md: 3 }}>
+          <Box
+            sx={{
+              borderRadius: 'var(--radius-md)',
+              border: '1px solid var(--border)',
+              backgroundColor: 'var(--surface)',
+              p: 3,
+              height: '100%',
+            }}
+          >
+            <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
+              {locale === 'fr' ? 'Mon rôle' : 'My role'}
+            </Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ mt: 1, lineHeight: 1.8 }}>
+              {project.role}
+            </Typography>
+          </Box>
+        </Grid>
+
+        <Grid size={{ xs: 12, md: 3 }}>
+          <Box
+            sx={{
+              borderRadius: 'var(--radius-md)',
+              border: '1px solid var(--border)',
+              backgroundColor: 'var(--surface)',
+              p: 3,
+              height: '100%',
+            }}
+          >
+            <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
+              {locale === 'fr' ? 'Livrables' : 'Deliverables'}
+            </Typography>
+            <Stack spacing={0.75} sx={{ mt: 1 }}>
+              {project.deliverables.map((deliverable) => (
+                <Typography key={deliverable} variant="body2" color="text.secondary">
+                  • {deliverable}
+                </Typography>
+              ))}
+            </Stack>
+          </Box>
+        </Grid>
+      </Grid>
+
+      <Grid container spacing={3}>
+        <Grid size={{ xs: 12, md: 8 }}>
+          <Box
+            sx={{
+              borderRadius: 'var(--radius-lg)',
+              border: '1px solid var(--border)',
+              backgroundColor: 'var(--surface)',
+              p: { xs: 3, md: 4 },
+              mb: 3,
+            }}
+          >
+            <Typography component="h2" variant="h4" sx={{ color: 'var(--text)', mb: 2 }}>
+              {locale === 'fr' ? 'Approche / Process' : 'Approach / Process'}
+            </Typography>
+            <Stack spacing={1.25}>
+              {project.process.map((item) => (
+                <Typography key={item} variant="body1" color="text.secondary" sx={{ lineHeight: 1.8 }}>
+                  • {item}
+                </Typography>
+              ))}
+            </Stack>
+          </Box>
+
+          <Box
+            sx={{
+              borderRadius: 'var(--radius-lg)',
+              border: '1px solid var(--border)',
+              backgroundColor: 'var(--surface)',
+              p: { xs: 3, md: 4 },
+              mb: 3,
+            }}
+          >
+            <Typography component="h2" variant="h4" sx={{ color: 'var(--text)', mb: 2 }}>
+              {locale === 'fr' ? 'Solution' : 'Solution'}
+            </Typography>
+            <Stack spacing={1.25}>
+              {project.solution.map((item) => (
+                <Typography key={item} variant="body1" color="text.secondary" sx={{ lineHeight: 1.8 }}>
+                  • {item}
+                </Typography>
+              ))}
+            </Stack>
+          </Box>
+
+          <Box
+            sx={{
+              borderRadius: 'var(--radius-lg)',
+              border: '1px solid var(--border)',
+              backgroundColor: 'var(--surface)',
+              p: { xs: 3, md: 4 },
+            }}
+          >
+            <Typography component="h2" variant="h4" sx={{ color: 'var(--text)', mb: 2 }}>
+              {locale === 'fr' ? 'Visuels' : 'Visuals'}
+            </Typography>
+            <Grid container spacing={2}>
+              {screens.map((screen) => (
+                <Grid key={screen.src} size={{ xs: 12, md: screens.length > 1 ? 6 : 12 }}>
+                  <Stack spacing={1}>
+                    <ImageLightbox src={screen.src} alt={screen.alt} aspectRatio="16/9" />
+                    <Typography variant="body2" color="text.secondary">
+                      {screen.caption}
+                    </Typography>
+                  </Stack>
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        </Grid>
+
+        <Grid size={{ xs: 12, md: 4 }}>
+          <Stack spacing={3}>
+            <Box
+              sx={{
+                borderRadius: 'var(--radius-lg)',
+                border: '1px solid var(--border)',
+                backgroundColor: 'var(--surface)',
+                p: 3,
+              }}
+            >
+              <Typography component="h2" variant="h5" sx={{ color: 'var(--text)', mb: 2 }}>
+                {locale === 'fr' ? 'Résultats' : 'Outcomes'}
               </Typography>
-              <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mt: 1 }}>
-                {project.tech.map((t) => (
+              <Stack spacing={1.5}>
+                {project.results.map((result) => (
+                  <Box
+                    key={`${result.value}-${result.label}`}
+                    sx={{
+                      borderRadius: '18px',
+                      border: '1px solid var(--border)',
+                      backgroundColor: 'rgba(255,255,255,0.02)',
+                      px: 1.75,
+                      py: 1.5,
+                    }}
+                  >
+                    <Typography variant="body2" sx={{ color: 'var(--text)', fontWeight: 600, mb: 0.4 }}>
+                      {result.value}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6 }}>
+                      {result.label}
+                    </Typography>
+                  </Box>
+                ))}
+              </Stack>
+            </Box>
+
+            <Box
+              sx={{
+                borderRadius: 'var(--radius-lg)',
+                border: '1px solid var(--border)',
+                backgroundColor: 'var(--surface)',
+                p: 3,
+              }}
+            >
+              <Typography component="h2" variant="h5" sx={{ color: 'var(--text)', mb: 2 }}>
+                {locale === 'fr' ? 'Stack' : 'Stack'}
+              </Typography>
+              <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+                {project.tech.map((item) => (
                   <Chip
-                    key={t}
-                    label={t}
-                    size="small"
+                    key={item}
+                    label={item}
                     variant="outlined"
-                    color={getTechColor(t)}
-                    aria-label={`${locale === 'en' ? 'Technology' : 'Technologie'} ${t}`}
+                    sx={{
+                      borderColor: 'rgba(125, 207, 255, 0.3)',
+                      color: 'var(--text)',
+                      backgroundColor: 'rgba(125, 207, 255, 0.1)',
+                    }}
                   />
                 ))}
               </Box>
             </Box>
 
-            {published && (
-              <Box sx={{ mb: 2 }}>
-                <Typography variant="subtitle2" color="text.secondary">
-                  {locale === 'en' ? 'Date' : 'Date'}
-                </Typography>
-                <Typography variant="body2">{published}</Typography>
-              </Box>
-            )}
-
-            <Divider sx={{ my: 2 }} />
-
-            <Stack spacing={1}>
-              {project.demoUrl && (
-                <Button
-                  variant="contained"
-                  color="info"
-                  href={project.demoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={locale === 'en' ? 'Open demo' : 'Ouvrir la démo'}
-                >
-                  {locale === 'en' ? 'Open demo' : 'Ouvrir la démo'}
-                </Button>
-              )}
-
-              {project.repoUrl && (
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  href={project.repoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={locale === 'en' ? 'View repository' : 'Voir le dépôt'}
-                >
-                  {locale === 'en' ? 'View repository' : 'Voir le dépôt'}
-                </Button>
-              )}
-
-              <Button
-                variant="contained"
-                color="success"
-                href="/contact"
-                aria-label={locale === 'en' ? 'Contact me about this project' : 'Me contacter au sujet de ce projet'}
-              >
-                {locale === 'en' ? 'Contact me about this project' : 'Me contacter au sujet de ce projet'}
-              </Button>
-            </Stack>
-          </Box>
+            <Box
+              sx={{
+                borderRadius: 'var(--radius-lg)',
+                border: '1px solid var(--border)',
+                backgroundColor: 'var(--surface)',
+                p: 3,
+              }}
+            >
+              <Typography component="h2" variant="h5" sx={{ color: 'var(--text)', mb: 2 }}>
+                {locale === 'fr' ? 'Liens' : 'Links'}
+              </Typography>
+              <Stack spacing={1.25}>
+                {project.links.map((link) => {
+                  const isInternal = link.url.startsWith('/');
+                  return (
+                    <Button
+                      key={`${link.label}-${link.url}`}
+                      component={isInternal ? Link : 'a'}
+                      href={link.url}
+                      target={isInternal ? undefined : '_blank'}
+                      rel={isInternal ? undefined : 'noopener noreferrer'}
+                      variant={link.type === 'contact' ? 'contained' : 'outlined'}
+                      endIcon={<ArrowOutward />}
+                    >
+                      {link.label}
+                    </Button>
+                  );
+                })}
+              </Stack>
+            </Box>
+          </Stack>
         </Grid>
       </Grid>
+
+      {nextProject && (
+        <Box
+          sx={{
+            mt: 6,
+            borderRadius: 'var(--radius-lg)',
+            border: '1px solid var(--border)',
+            background: 'linear-gradient(135deg, rgba(121, 168, 255, 0.08), rgba(199, 164, 106, 0.06))',
+            p: { xs: 3, md: 4 },
+          }}
+        >
+          <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
+            {locale === 'fr' ? 'Projet suivant' : 'Next project'}
+          </Typography>
+          <Typography variant="h4" sx={{ color: 'var(--text)', mt: 1, mb: 1 }}>
+            {nextProject.title}
+          </Typography>
+          <Typography variant="body1" color="text.secondary" sx={{ maxWidth: '60ch', mb: 2 }}>
+            {nextProject.short}
+          </Typography>
+          <Button component={Link} href={`/projets/${nextProject.slug}`} variant="contained" endIcon={<ArrowOutward />}>
+            {locale === 'fr' ? 'Voir le projet' : 'View project'}
+          </Button>
+        </Box>
+      )}
     </Container>
   );
 }

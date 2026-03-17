@@ -29,13 +29,14 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = 'Léo JEGO — Développeur Fullstack';
-  const description = 'Portfolio de Léo JEGO — React, Next.js, NestJS. CV dynamique et projets.';
+  const title = 'Léo JEGO — Développeur full-stack orienté produit';
+  const description =
+    'Portfolio de Léo JEGO. Interfaces web claires, outils métier, React, Next.js, NestJS, CV dynamique et case studies.';
   const base = process.env.SITE_URL ?? 'https://leo-jego.vercel.app';
 
   const v = process.env.NEXT_PUBLIC_OG_VERSION ?? String(Date.now());
 
-  const ogUrl = `${base}/api/og?title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent('Portfolio — Projets & CV')}&mode=dark&v=${v}`;
+  const ogUrl = `${base}/api/og?title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent('Portfolio — projets, CV et contact')}&mode=dark&v=${v}`;
 
   return {
     title,

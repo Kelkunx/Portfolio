@@ -1,77 +1,220 @@
-// lib/locales/fr/projects.ts
-export type Project = {
-  slug: string;
-  title: string;
-  short: string;
-  description: string;
-  imageSrc?: string;
-  imageAlt?: string;
-  tech: string[];
-  demoUrl?: string;
-  repoUrl?: string;
-  date?: string;
-};
+import type { Project } from '../../content-types';
 
 export const projects: Project[] = [
   {
     slug: 'edd-shopify',
     title: 'Estimated Delivery Date',
-    short:
-      'Application Shopify pour afficher des dates de livraison estimées précises et personnalisables',
+    tagline:
+      'Application Shopify conçue pour afficher des dates de livraison estimées fiables, lisibles et réellement configurables par les marchands.',
+    short: 'Application Shopify de date de livraison estimée avec logique métier et configuration marchande.',
     description:
-      'Estimated Delivery Date est une application Shopify embarquée conçue pour afficher dynamiquement des dates de livraison estimées sur les pages produits. ' +
-      "Elle permet aux marchands d'améliorer la transparence, la confiance et le taux de conversion en communiquant des délais fiables aux clients. " +
-      "L'application intègre une logique avancée de calcul prenant en compte les jours ouvrés, les heures limites de commande, les délais de préparation et les plages d'expédition. " +
-      "Elle propose également un système de templates avec variables dynamiques, un haut niveau de personnalisation du widget (couleurs, style, mode compact, icône, etc.), ainsi qu'une gestion des fonctionnalités via un système de plans (Free / Pro). " +
-      "Développée avec Shopify CLI, React et TypeScript, elle utilise Polaris et App Bridge pour une intégration native dans l'admin Shopify, ainsi qu'une Theme App Extension pour un rendu léger côté storefront. " +
-      "Le projet met l'accent sur une UX claire, une configuration simple pour les marchands, une excellente fiabilité des calculs et une architecture maintenable pour un développement en solo.",
+      "Produit Shopify pensé pour améliorer la transparence côté boutique et donner aux marchands un contrôle fin sur l'affichage des délais.",
     imageSrc: '',
-    imageAlt: 'Widget de date de livraison estimée sur une page produit Shopify',
-    tech: ['Shopify CLI', 'React', 'TypeScript', 'Polaris', 'Shopify App Bridge'],
+    imageAlt: 'Capture à venir du projet Estimated Delivery Date',
+    tech: ['Shopify CLI', 'React', 'TypeScript', 'Polaris', 'App Bridge'],
     date: '2026-03',
+    featured: true,
+    status: 'Projet produit',
+    role: 'Product design, développement full-stack, UX de configuration, logique de calcul.',
+    context:
+      "Les marchands Shopify utilisent souvent des messages de livraison trop génériques. L'enjeu était de proposer une information plus crédible, tout en gardant une configuration simple côté admin.",
+    problem:
+      "Comment afficher une date de livraison suffisamment fiable pour rassurer le client, tout en tenant compte des jours ouvrés, des cut-offs, des délais de préparation et des variations d'expédition ?",
+    process: [
+      "Définition d'une logique de calcul capable de gérer les contraintes métier les plus fréquentes sans rendre l'outil incompréhensible.",
+      "Conception d'une interface d'administration claire pour configurer les règles, les templates et les options d'affichage.",
+      'Travail sur une architecture maintenable pour permettre des évolutions futures et un développement solo propre.',
+    ],
+    solution: [
+      'Application embarquée dans Shopify Admin avec configuration des règles de livraison et personnalisation du widget.',
+      'Theme App Extension légère côté storefront pour afficher la date estimée sur les fiches produit.',
+      'Gestion de templates dynamiques, styles, mode compact et logique de plans Free / Pro.',
+    ],
+    deliverables: [
+      'Application Shopify embarquée',
+      'Widget storefront',
+      'Système de templates',
+      'Gestion des plans et options',
+    ],
+    results: [
+      {
+        value: 'Calcul métier',
+        label: 'Date estimée calculée selon jours ouvrés, heure limite et délais de préparation.',
+      },
+      {
+        value: 'Configuration claire',
+        label: 'Personnalisation du rendu et des messages sans complexifier la prise en main.',
+      },
+      {
+        value: 'Architecture maintenable',
+        label: 'Produit structuré pour itérer proprement en solo.',
+      },
+    ],
+    screens: [],
+    links: [{ label: 'Me contacter à propos de ce projet', url: '/contact', type: 'contact' }],
   },
   {
     slug: 'portfolio',
     title: 'Portfolio personnel',
-    short: 'CV dynamique et vitrine de mes projets',
+    tagline:
+      'Refonte de mon portfolio comme CV dynamique orienté recrutement, avec une hiérarchie plus claire, des preuves mieux exposées et une structure de case studies.',
+    short: 'Portfolio premium pensé comme CV dynamique, vitrine de projets et outil de conversion.',
     description:
-      'Ce site web est mon portfolio personnel. Il présente mes compétences, mes expériences et mes projets. ' +
-      'Développé avec Next.js et React, il utilise MUI pour le design et suit une architecture moderne. ' +
-      'Il inclut une page contact avec mes coordonnées et un accès direct à mon CV en PDF.',
+      'Refonte éditoriale et visuelle de mon portfolio pour renforcer la crédibilité, la lisibilité et la prise de contact.',
     imageSrc: '',
-    imageAlt: 'Capture du portfolio personnel',
+    imageAlt: 'Capture à venir du portfolio personnel',
     tech: ['Next.js', 'React', 'TypeScript', 'MUI'],
+    date: '2026-03',
+    featured: true,
+    status: 'Live',
+    role: 'Direction artistique, UI, intégration front, structuration de contenu.',
+    context:
+      'Le portfolio existant était propre mais trop proche d’un empilement de sections CV. Il fallait le transformer en objet plus convaincant pour un recruteur.',
+    problem:
+      'Comment rendre le site plus mémorable, plus crédible et plus orienté conversion sans tomber dans un rendu trop flashy ou trop démonstratif ?',
+    process: [
+      'Audit du positionnement, de la hiérarchie visuelle et des signaux de crédibilité.',
+      "Refonte de l'architecture avec une homepage courte, une vraie page CV et des pages projet plus structurées.",
+      'Travail sur la direction artistique sombre, les CTA et le ton éditorial pour garder un rendu premium mais professionnel.',
+    ],
+    solution: [
+      'Homepage recentrée sur la promesse, les preuves, les projets phares et le contact.',
+      'Création d’une page CV dédiée pour sortir le contenu de parcours de la homepage.',
+      'Nouveau système de case studies avec contexte, problème, rôle, process, solution et résultats.',
+    ],
+    deliverables: [
+      'Homepage orientée recrutement',
+      'Page CV dédiée',
+      'Fiches projet enrichies',
+      'Page contact de conversion',
+    ],
+    results: [
+      {
+        value: 'Message plus clair',
+        label: 'Le positionnement full-stack orienté produit apparaît dès le premier écran.',
+      },
+      {
+        value: 'Parcours plus lisible',
+        label: 'Le contenu CV est structuré sans alourdir la homepage.',
+      },
+      {
+        value: 'Conversion renforcée',
+        label: 'CV, contact direct et formulaire sont visibles plus rapidement.',
+      },
+    ],
+    screens: [],
+    links: [
+      { label: 'Voir le site', url: 'https://leo-jego.vercel.app', type: 'demo' },
+      { label: 'Voir le code', url: 'https://github.com/Kelkunx/Portfolio', type: 'repo' },
+      { label: 'Me contacter', url: '/contact', type: 'contact' },
+    ],
     demoUrl: 'https://leo-jego.vercel.app',
     repoUrl: 'https://github.com/Kelkunx/Portfolio',
-    date: '2025-09',
   },
   {
     slug: 'dashboard-news-ai',
-    title: 'Dashboard News (IA)',
-    short: "Fil d'actualité intelligent avec IA et filtres personnalisés",
+    title: 'Dashboard News AI',
+    tagline:
+      "Application web qui agrège l'actualité, la filtre par catégories et mots-clés, puis génère un résumé court pour chaque article via IA.",
+    short: "Fil d'actualité intelligent avec filtres personnalisés et résumés générés par IA.",
     description:
-      "Application web affichant un fil d'actualité filtrable par catégories et mots-clés. " +
-      "Chaque article est accompagné d'un résumé court généré automatiquement par un modèle d'IA (HuggingFace). " +
-      "Le projet combine un front React avec Tailwind CSS et un back NestJS pour l'agrégation des données.",
+      "Projet personnel mêlant agrégation de contenus, UI de consultation et génération de résumés pour accélérer la lecture de l'information.",
     imageSrc: '/images/capture-news.png',
     imageAlt: 'Capture du Dashboard News AI',
     tech: ['React', 'NestJS', 'Tailwind', 'HuggingFace'],
+    date: '2025-08',
+    featured: true,
+    status: 'Live',
+    role: 'Conception du produit, développement frontend/backend et intégration IA.',
+    context:
+      "L'idée était de proposer une lecture plus rapide de l'actualité en combinant filtres personnalisés et synthèse automatique des articles.",
+    problem:
+      'Comment aider un utilisateur à parcourir beaucoup de contenus sans multiplier les clics ni imposer une lecture complète de chaque article ?',
+    process: [
+      'Conception du parcours de consultation et des filtres pour réduire le bruit côté utilisateur.',
+      "Mise en place d'une architecture séparant l'agrégation backend, la logique de résumé et l'affichage côté frontend.",
+      "Travail sur l'équilibre entre richesse de l'information, rapidité de lecture et simplicité visuelle.",
+    ],
+    solution: [
+      'Frontend React pour parcourir rapidement les articles avec filtres et recherche.',
+      'Backend NestJS pour agréger les données et orchestrer les résumés générés par modèle IA.',
+      "Présentation compacte de l'information avec résumé court, métadonnées et catégorisation.",
+    ],
+    deliverables: ['Interface React', 'API NestJS', 'Filtres personnalisés', 'Résumés IA'],
+    results: [
+      {
+        value: 'Lecture accélérée',
+        label: 'Chaque article est résumé en quelques lignes pour aller à l’essentiel.',
+      },
+      {
+        value: 'Filtres utiles',
+        label: 'Navigation par catégories et mots-clés pour cibler rapidement les sujets pertinents.',
+      },
+      {
+        value: 'Architecture claire',
+        label: 'Séparation front / back facilitant l’évolution du produit.',
+      },
+    ],
+    screens: [
+      {
+        src: '/images/capture-news.png',
+        alt: 'Capture réelle du Dashboard News AI',
+        caption: 'Capture du dashboard avec cartes articles, filtres et aperçu des résumés.',
+      },
+    ],
+    links: [
+      { label: 'Voir la démo', url: 'https://dashboard-news-ai.vercel.app', type: 'demo' },
+      { label: 'Voir le code', url: 'https://github.com/Kelkunx/dashboard-news-ai', type: 'repo' },
+      { label: 'Me contacter', url: '/contact', type: 'contact' },
+    ],
     demoUrl: 'https://dashboard-news-ai.vercel.app',
     repoUrl: 'https://github.com/Kelkunx/dashboard-news-ai',
-    date: '2025-08',
   },
   {
     slug: 'bts-baie-securisee',
     title: 'Projet BTS — Baie serveur sécurisée',
-    short: "Mise en place d'une baie serveur sécurisée pour une entreprise fictive",
+    tagline:
+      "Projet académique autour de la conception d'une baie serveur sécurisée avec réseau, supervision, contrôle d'accès et capteurs environnementaux.",
+    short: "Conception d'une baie serveur sécurisée avec réseau, RADIUS, supervision et capteurs.",
     description:
-      "Projet scolaire réalisé en BTS : conception et mise en place d'une baie serveur sécurisée. " +
-      'Elle incluait un serveur Active Directory, un réseau ethernet et un réseau wifi, un NAS, un système de caméras avec détection de mouvement, ' +
-      "et un monitoring de la température et de l'humidité. " +
-      "J'ai personnellement installé un serveur RADIUS relié à une borne wifi Cisco et configuré des capteurs de mouvement, de température et d'humidité avec Arduino.",
+      "Projet de BTS mêlant infrastructure, réseau, sécurité et intégration matérielle dans un scénario d'entreprise fictive.",
     imageSrc: '',
-    imageAlt: "Illustration d'une baie serveur sécurisée",
+    imageAlt: 'Capture à venir du projet baie serveur sécurisée',
     tech: ['Active Directory', 'Cisco', 'RADIUS', 'Arduino'],
     date: '2024-06',
+    featured: false,
+    status: 'Projet académique',
+    role: 'Configuration réseau, serveur RADIUS, intégration capteurs et documentation.',
+    context:
+      'Le projet simulait la mise en place d’une infrastructure sécurisée pour une entreprise fictive avec services réseau, NAS, vidéosurveillance et supervision.',
+    problem:
+      'Comment proposer une architecture cohérente intégrant authentification, segmentation, surveillance physique et collecte environnementale dans un cadre pédagogique ?',
+    process: [
+      "Définition de l'architecture technique et répartition des composants au sein de la baie.",
+      'Configuration réseau, déploiement des services et branchement des équipements de supervision.',
+      'Documentation des choix techniques et des étapes de mise en place.',
+    ],
+    solution: [
+      'Mise en place d’un serveur RADIUS relié à une borne Wi-Fi Cisco.',
+      'Ajout de capteurs de mouvement, température et humidité avec Arduino.',
+      'Intégration dans une architecture incluant Active Directory, NAS et vidéosurveillance.',
+    ],
+    deliverables: ['Serveur RADIUS', 'Capteurs Arduino', 'Architecture réseau', 'Documentation'],
+    results: [
+      {
+        value: 'Architecture complète',
+        label: 'Projet couvrant réseau, authentification, stockage, supervision et environnement.',
+      },
+      {
+        value: 'Vision transverse',
+        label: 'Mise en relation de problématiques infrastructure, sécurité et matériel.',
+      },
+      {
+        value: 'Projet documenté',
+        label: 'Choix et configuration suffisamment explicités pour être repris et présentés.',
+      },
+    ],
+    screens: [],
+    links: [{ label: 'Me contacter à propos de ce projet', url: '/contact', type: 'contact' }],
   },
 ];

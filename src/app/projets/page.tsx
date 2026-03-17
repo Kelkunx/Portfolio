@@ -1,44 +1,76 @@
-// app/projets/page.tsx
 'use client';
 
 import React from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import ProjectCard from '../../components/ProjectCard';
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
 import { useLocale } from '../../context/LocaleContext';
-import { projects as projectsFR } from '../../../lib/locales/fr/projects';
-import { projects as projectsEN } from '../../../lib/locales/en/projects';
+import { getProjects } from '../../../lib/content';
+import ProjectCard from '../../components/ProjectCard';
 
 export default function ProjectsPage() {
-  const { locale, t } = useLocale();
-
-  const projects = locale === 'fr' ? projectsFR : projectsEN;
+  const { locale } = useLocale();
+  const projects = getProjects(locale);
+  const featuredProjects = projects.filter((project) => project.featured);
+  const archiveProjects = projects.filter((project) => !project.featured);
 
   return (
     <Container maxWidth="lg" sx={{ py: { xs: 6, md: 8 } }}>
-      <Typography variant="h3" component="h1" sx={{ mb: 3, color: 'var(--text)' }}>
-        {t.nav.projects}
-      </Typography>
+      <Stack spacing={1.25} sx={{ mb: 5, maxWidth: 760 }}>
+        <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
+          {locale === 'fr' ? 'Case studies' : 'Case studies'}
+        </Typography>
+        <Typography variant="h2" component="h1" sx={{ color: 'var(--text)' }}>
+          {locale === 'fr' ? 'Projets' : 'Projects'}
+        </Typography>
+        <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.8 }}>
+          {locale === 'fr'
+            ? 'Une sélection de projets conçus comme des démonstrations de raisonnement produit, de qualité d’exécution et de clarté technique.'
+            : 'A curated selection of projects presented as proof of product thinking, execution quality and technical clarity.'}
+        </Typography>
+      </Stack>
 
-      <Grid container spacing={4}>
-        {projects.map((p, index) => (
-          <Grid key={p.slug} size={{ xs: 12, sm: 6, md: 4 }}>
-            <ProjectCard
-              title={p.title}
-              short={p.short}
-              description={p.description}
-              slug={p.slug}
-              imageSrc={p.imageSrc}
-              imageAlt={p.imageAlt ?? `${p.title} - aperçu`}
-              tech={p.tech}
-              demoUrl={p.demoUrl}
-              repoUrl={p.repoUrl}
-              revealDelay={index * 0.06}
-            />
+      <Box component="section" sx={{ mb: 7 }}>
+        <Typography variant="h4" component="h2" sx={{ color: 'var(--text)', mb: 1.5 }}>
+          {locale === 'fr' ? 'Projets phares' : 'Featured work'}
+        </Typography>
+        <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+          {locale === 'fr'
+            ? 'Les projets qui représentent le mieux ma manière de concevoir, structurer et livrer.'
+            : 'The projects that best represent how I think, structure and deliver.'}
+        </Typography>
+
+        <Grid container spacing={3}>
+          {featuredProjects.map((project, index) => (
+            <Grid key={project.slug} size={{ xs: 12, md: 4 }}>
+              <ProjectCard {...project} revealDelay={index * 0.05} />
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+
+      {archiveProjects.length > 0 && (
+        <Box component="section">
+          <Typography variant="h4" component="h2" sx={{ color: 'var(--text)', mb: 1.5 }}>
+            {locale === 'fr' ? 'Autres projets' : 'Other projects'}
+          </Typography>
+          <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+            {locale === 'fr'
+              ? 'Projets secondaires ou académiques, conservés pour compléter le parcours.'
+              : 'Secondary or academic projects kept to complete the profile.'}
+          </Typography>
+
+          <Grid container spacing={3}>
+            {archiveProjects.map((project, index) => (
+              <Grid key={project.slug} size={{ xs: 12, md: 6 }}>
+                <ProjectCard {...project} compact revealDelay={index * 0.05} />
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
+        </Box>
+      )}
     </Container>
   );
 }

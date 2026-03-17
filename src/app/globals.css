@@ -1,4 +1,3 @@
-/* Skip link (accessibilité) */
 .skip-link {
   position: absolute;
   left: -9999px;
@@ -7,6 +6,7 @@
   height: 1px;
   overflow: hidden;
 }
+
 .skip-link:focus,
 .skip-link:active {
   left: 1rem;
@@ -17,22 +17,21 @@
   background: var(--surface-2);
   color: var(--text);
   z-index: 9999;
-  border-radius: 6px;
+  border-radius: 10px;
   border: 1px solid var(--border);
   box-shadow: var(--shadow-soft);
 }
 
-/* Focus visible */
 :focus:not(:focus-visible) {
   outline: none;
 }
+
 :focus-visible {
-  outline: 3px solid var(--blue); /* accent TokyoNight */
+  outline: 3px solid var(--accent);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
-/* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.001ms !important;
@@ -42,19 +41,18 @@
   }
 }
 
-/* Impression : garantir contraste et couleurs */
 @media print {
   @page {
     size: A4;
     margin: 15mm;
   }
+
   body {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 }
 
-/* Curseur sur éléments interactifs */
 button,
 a,
 input,
@@ -62,12 +60,6 @@ textarea {
   cursor: pointer;
 }
 
-/* Optionnel : liens et boutons hover subtils */
-a:hover,
-button:hover {
-  cursor: pointer;
-}
-/* Tokyo Night tokens */
 :root {
   color-scheme: dark;
 
@@ -93,20 +85,20 @@ button:hover {
   --red: #f7768e;
 
   --accent: var(--blue);
-  --accent-2: var(--cyan);
-  --accent-3: var(--purple);
+  --accent-2: var(--yellow);
+  --accent-3: var(--cyan);
 
   --surface-glass: rgba(36, 40, 59, 0.62);
   --ring: rgba(125, 207, 255, 0.35);
 
-  --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 22px;
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
 
   --shadow-soft: 0 14px 38px rgba(10, 15, 30, 0.45);
   --shadow-glow: 0 0 36px rgba(125, 207, 255, 0.28);
 
-  --blur-glass: 14px;
+  --blur-glass: 18px;
 
   --grad-hero:
     radial-gradient(60% 60% at 80% 0%, rgba(125, 207, 255, 0.22), transparent 70%),
@@ -115,7 +107,7 @@ button:hover {
   --grad-border: linear-gradient(90deg, rgba(125, 207, 255, 0.7), rgba(187, 154, 247, 0.7));
 }
 
-[data-theme="light"] {
+[data-theme='light'] {
   color-scheme: light;
 
   --bg: #e1e2e7;
@@ -140,8 +132,8 @@ button:hover {
   --red: #d64d63;
 
   --accent: var(--blue);
-  --accent-2: var(--cyan);
-  --accent-3: var(--purple);
+  --accent-2: var(--yellow);
+  --accent-3: var(--cyan);
 
   --surface-glass: rgba(255, 255, 255, 0.7);
   --ring: rgba(46, 125, 233, 0.28);
@@ -168,7 +160,9 @@ body {
 }
 
 body {
-  background-image: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+  background-image:
+    radial-gradient(circle at top right, rgba(122, 162, 247, 0.1), transparent 28%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -179,6 +173,6 @@ main {
 }
 
 ::selection {
-  background: rgba(122, 162, 247, 0.35);
+  background: rgba(121, 168, 255, 0.28);
   color: var(--text);
 }

@@ -31,7 +31,7 @@ export default function LanguageToggle() {
         aria-controls={anchorEl ? 'language-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={anchorEl ? 'true' : undefined}
-        aria-label="Changer la langue"
+        aria-label={locale === 'fr' ? 'Changer la langue' : 'Change language'}
         size="small"
       >
         <LanguageIcon />

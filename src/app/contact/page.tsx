@@ -1,127 +1,127 @@
-// src/app/contact/page.tsx
 'use client';
 
 import React from 'react';
-import {
-  Container,
-  Typography,
-  Stack,
-  Button,
-  Box,
-  Paper,
-} from '@mui/material';
-import {
-  Email,
-  Phone,
-  LinkedIn,
-  GitHub,
-  PictureAsPdf,
-} from '@mui/icons-material';
+import { Container, Typography, Stack, Button, Box, Grid } from '@mui/material';
+import { Email, Phone, LinkedIn, GitHub, PictureAsPdf } from '@mui/icons-material';
 import { useLocale } from '../../context/LocaleContext';
-import { profile as profileFR } from '../../../lib/locales/fr/profile';
-import { profile as profileEN } from '../../../lib/locales/en/profile';
+import { getProfile } from '../../../lib/content';
 
 export default function ContactPage() {
   const { locale } = useLocale();
-  const profile = locale === 'fr' ? profileFR : profileEN;
-
-  const title = locale === 'fr' ? 'Me contacter' : 'Contact';
-  const subtitle =
-    locale === 'fr'
-      ? 'Vous pouvez me joindre facilement par email, téléphone ou via mes réseaux pro.'
-      : 'You can reach me easily via email, phone or my professional networks.';
-
-  const downloadCvLabel = locale === 'fr' ? 'Télécharger mon CV (PDF)' : 'Download my CV (PDF)';
-  const emailAria = locale === 'fr' ? 'Envoyer un email' : 'Send an email';
-  const phoneAria = locale === 'fr' ? 'Appeler' : 'Call';
-  const linkedInAria = locale === 'fr' ? 'Profil LinkedIn (ouvert dans un nouvel onglet)' : 'LinkedIn profile (opens in a new tab)';
-  const githubAria = locale === 'fr' ? 'Profil GitHub (ouvert dans un nouvel onglet)' : 'GitHub profile (opens in a new tab)';
-  const cvAria = locale === 'fr' ? "Télécharger le CV au format PDF" : 'Download CV as PDF';
+  const profile = getProfile(locale);
 
   return (
-    <Container maxWidth="sm" sx={{ py: { xs: 6, md: 10 } }}>
-      <Paper
-        elevation={0}
-        sx={{
-          p: 4,
-          borderRadius: 'var(--radius-lg)',
-          border: '1px solid var(--border)',
-          backgroundColor: 'var(--surface-glass)',
-          boxShadow: 'var(--shadow-soft)',
-          backdropFilter: 'blur(var(--blur-glass))',
-        }}
-      >
-        <Box textAlign="center" mb={4}>
-          <Typography variant="h3" component="h1" gutterBottom color="primary">
-            {title}
-          </Typography>
-          <Typography variant="body1" color="text.secondary">
-            {subtitle}
-          </Typography>
-        </Box>
-
-        <Stack spacing={2}>
-          <Button
-            variant="contained"
-            color="error"
-            startIcon={<Email />}
-            href={`mailto:${profile.email}`}
-            fullWidth
-            aria-label={emailAria}
+    <Container maxWidth="lg" sx={{ py: { xs: 6, md: 10 } }}>
+      <Grid container spacing={3}>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Box
+            sx={{
+              borderRadius: 'var(--radius-lg)',
+              border: '1px solid var(--border)',
+              backgroundColor: 'var(--surface)',
+              p: { xs: 3, md: 4 },
+              height: '100%',
+            }}
           >
-            {profile.email}
-          </Button>
+            <Stack spacing={2.5}>
+              <Box>
+                <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
+                  {locale === 'fr' ? 'Contact' : 'Contact'}
+                </Typography>
+                <Typography component="h1" variant="h2" sx={{ color: 'var(--text)', mb: 1 }}>
+                  {locale === 'fr' ? 'Parlons du poste ou du projet' : 'Let’s talk about the role or the project'}
+                </Typography>
+                <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.8, maxWidth: '58ch' }}>
+                  {profile.contactPitch}
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  borderRadius: 'var(--radius-md)',
+                  border: '1px solid var(--border)',
+                  backgroundColor: 'rgba(255,255,255,0.03)',
+                  p: 2.5,
+                }}
+              >
+                <Typography variant="subtitle1" sx={{ color: 'var(--text)', mb: 1 }}>
+                  {locale === 'fr' ? 'Le plus simple pour me joindre' : 'The easiest way to reach me'}
+                </Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.75 }}>
+                  {locale === 'fr'
+                    ? "Pour l'instant, je privilégie le contact direct par email, téléphone ou LinkedIn. Je préfère ça à un formulaire branché sur une solution mail externe."
+                    : 'For now, I prefer direct contact by email, phone or LinkedIn rather than a contact form wired to an external email solution.'}
+                </Typography>
+              </Box>
+            </Stack>
+          </Box>
+        </Grid>
 
-          <Button
-            variant="contained"
-            color="warning"
-            startIcon={<Phone />}
-            href={`tel:${profile.phone}`}
-            fullWidth
-            aria-label={phoneAria}
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Box
+            sx={{
+              borderRadius: 'var(--radius-lg)',
+              border: '1px solid var(--border)',
+              backgroundColor: 'var(--surface)',
+              p: { xs: 3, md: 4 },
+              height: '100%',
+            }}
           >
-            {profile.phone}
-          </Button>
+            <Stack spacing={2}>
+              <Box>
+                <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
+                  {locale === 'fr' ? 'Coordonnées directes' : 'Direct contact'}
+                </Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
+                  {locale === 'fr'
+                    ? 'Tu peux aussi me joindre directement par email, téléphone ou via mes profils professionnels.'
+                    : 'You can also reach me directly by email, phone or through my professional profiles.'}
+                </Typography>
+              </Box>
 
-          <Button
-            variant="contained"
-            color="info"
-            startIcon={<LinkedIn />}
-            href={profile.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            fullWidth
-            aria-label={linkedInAria}
-          >
-            LinkedIn
-          </Button>
+              <Button variant="outlined" startIcon={<Email />} href={`mailto:${profile.email}`} fullWidth>
+                {profile.email}
+              </Button>
 
-          <Button
-            variant="contained"
-            color="secondary"
-            startIcon={<GitHub />}
-            href={'https://github.com/Kelkunx'}
-            target="_blank"
-            rel="noopener noreferrer"
-            fullWidth
-            aria-label={githubAria}
-          >
-            GitHub
-          </Button>
+              <Button variant="outlined" startIcon={<Phone />} href={`tel:${profile.phone}`} fullWidth>
+                {profile.phone}
+              </Button>
 
-          <Button
-            variant="outlined"
-            startIcon={<PictureAsPdf />}
-            href={profile.cvPdf}
-            target="_blank"
-            rel="noopener noreferrer"
-            fullWidth
-            aria-label={cvAria}
-          >
-            {downloadCvLabel}
-          </Button>
-        </Stack>
-      </Paper>
+              <Button
+                variant="outlined"
+                startIcon={<LinkedIn />}
+                href={profile.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                fullWidth
+              >
+                LinkedIn
+              </Button>
+
+              <Button
+                variant="outlined"
+                startIcon={<GitHub />}
+                href={profile.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                fullWidth
+              >
+                GitHub
+              </Button>
+
+              <Button
+                variant="contained"
+                startIcon={<PictureAsPdf />}
+                href={profile.cvPdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                fullWidth
+              >
+                {locale === 'fr' ? 'Télécharger le CV (PDF)' : 'Download CV (PDF)'}
+              </Button>
+            </Stack>
+          </Box>
+        </Grid>
+      </Grid>
     </Container>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
@@ -15,6 +15,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
 import { useLocale } from '../context/LocaleContext';
 import LanguageToggle from './LanguageToggle';
@@ -22,7 +23,8 @@ import LanguageToggle from './LanguageToggle';
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { locale, setLocale, t } = useLocale();
+  const { t } = useLocale();
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -33,6 +35,7 @@ export default function Header() {
   const navLinks = [
     { key: 'home', label: t.nav.home, href: '/' },
     { key: 'projects', label: t.nav.projects, href: '/projets' },
+    { key: 'cv', label: t.nav.cv, href: '/cv' },
     { key: 'contact', label: t.nav.contact, href: '/contact' },
   ];
 
@@ -47,7 +50,7 @@ export default function Header() {
           backdropFilter: 'blur(var(--blur-glass))',
           backgroundColor: scrolled ? 'var(--surface-glass)' : 'transparent',
           boxShadow: scrolled ? 'var(--shadow-soft)' : 'none',
-          transition: 'background-color 250ms ease, box-shadow 250ms ease',
+          transition: 'background-color 220ms ease, box-shadow 220ms ease',
           '&::after': {
             content: '""',
             position: 'absolute',
@@ -56,7 +59,7 @@ export default function Header() {
             bottom: 0,
             height: '1px',
             background: scrolled ? 'var(--grad-border)' : 'transparent',
-            opacity: 0.8,
+            opacity: 0.6,
           },
         }}
       >
@@ -66,7 +69,7 @@ export default function Header() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              minHeight: scrolled ? 60 : 78,
+              minHeight: scrolled ? 66 : 80,
               transition: 'min-height 200ms ease',
               px: { xs: 2, md: 0 },
             }}
@@ -81,50 +84,47 @@ export default function Header() {
                 fontWeight: 700,
                 letterSpacing: '-0.04em',
                 fontFamily: 'var(--font-display)',
-                transition: 'color 180ms ease',
-                '&:hover': { color: 'var(--accent)' },
               }}
             >
               Léo JEGO
             </Typography>
 
-            {/* Desktop nav */}
-            <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 2 }}>
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 1.5 }}>
               {navLinks.map((link) => {
-                const isCta = link.key === 'contact';
+                const active = pathname === link.href;
+                const isContact = link.key === 'contact';
+
                 return (
                   <Button
                     key={link.key}
                     component={Link}
                     href={link.href}
+                    variant={isContact ? 'outlined' : 'text'}
                     sx={{
-                      fontWeight: 500,
-                      color: isCta ? 'var(--text)' : 'var(--text-2)',
+                      color: active || isContact ? 'var(--text)' : 'var(--text-2)',
+                      borderColor: isContact ? 'var(--border)' : undefined,
+                      backgroundColor: active ? 'rgba(121, 168, 255, 0.08)' : 'transparent',
                       '&:hover': {
                         color: 'var(--text)',
-                        backgroundColor: isCta ? 'rgba(187, 154, 247, 0.12)' : 'rgba(125, 207, 255, 0.08)',
+                        backgroundColor: 'rgba(121, 168, 255, 0.08)',
                       },
                     }}
-                    variant={isCta ? 'outlined' : 'text'}
-                    color={isCta ? 'secondary' : 'primary'}
                   >
                     {link.label}
                   </Button>
                 );
               })}
 
-              {/* Language selector + ThemeToggle */}
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <LanguageToggle />
                 <ThemeToggle />
               </Box>
             </Box>
 
-            {/* Mobile nav */}
             <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center', gap: 1 }}>
               <LanguageToggle />
               <ThemeToggle />
-              <IconButton onClick={() => setMobileOpen((o) => !o)} color="primary" aria-label="ouvrir le menu">
+              <IconButton onClick={() => setMobileOpen((open) => !open)} aria-label="open menu">
                 <MenuIcon />
               </IconButton>
             </Box>
@@ -132,20 +132,20 @@ export default function Header() {
         </Container>
       </AppBar>
 
-      {/* Drawer mobile */}
       <Drawer
         anchor="right"
         open={mobileOpen}
         onClose={() => setMobileOpen(false)}
         PaperProps={{
           sx: {
+            width: 260,
             backgroundColor: 'var(--surface)',
             color: 'var(--text)',
             borderLeft: '1px solid var(--border)',
           },
         }}
       >
-        <Box sx={{ width: 240, p: 2 }}>
+        <Box sx={{ p: 2 }}>
           <List>
             {navLinks.map((link) => (
               <ListItem key={link.key} disablePadding>

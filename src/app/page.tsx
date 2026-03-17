@@ -1,15 +1,15 @@
-// app/page.tsx
 'use client';
+
 import React from 'react';
-import HeroSection from '../components/HeroSection';
-import SkillsSection from '../components/SkillsSection';
-import LanguagesSection from '../components/LanguagesSection';
-import ExperienceSection from '../components/ExperienceSection';
-import EducationSection from '../components/EducationSection';
-import CertificationsSection from '../components/CertificationsSection';
 import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
 import AnimatedSection from '../components/AnimatedSection';
+import HeroSection from '../components/HeroSection';
+import ProofBar from '../components/ProofBar';
+import FeaturedProjectsSection from '../components/FeaturedProjectsSection';
+import SkillsSection from '../components/SkillsSection';
+import CareerHighlightsSection from '../components/CareerHighlightsSection';
+import CvSnapshotSection from '../components/CvSnapshotSection';
+import FinalCtaSection from '../components/FinalCtaSection';
 
 export default function HomePage() {
   return (
@@ -18,34 +18,30 @@ export default function HomePage() {
         <HeroSection />
       </AnimatedSection>
 
-      <Container maxWidth="lg" sx={{ pt: { xs: 2, md: 4 }, pb: { xs: 8, md: 12 } }}>
-        <Box
-          component="section"
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-        >
-          <AnimatedSection>
-            <SkillsSection />
-          </AnimatedSection>
+      <Container maxWidth="lg">
+        <AnimatedSection>
+          <ProofBar />
+        </AnimatedSection>
 
-          <AnimatedSection>
-            <LanguagesSection />
-          </AnimatedSection>
+        <AnimatedSection>
+          <FeaturedProjectsSection />
+        </AnimatedSection>
 
-          <AnimatedSection>
-            <ExperienceSection />
-          </AnimatedSection>
+        <AnimatedSection>
+          <SkillsSection variant="home" />
+        </AnimatedSection>
 
-          <AnimatedSection>
-            <EducationSection />
-          </AnimatedSection>
+        <AnimatedSection>
+          <CareerHighlightsSection />
+        </AnimatedSection>
 
-          <AnimatedSection>
-            <CertificationsSection />
-          </AnimatedSection>
-        </Box>
+        <AnimatedSection>
+          <CvSnapshotSection />
+        </AnimatedSection>
+
+        <AnimatedSection>
+          <FinalCtaSection />
+        </AnimatedSection>
       </Container>
     </>
   );
