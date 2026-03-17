@@ -8,16 +8,16 @@ export const profile: Profile = {
   email: 'leo.jego56@gmail.com',
   linkedin: 'https://www.linkedin.com/in/leo-jego',
   github: 'https://github.com/Kelkunx',
-  title: 'Product-oriented full-stack developer',
-  focus: 'Product-oriented full-stack developer',
+  title: 'Full-stack developer',
+  focus: 'Full-stack developer',
   summary:
     'I design and build clear, robust and useful web interfaces and tools, with strong attention to user experience, business logic and execution quality. My background led me to work on business UIs, APIs, automations and web products where technical depth has to meet real operational needs.',
   shortBio:
     'I design and ship clear, robust and useful web interfaces and tools, with a strong focus on UX, business logic and quality.',
   contactPitch:
     'I am available to discuss a full-stack or frontend role, an apprenticeship with growth potential, or a demanding product-oriented project.',
-  availability: 'Available for a product-oriented full-stack / frontend role',
-  targetRoles: ['Full-stack Developer', 'React / Next.js Frontend Developer', 'Junior Product Engineer'],
+  availability: 'Available for a full-stack / frontend role',
+  targetRoles: ['Full-stack Developer', 'React / Next.js Frontend Developer', 'Junior Frontend Developer'],
   proofPoints: [
     { label: 'Core stack', value: 'React / Next.js / NestJS' },
     { label: 'Hands-on experience', value: 'Business tools, ATS, retail, IoT' },

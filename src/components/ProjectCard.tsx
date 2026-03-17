@@ -52,10 +52,10 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   const router = useRouter();
   const { locale } = useLocale();
-  const reduce = useReducedMotion();
+  const prefersReducedMotion = useReducedMotion();
   const ease: Easing = [0.22, 1, 0.36, 1];
 
-  const variants: Variants = reduce
+  const animationVariants: Variants = prefersReducedMotion
     ? {
         hidden: { opacity: 1, y: 0 },
         visible: { opacity: 1, y: 0 },
@@ -75,13 +75,14 @@ export default function ProjectCard({
       };
 
   const externalLinks = links.filter((item) => item.type === 'demo' || item.type === 'repo');
-  const proofItems = results.slice(0, compact ? 1 : 2);
+  const highlightedResults = results.slice(0, compact ? 1 : 2);
   const dateLabel = formatDate(date, locale);
-  const image = imageSrc && imageSrc.trim() !== '' ? imageSrc : projectPlaceholderDataUrl(title, locale);
-  const altText = imageAlt || title;
+  const cardImageSrc = imageSrc && imageSrc.trim() !== '' ? imageSrc : projectPlaceholderDataUrl(title, locale);
+  const cardImageAlt = imageAlt || title;
 
   const handleActivate = (event: React.MouseEvent | React.KeyboardEvent) => {
     const target = event.target as HTMLElement | null;
+    // Let buttons and links keep their native behaviour inside the clickable card.
     if (target?.closest('a,button')) return;
     router.push(`/projets/${slug}`);
   };
@@ -95,11 +96,11 @@ export default function ProjectCard({
 
   return (
     <MotionCard
-      variants={variants}
-      initial={reduce ? false : 'hidden'}
-      whileInView={reduce ? undefined : 'visible'}
-      whileHover={reduce ? undefined : 'hover'}
-      viewport={reduce ? undefined : { once: true, amount: 0.25 }}
+      variants={animationVariants}
+      initial={prefersReducedMotion ? false : 'hidden'}
+      whileInView={prefersReducedMotion ? undefined : 'visible'}
+      whileHover={prefersReducedMotion ? undefined : 'hover'}
+      viewport={prefersReducedMotion ? undefined : { once: true, amount: 0.25 }}
       role="link"
       tabIndex={0}
       onClick={handleActivate}
@@ -134,8 +135,8 @@ export default function ProjectCard({
       >
         <CardMedia
           component="img"
-          image={image}
-          alt={altText}
+          image={cardImageSrc}
+          alt={cardImageAlt}
           loading="lazy"
           sx={{
             width: '100%',
@@ -175,7 +176,7 @@ export default function ProjectCard({
           </Box>
 
           <Stack spacing={1}>
-            {proofItems.map((item) => (
+            {highlightedResults.map((item) => (
               <Box
                 key={`${item.value}-${item.label}`}
                 sx={{

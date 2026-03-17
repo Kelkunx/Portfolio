@@ -91,7 +91,7 @@ export const projects: Project[] = [
     results: [
       {
         value: 'Clearer message',
-        label: 'The product-oriented full-stack positioning now appears from the first screen.',
+        label: 'The full-stack positioning now appears from the first screen.',
       },
       {
         value: 'More readable profile',

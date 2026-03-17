@@ -10,8 +10,8 @@ import { getProfile } from '../../lib/content';
 export default function LanguagesSection() {
   const { locale } = useLocale();
   const profile = getProfile(locale);
-  const toeic = profile.certifications.find((item) => item.name.toLowerCase().includes('toeic'));
-  const tones = ['var(--cyan)', 'var(--purple)', 'var(--green)'];
+  const toeicCertification = profile.certifications.find((item) => item.name.toLowerCase().includes('toeic'));
+  const accentTones = ['var(--cyan)', 'var(--purple)', 'var(--green)'];
 
   return (
     <Box sx={{ mt: 8 }}>
@@ -26,11 +26,11 @@ export default function LanguagesSection() {
 
       <Stack spacing={2}>
         {profile.languages.map((language, index) => {
-          const extra =
-            language.name.toLowerCase() === (locale === 'fr' ? 'anglais' : 'english') && toeic
-              ? ` • TOEIC ${toeic.score}`
+          const scoreSuffix =
+            language.name.toLowerCase() === (locale === 'fr' ? 'anglais' : 'english') && toeicCertification
+              ? ` • TOEIC ${toeicCertification.score}`
               : '';
-          const tone = tones[index % tones.length];
+          const accentTone = accentTones[index % accentTones.length];
 
           return (
             <Box
@@ -49,7 +49,7 @@ export default function LanguagesSection() {
                   right: 0,
                   top: 0,
                   height: 3,
-                  background: `linear-gradient(90deg, ${tone}, transparent 72%)`,
+                  background: `linear-gradient(90deg, ${accentTone}, transparent 72%)`,
                 },
               }}
             >
@@ -58,7 +58,7 @@ export default function LanguagesSection() {
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 {language.level}
-                {extra}
+                {scoreSuffix}
               </Typography>
             </Box>
           );

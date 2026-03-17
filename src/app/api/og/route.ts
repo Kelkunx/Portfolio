@@ -6,7 +6,7 @@ export const runtime = 'edge';
 export async function GET(req: Request) {
   const url = new URL(req.url);
   const title = url.searchParams.get('title') ?? 'Léo JEGO';
-  const subtitle = url.searchParams.get('subtitle') ?? 'Portfolio — Développeur full-stack orienté produit';
+  const subtitle = url.searchParams.get('subtitle') ?? 'Portfolio — Développeur full-stack';
 
   return new ImageResponse(
     React.createElement(

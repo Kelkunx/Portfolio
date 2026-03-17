@@ -119,8 +119,8 @@ export default function SkillsSection({ variant = 'home' }: SkillsSectionProps) 
         </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ maxWidth: '70ch' }}>
           {locale === 'fr'
-            ? 'Un profil full-stack orienté produit, avec une attention forte portée à la clarté, à la logique métier et à la qualité de livraison.'
-            : 'A product-oriented full-stack profile focused on clarity, business logic and execution quality.'}
+            ? 'Un profil full-stack avec une attention forte portée à la clarté, à la logique métier et à la qualité de livraison.'
+            : 'A full-stack profile focused on clarity, business logic and execution quality.'}
         </Typography>
       </Stack>
 

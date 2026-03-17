@@ -7,7 +7,7 @@ import Stack from '@mui/material/Stack';
 import { useLocale } from '../context/LocaleContext';
 import { getProfile } from '../../lib/content';
 
-function formatRange(start?: string, end?: string, locale = 'fr') {
+function formatExperienceRange(start?: string, end?: string, locale = 'fr') {
   if (!start) return '';
   const present = locale === 'en' ? 'present' : 'présent';
   return end ? `${start} — ${end}` : `${start} — ${present}`;
@@ -16,9 +16,9 @@ function formatRange(start?: string, end?: string, locale = 'fr') {
 export default function ExperienceSection() {
   const { locale } = useLocale();
   const profile = getProfile(locale);
-  const mainExperiences = profile.experiences.filter((item) => item.kind !== 'other');
-  const otherExperiences = profile.experiences.filter((item) => item.kind === 'other');
-  const tones = ['var(--cyan)', 'var(--purple)', 'var(--green)'];
+  const featuredExperiences = profile.experiences.filter((item) => item.kind !== 'other');
+  const supportingExperiences = profile.experiences.filter((item) => item.kind === 'other');
+  const accentTones = ['var(--cyan)', 'var(--purple)', 'var(--green)'];
 
   return (
     <Box sx={{ mt: 8 }}>
@@ -28,13 +28,13 @@ export default function ExperienceSection() {
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ maxWidth: '70ch' }}>
           {locale === 'fr'
-            ? 'Expériences principales liées au produit, au développement full-stack et à la livraison.'
-            : 'Main experience related to product work, full-stack development and delivery.'}
+            ? 'Expériences principales liées au développement full-stack, à l’automatisation et à la livraison.'
+            : 'Main experience related to full-stack development, automation and delivery.'}
         </Typography>
       </Stack>
 
       <Stack spacing={3}>
-        {mainExperiences.map((experience, index) => (
+        {featuredExperiences.map((experience, index) => (
           <Box
             key={`${experience.company}-${experience.start}`}
             sx={{
@@ -51,7 +51,7 @@ export default function ExperienceSection() {
                 right: 0,
                 top: 0,
                 height: 4,
-                background: `linear-gradient(90deg, ${tones[index % tones.length]}, transparent 72%)`,
+                background: `linear-gradient(90deg, ${accentTones[index % accentTones.length]}, transparent 72%)`,
               },
             }}
           >
@@ -61,7 +61,7 @@ export default function ExperienceSection() {
                   {experience.role} — {experience.company}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {formatRange(experience.start, experience.end, locale)} • {experience.location}
+                  {formatExperienceRange(experience.start, experience.end, locale)} • {experience.location}
                 </Typography>
               </Box>
 
@@ -86,9 +86,9 @@ export default function ExperienceSection() {
                         width: 10,
                         height: 10,
                         borderRadius: '50%',
-                        backgroundColor: tones[index % tones.length],
+                        backgroundColor: accentTones[index % accentTones.length],
                         mt: '0.45rem',
-                        boxShadow: `0 0 0 4px color-mix(in srgb, ${tones[index % tones.length]} 22%, transparent)`,
+                        boxShadow: `0 0 0 4px color-mix(in srgb, ${accentTones[index % accentTones.length]} 22%, transparent)`,
                       }}
                     />
                     <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.72 }}>
@@ -102,7 +102,7 @@ export default function ExperienceSection() {
         ))}
       </Stack>
 
-      {otherExperiences.length > 0 && (
+      {supportingExperiences.length > 0 && (
         <Box
           sx={{
             position: 'relative',
@@ -127,7 +127,7 @@ export default function ExperienceSection() {
             {locale === 'fr' ? 'Autres expériences' : 'Other experience'}
           </Typography>
           <Stack spacing={0.75}>
-            {otherExperiences.map((experience) => (
+            {supportingExperiences.map((experience) => (
               <Box
                 key={`${experience.company}-${experience.start}`}
                 sx={{
@@ -139,7 +139,8 @@ export default function ExperienceSection() {
                 }}
               >
                 <Typography variant="body2" color="text.secondary">
-                  {experience.role} — {experience.company} • {formatRange(experience.start, experience.end, locale)}
+                  {experience.role} — {experience.company} •{' '}
+                  {formatExperienceRange(experience.start, experience.end, locale)}
                 </Typography>
               </Box>
             ))}

@@ -14,8 +14,8 @@ import { getProfile } from '../../lib/content';
 export default function CvSnapshotSection() {
   const { locale } = useLocale();
   const profile = getProfile(locale);
-  const toeic = profile.certifications.find((item) => item.name.toLowerCase().includes('toeic'));
-  const languages = profile.languages.map((item) => `${item.name} ${item.level}`).join(' • ');
+  const toeicCertification = profile.certifications.find((item) => item.name.toLowerCase().includes('toeic'));
+  const languageSummary = profile.languages.map((item) => `${item.name} ${item.level}`).join(' • ');
 
   return (
     <Box component="section" sx={{ mt: { xs: 8, md: 12 } }}>
@@ -31,6 +31,7 @@ export default function CvSnapshotSection() {
               p: { xs: 3, md: 4 },
               overflow: 'hidden',
               '&::before': {
+                // Keep the card colorful without competing with the main copy.
                 content: '""',
                 position: 'absolute',
                 inset: 0,
@@ -111,17 +112,17 @@ export default function CvSnapshotSection() {
                   {locale === 'fr' ? 'Langues' : 'Languages'}
                 </Typography>
                 <Typography variant="body1" sx={{ color: 'var(--text)' }}>
-                  {languages}
+                  {languageSummary}
                 </Typography>
               </Box>
 
-              {toeic && (
+              {toeicCertification && (
                 <Box sx={{ borderLeft: '3px solid var(--green)', pl: 1.5 }}>
                   <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
                     TOEIC
                   </Typography>
                   <Typography variant="body1" sx={{ color: 'var(--text)' }}>
-                    {toeic.score}
+                    {toeicCertification.score}
                   </Typography>
                 </Box>
               )}

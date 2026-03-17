@@ -8,16 +8,16 @@ export const profile: Profile = {
   email: 'leo.jego56@gmail.com',
   linkedin: 'https://www.linkedin.com/in/leo-jego',
   github: 'https://github.com/Kelkunx',
-  title: 'Développeur full-stack orienté produit',
-  focus: 'Développeur full-stack orienté produit',
+  title: 'Développeur full-stack',
+  focus: 'Développeur full-stack',
   summary:
     "Je conçois et développe des interfaces et outils web clairs, robustes et utiles, avec une attention forte portée à l'expérience utilisateur, à la logique métier et à la qualité d'exécution. Mon parcours m'a amené à travailler sur des écrans métier, des API, des automatisations et des produits web mêlant enjeux techniques et besoins concrets.",
   shortBio:
     "Je conçois et livre des interfaces et outils web clairs, robustes et utiles, avec un vrai souci d'UX, de logique métier et de qualité.",
   contactPitch:
     "Je suis disponible pour échanger autour d'un poste full-stack / frontend, d'une alternance évolutive ou d'un projet produit exigeant.",
-  availability: "Disponible pour un poste full-stack / frontend orienté produit",
-  targetRoles: ['Développeur full-stack', 'Frontend React / Next.js', 'Product engineer junior'],
+  availability: 'Disponible pour un poste full-stack / frontend',
+  targetRoles: ['Développeur full-stack', 'Frontend React / Next.js', 'Développeur frontend junior'],
   proofPoints: [
     { label: 'Stack coeur', value: 'React / Next.js / NestJS' },
     { label: 'Expérience terrain', value: 'Outils métier, ATS, retail, IoT' },

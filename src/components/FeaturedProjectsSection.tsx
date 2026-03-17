@@ -13,7 +13,7 @@ import ProjectCard from './ProjectCard';
 
 export default function FeaturedProjectsSection() {
   const { locale } = useLocale();
-  const projects = getProjects(locale).filter((project) => project.featured).slice(0, 3);
+  const featuredProjects = getProjects(locale).filter((project) => project.featured).slice(0, 3);
 
   return (
     <Box component="section" sx={{ mt: { xs: 8, md: 12 } }}>
@@ -40,7 +40,7 @@ export default function FeaturedProjectsSection() {
       </Stack>
 
       <Grid container spacing={3}>
-        {projects.map((project, index) => (
+        {featuredProjects.map((project, index) => (
           <Grid key={project.slug} size={{ xs: 12, md: 4 }}>
             <ProjectCard {...project} revealDelay={index * 0.05} />
           </Grid>

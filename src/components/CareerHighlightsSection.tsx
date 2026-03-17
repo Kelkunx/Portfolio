@@ -30,8 +30,8 @@ export default function CareerHighlightsSection() {
         </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ maxWidth: '70ch' }}>
           {locale === 'fr'
-            ? 'Des expériences qui relient produit, développement full-stack, automatisation et qualité logicielle.'
-            : 'Experience spanning product work, full-stack development, automation and software quality.'}
+            ? 'Des expériences qui relient développement full-stack, automatisation et qualité logicielle.'
+            : 'Experience spanning full-stack development, automation and software quality.'}
         </Typography>
       </Stack>
 
@@ -80,7 +80,7 @@ export default function CareerHighlightsSection() {
                         gridTemplateColumns: '8px 1fr',
                         gap: 1.1,
                         alignItems: 'start',
-                        borderRadius: 12,
+                        borderRadius: 1,
                         backgroundColor: 'var(--surface-2)',
                         border: '1px solid rgba(125, 207, 255, 0.1)',
                         px: 1.35,

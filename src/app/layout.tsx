@@ -29,7 +29,7 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = 'Léo JEGO — Développeur full-stack orienté produit';
+  const title = 'Léo JEGO — Développeur full-stack';
   const description =
     'Portfolio de Léo JEGO. Interfaces web claires, outils métier, React, Next.js, NestJS, CV dynamique et case studies.';
   const base = process.env.SITE_URL ?? 'https://leo-jego.vercel.app';
