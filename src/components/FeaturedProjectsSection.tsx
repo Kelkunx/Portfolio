@@ -16,7 +16,7 @@ export default function FeaturedProjectsSection() {
   const featuredProjects = getProjects(locale).filter((project) => project.featured).slice(0, 3);
 
   return (
-    <Box component="section" sx={{ mt: { xs: 8, md: 12 } }}>
+    <Box component="section" id="home-sections-start" sx={{ mt: { xs: 8, md: 12 }, scrollMarginTop: '96px' }}>
       <Stack
         direction={{ xs: 'column', md: 'row' }}
         justifyContent="space-between"

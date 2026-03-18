@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
@@ -11,13 +11,31 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Link from 'next/link';
 import Image from 'next/image';
-import { LinkedIn, Email, GitHub, ArrowOutward } from '@mui/icons-material';
+import { LinkedIn, Email, GitHub, ArrowOutward, KeyboardArrowDownRounded } from '@mui/icons-material';
 import { useLocale } from '../context/LocaleContext';
 import { getProfile } from '../../lib/content';
 
 export default function HeroSection() {
   const { locale } = useLocale();
   const profile = getProfile(locale);
+  const [showScrollCue, setShowScrollCue] = useState(true);
+
+  useEffect(() => {
+    const onScroll = () => setShowScrollCue(window.scrollY < 48);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const handleScrollCueClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+
+    const nextSection = document.getElementById('home-sections-start');
+    if (!nextSection) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    nextSection.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+  };
 
   return (
     <Box
@@ -253,6 +271,48 @@ export default function HeroSection() {
             </Box>
           </Grid>
         </Grid>
+
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            mt: { xs: 4, md: 5 },
+            opacity: showScrollCue ? 1 : 0,
+            transform: showScrollCue ? 'translateY(0)' : 'translateY(8px)',
+            pointerEvents: showScrollCue ? 'auto' : 'none',
+            transition: 'opacity 180ms ease, transform 180ms ease',
+          }}
+        >
+          <Button
+            component="a"
+            href="#home-sections-start"
+            onClick={handleScrollCueClick}
+            aria-label={locale === 'fr' ? 'Descendre vers les sections suivantes' : 'Scroll to the next sections'}
+            variant="text"
+            sx={{
+              color: 'var(--text-2)',
+              minWidth: 'auto',
+              width: 56,
+              height: 56,
+              borderRadius: '999px',
+              p: 0,
+              '@keyframes scrollCueFloat': {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(6px)' },
+              },
+              '& .MuiSvgIcon-root': {
+                fontSize: 36,
+                animation: 'scrollCueFloat 1.4s ease-in-out infinite',
+              },
+              '&:hover': {
+                backgroundColor: 'rgba(125, 207, 255, 0.08)',
+                color: 'var(--cyan)',
+              },
+            }}
+          >
+            <KeyboardArrowDownRounded />
+          </Button>
+        </Box>
       </Container>
     </Box>
   );
