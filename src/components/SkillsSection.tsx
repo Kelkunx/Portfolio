@@ -7,8 +7,10 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
+import { CodeRounded, HandymanRounded } from '@mui/icons-material';
 import { useLocale } from '../context/LocaleContext';
 import { getProfile } from '../../lib/content';
+import SectionTitle from './SectionTitle';
 
 const MotionBox = motion(Box);
 
@@ -27,9 +29,11 @@ export default function SkillsSection({ variant = 'home' }: SkillsSectionProps) 
     return (
       <Box sx={{ mt: 8 }}>
         <Stack spacing={1} sx={{ mb: 3 }}>
-          <Typography component="h2" variant="h4" sx={{ color: 'var(--text)' }}>
-            {locale === 'fr' ? 'Compétences' : 'Skills'}
-          </Typography>
+          <SectionTitle
+            title={locale === 'fr' ? 'Compétences' : 'Skills'}
+            icon={<CodeRounded />}
+            tone="purple"
+          />
         </Stack>
 
         <Grid container spacing={3}>
@@ -51,34 +55,57 @@ export default function SkillsSection({ variant = 'home' }: SkillsSectionProps) 
               <Grid key={group.category} size={{ xs: 12, md: 6 }}>
                 <MotionBox
                   {...revealProps}
-                sx={{
-                  borderRadius: 'var(--radius-md)',
-                  border: '1px solid var(--border)',
-                  borderTop: `2px solid ${tone}`,
-                  backgroundColor: 'var(--surface)',
-                  p: 3,
-                  height: '100%',
-                  transition: 'background-color 160ms ease, border-color 160ms ease',
-                  '&:hover': {
-                    borderColor: tone,
-                    backgroundColor:
-                      tone === 'var(--cyan)'
-                        ? 'rgba(125, 207, 255, 0.05)'
-                        : tone === 'var(--purple)'
-                          ? 'rgba(187, 154, 247, 0.05)'
-                          : tone === 'var(--green)'
-                            ? 'rgba(158, 206, 106, 0.05)'
-                            : 'rgba(255, 158, 100, 0.05)',
-                  },
-                }}
-              >
+                  sx={{
+                    borderRadius: 'var(--radius-md)',
+                    border: '1px solid var(--border)',
+                    borderTop: `2px solid ${tone}`,
+                    backgroundColor: 'var(--surface)',
+                    p: 3,
+                    height: '100%',
+                    transition: 'background-color 160ms ease, border-color 160ms ease',
+                    '&:hover': {
+                      borderColor: tone,
+                      backgroundColor:
+                        tone === 'var(--cyan)'
+                          ? 'rgba(125, 207, 255, 0.05)'
+                          : tone === 'var(--purple)'
+                            ? 'rgba(187, 154, 247, 0.05)'
+                            : tone === 'var(--green)'
+                              ? 'rgba(158, 206, 106, 0.05)'
+                              : 'rgba(255, 158, 100, 0.05)',
+                    },
+                  }}
+                >
                   <Typography component="h3" variant="h6" sx={{ color: 'var(--text)', mb: 2 }}>
                     {group.category}
                   </Typography>
 
-                  <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.75 }}>
-                    {group.items.join(' • ')}
-                  </Typography>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.1 }}>
+                    {group.items.map((item) => (
+                      <Box
+                        key={item}
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 0.75,
+                          pr: 0.9,
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            width: 6,
+                            height: 6,
+                            borderRadius: '50%',
+                            backgroundColor: tone,
+                            flexShrink: 0,
+                          }}
+                        />
+                        <Typography variant="body2" sx={{ color: 'var(--text)', lineHeight: 1.55 }}>
+                          {item}
+                        </Typography>
+                      </Box>
+                    ))}
+                  </Box>
                 </MotionBox>
               </Grid>
             );
@@ -91,9 +118,11 @@ export default function SkillsSection({ variant = 'home' }: SkillsSectionProps) 
   return (
     <Box sx={{ mt: { xs: 8, md: 12 } }}>
       <Stack spacing={1} sx={{ mb: 4 }}>
-        <Typography component="h2" variant="h4" sx={{ color: 'var(--text)' }}>
-          {locale === 'fr' ? "Ce que j'apporte" : 'What I bring'}
-        </Typography>
+        <SectionTitle
+          title={locale === 'fr' ? "Ce que j'apporte" : 'What I bring'}
+          icon={<HandymanRounded />}
+          tone="green"
+        />
         <Typography variant="body1" color="text.secondary" sx={{ maxWidth: '70ch' }}>
           {locale === 'fr'
             ? 'Un profil full-stack avec une attention forte portée à la clarté, à la logique métier et à la qualité de livraison.'

@@ -3,13 +3,15 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
+import { DescriptionRounded } from '@mui/icons-material';
 import { useLocale } from '../context/LocaleContext';
 import { getProfile } from '../../lib/content';
+import SectionTitle from './SectionTitle';
+import TechStackChips from './TechStackChips';
 
 export default function CvSnapshotSection() {
   const { locale } = useLocale();
@@ -31,38 +33,16 @@ export default function CvSnapshotSection() {
             }}
           >
             <Stack spacing={2}>
-              <Typography component="h2" variant="h4" sx={{ color: 'var(--text)' }}>
-                {locale === 'fr' ? 'CV express' : 'Quick CV'}
-              </Typography>
+              <SectionTitle
+                title={locale === 'fr' ? 'CV express' : 'Quick CV'}
+                icon={<DescriptionRounded />}
+                tone="cyan"
+              />
               <Typography variant="body1" color="text.secondary" sx={{ maxWidth: '60ch' }}>
                 {profile.summary}
               </Typography>
 
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75 }}>
-                {profile.primaryStack.map((item, index) => (
-                  <Chip
-                    key={item}
-                    label={item}
-                    size="small"
-                    variant="outlined"
-                    sx={{
-                      color: 'var(--text)',
-                      borderColor:
-                        index % 3 === 0
-                          ? 'rgba(125, 207, 255, 0.3)'
-                          : index % 3 === 1
-                            ? 'rgba(187, 154, 247, 0.3)'
-                            : 'rgba(158, 206, 106, 0.3)',
-                      backgroundColor:
-                        index % 3 === 0
-                          ? 'rgba(125, 207, 255, 0.1)'
-                          : index % 3 === 1
-                            ? 'rgba(187, 154, 247, 0.1)'
-                            : 'rgba(158, 206, 106, 0.1)',
-                    }}
-                  />
-                ))}
-              </Box>
+              <TechStackChips items={profile.primaryStack} />
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
                 <Button component={Link} href="/cv" variant="contained">

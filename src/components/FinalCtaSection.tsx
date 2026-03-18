@@ -6,9 +6,10 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
-import { ArrowOutward } from '@mui/icons-material';
+import { ArrowOutward, MailOutlineRounded } from '@mui/icons-material';
 import { useLocale } from '../context/LocaleContext';
 import { getProfile } from '../../lib/content';
+import SectionTitle from './SectionTitle';
 
 export default function FinalCtaSection() {
   const { locale } = useLocale();
@@ -28,9 +29,11 @@ export default function FinalCtaSection() {
       }}
     >
       <Stack spacing={2} sx={{ maxWidth: 760 }}>
-        <Typography component="h2" variant="h4" sx={{ color: 'var(--text)' }}>
-          {locale === 'fr' ? 'Parlons du poste ou du projet' : "Let's talk about the role or the project"}
-        </Typography>
+        <SectionTitle
+          title={locale === 'fr' ? 'Parlons du poste ou du projet' : "Let's talk about the role or the project"}
+          icon={<MailOutlineRounded />}
+          tone="orange"
+        />
         <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.75 }}>
           {profile.contactPitch}
         </Typography>

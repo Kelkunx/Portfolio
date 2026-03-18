@@ -4,8 +4,10 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
+import { SchoolRounded } from '@mui/icons-material';
 import { useLocale } from '../context/LocaleContext';
 import { getProfile } from '../../lib/content';
+import SectionTitle from './SectionTitle';
 
 export default function EducationSection() {
   const { locale } = useLocale();
@@ -15,9 +17,11 @@ export default function EducationSection() {
   return (
     <Box sx={{ mt: 8, mb: { xs: 4, md: 6 } }}>
       <Stack spacing={1} sx={{ mb: 3 }}>
-        <Typography component="h2" variant="h4" sx={{ color: 'var(--text)' }}>
-          {locale === 'fr' ? 'Formation' : 'Education'}
-        </Typography>
+        <SectionTitle
+          title={locale === 'fr' ? 'Formation' : 'Education'}
+          icon={<SchoolRounded />}
+          tone="orange"
+        />
       </Stack>
 
       <Stack spacing={2}>

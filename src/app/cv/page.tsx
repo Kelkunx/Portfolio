@@ -3,7 +3,6 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
@@ -16,11 +15,12 @@ import SkillsSection from '../../components/SkillsSection';
 import LanguagesSection from '../../components/LanguagesSection';
 import CertificationsSection from '../../components/CertificationsSection';
 import EducationSection from '../../components/EducationSection';
+import TechStackChips from '../../components/TechStackChips';
 
 export default function CvPage() {
   const { locale } = useLocale();
   const profile = getProfile(locale);
-  const toeic = profile.certifications.find((item) => item.name.toLowerCase().includes('toeic'));
+  const toeicCertification = profile.certifications.find((item) => item.name.toLowerCase().includes('toeic'));
 
   return (
     <Container maxWidth="lg" sx={{ py: { xs: 6, md: 8 } }}>
@@ -45,7 +45,7 @@ export default function CvPage() {
               </Typography>
 
               <Grid container spacing={1.25}>
-                {profile.proofPoints.slice(0, 3).map((item, index) => {
+                {profile.proofPoints.slice(0, 2).map((item, index) => {
                   const tone = index === 0 ? 'var(--cyan)' : index === 1 ? 'var(--purple)' : 'var(--green)';
                   const bg =
                     index === 0
@@ -125,31 +125,7 @@ export default function CvPage() {
                 <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.5 }}>
                   {locale === 'fr' ? 'Stack principale' : 'Primary stack'}
                 </Typography>
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75 }}>
-                  {profile.primaryStack.map((item, index) => (
-                    <Chip
-                      key={item}
-                      label={item}
-                      size="small"
-                      variant="outlined"
-                      sx={{
-                        color: 'var(--text)',
-                        borderColor:
-                          index % 3 === 0
-                            ? 'rgba(125, 207, 255, 0.3)'
-                            : index % 3 === 1
-                              ? 'rgba(187, 154, 247, 0.3)'
-                              : 'rgba(158, 206, 106, 0.3)',
-                        backgroundColor:
-                          index % 3 === 0
-                            ? 'rgba(125, 207, 255, 0.1)'
-                            : index % 3 === 1
-                              ? 'rgba(187, 154, 247, 0.1)'
-                              : 'rgba(158, 206, 106, 0.1)',
-                      }}
-                    />
-                  ))}
-                </Box>
+                <TechStackChips items={profile.primaryStack} />
               </Box>
 
               <Box sx={{ borderLeft: '3px solid var(--purple)', pl: 1.5 }}>
@@ -161,13 +137,13 @@ export default function CvPage() {
                 </Typography>
               </Box>
 
-              {toeic && (
+              {toeicCertification && (
                 <Box sx={{ borderLeft: '3px solid var(--green)', pl: 1.5 }}>
                   <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.5 }}>
                     TOEIC
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    {toeic.score} • {toeic.date}
+                    {toeicCertification.score} • {toeicCertification.date}
                   </Typography>
                 </Box>
               )}

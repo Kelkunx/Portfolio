@@ -6,12 +6,12 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import Link from 'next/link';
 import { ArrowOutward } from '@mui/icons-material';
 import ImageLightbox from '../../../components/ImageLightbox';
+import TechStackChips from '../../../components/TechStackChips';
 import { useLocale } from '../../../context/LocaleContext';
 import { getProjects } from '../../../../lib/content';
 import { projectPlaceholderDataUrl } from '../../../../lib/project-placeholder';
@@ -319,31 +319,7 @@ export default function ProjectDetailPage() {
               <Typography component="h2" variant="h5" sx={{ color: 'var(--text)', mb: 2 }}>
                 {locale === 'fr' ? 'Stack' : 'Stack'}
               </Typography>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75 }}>
-                {project.tech.map((item, index) => (
-                  <Chip
-                    key={item}
-                    label={item}
-                    size="small"
-                    variant="outlined"
-                    sx={{
-                      color: 'var(--text)',
-                      borderColor:
-                        index % 3 === 0
-                          ? 'rgba(125, 207, 255, 0.3)'
-                          : index % 3 === 1
-                            ? 'rgba(187, 154, 247, 0.3)'
-                            : 'rgba(158, 206, 106, 0.3)',
-                      backgroundColor:
-                        index % 3 === 0
-                          ? 'rgba(125, 207, 255, 0.1)'
-                          : index % 3 === 1
-                            ? 'rgba(187, 154, 247, 0.1)'
-                            : 'rgba(158, 206, 106, 0.1)',
-                    }}
-                  />
-                ))}
-              </Box>
+              <TechStackChips items={project.tech} />
             </Box>
 
             <Box

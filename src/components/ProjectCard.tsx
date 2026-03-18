@@ -8,7 +8,6 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Link from 'next/link';
@@ -17,6 +16,7 @@ import { useRouter } from 'next/navigation';
 import { useLocale } from '../context/LocaleContext';
 import type { Project } from '../../lib/content-types';
 import { projectPlaceholderDataUrl } from '../../lib/project-placeholder';
+import TechStackChips from './TechStackChips';
 
 type ProjectCardProps = Project & {
   revealDelay?: number;
@@ -79,8 +79,6 @@ export default function ProjectCard({
   const dateLabel = formatDate(date, locale);
   const cardImageSrc = imageSrc && imageSrc.trim() !== '' ? imageSrc : projectPlaceholderDataUrl(title, locale);
   const cardImageAlt = imageAlt || title;
-  const stackTone = compact ? 'rgba(187, 154, 247, 0.1)' : 'rgba(125, 207, 255, 0.1)';
-  const stackBorder = compact ? 'rgba(187, 154, 247, 0.3)' : 'rgba(125, 207, 255, 0.3)';
 
   const handleActivate = (event: React.MouseEvent | React.KeyboardEvent) => {
     const target = event.target as HTMLElement | null;
@@ -187,21 +185,7 @@ export default function ProjectCard({
             ))}
           </Stack>
 
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75 }}>
-            {tech.slice(0, compact ? 3 : 4).map((item) => (
-              <Chip
-                key={item}
-                label={item}
-                size="small"
-                variant="outlined"
-                sx={{
-                  color: 'var(--text)',
-                  borderColor: stackBorder,
-                  backgroundColor: stackTone,
-                }}
-              />
-            ))}
-          </Box>
+          <TechStackChips items={tech} limit={compact ? 3 : 4} />
         </Stack>
       </CardContent>
 

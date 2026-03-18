@@ -7,9 +7,11 @@ import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
+import { FolderOpenRounded } from '@mui/icons-material';
 import { useLocale } from '../context/LocaleContext';
 import { getProjects } from '../../lib/content';
 import ProjectCard from './ProjectCard';
+import SectionTitle from './SectionTitle';
 
 export default function FeaturedProjectsSection() {
   const { locale } = useLocale();
@@ -25,9 +27,11 @@ export default function FeaturedProjectsSection() {
         sx={{ mb: 4 }}
       >
         <Box sx={{ maxWidth: 720 }}>
-          <Typography component="h2" variant="h4" sx={{ color: 'var(--text)', mb: 1 }}>
-            {locale === 'fr' ? 'Projets phares' : 'Featured projects'}
-          </Typography>
+          <SectionTitle
+            title={locale === 'fr' ? 'Projets phares' : 'Featured projects'}
+            icon={<FolderOpenRounded />}
+            tone="cyan"
+          />
           <Typography variant="body1" color="text.secondary">
             {locale === 'fr'
               ? 'Trois projets qui montrent le mieux ma façon de concevoir un produit, structurer une solution et livrer un résultat crédible.'

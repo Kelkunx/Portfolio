@@ -4,8 +4,10 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
+import { BusinessCenterRounded } from '@mui/icons-material';
 import { useLocale } from '../context/LocaleContext';
 import { getProfile } from '../../lib/content';
+import SectionTitle from './SectionTitle';
 
 function formatExperienceRange(start?: string, end?: string, locale = 'fr') {
   if (!start) return '';
@@ -23,9 +25,11 @@ export default function ExperienceSection() {
   return (
     <Box sx={{ mt: 8 }}>
       <Stack spacing={1} sx={{ mb: 3 }}>
-        <Typography component="h2" variant="h4" sx={{ color: 'var(--text)' }}>
-          {locale === 'fr' ? 'Expériences' : 'Experience'}
-        </Typography>
+        <SectionTitle
+          title={locale === 'fr' ? 'Expériences' : 'Experience'}
+          icon={<BusinessCenterRounded />}
+          tone="green"
+        />
       </Stack>
 
       <Stack spacing={3}>

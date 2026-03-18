@@ -7,8 +7,10 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
+import { WorkHistoryRounded } from '@mui/icons-material';
 import { useLocale } from '../context/LocaleContext';
 import { getProfile } from '../../lib/content';
+import SectionTitle from './SectionTitle';
 
 function formatRange(start?: string, end?: string, locale = 'fr') {
   if (!start) return '';
@@ -25,9 +27,11 @@ export default function CareerHighlightsSection() {
   return (
     <Box component="section" sx={{ mt: { xs: 8, md: 12 } }}>
       <Stack spacing={1} sx={{ mb: 4 }}>
-        <Typography component="h2" variant="h4" sx={{ color: 'var(--text)' }}>
-          {locale === 'fr' ? 'Parcours en bref' : 'Career highlights'}
-        </Typography>
+        <SectionTitle
+          title={locale === 'fr' ? 'Parcours en bref' : 'Career highlights'}
+          icon={<WorkHistoryRounded />}
+          tone="purple"
+        />
         <Typography variant="body1" color="text.secondary" sx={{ maxWidth: '70ch' }}>
           {locale === 'fr'
             ? 'Des expériences qui relient développement full-stack, automatisation et qualité logicielle.'

@@ -5,7 +5,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
@@ -14,6 +13,7 @@ import Image from 'next/image';
 import { LinkedIn, Email, GitHub, ArrowOutward, KeyboardArrowDownRounded } from '@mui/icons-material';
 import { useLocale } from '../context/LocaleContext';
 import { getProfile } from '../../lib/content';
+import TechStackChips from './TechStackChips';
 
 export default function HeroSection() {
   const { locale } = useLocale();
@@ -207,31 +207,7 @@ export default function HeroSection() {
                     <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.4 }}>
                       {locale === 'fr' ? 'Stack principale' : 'Primary stack'}
                     </Typography>
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75 }}>
-                      {profile.primaryStack.map((item, index) => (
-                        <Chip
-                          key={item}
-                          label={item}
-                          size="small"
-                          variant="outlined"
-                          sx={{
-                            color: 'var(--text)',
-                            borderColor:
-                              index % 3 === 0
-                                ? 'rgba(125, 207, 255, 0.3)'
-                                : index % 3 === 1
-                                  ? 'rgba(187, 154, 247, 0.3)'
-                                  : 'rgba(158, 206, 106, 0.3)',
-                            backgroundColor:
-                              index % 3 === 0
-                                ? 'rgba(125, 207, 255, 0.1)'
-                                : index % 3 === 1
-                                  ? 'rgba(187, 154, 247, 0.1)'
-                                  : 'rgba(158, 206, 106, 0.1)',
-                          }}
-                        />
-                      ))}
-                    </Box>
+                    <TechStackChips items={profile.primaryStack} />
                   </Box>
                 </Box>
 
@@ -301,7 +277,7 @@ export default function HeroSection() {
                 '50%': { transform: 'translateY(6px)' },
               },
               '& .MuiSvgIcon-root': {
-                fontSize: 36,
+                fontSize: 50,
                 animation: 'scrollCueFloat 1.4s ease-in-out infinite',
               },
               '&:hover': {
