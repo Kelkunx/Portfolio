@@ -1,4 +1,3 @@
-/* Skip link (accessibilité) */
 .skip-link {
   position: absolute;
   left: -9999px;
@@ -7,6 +6,7 @@
   height: 1px;
   overflow: hidden;
 }
+
 .skip-link:focus,
 .skip-link:active {
   left: 1rem;
@@ -17,22 +17,21 @@
   background: var(--surface-2);
   color: var(--text);
   z-index: 9999;
-  border-radius: 6px;
+  border-radius: 10px;
   border: 1px solid var(--border);
   box-shadow: var(--shadow-soft);
 }
 
-/* Focus visible */
 :focus:not(:focus-visible) {
   outline: none;
 }
+
 :focus-visible {
-  outline: 3px solid var(--blue); /* accent TokyoNight */
+  outline: 3px solid var(--accent);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
-/* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.001ms !important;
@@ -42,19 +41,18 @@
   }
 }
 
-/* Impression : garantir contraste et couleurs */
 @media print {
   @page {
     size: A4;
     margin: 15mm;
   }
+
   body {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 }
 
-/* Curseur sur éléments interactifs */
 button,
 a,
 input,
@@ -62,24 +60,18 @@ textarea {
   cursor: pointer;
 }
 
-/* Optionnel : liens et boutons hover subtils */
-a:hover,
-button:hover {
-  cursor: pointer;
-}
-/* Tokyo Night tokens */
 :root {
   color-scheme: dark;
 
   --bg: #1a1b26;
-  --bg-2: #16161e;
-  --surface: #24283b;
-  --surface-2: #292e42;
-  --surface-3: #1f2335;
+  --bg-2: #181a24;
+  --surface: #202332;
+  --surface-2: #262a3c;
+  --surface-3: #1c1f2d;
 
   --text: #c0caf5;
   --text-2: #a9b1d6;
-  --muted: #565f89;
+  --muted: #7a84ad;
   --border: #3b4261;
 
   --blue: #7aa2f7;
@@ -93,29 +85,29 @@ button:hover {
   --red: #f7768e;
 
   --accent: var(--blue);
-  --accent-2: var(--cyan);
-  --accent-3: var(--purple);
+  --accent-2: var(--yellow);
+  --accent-3: var(--cyan);
 
-  --surface-glass: rgba(36, 40, 59, 0.62);
+  --surface-glass: rgba(32, 35, 50, 0.96);
   --ring: rgba(125, 207, 255, 0.35);
 
-  --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 22px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
 
-  --shadow-soft: 0 14px 38px rgba(10, 15, 30, 0.45);
-  --shadow-glow: 0 0 36px rgba(125, 207, 255, 0.28);
+  --shadow-soft: 0 4px 14px rgba(10, 15, 30, 0.18);
+  --shadow-glow: 0 0 0 rgba(0, 0, 0, 0);
 
-  --blur-glass: 14px;
+  --blur-glass: 0px;
 
   --grad-hero:
-    radial-gradient(60% 60% at 80% 0%, rgba(125, 207, 255, 0.22), transparent 70%),
-    radial-gradient(40% 40% at 15% 10%, rgba(187, 154, 247, 0.18), transparent 70%);
-  --grad-accent: linear-gradient(120deg, #7dcfff 0%, #7aa2f7 55%, #bb9af7 100%);
-  --grad-border: linear-gradient(90deg, rgba(125, 207, 255, 0.7), rgba(187, 154, 247, 0.7));
+    linear-gradient(180deg, rgba(125, 207, 255, 0.08), transparent 28%),
+    linear-gradient(90deg, rgba(187, 154, 247, 0.05), transparent 40%);
+  --grad-accent: linear-gradient(90deg, #7dcfff 0%, #7aa2f7 100%);
+  --grad-border: linear-gradient(90deg, rgba(125, 207, 255, 0.42), rgba(187, 154, 247, 0.36));
 }
 
-[data-theme="light"] {
+[data-theme='light'] {
   color-scheme: light;
 
   --bg: #e1e2e7;
@@ -126,7 +118,7 @@ button:hover {
 
   --text: #1f2335;
   --text-2: #2f3555;
-  --muted: #5a6485;
+  --muted: #69738f;
   --border: #d2d6e3;
 
   --blue: #2e7de9;
@@ -140,20 +132,20 @@ button:hover {
   --red: #d64d63;
 
   --accent: var(--blue);
-  --accent-2: var(--cyan);
-  --accent-3: var(--purple);
+  --accent-2: var(--yellow);
+  --accent-3: var(--cyan);
 
-  --surface-glass: rgba(255, 255, 255, 0.7);
+  --surface-glass: rgba(255, 255, 255, 0.96);
   --ring: rgba(46, 125, 233, 0.28);
 
-  --shadow-soft: 0 14px 28px rgba(21, 32, 55, 0.12);
-  --shadow-glow: 0 0 26px rgba(46, 125, 233, 0.22);
+  --shadow-soft: 0 4px 14px rgba(21, 32, 55, 0.1);
+  --shadow-glow: 0 0 0 rgba(0, 0, 0, 0);
 
   --grad-hero:
-    radial-gradient(60% 60% at 80% 0%, rgba(46, 125, 233, 0.18), transparent 70%),
-    radial-gradient(40% 40% at 12% 10%, rgba(152, 84, 241, 0.14), transparent 70%);
-  --grad-accent: linear-gradient(120deg, #0087a8 0%, #2e7de9 55%, #7b5cf6 100%);
-  --grad-border: linear-gradient(90deg, rgba(46, 125, 233, 0.7), rgba(123, 92, 246, 0.6));
+    linear-gradient(180deg, rgba(46, 125, 233, 0.08), transparent 24%),
+    linear-gradient(90deg, rgba(123, 92, 246, 0.04), transparent 40%);
+  --grad-accent: linear-gradient(90deg, #0087a8 0%, #2e7de9 100%);
+  --grad-border: linear-gradient(90deg, rgba(46, 125, 233, 0.42), rgba(123, 92, 246, 0.34));
 }
 
 html,
@@ -179,6 +171,6 @@ main {
 }
 
 ::selection {
-  background: rgba(122, 162, 247, 0.35);
+  background: rgba(121, 168, 255, 0.28);
   color: var(--text);
 }

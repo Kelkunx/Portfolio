@@ -9,6 +9,7 @@ import { Close } from '@mui/icons-material';
 import Box from '@mui/material/Box';
 import Image from 'next/image';
 import ButtonBase from '@mui/material/ButtonBase';
+import { useLocale } from '../context/LocaleContext';
 
 type Props = {
   src: string;
@@ -33,6 +34,7 @@ export default function ImageLightbox({
   aspectRatio = '16/9',
   priority = false,
 }: Props) {
+  const { locale } = useLocale();
   const [open, setOpen] = React.useState(false);
   const sizeSx = thumbHeight ? { height: thumbHeight } : { aspectRatio };
 
@@ -49,7 +51,7 @@ export default function ImageLightbox({
           overflow: 'hidden',
           border: '1px solid var(--border)',
         }}
-        aria-label={`Agrandir l'image : ${alt}`}
+        aria-label={`${locale === 'fr' ? "Agrandir l'image" : 'Open image'} : ${alt}`}
       >
         <Box sx={{ width: '100%', height: '100%', position: 'relative' }}>
           <Image src={src} alt={alt} fill style={{ objectFit: 'cover' }} priority={priority}/>
@@ -73,8 +75,8 @@ export default function ImageLightbox({
       >
         <IconButton
           onClick={() => setOpen(false)}
-          aria-label="Fermer"
-          color='warning'
+          aria-label={locale === 'fr' ? 'Fermer' : 'Close'}
+          color="inherit"
           sx={{ position: 'absolute', right: 8, top: 8, zIndex: 10 }}
         >
           <Close />

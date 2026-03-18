@@ -17,25 +17,25 @@ const easeShowcase: Easing = [0.16, 1, 0.3, 1];
 
 const baseVariants: Record<Intent, VariantConfig> = {
   soft: {
-    hidden: { opacity: 0, y: 20, scale: 0.98, filter: 'blur(6px)' },
-    visible: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
-    transition: { duration: 0.65, ease: easeSoft },
+    hidden: { opacity: 0, y: 12 },
+    visible: { opacity: 1, y: 0 },
+    transition: { duration: 0.45, ease: easeSoft },
   },
   showcase: {
-    hidden: { opacity: 0, y: 30, scale: 0.96, filter: 'blur(10px)' },
-    visible: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
-    transition: { duration: 0.9, ease: easeShowcase },
+    hidden: { opacity: 0, y: 18 },
+    visible: { opacity: 1, y: 0 },
+    transition: { duration: 0.55, ease: easeShowcase },
   },
 };
 
 const childVariants: Record<Intent, Variants> = {
   soft: {
-    hidden: { opacity: 0, y: 12 },
+    hidden: { opacity: 0, y: 8 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: easeSoft } },
   },
   showcase: {
-    hidden: { opacity: 0, y: 16, filter: 'blur(4px)' },
-    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.55, ease: easeShowcase } },
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: easeShowcase } },
   },
 };
 
@@ -62,7 +62,7 @@ export default function AnimatedSection({
 
   const variants = (() => {
     if (reduce) {
-      return { hidden: { opacity: 1, y: 0, scale: 1, filter: 'none' }, visible: { opacity: 1, y: 0, scale: 1, filter: 'none' } };
+      return { hidden: { opacity: 1, y: 0 }, visible: { opacity: 1, y: 0 } };
     }
 
     const base = baseVariants[intent];

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
@@ -15,6 +15,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
 import { useLocale } from '../context/LocaleContext';
 import LanguageToggle from './LanguageToggle';
@@ -22,7 +23,8 @@ import LanguageToggle from './LanguageToggle';
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { locale, setLocale, t } = useLocale();
+  const { t } = useLocale();
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -33,8 +35,11 @@ export default function Header() {
   const navLinks = [
     { key: 'home', label: t.nav.home, href: '/' },
     { key: 'projects', label: t.nav.projects, href: '/projets' },
+    { key: 'cv', label: t.nav.cv, href: '/cv' },
     { key: 'contact', label: t.nav.contact, href: '/contact' },
   ];
+
+  const isActiveLink = (href: string) => pathname === href || (href !== '/' && pathname.startsWith(`${href}/`));
 
   return (
     <>
@@ -44,20 +49,9 @@ export default function Header() {
         elevation={0}
         sx={{
           borderBottom: '1px solid transparent',
-          backdropFilter: 'blur(var(--blur-glass))',
-          backgroundColor: scrolled ? 'var(--surface-glass)' : 'transparent',
-          boxShadow: scrolled ? 'var(--shadow-soft)' : 'none',
-          transition: 'background-color 250ms ease, box-shadow 250ms ease',
-          '&::after': {
-            content: '""',
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            bottom: 0,
-            height: '1px',
-            background: scrolled ? 'var(--grad-border)' : 'transparent',
-            opacity: 0.8,
-          },
+          backgroundColor: 'transparent',
+          boxShadow: 'none',
+          transition: 'background-color 180ms ease, border-color 180ms ease',
         }}
       >
         <Container maxWidth="lg">
@@ -66,65 +60,189 @@ export default function Header() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              minHeight: scrolled ? 60 : 78,
+              minHeight: scrolled ? 66 : 80,
               transition: 'min-height 200ms ease',
               px: { xs: 2, md: 0 },
             }}
           >
-            <Typography
-              variant="h6"
-              component={Link}
-              href="/"
+            <Box
               sx={{
-                textDecoration: 'none',
-                color: 'var(--text)',
-                fontWeight: 700,
-                letterSpacing: '-0.04em',
-                fontFamily: 'var(--font-display)',
-                transition: 'color 180ms ease',
-                '&:hover': { color: 'var(--accent)' },
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1.5,
               }}
             >
-              Léo JEGO
-            </Typography>
+              <Box
+                sx={{
+                  border: '1px solid var(--border)',
+                  borderRadius: '10px',
+                  backgroundColor: 'var(--surface)',
+                  px: 1.5,
+                  py: 1,
+                  boxShadow: scrolled ? 'var(--shadow-soft)' : 'none',
+                  transition: 'box-shadow 160ms ease, border-color 160ms ease, background-color 160ms ease',
+                  '&:hover': {
+                    borderColor: 'rgba(125, 207, 255, 0.24)',
+                    backgroundColor: 'var(--surface-2)',
+                  },
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  component={Link}
+                  href="/"
+                  sx={{
+                    display: 'block',
+                    textDecoration: 'none',
+                    color: 'var(--text)',
+                    fontWeight: 700,
+                    letterSpacing: '-0.04em',
+                    fontFamily: 'var(--font-display)',
+                    transition: 'color 160ms ease',
+                    '&:hover': {
+                      color: 'var(--cyan)',
+                    },
+                  }}
+                >
+                  Léo JEGO
+                </Typography>
+              </Box>
+            </Box>
 
-            {/* Desktop nav */}
-            <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 2 }}>
-              {navLinks.map((link) => {
-                const isCta = link.key === 'contact';
+            <Box
+              component="nav"
+              aria-label="Primary navigation"
+              sx={{
+                display: { xs: 'none', md: 'flex' },
+                alignItems: 'center',
+                gap: 1.5,
+                border: '1px solid var(--border)',
+                borderRadius: '10px',
+                backgroundColor: 'var(--surface)',
+                px: 1.25,
+                boxShadow: scrolled ? 'var(--shadow-soft)' : 'none',
+                transition: 'box-shadow 160ms ease, border-color 160ms ease, background-color 160ms ease',
+              }}
+            >
+              {navLinks.map((link, index) => {
+                const active = isActiveLink(link.href);
+                const tone =
+                  index === 0
+                    ? 'var(--cyan)'
+                    : index === 1
+                      ? 'var(--purple)'
+                      : index === 2
+                        ? 'var(--green)'
+                        : 'var(--yellow)';
+                const background =
+                  index === 0
+                    ? 'rgba(125, 207, 255, 0.08)'
+                    : index === 1
+                      ? 'rgba(187, 154, 247, 0.08)'
+                      : index === 2
+                        ? 'rgba(158, 206, 106, 0.08)'
+                        : 'rgba(224, 175, 104, 0.1)';
+
                 return (
                   <Button
                     key={link.key}
                     component={Link}
                     href={link.href}
+                    variant="text"
                     sx={{
-                      fontWeight: 500,
-                      color: isCta ? 'var(--text)' : 'var(--text-2)',
+                      position: 'relative',
+                      overflow: 'hidden',
+                      color: active ? 'var(--text)' : 'var(--text-2)',
+                      px: 1.5,
+                      py: 0.85,
+                      minWidth: 'auto',
+                      borderRadius: '8px',
+                      fontWeight: active ? 600 : 500,
+                      letterSpacing: '-0.01em',
+                      transition: 'color 160ms ease, background-color 160ms ease',
                       '&:hover': {
-                        color: 'var(--text)',
-                        backgroundColor: isCta ? 'rgba(187, 154, 247, 0.12)' : 'rgba(125, 207, 255, 0.08)',
+                        color: tone,
+                        backgroundColor: background,
+                      },
+                      '&::before': {
+                        content: '""',
+                        position: 'absolute',
+                        left: 10,
+                        right: 10,
+                        top: 6,
+                        height: 2,
+                        borderRadius: '999px',
+                        backgroundColor: active ? tone : 'transparent',
+                        transition: 'background-color 160ms ease',
+                      },
+                      '&::after': {
+                        content: '""',
+                        position: 'absolute',
+                        left: 10,
+                        right: 10,
+                        bottom: 6,
+                        height: 2,
+                        borderRadius: '999px',
+                        backgroundColor: tone,
+                        opacity: active ? 1 : 0,
+                        transition: 'opacity 160ms ease',
+                      },
+                      '&:hover::after': {
+                        opacity: 1,
                       },
                     }}
-                    variant={isCta ? 'outlined' : 'text'}
-                    color={isCta ? 'secondary' : 'primary'}
                   >
                     {link.label}
                   </Button>
                 );
               })}
 
-              {/* Language selector + ThemeToggle */}
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1,
+                  pl: 1.25,
+                  ml: 0.25,
+                  borderLeft: '1px solid var(--border)',
+                }}
+              >
                 <LanguageToggle />
                 <ThemeToggle />
               </Box>
             </Box>
 
-            {/* Mobile nav */}
-            <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center', gap: 1 }}>
+            <Box
+              sx={{
+                display: { xs: 'flex', md: 'none' },
+                alignItems: 'center',
+                gap: 0.75,
+                border: '1px solid var(--border)',
+                borderRadius: '10px',
+                backgroundColor: 'var(--surface)',
+                p: 0.5,
+                boxShadow: scrolled ? 'var(--shadow-soft)' : 'none',
+                transition: 'box-shadow 160ms ease, border-color 160ms ease, background-color 160ms ease',
+              }}
+            >
               <LanguageToggle />
               <ThemeToggle />
-              <IconButton onClick={() => setMobileOpen((o) => !o)} color="primary" aria-label="ouvrir le menu">
+              <IconButton
+                onClick={() => setMobileOpen((open) => !open)}
+                aria-label="open menu"
+                sx={{
+                  border: '1px solid var(--border)',
+                  borderRadius: '8px',
+                  backgroundColor: 'var(--surface)',
+                  color: 'var(--text)',
+                  transition: 'background-color 160ms ease, border-color 160ms ease, color 160ms ease',
+                  '&:hover': {
+                    backgroundColor: 'rgba(125, 207, 255, 0.08)',
+                    borderColor: 'rgba(125, 207, 255, 0.28)',
+                    color: 'var(--cyan)',
+                  },
+                }}
+              >
                 <MenuIcon />
               </IconButton>
             </Box>
@@ -132,28 +250,55 @@ export default function Header() {
         </Container>
       </AppBar>
 
-      {/* Drawer mobile */}
       <Drawer
         anchor="right"
         open={mobileOpen}
         onClose={() => setMobileOpen(false)}
         PaperProps={{
           sx: {
+            width: 260,
             backgroundColor: 'var(--surface)',
             color: 'var(--text)',
             borderLeft: '1px solid var(--border)',
           },
         }}
       >
-        <Box sx={{ width: 240, p: 2 }}>
+        <Box sx={{ p: 2 }}>
           <List>
-            {navLinks.map((link) => (
+            {navLinks.map((link, index) => {
+              const active = isActiveLink(link.href);
+              const tone =
+                index === 0
+                  ? 'var(--cyan)'
+                  : index === 1
+                    ? 'var(--purple)'
+                    : index === 2
+                      ? 'var(--green)'
+                      : 'var(--yellow)';
+
+              return (
               <ListItem key={link.key} disablePadding>
-                <ListItemButton component={Link} href={link.href} onClick={() => setMobileOpen(false)}>
+                <ListItemButton
+                  component={Link}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  sx={{
+                    borderRadius: '8px',
+                    mb: 0.5,
+                    color: active ? 'var(--text)' : 'var(--text-2)',
+                    borderLeft: active ? `2px solid ${tone}` : '2px solid transparent',
+                    backgroundColor: active ? 'rgba(125, 207, 255, 0.06)' : 'transparent',
+                    '&:hover': {
+                      backgroundColor: active ? 'rgba(125, 207, 255, 0.08)' : 'var(--surface-2)',
+                      color: 'var(--text)',
+                    },
+                  }}
+                >
                   <ListItemText primary={link.label} />
                 </ListItemButton>
               </ListItem>
-            ))}
+              );
+            })}
           </List>
         </Box>
       </Drawer>

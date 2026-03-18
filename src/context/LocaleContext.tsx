@@ -9,6 +9,7 @@ type UIStrings = {
   nav: {
     home: string;
     projects: string;
+    cv: string;
     contact: string;
   };
   header: {
@@ -39,7 +40,7 @@ const DEFAULT_LOCALE: Locale = 'fr';
 const LS_KEY = 'locale';
 
 const fr: UIStrings = {
-  nav: { home: 'Accueil', projects: 'Projets', contact: 'Contact' },
+  nav: { home: 'Accueil', projects: 'Projets', cv: 'CV', contact: 'Contact' },
   header: { skipToContent: "Aller au contenu" },
   projects: { searchPlaceholder: "Rechercher un projet (titre, description...)", all: 'Tous', noResults: "Aucune correspondance — essaie d'élargir ta recherche ou désactive le filtre." },
   buttons: { details: 'Détails', demo: 'Démo', code: 'Code' },
@@ -47,7 +48,7 @@ const fr: UIStrings = {
 };
 
 const en: UIStrings = {
-  nav: { home: 'Home', projects: 'Projects', contact: 'Contact' },
+  nav: { home: 'Home', projects: 'Projects', cv: 'CV', contact: 'Contact' },
   header: { skipToContent: 'Skip to content' },
   projects: { searchPlaceholder: 'Search projects (title, description...)', all: 'All', noResults: 'No matches — try widening your search or disable the filter.' },
   buttons: { details: 'Details', demo: 'Demo', code: 'Code' },

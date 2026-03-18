@@ -1,191 +1,194 @@
 'use client';
+
 import React from 'react';
 import { motion, useReducedMotion, type Easing } from 'framer-motion';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-import Chip from '@mui/material/Chip';
 import Grid from '@mui/material/Grid';
+import Divider from '@mui/material/Divider';
+import { CodeRounded, HandymanRounded } from '@mui/icons-material';
 import { useLocale } from '../context/LocaleContext';
-import { profile as profileFR } from '../../lib/locales/fr/profile';
-import { profile as profileEN } from '../../lib/locales/en/profile';
-import CodeIcon from '@mui/icons-material/Code';
-import StorageIcon from '@mui/icons-material/Storage';
-import BuildIcon from '@mui/icons-material/Build';
-import MemoryIcon from '@mui/icons-material/Memory';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import FactCheckIcon from '@mui/icons-material/FactCheck'; // pour tests & qualité
-import SecurityIcon from '@mui/icons-material/Security';
+import { getProfile } from '../../lib/content';
+import SectionTitle from './SectionTitle';
 
 const MotionBox = motion(Box);
 
-function getCategoryIcon(label: string): React.ReactNode {
-  const l = label.toLowerCase();
+type SkillsSectionProps = {
+  variant?: 'home' | 'cv';
+};
 
-  // Frontend
-  if (l.includes('front')) {
-    return <CodeIcon fontSize="small" />;
-  }
-
-  // Backend / API
-  if (l.includes('back') || l.includes('api')) {
-    return <BuildIcon fontSize="small" />;
-  }
-
-  // Bases de données / Databases
-  if (l.includes('bases de données') || l.includes('database') || l.includes('data')) {
-    return <StorageIcon fontSize="small" />;
-  }
-
-  // Tests & Qualité / Testing & Quality
-  if (l.includes('test') || l.includes('qualit')) {
-    return <FactCheckIcon fontSize="small" />;
-  }
-
-  // DevOps
-  if (l.includes('devops')) {
-    return <BuildIcon fontSize="small" />;
-  }
-
-  // Cybersecurity / Cybersécurité
-  if (l.includes('cyber') || l.includes('security') || l.includes('secur') || l.includes('sécur')) {
-    return <SecurityIcon fontSize="small" />;
-  }
-
-  // IoT, embarqué, systèmes / IoT & systems / embedded
-  if (
-    l.includes('iot') ||
-    l.includes('embarqué') ||
-    l.includes('embarqu') ||
-    l.includes('embedded') ||
-    l.includes('syst')
-  ) {
-    return <MemoryIcon fontSize="small" />;
-  }
-
-  // Automatisation / Automation / no-code
-  if (l.includes('auto') || l.includes('no-code') || l.includes('automation')) {
-    return <BuildIcon fontSize="small" />;
-  }
-
-  // Autres / Others / Other
-  if (l.includes('autre') || l.includes('other')) {
-    return <MoreHorizIcon fontSize="small" />;
-  }
-
-  // Fallback par défaut
-  return <MoreHorizIcon fontSize="small" />;
-}
-
-function getCategoryTone(label: string): string {
-  const l = label.toLowerCase();
-
-  if (l.includes('front')) return 'var(--cyan)';
-  if (l.includes('back') || l.includes('api')) return 'var(--blue)';
-  if (l.includes('base') || l.includes('database') || l.includes('data')) return 'var(--teal)';
-  if (l.includes('test') || l.includes('qualit')) return 'var(--green)';
-  if (l.includes('devops')) return 'var(--orange)';
-  if (l.includes('cyber') || l.includes('security') || l.includes('secur') || l.includes('sécur')) {
-    return 'var(--red)';
-  }
-  if (l.includes('iot') || l.includes('embarqu') || l.includes('embedded')) return 'var(--purple)';
-  if (l.includes('auto') || l.includes('no-code') || l.includes('automation')) return 'var(--magenta)';
-  if (l.includes('autre') || l.includes('other')) return 'var(--muted)';
-
-  return 'var(--accent)';
-}
-
-export default function SkillsSection() {
+export default function SkillsSection({ variant = 'home' }: SkillsSectionProps) {
   const { locale } = useLocale();
-  const profile = locale === 'fr' ? profileFR : profileEN;
+  const profile = getProfile(locale);
   const reduce = useReducedMotion();
+  const ease: Easing = [0.22, 1, 0.36, 1];
+  const tones = ['var(--cyan)', 'var(--purple)', 'var(--green)', 'var(--orange)'];
+
+  if (variant === 'cv') {
+    return (
+      <Box sx={{ mt: 8 }}>
+        <Stack spacing={1} sx={{ mb: 3 }}>
+          <SectionTitle
+            title={locale === 'fr' ? 'Compétences' : 'Skills'}
+            icon={<CodeRounded />}
+            tone="purple"
+          />
+        </Stack>
+
+        <Grid container spacing={3}>
+          {profile.skills.map((group, index) => {
+            const tone = tones[index % tones.length];
+            const revealProps = reduce
+              ? {}
+              : {
+                  initial: { opacity: 0, y: 16 },
+                  whileInView: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.5, ease, delay: Math.min(index * 0.05, 0.24) },
+                  },
+                  viewport: { once: true, amount: 0.25 },
+                };
+
+            return (
+              <Grid key={group.category} size={{ xs: 12, md: 6 }}>
+                <MotionBox
+                  {...revealProps}
+                  sx={{
+                    borderRadius: 'var(--radius-md)',
+                    border: '1px solid var(--border)',
+                    borderTop: `2px solid ${tone}`,
+                    backgroundColor: 'var(--surface)',
+                    p: 3,
+                    height: '100%',
+                    transition: 'background-color 160ms ease, border-color 160ms ease',
+                    '&:hover': {
+                      borderColor: tone,
+                      backgroundColor:
+                        tone === 'var(--cyan)'
+                          ? 'rgba(125, 207, 255, 0.05)'
+                          : tone === 'var(--purple)'
+                            ? 'rgba(187, 154, 247, 0.05)'
+                            : tone === 'var(--green)'
+                              ? 'rgba(158, 206, 106, 0.05)'
+                              : 'rgba(255, 158, 100, 0.05)',
+                    },
+                  }}
+                >
+                  <Typography component="h3" variant="h6" sx={{ color: 'var(--text)', mb: 2 }}>
+                    {group.category}
+                  </Typography>
+
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.1 }}>
+                    {group.items.map((item) => (
+                      <Box
+                        key={item}
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 0.75,
+                          pr: 0.9,
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            width: 6,
+                            height: 6,
+                            borderRadius: '50%',
+                            backgroundColor: tone,
+                            flexShrink: 0,
+                          }}
+                        />
+                        <Typography variant="body2" sx={{ color: 'var(--text)', lineHeight: 1.55 }}>
+                          {item}
+                        </Typography>
+                      </Box>
+                    ))}
+                  </Box>
+                </MotionBox>
+              </Grid>
+            );
+          })}
+        </Grid>
+      </Box>
+    );
+  }
 
   return (
-    <Box sx={{ mt: 6 }}>
-      <Stack spacing={1} sx={{ mb: 3 }}>
-        <Typography component="h4" variant="h5" color="primary">
-          {locale === 'fr' ? 'Compétences' : 'Skills'}
-        </Typography>
-        <Typography variant="body2" color="text.secondary" sx={{ maxWidth: '70ch' }}>
+    <Box sx={{ mt: { xs: 8, md: 12 } }}>
+      <Stack spacing={1} sx={{ mb: 4 }}>
+        <SectionTitle
+          title={locale === 'fr' ? "Ce que j'apporte" : 'What I bring'}
+          icon={<HandymanRounded />}
+          tone="green"
+        />
+        <Typography variant="body1" color="text.secondary" sx={{ maxWidth: '70ch' }}>
           {locale === 'fr'
-            ? 'Stack organisée par domaines, avec les outils les plus maîtrisés mis en avant.'
-            : 'Stack organized by domain, highlighting the most proficient tools.'}
+            ? 'Un profil full-stack avec une attention forte portée à la clarté, à la logique métier et à la qualité de livraison.'
+            : 'A full-stack profile focused on clarity, business logic and execution quality.'}
         </Typography>
       </Stack>
 
       <Grid container spacing={3}>
-        {profile.skills.map((group, index) => {
-          const tone = getCategoryTone(group.category);
-          const delay = Math.min(index * 0.08, 0.4);
-          const ease: Easing = [0.22, 1, 0.36, 1];
+        {profile.valuePillars.map((pillar, index) => {
+          const tone = tones[index % tones.length];
           const revealProps = reduce
             ? {}
             : {
-                initial: { opacity: 0, y: 16, filter: 'blur(6px)' },
+                initial: { opacity: 0, y: 18 },
                 whileInView: {
                   opacity: 1,
                   y: 0,
-                  filter: 'blur(0px)',
-                  transition: { duration: 0.55, ease, delay },
+                  transition: { duration: 0.55, ease, delay: Math.min(index * 0.06, 0.28) },
                 },
                 viewport: { once: true, amount: 0.3 },
               };
+
           return (
-            <Grid key={group.category} size={{ xs: 12, md: 6 }}>
+            <Grid key={pillar.title} size={{ xs: 12, md: 6 }}>
               <MotionBox
                 {...revealProps}
                 sx={{
-                  position: 'relative',
                   borderRadius: 'var(--radius-md)',
                   border: '1px solid var(--border)',
+                  borderTop: `2px solid ${tone}`,
                   backgroundColor: 'var(--surface)',
-                  p: 3,
-                  overflow: 'hidden',
-                  transition: 'transform 200ms ease, box-shadow 220ms ease',
+                  p: { xs: 3, md: 3.5 },
+                  height: '100%',
+                  transition: 'transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease',
                   '&:hover': {
-                    transform: 'translateY(-3px)',
-                    boxShadow: 'var(--shadow-glow)',
-                  },
-                  '&::after': {
-                    content: '""',
-                    position: 'absolute',
-                    left: 0,
-                    right: 0,
-                    top: 0,
-                    height: '2px',
-                    background: `linear-gradient(90deg, ${tone}, transparent)`,
-                    opacity: 0.9,
-                    pointerEvents: 'none',
+                    transform: 'translateY(-2px)',
+                    borderColor: tone,
+                    backgroundColor: 'var(--surface-2)',
                   },
                 }}
               >
-                <Stack direction="row" alignItems="center" spacing={1} sx={{ mb: 2 }}>
-                  <Box sx={{ color: tone }}>{getCategoryIcon(group.category)}</Box>
-                  <Typography component="h5" variant="subtitle1">
-                    {group.category}
-                  </Typography>
-                </Stack>
+                <Stack spacing={2}>
+                  <Box>
+                    <Typography component="h3" variant="h5" sx={{ color: 'var(--text)' }}>
+                      {pillar.title}
+                    </Typography>
+                  </Box>
 
-                <Stack direction="row" spacing={1} flexWrap="wrap">
-                  {group.items.map((skill, idx) => {
-                    const featured = idx < 3;
-                    return (
-                      <Chip
-                        key={skill}
-                        label={skill}
-                        size="medium"
-                        variant="outlined"
-                        sx={{
-                          mr: 1,
-                          mb: 1,
-                          borderColor: featured ? tone : 'var(--border)',
-                          color: featured ? 'var(--bg)' : 'var(--text-2)',
-                          backgroundColor: featured ? tone : 'transparent',
-                          fontWeight: featured ? 600 : 500,
-                        }}
-                      />
-                    );
-                  })}
+                  <Typography variant="body1" sx={{ color: 'var(--text-2)', lineHeight: 1.75 }}>
+                    {pillar.description}
+                  </Typography>
+
+                  <Divider />
+
+                  <Box>
+                    <Typography variant="body2" sx={{ color: 'var(--text)', fontWeight: 600, mb: 0.75 }}>
+                      {locale === 'fr' ? 'Preuve' : 'Proof'}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>
+                      {pillar.proof}
+                    </Typography>
+                  </Box>
+
+                  <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>
+                    {pillar.tools.join(' • ')}
+                  </Typography>
                 </Stack>
               </MotionBox>
             </Grid>
