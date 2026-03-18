@@ -4,7 +4,6 @@ import React from 'react';
 import Container from '@mui/material/Container';
 import AnimatedSection from '../components/AnimatedSection';
 import HeroSection from '../components/HeroSection';
-import ProofBar from '../components/ProofBar';
 import FeaturedProjectsSection from '../components/FeaturedProjectsSection';
 import SkillsSection from '../components/SkillsSection';
 import CareerHighlightsSection from '../components/CareerHighlightsSection';
@@ -19,10 +18,6 @@ export default function HomePage() {
       </AnimatedSection>
 
       <Container maxWidth="lg">
-        <AnimatedSection>
-          <ProofBar />
-        </AnimatedSection>
-
         <AnimatedSection>
           <FeaturedProjectsSection />
         </AnimatedSection>

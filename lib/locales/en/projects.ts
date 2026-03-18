@@ -57,10 +57,10 @@ export const projects: Project[] = [
     slug: 'portfolio',
     title: 'Personal Portfolio',
     tagline:
-      'Rebuilt my portfolio as a recruiter-oriented dynamic CV with clearer hierarchy, better proof points and stronger case-study structure.',
-    short: 'Premium portfolio designed as a dynamic CV, project showcase and conversion tool.',
+      'Example of a developer portfolio structured as a clear showcase, with a dedicated CV page and more detailed project pages.',
+    short: 'Developer portfolio designed as a project showcase, a CV page and a clear contact point.',
     description:
-      'Editorial and visual redesign of my portfolio to strengthen clarity, credibility and contact conversion.',
+      'Portfolio case study built to present a profile, projects and contact details more clearly without overloading the reading experience.',
     imageSrc: '',
     imageAlt: 'Screenshot coming soon for the personal portfolio',
     tech: ['Next.js', 'React', 'TypeScript', 'MUI'],
@@ -69,37 +69,37 @@ export const projects: Project[] = [
     status: 'Live',
     role: 'Art direction, UI design, frontend implementation and content structuring.',
     context:
-      'The existing portfolio was clean but still read too much like a stack of CV sections. It needed to become a stronger object for recruiters.',
+      'Many personal portfolios either read like a static resume or lean too heavily on visual effects. The goal here is to provide a cleaner and more reusable base.',
     problem:
-      'How do you make the site more memorable, more credible and more conversion-oriented without drifting into something too flashy or overdesigned?',
+      'How do you structure a public portfolio so it stays credible, readable and easy to adapt, without relying on a highly personal story or an overdesigned visual direction?',
     process: [
-      'Audited positioning, visual hierarchy and credibility signals.',
-      'Redesigned the architecture with a shorter homepage, a real CV page and stronger project pages.',
-      'Refined the dark art direction, CTAs and editorial tone to keep the result premium but professional.',
+      'Worked on a simpler architecture with a shorter homepage, a dedicated CV page and more complete project pages.',
+      'Progressively simplified the visual hierarchy so useful content leads before visual effects.',
+      'Structured the content so another developer profile could reuse the base without rewriting the whole editorial logic.',
     ],
     solution: [
-      'Homepage refocused on positioning, proof points, featured work and contact.',
-      'Dedicated CV page to move profile depth away from the homepage.',
-      'Case-study structure with context, problem, role, process, solution and outcomes.',
+      'Homepage refocused on profile, a few proof points, featured projects and contact.',
+      'Dedicated CV page to move career depth away from the homepage.',
+      'Reusable case-study structure with context, problem, role, process, solution and outcomes.',
     ],
     deliverables: [
-      'Recruiter-oriented homepage',
+      'Structured homepage',
       'Dedicated CV page',
-      'Richer project pages',
-      'Conversion-focused contact page',
+      'Detailed project pages',
+      'Simple contact page',
     ],
     results: [
       {
-        value: 'Clearer message',
-        label: 'The full-stack positioning now appears from the first screen.',
+        value: 'Reusable structure',
+        label: 'The base can be adapted to another portfolio without depending on a very personal context.',
       },
       {
-        value: 'More readable profile',
-        label: 'Career content is structured without overloading the homepage.',
+        value: 'Clearer reading flow',
+        label: 'Profile, project and career information are separated more cleanly.',
       },
       {
-        value: 'Stronger conversion',
-        label: 'CV, direct contact and the form appear faster and more clearly.',
+        value: 'Extensible base',
+        label: 'The section system and case-study model can evolve without reworking the whole structure.',
       },
     ],
     screens: [],

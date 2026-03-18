@@ -5,10 +5,10 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
-import Chip from '@mui/material/Chip';
 import Link from 'next/link';
 import Image from 'next/image';
 import { LinkedIn, Email, GitHub, ArrowOutward } from '@mui/icons-material';
@@ -24,48 +24,21 @@ export default function HeroSection() {
       component="section"
       aria-labelledby="hero-heading"
       sx={{
-        position: 'relative',
         pt: { xs: 8, md: 10 },
         pb: { xs: 4, md: 6 },
-        overflow: 'hidden',
       }}
     >
-      <Box
-        aria-hidden
-        sx={{
-          position: 'absolute',
-          inset: 0,
-          background: 'var(--grad-hero)',
-          opacity: 0.95,
-          pointerEvents: 'none',
-        }}
-      />
-
-      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
+      <Container maxWidth="lg">
         <Grid container spacing={{ xs: 4, md: 6 }} alignItems="stretch">
           <Grid size={{ xs: 12, md: 7 }}>
-            <Stack spacing={3} sx={{ maxWidth: 700 }}>
-              <Box sx={{ display: 'flex', gap: 1.25, alignItems: 'center', flexWrap: 'wrap' }}>
-                <Chip
-                  label={locale === 'fr' ? 'Portfolio / CV dynamique' : 'Portfolio / dynamic CV'}
-                  sx={{
-                    backgroundColor: 'rgba(125, 207, 255, 0.14)',
-                    color: 'var(--text)',
-                    border: '1px solid rgba(125, 207, 255, 0.3)',
-                  }}
-                />
-                <Typography variant="body2" color="text.secondary">
-                  {profile.name}
-                </Typography>
-              </Box>
-
+            <Stack spacing={3} sx={{ maxWidth: 700, pt: { md: 2 } }}>
               <Typography
                 id="hero-heading"
                 component="h1"
                 variant="h1"
                 sx={{
                   color: 'var(--text)',
-                  maxWidth: '12ch',
+                  maxWidth: '11ch',
                   fontSize: { xs: '3rem', md: '4.6rem' },
                   lineHeight: 0.98,
                   letterSpacing: '-0.05em',
@@ -83,8 +56,53 @@ export default function HeroSection() {
                   maxWidth: '58ch',
                 }}
               >
-                {profile.shortBio}
+                {profile.summary}
               </Typography>
+
+              <Grid container spacing={1.5}>
+                {profile.proofPoints.slice(0, 3).map((item, index) => {
+                  const tone = index === 0 ? 'var(--cyan)' : index === 1 ? 'var(--purple)' : 'var(--green)';
+                  const bg =
+                    index === 0
+                      ? 'rgba(125, 207, 255, 0.08)'
+                      : index === 1
+                        ? 'rgba(187, 154, 247, 0.08)'
+                        : 'rgba(158, 206, 106, 0.08)';
+
+                  return (
+                    <Grid key={`${item.label}-${item.value}`} size={{ xs: 12, sm: 4 }}>
+                      <Box
+                        sx={{
+                          height: '100%',
+                          borderRadius: 'var(--radius-md)',
+                          border: '1px solid var(--border)',
+                          borderTop: `2px solid ${tone}`,
+                          backgroundColor: bg,
+                          px: 2,
+                          py: 1.75,
+                          transition: 'background-color 160ms ease, border-color 160ms ease',
+                          '&:hover': {
+                            borderColor: tone,
+                            backgroundColor:
+                              index === 0
+                                ? 'rgba(125, 207, 255, 0.12)'
+                                : index === 1
+                                  ? 'rgba(187, 154, 247, 0.12)'
+                                  : 'rgba(158, 206, 106, 0.12)',
+                          },
+                        }}
+                      >
+                        <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.5 }}>
+                          {item.label}
+                        </Typography>
+                        <Typography variant="body2" sx={{ color: 'var(--text)', fontWeight: 600, lineHeight: 1.55 }}>
+                          {item.value}
+                        </Typography>
+                      </Box>
+                    </Grid>
+                  );
+                })}
+              </Grid>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
                 <Button variant="contained" color="primary" component={Link} href="/projets">
@@ -106,9 +124,8 @@ export default function HeroSection() {
                 height: '100%',
                 borderRadius: 'var(--radius-lg)',
                 border: '1px solid var(--border)',
-                backgroundColor: 'var(--surface-glass)',
+                backgroundColor: 'var(--surface)',
                 boxShadow: 'var(--shadow-soft)',
-                backdropFilter: 'blur(var(--blur-glass))',
                 p: { xs: 3, md: 3.5 },
               }}
             >
@@ -118,7 +135,7 @@ export default function HeroSection() {
                     sx={{
                       width: 92,
                       height: 92,
-                      borderRadius: '26px',
+                      borderRadius: 'var(--radius-md)',
                       overflow: 'hidden',
                       border: '1px solid var(--border)',
                       flexShrink: 0,
@@ -148,37 +165,55 @@ export default function HeroSection() {
 
                 <Box
                   sx={{
-                    borderRadius: 'var(--radius-md)',
-                    border: '1px solid var(--border)',
-                    backgroundColor: 'rgba(255,255,255,0.02)',
-                    p: 2,
+                    display: 'grid',
+                    gap: 1.25,
                   }}
                 >
-                  <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
-                    {locale === 'fr' ? 'Disponibilité' : 'Availability'}
-                  </Typography>
-                  <Typography variant="body1" sx={{ color: 'var(--text)', mt: 0.5 }}>
-                    {profile.availability}
-                  </Typography>
-                </Box>
-
-                <Box>
-                  <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
-                    {locale === 'fr' ? 'Cibles' : 'Target roles'}
-                  </Typography>
-                  <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mt: 1 }}>
-                    {profile.targetRoles.map((role) => (
-                      <Chip
-                        key={role}
-                        label={role}
-                        variant="outlined"
-                        sx={{
-                          color: 'var(--text)',
-                          borderColor: 'rgba(187, 154, 247, 0.34)',
-                          backgroundColor: 'rgba(187, 154, 247, 0.12)',
-                        }}
-                      />
-                    ))}
+                  <Box sx={{ borderLeft: '2px solid var(--cyan)', pl: 1.5 }}>
+                    <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.4 }}>
+                      {locale === 'fr' ? 'Disponibilité' : 'Availability'}
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: 'var(--text)' }}>
+                      {profile.availability}
+                    </Typography>
+                  </Box>
+                  <Box sx={{ borderLeft: '2px solid var(--purple)', pl: 1.5 }}>
+                    <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.4 }}>
+                      {locale === 'fr' ? 'Cibles' : 'Target roles'}
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: 'var(--text)' }}>
+                      {profile.targetRoles.join(' • ')}
+                    </Typography>
+                  </Box>
+                  <Box sx={{ borderLeft: '2px solid var(--green)', pl: 1.5 }}>
+                    <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.4 }}>
+                      {locale === 'fr' ? 'Stack principale' : 'Primary stack'}
+                    </Typography>
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75 }}>
+                      {profile.primaryStack.map((item, index) => (
+                        <Chip
+                          key={item}
+                          label={item}
+                          size="small"
+                          variant="outlined"
+                          sx={{
+                            color: 'var(--text)',
+                            borderColor:
+                              index % 3 === 0
+                                ? 'rgba(125, 207, 255, 0.3)'
+                                : index % 3 === 1
+                                  ? 'rgba(187, 154, 247, 0.3)'
+                                  : 'rgba(158, 206, 106, 0.3)',
+                            backgroundColor:
+                              index % 3 === 0
+                                ? 'rgba(125, 207, 255, 0.1)'
+                                : index % 3 === 1
+                                  ? 'rgba(187, 154, 247, 0.1)'
+                                  : 'rgba(158, 206, 106, 0.1)',
+                          }}
+                        />
+                      ))}
+                    </Box>
                   </Box>
                 </Box>
 
@@ -211,7 +246,7 @@ export default function HeroSection() {
                     startIcon={<Email />}
                     sx={{ justifyContent: 'flex-start', px: 0, color: 'var(--text)' }}
                   >
-                    {locale === 'fr' ? 'Email direct' : 'Direct email'}
+                    Email
                   </Button>
                 </Stack>
               </Stack>

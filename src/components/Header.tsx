@@ -46,21 +46,10 @@ export default function Header() {
         color="inherit"
         elevation={0}
         sx={{
-          borderBottom: '1px solid transparent',
-          backdropFilter: 'blur(var(--blur-glass))',
+          borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
           backgroundColor: scrolled ? 'var(--surface-glass)' : 'transparent',
-          boxShadow: scrolled ? 'var(--shadow-soft)' : 'none',
-          transition: 'background-color 220ms ease, box-shadow 220ms ease',
-          '&::after': {
-            content: '""',
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            bottom: 0,
-            height: '1px',
-            background: scrolled ? 'var(--grad-border)' : 'transparent',
-            opacity: 0.6,
-          },
+          boxShadow: 'none',
+          transition: 'background-color 180ms ease, border-color 180ms ease',
         }}
       >
         <Container maxWidth="lg">
@@ -92,21 +81,32 @@ export default function Header() {
             <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 1.5 }}>
               {navLinks.map((link) => {
                 const active = pathname === link.href;
-                const isContact = link.key === 'contact';
 
                 return (
                   <Button
                     key={link.key}
                     component={Link}
                     href={link.href}
-                    variant={isContact ? 'outlined' : 'text'}
+                    variant="text"
                     sx={{
-                      color: active || isContact ? 'var(--text)' : 'var(--text-2)',
-                      borderColor: isContact ? 'var(--border)' : undefined,
-                      backgroundColor: active ? 'rgba(121, 168, 255, 0.08)' : 'transparent',
+                      position: 'relative',
+                      color: active ? 'var(--text)' : 'var(--text-2)',
+                      px: 1,
+                      minWidth: 'auto',
+                      borderRadius: 0,
                       '&:hover': {
                         color: 'var(--text)',
-                        backgroundColor: 'rgba(121, 168, 255, 0.08)',
+                        backgroundColor: 'transparent',
+                      },
+                      '&::after': {
+                        content: '""',
+                        position: 'absolute',
+                        left: 8,
+                        right: 8,
+                        bottom: 6,
+                        height: 2,
+                        backgroundColor: active ? 'var(--cyan)' : 'transparent',
+                        transition: 'background-color 160ms ease',
                       },
                     }}
                   >

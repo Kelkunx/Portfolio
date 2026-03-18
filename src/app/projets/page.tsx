@@ -19,16 +19,13 @@ export default function ProjectsPage() {
   return (
     <Container maxWidth="lg" sx={{ py: { xs: 6, md: 8 } }}>
       <Stack spacing={1.25} sx={{ mb: 5, maxWidth: 760 }}>
-        <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
-          {locale === 'fr' ? 'Case studies' : 'Case studies'}
-        </Typography>
         <Typography variant="h2" component="h1" sx={{ color: 'var(--text)' }}>
           {locale === 'fr' ? 'Projets' : 'Projects'}
         </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.8 }}>
           {locale === 'fr'
-            ? 'Une sélection de projets conçus comme des démonstrations de raisonnement produit, de qualité d’exécution et de clarté technique.'
-            : 'A curated selection of projects presented as proof of product thinking, execution quality and technical clarity.'}
+            ? 'Une sélection de projets présentés avec assez de contexte pour comprendre le problème, les choix faits et le résultat.'
+            : 'A selection of projects presented with enough context to understand the problem, the choices made and the result.'}
         </Typography>
       </Stack>
 

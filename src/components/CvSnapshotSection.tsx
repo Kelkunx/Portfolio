@@ -23,25 +23,14 @@ export default function CvSnapshotSection() {
         <Grid size={{ xs: 12, md: 7 }}>
           <Box
             sx={{
-              position: 'relative',
               height: '100%',
               borderRadius: 'var(--radius-lg)',
               border: '1px solid var(--border)',
               backgroundColor: 'var(--surface)',
               p: { xs: 3, md: 4 },
-              overflow: 'hidden',
-              '&::before': {
-                // Keep the card colorful without competing with the main copy.
-                content: '""',
-                position: 'absolute',
-                inset: 0,
-                background:
-                  'linear-gradient(135deg, rgba(125, 207, 255, 0.16), transparent 46%), radial-gradient(circle at top right, rgba(187, 154, 247, 0.14), transparent 40%)',
-                pointerEvents: 'none',
-              },
             }}
           >
-            <Stack spacing={2} sx={{ position: 'relative', zIndex: 1 }}>
+            <Stack spacing={2}>
               <Typography component="h2" variant="h4" sx={{ color: 'var(--text)' }}>
                 {locale === 'fr' ? 'CV express' : 'Quick CV'}
               </Typography>
@@ -49,17 +38,27 @@ export default function CvSnapshotSection() {
                 {profile.summary}
               </Typography>
 
-              <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-                {profile.primaryStack.map((item) => (
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75 }}>
+                {profile.primaryStack.map((item, index) => (
                   <Chip
                     key={item}
                     label={item}
                     size="small"
                     variant="outlined"
                     sx={{
-                      borderColor: 'rgba(125, 207, 255, 0.3)',
                       color: 'var(--text)',
-                      backgroundColor: 'rgba(125, 207, 255, 0.1)',
+                      borderColor:
+                        index % 3 === 0
+                          ? 'rgba(125, 207, 255, 0.3)'
+                          : index % 3 === 1
+                            ? 'rgba(187, 154, 247, 0.3)'
+                            : 'rgba(158, 206, 106, 0.3)',
+                      backgroundColor:
+                        index % 3 === 0
+                          ? 'rgba(125, 207, 255, 0.1)'
+                          : index % 3 === 1
+                            ? 'rgba(187, 154, 247, 0.1)'
+                            : 'rgba(158, 206, 106, 0.1)',
                     }}
                   />
                 ))}
@@ -80,26 +79,16 @@ export default function CvSnapshotSection() {
         <Grid size={{ xs: 12, md: 5 }}>
           <Box
             sx={{
-              position: 'relative',
               height: '100%',
               borderRadius: 'var(--radius-lg)',
               border: '1px solid var(--border)',
               backgroundColor: 'var(--surface)',
               p: { xs: 3, md: 4 },
-              overflow: 'hidden',
-              '&::before': {
-                content: '""',
-                position: 'absolute',
-                inset: 0,
-                background:
-                  'linear-gradient(180deg, rgba(255, 158, 100, 0.12), transparent 35%), radial-gradient(circle at bottom left, rgba(158, 206, 106, 0.12), transparent 36%)',
-                pointerEvents: 'none',
-              },
             }}
           >
-            <Stack spacing={2} sx={{ position: 'relative', zIndex: 1 }}>
+            <Stack spacing={2}>
               <Box sx={{ borderLeft: '3px solid var(--cyan)', pl: 1.5 }}>
-                <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
+                <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.4 }}>
                   {locale === 'fr' ? 'Disponibilité' : 'Availability'}
                 </Typography>
                 <Typography variant="body1" sx={{ color: 'var(--text)' }}>
@@ -108,7 +97,7 @@ export default function CvSnapshotSection() {
               </Box>
 
               <Box sx={{ borderLeft: '3px solid var(--purple)', pl: 1.5 }}>
-                <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
+                <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.4 }}>
                   {locale === 'fr' ? 'Langues' : 'Languages'}
                 </Typography>
                 <Typography variant="body1" sx={{ color: 'var(--text)' }}>
@@ -118,7 +107,7 @@ export default function CvSnapshotSection() {
 
               {toeicCertification && (
                 <Box sx={{ borderLeft: '3px solid var(--green)', pl: 1.5 }}>
-                  <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
+                  <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.4 }}>
                     TOEIC
                   </Typography>
                   <Typography variant="body1" sx={{ color: 'var(--text)' }}>
@@ -128,7 +117,7 @@ export default function CvSnapshotSection() {
               )}
 
               <Box sx={{ borderLeft: '3px solid var(--orange)', pl: 1.5 }}>
-                <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
+                <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.4 }}>
                   {locale === 'fr' ? 'Localisation' : 'Location'}
                 </Typography>
                 <Typography variant="body1" sx={{ color: 'var(--text)' }}>

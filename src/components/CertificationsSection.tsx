@@ -21,9 +21,6 @@ export default function CertificationsSection() {
         <Typography component="h2" variant="h4" sx={{ color: 'var(--text)' }}>
           {locale === 'fr' ? 'Certifications' : 'Certifications'}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {locale === 'fr' ? 'Preuves externes utiles pour crédibiliser le profil.' : 'External proof points that support the profile.'}
-        </Typography>
       </Stack>
 
       <Stack spacing={2}>
@@ -37,6 +34,16 @@ export default function CertificationsSection() {
               backgroundColor: 'var(--surface)',
               p: 2.5,
               overflow: 'hidden',
+              transition: 'background-color 160ms ease, border-color 160ms ease',
+              '&:hover': {
+                borderColor: tones[index % tones.length],
+                backgroundColor:
+                  tones[index % tones.length] === 'var(--green)'
+                    ? 'rgba(158, 206, 106, 0.05)'
+                    : tones[index % tones.length] === 'var(--cyan)'
+                      ? 'rgba(125, 207, 255, 0.05)'
+                      : 'rgba(187, 154, 247, 0.05)',
+              },
               '&::before': {
                 content: '""',
                 position: 'absolute',

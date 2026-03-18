@@ -28,28 +28,16 @@ export default function CvPage() {
         <Grid size={{ xs: 12, md: 8 }}>
           <Box
             sx={{
-              position: 'relative',
               borderRadius: 'var(--radius-lg)',
               border: '1px solid var(--border)',
+              borderTop: '2px solid var(--cyan)',
               backgroundColor: 'var(--surface)',
               p: { xs: 3, md: 4 },
               height: '100%',
-              overflow: 'hidden',
-              '&::before': {
-                content: '""',
-                position: 'absolute',
-                inset: 0,
-                background:
-                  'linear-gradient(135deg, rgba(125, 207, 255, 0.12), transparent 48%), radial-gradient(circle at top right, rgba(187, 154, 247, 0.12), transparent 42%)',
-                pointerEvents: 'none',
-              },
             }}
           >
-            <Stack spacing={2.5} sx={{ position: 'relative', zIndex: 1 }}>
-              <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
-                {locale === 'fr' ? 'CV détaillé' : 'Detailed CV'}
-              </Typography>
-              <Typography component="h1" variant="h2" sx={{ color: 'var(--text)', maxWidth: '14ch' }}>
+            <Stack spacing={2.5}>
+              <Typography component="h1" variant="h2" sx={{ color: 'var(--text)' }}>
                 {profile.focus}
               </Typography>
               <Typography variant="body1" color="text.secondary" sx={{ maxWidth: '62ch', lineHeight: 1.8 }}>
@@ -78,7 +66,7 @@ export default function CvPage() {
                           height: '100%',
                         }}
                       >
-                        <Typography variant="body2" sx={{ color: 'var(--muted)', mb: 0.35 }}>
+                        <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.35 }}>
                           {item.label}
                         </Typography>
                         <Typography variant="body2" sx={{ color: 'var(--text)', lineHeight: 1.55 }}>
@@ -90,21 +78,9 @@ export default function CvPage() {
                 })}
               </Grid>
 
-              <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-                {profile.targetRoles.map((role) => (
-                  <Chip
-                    key={role}
-                    label={role}
-                    size="small"
-                    variant="outlined"
-                    sx={{
-                      borderColor: 'rgba(187, 154, 247, 0.34)',
-                      color: 'var(--text)',
-                      backgroundColor: 'rgba(187, 154, 247, 0.12)',
-                    }}
-                  />
-                ))}
-              </Box>
+              <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>
+                {profile.targetRoles.join(' • ')}
+              </Typography>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
                 <Button component="a" href={profile.cvPdf} target="_blank" rel="noopener noreferrer" variant="contained">
@@ -121,28 +97,16 @@ export default function CvPage() {
         <Grid size={{ xs: 12, md: 4 }}>
           <Box
             sx={{
-              position: 'relative',
               borderRadius: 'var(--radius-lg)',
               border: '1px solid var(--border)',
+              borderTop: '2px solid var(--purple)',
               backgroundColor: 'var(--surface)',
               p: { xs: 3, md: 4 },
               height: '100%',
-              overflow: 'hidden',
-              '&::before': {
-                content: '""',
-                position: 'absolute',
-                inset: 0,
-                background:
-                  'linear-gradient(180deg, rgba(125, 207, 255, 0.08), transparent 42%), radial-gradient(circle at bottom left, rgba(158, 206, 106, 0.1), transparent 35%)',
-                pointerEvents: 'none',
-              },
             }}
           >
-            <Stack spacing={2} sx={{ position: 'relative', zIndex: 1 }}>
+            <Stack spacing={2}>
               <Box>
-                <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
-                  {locale === 'fr' ? 'Profil rapide' : 'Quick profile'}
-                </Typography>
                 <Typography variant="body1" sx={{ color: 'var(--text)', mt: 0.5 }}>
                   {profile.name}
                 </Typography>
@@ -158,20 +122,30 @@ export default function CvPage() {
               </Box>
 
               <Box>
-                <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
+                <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.5 }}>
                   {locale === 'fr' ? 'Stack principale' : 'Primary stack'}
                 </Typography>
-                <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mt: 1 }}>
-                  {profile.primaryStack.map((item) => (
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75 }}>
+                  {profile.primaryStack.map((item, index) => (
                     <Chip
                       key={item}
                       label={item}
-                      variant="outlined"
                       size="small"
+                      variant="outlined"
                       sx={{
-                        borderColor: 'rgba(125, 207, 255, 0.3)',
                         color: 'var(--text)',
-                        backgroundColor: 'rgba(125, 207, 255, 0.1)',
+                        borderColor:
+                          index % 3 === 0
+                            ? 'rgba(125, 207, 255, 0.3)'
+                            : index % 3 === 1
+                              ? 'rgba(187, 154, 247, 0.3)'
+                              : 'rgba(158, 206, 106, 0.3)',
+                        backgroundColor:
+                          index % 3 === 0
+                            ? 'rgba(125, 207, 255, 0.1)'
+                            : index % 3 === 1
+                              ? 'rgba(187, 154, 247, 0.1)'
+                              : 'rgba(158, 206, 106, 0.1)',
                       }}
                     />
                   ))}
@@ -179,7 +153,7 @@ export default function CvPage() {
               </Box>
 
               <Box sx={{ borderLeft: '3px solid var(--purple)', pl: 1.5 }}>
-                <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
+                <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.5 }}>
                   {locale === 'fr' ? 'Langues' : 'Languages'}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
@@ -189,7 +163,7 @@ export default function CvPage() {
 
               {toeic && (
                 <Box sx={{ borderLeft: '3px solid var(--green)', pl: 1.5 }}>
-                  <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
+                  <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.5 }}>
                     TOEIC
                   </Typography>
                   <Typography variant="body2" color="text.secondary">

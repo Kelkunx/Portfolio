@@ -6,8 +6,8 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import Link from 'next/link';
 import { ArrowOutward } from '@mui/icons-material';
@@ -62,27 +62,9 @@ export default function ProjectDetailPage() {
   return (
     <Container maxWidth="lg" sx={{ py: { xs: 6, md: 8 } }}>
       <Stack spacing={2} sx={{ mb: 5, maxWidth: 860 }}>
-        <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-          <Chip
-            label={project.status}
-            sx={{
-              backgroundColor: 'rgba(125, 207, 255, 0.14)',
-              color: 'var(--text)',
-              border: '1px solid rgba(125, 207, 255, 0.3)',
-            }}
-          />
-          {published && (
-            <Chip
-              label={published}
-              variant="outlined"
-              sx={{
-                borderColor: 'rgba(187, 154, 247, 0.34)',
-                color: 'var(--text)',
-                backgroundColor: 'rgba(187, 154, 247, 0.1)',
-              }}
-            />
-          )}
-        </Box>
+        <Typography variant="body2" sx={{ color: 'var(--text-2)', fontWeight: 600 }}>
+          {published ? `${project.status} • ${published}` : project.status}
+        </Typography>
 
         <Typography component="h1" variant="h2" sx={{ color: 'var(--text)', maxWidth: '14ch' }}>
           {project.title}
@@ -104,12 +86,18 @@ export default function ProjectDetailPage() {
             sx={{
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--border)',
+              borderTop: '2px solid var(--cyan)',
               backgroundColor: 'var(--surface)',
               p: 3,
               height: '100%',
+              transition: 'background-color 160ms ease, border-color 160ms ease',
+              '&:hover': {
+                borderColor: 'var(--cyan)',
+                backgroundColor: 'rgba(125, 207, 255, 0.05)',
+              },
             }}
           >
-            <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
+            <Typography variant="body1" sx={{ color: 'var(--text-2)', mb: 0.75 }}>
               {locale === 'fr' ? 'Contexte' : 'Context'}
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mt: 1, lineHeight: 1.8 }}>
@@ -123,12 +111,18 @@ export default function ProjectDetailPage() {
             sx={{
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--border)',
+              borderTop: '2px solid var(--purple)',
               backgroundColor: 'var(--surface)',
               p: 3,
               height: '100%',
+              transition: 'background-color 160ms ease, border-color 160ms ease',
+              '&:hover': {
+                borderColor: 'var(--purple)',
+                backgroundColor: 'rgba(187, 154, 247, 0.05)',
+              },
             }}
           >
-            <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
+            <Typography variant="body1" sx={{ color: 'var(--text-2)', mb: 0.75 }}>
               {locale === 'fr' ? 'Problème' : 'Problem'}
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mt: 1, lineHeight: 1.8 }}>
@@ -142,12 +136,18 @@ export default function ProjectDetailPage() {
             sx={{
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--border)',
+              borderTop: '2px solid var(--green)',
               backgroundColor: 'var(--surface)',
               p: 3,
               height: '100%',
+              transition: 'background-color 160ms ease, border-color 160ms ease',
+              '&:hover': {
+                borderColor: 'var(--green)',
+                backgroundColor: 'rgba(158, 206, 106, 0.05)',
+              },
             }}
           >
-            <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
+            <Typography variant="body1" sx={{ color: 'var(--text-2)', mb: 0.75 }}>
               {locale === 'fr' ? 'Mon rôle' : 'My role'}
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mt: 1, lineHeight: 1.8 }}>
@@ -161,12 +161,18 @@ export default function ProjectDetailPage() {
             sx={{
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--border)',
+              borderTop: '2px solid var(--orange)',
               backgroundColor: 'var(--surface)',
               p: 3,
               height: '100%',
+              transition: 'background-color 160ms ease, border-color 160ms ease',
+              '&:hover': {
+                borderColor: 'var(--orange)',
+                backgroundColor: 'rgba(255, 158, 100, 0.05)',
+              },
             }}
           >
-            <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
+            <Typography variant="body1" sx={{ color: 'var(--text-2)', mb: 0.75 }}>
               {locale === 'fr' ? 'Livrables' : 'Deliverables'}
             </Typography>
             <Stack spacing={0.75} sx={{ mt: 1 }}>
@@ -186,9 +192,15 @@ export default function ProjectDetailPage() {
             sx={{
               borderRadius: 'var(--radius-lg)',
               border: '1px solid var(--border)',
+              borderTop: '2px solid var(--cyan)',
               backgroundColor: 'var(--surface)',
               p: { xs: 3, md: 4 },
               mb: 3,
+              transition: 'border-color 160ms ease, background-color 160ms ease',
+              '&:hover': {
+                borderColor: 'var(--cyan)',
+                backgroundColor: 'rgba(125, 207, 255, 0.03)',
+              },
             }}
           >
             <Typography component="h2" variant="h4" sx={{ color: 'var(--text)', mb: 2 }}>
@@ -207,9 +219,15 @@ export default function ProjectDetailPage() {
             sx={{
               borderRadius: 'var(--radius-lg)',
               border: '1px solid var(--border)',
+              borderTop: '2px solid var(--purple)',
               backgroundColor: 'var(--surface)',
               p: { xs: 3, md: 4 },
               mb: 3,
+              transition: 'border-color 160ms ease, background-color 160ms ease',
+              '&:hover': {
+                borderColor: 'var(--purple)',
+                backgroundColor: 'rgba(187, 154, 247, 0.03)',
+              },
             }}
           >
             <Typography component="h2" variant="h4" sx={{ color: 'var(--text)', mb: 2 }}>
@@ -228,6 +246,7 @@ export default function ProjectDetailPage() {
             sx={{
               borderRadius: 'var(--radius-lg)',
               border: '1px solid var(--border)',
+              borderTop: '2px solid var(--green)',
               backgroundColor: 'var(--surface)',
               p: { xs: 3, md: 4 },
             }}
@@ -256,8 +275,14 @@ export default function ProjectDetailPage() {
               sx={{
                 borderRadius: 'var(--radius-lg)',
                 border: '1px solid var(--border)',
+                borderTop: '2px solid var(--green)',
                 backgroundColor: 'var(--surface)',
                 p: 3,
+                transition: 'border-color 160ms ease, background-color 160ms ease',
+                '&:hover': {
+                  borderColor: 'var(--green)',
+                  backgroundColor: 'rgba(158, 206, 106, 0.03)',
+                },
               }}
             >
               <Typography component="h2" variant="h5" sx={{ color: 'var(--text)', mb: 2 }}>
@@ -268,11 +293,8 @@ export default function ProjectDetailPage() {
                   <Box
                     key={`${result.value}-${result.label}`}
                     sx={{
-                      borderRadius: '18px',
-                      border: '1px solid var(--border)',
-                      backgroundColor: 'rgba(255,255,255,0.02)',
-                      px: 1.75,
-                      py: 1.5,
+                      borderLeft: '2px solid var(--cyan)',
+                      pl: 1.5,
                     }}
                   >
                     <Typography variant="body2" sx={{ color: 'var(--text)', fontWeight: 600, mb: 0.4 }}>
@@ -297,16 +319,27 @@ export default function ProjectDetailPage() {
               <Typography component="h2" variant="h5" sx={{ color: 'var(--text)', mb: 2 }}>
                 {locale === 'fr' ? 'Stack' : 'Stack'}
               </Typography>
-              <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-                {project.tech.map((item) => (
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75 }}>
+                {project.tech.map((item, index) => (
                   <Chip
                     key={item}
                     label={item}
+                    size="small"
                     variant="outlined"
                     sx={{
-                      borderColor: 'rgba(125, 207, 255, 0.3)',
                       color: 'var(--text)',
-                      backgroundColor: 'rgba(125, 207, 255, 0.1)',
+                      borderColor:
+                        index % 3 === 0
+                          ? 'rgba(125, 207, 255, 0.3)'
+                          : index % 3 === 1
+                            ? 'rgba(187, 154, 247, 0.3)'
+                            : 'rgba(158, 206, 106, 0.3)',
+                      backgroundColor:
+                        index % 3 === 0
+                          ? 'rgba(125, 207, 255, 0.1)'
+                          : index % 3 === 1
+                            ? 'rgba(187, 154, 247, 0.1)'
+                            : 'rgba(158, 206, 106, 0.1)',
                     }}
                   />
                 ))}
@@ -353,14 +386,15 @@ export default function ProjectDetailPage() {
             mt: 6,
             borderRadius: 'var(--radius-lg)',
             border: '1px solid var(--border)',
-            background: 'linear-gradient(135deg, rgba(121, 168, 255, 0.08), rgba(199, 164, 106, 0.06))',
+            borderTop: '2px solid var(--orange)',
+            backgroundColor: 'var(--surface)',
             p: { xs: 3, md: 4 },
           }}
         >
-          <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
+          <Typography variant="body1" sx={{ color: 'var(--text-2)', mb: 0.75 }}>
             {locale === 'fr' ? 'Projet suivant' : 'Next project'}
           </Typography>
-          <Typography variant="h4" sx={{ color: 'var(--text)', mt: 1, mb: 1 }}>
+          <Typography variant="h4" sx={{ color: 'var(--text)', mb: 1 }}>
             {nextProject.title}
           </Typography>
           <Typography variant="body1" color="text.secondary" sx={{ maxWidth: '60ch', mb: 2 }}>

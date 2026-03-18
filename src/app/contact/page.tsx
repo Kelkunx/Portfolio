@@ -18,6 +18,7 @@ export default function ContactPage() {
             sx={{
               borderRadius: 'var(--radius-lg)',
               border: '1px solid var(--border)',
+              borderTop: '2px solid var(--cyan)',
               backgroundColor: 'var(--surface)',
               p: { xs: 3, md: 4 },
               height: '100%',
@@ -25,11 +26,8 @@ export default function ContactPage() {
           >
             <Stack spacing={2.5}>
               <Box>
-                <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
-                  {locale === 'fr' ? 'Contact' : 'Contact'}
-                </Typography>
                 <Typography component="h1" variant="h2" sx={{ color: 'var(--text)', mb: 1 }}>
-                  {locale === 'fr' ? 'Parlons du poste ou du projet' : 'Let’s talk about the role or the project'}
+                  {locale === 'fr' ? 'Parlons du poste ou du projet' : "Let's talk about the role or the project"}
                 </Typography>
                 <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.8, maxWidth: '58ch' }}>
                   {profile.contactPitch}
@@ -37,10 +35,8 @@ export default function ContactPage() {
               </Box>
               <Box
                 sx={{
-                  borderRadius: 'var(--radius-md)',
-                  border: '1px solid var(--border)',
-                  backgroundColor: 'rgba(255,255,255,0.03)',
-                  p: 2.5,
+                  borderLeft: '2px solid var(--orange)',
+                  pl: 2,
                 }}
               >
                 <Typography variant="subtitle1" sx={{ color: 'var(--text)', mb: 1 }}>
@@ -48,8 +44,8 @@ export default function ContactPage() {
                 </Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.75 }}>
                   {locale === 'fr'
-                    ? "Pour l'instant, je privilégie le contact direct par email, téléphone ou LinkedIn. Je préfère ça à un formulaire branché sur une solution mail externe."
-                    : 'For now, I prefer direct contact by email, phone or LinkedIn rather than a contact form wired to an external email solution.'}
+                    ? "Je privilégie le contact direct par email ou LinkedIn."
+                    : 'I prefer direct contact by email or LinkedIn.'}
                 </Typography>
               </Box>
             </Stack>
@@ -61,6 +57,7 @@ export default function ContactPage() {
             sx={{
               borderRadius: 'var(--radius-lg)',
               border: '1px solid var(--border)',
+              borderTop: '2px solid var(--purple)',
               backgroundColor: 'var(--surface)',
               p: { xs: 3, md: 4 },
               height: '100%',
@@ -68,10 +65,7 @@ export default function ContactPage() {
           >
             <Stack spacing={2}>
               <Box>
-                <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
-                  {locale === 'fr' ? 'Coordonnées directes' : 'Direct contact'}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
+                <Typography variant="body2" color="text.secondary">
                   {locale === 'fr'
                     ? 'Tu peux aussi me joindre directement par email, téléphone ou via mes profils professionnels.'
                     : 'You can also reach me directly by email, phone or through my professional profiles.'}

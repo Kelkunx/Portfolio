@@ -57,10 +57,10 @@ export const projects: Project[] = [
     slug: 'portfolio',
     title: 'Portfolio personnel',
     tagline:
-      'Refonte de mon portfolio comme CV dynamique orienté recrutement, avec une hiérarchie plus claire, des preuves mieux exposées et une structure de case studies.',
-    short: 'Portfolio premium pensé comme CV dynamique, vitrine de projets et outil de conversion.',
+      'Exemple de portfolio développeur structuré comme une vitrine claire, avec page CV dédiée et fiches projet détaillées.',
+    short: 'Portfolio développeur pensé comme vitrine de projets, page CV et point de contact clair.',
     description:
-      'Refonte éditoriale et visuelle de mon portfolio pour renforcer la crédibilité, la lisibilité et la prise de contact.',
+      'Cas de portfolio développeur conçu pour mieux présenter un profil, des projets et des points de contact sans surcharger la lecture.',
     imageSrc: '',
     imageAlt: 'Capture à venir du portfolio personnel',
     tech: ['Next.js', 'React', 'TypeScript', 'MUI'],
@@ -69,37 +69,37 @@ export const projects: Project[] = [
     status: 'Live',
     role: 'Direction artistique, UI, intégration front, structuration de contenu.',
     context:
-      'Le portfolio existant était propre mais trop proche d’un empilement de sections CV. Il fallait le transformer en objet plus convaincant pour un recruteur.',
+      "Beaucoup de portfolios personnels ressemblent soit à un CV en colonnes, soit à une démonstration visuelle trop chargée. L'objectif ici est de proposer une base plus claire et plus réutilisable.",
     problem:
-      'Comment rendre le site plus mémorable, plus crédible et plus orienté conversion sans tomber dans un rendu trop flashy ou trop démonstratif ?',
+    "Comment structurer un portfolio public de façon crédible, lisible et facilement adaptable, sans dépendre d'un storytelling trop personnel ni d'une DA trop démonstrative ?",
     process: [
-      'Audit du positionnement, de la hiérarchie visuelle et des signaux de crédibilité.',
-      "Refonte de l'architecture avec une homepage courte, une vraie page CV et des pages projet plus structurées.",
-      'Travail sur la direction artistique sombre, les CTA et le ton éditorial pour garder un rendu premium mais professionnel.',
+      "Travail sur une architecture simple avec une homepage courte, une page CV dédiée et des pages projet plus complètes.",
+      'Simplification progressive de la hiérarchie visuelle pour mettre en avant le contenu utile avant les effets de style.',
+      "Structuration du contenu pour qu'un autre profil puisse reprendre la base sans avoir à réécrire toute la logique éditoriale.",
     ],
     solution: [
-      'Homepage recentrée sur la promesse, les preuves, les projets phares et le contact.',
-      'Création d’une page CV dédiée pour sortir le contenu de parcours de la homepage.',
-      'Nouveau système de case studies avec contexte, problème, rôle, process, solution et résultats.',
+      'Homepage recentrée sur le profil, quelques preuves utiles, les projets phares et le contact.',
+      'Page CV dédiée pour sortir les détails de parcours de la homepage.',
+      'Structure de case study réutilisable avec contexte, problème, rôle, process, solution et résultats.',
     ],
     deliverables: [
-      'Homepage orientée recrutement',
+      'Homepage structurée',
       'Page CV dédiée',
-      'Fiches projet enrichies',
-      'Page contact de conversion',
+      'Fiches projet détaillées',
+      'Page contact simple',
     ],
     results: [
       {
-        value: 'Message plus clair',
-        label: 'Le positionnement full-stack apparaît dès le premier écran.',
+        value: 'Structure réutilisable',
+        label: "La base peut être adaptée à un autre portfolio sans dépendre d'un contexte trop personnel.",
       },
       {
-        value: 'Parcours plus lisible',
-        label: 'Le contenu CV est structuré sans alourdir la homepage.',
+        value: 'Lecture plus claire',
+        label: 'Les informations de profil, de projets et de parcours sont séparées plus proprement.',
       },
       {
-        value: 'Conversion renforcée',
-        label: 'CV, contact direct et formulaire sont visibles plus rapidement.',
+        value: 'Base extensible',
+        label: 'Le système de sections et de fiches projet peut évoluer sans refaire toute la structure.',
       },
     ],
     screens: [],
@@ -144,7 +144,7 @@ export const projects: Project[] = [
     results: [
       {
         value: 'Lecture accélérée',
-        label: 'Chaque article est résumé en quelques lignes pour aller à l’essentiel.',
+        label: "Chaque article est résumé en quelques lignes pour aller à l'essentiel.",
       },
       {
         value: 'Filtres utiles',
@@ -152,7 +152,7 @@ export const projects: Project[] = [
       },
       {
         value: 'Architecture claire',
-        label: 'Séparation front / back facilitant l’évolution du produit.',
+        label: "Séparation front / back facilitant l'évolution du produit.",
       },
     ],
     screens: [
@@ -186,7 +186,7 @@ export const projects: Project[] = [
     status: 'Projet académique',
     role: 'Configuration réseau, serveur RADIUS, intégration capteurs et documentation.',
     context:
-      'Le projet simulait la mise en place d’une infrastructure sécurisée pour une entreprise fictive avec services réseau, NAS, vidéosurveillance et supervision.',
+      "Le projet simulait la mise en place d'une infrastructure sécurisée pour une entreprise fictive avec services réseau, NAS, vidéosurveillance et supervision.",
     problem:
       'Comment proposer une architecture cohérente intégrant authentification, segmentation, surveillance physique et collecte environnementale dans un cadre pédagogique ?',
     process: [
@@ -195,7 +195,7 @@ export const projects: Project[] = [
       'Documentation des choix techniques et des étapes de mise en place.',
     ],
     solution: [
-      'Mise en place d’un serveur RADIUS relié à une borne Wi-Fi Cisco.',
+      "Mise en place d'un serveur RADIUS relié à une borne Wi-Fi Cisco.",
       'Ajout de capteurs de mouvement, température et humidité avec Arduino.',
       'Intégration dans une architecture incluant Active Directory, NAS et vidéosurveillance.',
     ],

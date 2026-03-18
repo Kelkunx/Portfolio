@@ -93,7 +93,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           h6: { fontFamily: 'var(--font-display)', fontWeight: 600 },
           button: { textTransform: 'none', fontWeight: 600, letterSpacing: '0.01em' },
         },
-        shape: { borderRadius: 18 },
+        shape: { borderRadius: 10 },
         components: {
           MuiCssBaseline: {
             styleOverrides: {
@@ -117,6 +117,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
                 backgroundColor: 'var(--surface)',
                 border: '1px solid var(--border)',
                 boxShadow: 'var(--shadow-soft)',
+                transition: 'border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease',
               },
             },
           },
@@ -131,19 +132,17 @@ export default function Providers({ children }: { children: React.ReactNode }) {
             defaultProps: { disableElevation: true },
             styleOverrides: {
               root: {
-                borderRadius: 14,
-                transition: 'transform 180ms ease, background-color 200ms ease, border-color 200ms ease',
-                '&:active': {
-                  transform: 'translateY(1px)',
-                },
+                borderRadius: 10,
+                transition:
+                  'background-color 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease',
               },
               containedPrimary: {
-                backgroundImage: 'var(--grad-accent)',
-                color: '#091019',
-                boxShadow: 'var(--shadow-glow)',
+                backgroundImage: 'none',
+                backgroundColor: mode === 'light' ? '#2e7de9' : '#7aa2f7',
+                color: mode === 'light' ? '#ffffff' : '#10131d',
                 '&:hover': {
-                  backgroundImage: 'var(--grad-accent)',
-                  boxShadow: '0 0 0 1px var(--ring), var(--shadow-glow)',
+                  backgroundImage: 'none',
+                  backgroundColor: mode === 'light' ? '#236fd2' : '#6f98f0',
                 },
               },
               outlinedPrimary: {
@@ -151,13 +150,13 @@ export default function Providers({ children }: { children: React.ReactNode }) {
                 color: 'var(--text)',
                 '&:hover': {
                   borderColor: 'var(--blue)',
-                  backgroundColor: 'rgba(125, 207, 255, 0.08)',
+                  backgroundColor: 'rgba(125, 207, 255, 0.12)',
                 },
               },
               textPrimary: {
                 color: 'var(--text)',
                 '&:hover': {
-                  backgroundColor: 'rgba(125, 207, 255, 0.08)',
+                  backgroundColor: 'rgba(125, 207, 255, 0.1)',
                 },
               },
             },
@@ -166,9 +165,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
             styleOverrides: {
               root: {
                 color: 'var(--text)',
-                borderRadius: 12,
+                borderRadius: 10,
+                transition: 'background-color 160ms ease',
                 '&:hover': {
-                  boxShadow: '0 8px 20px rgba(10, 15, 30, 0.25)',
                   backgroundColor: 'rgba(125, 207, 255, 0.08)',
                 },
               },
@@ -210,7 +209,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
             styleOverrides: {
               root: {
                 backgroundColor: 'var(--surface-2)',
-                borderRadius: 14,
+                borderRadius: 10,
                 '& .MuiOutlinedInput-notchedOutline': {
                   borderColor: 'var(--border)',
                 },

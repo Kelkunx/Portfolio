@@ -69,7 +69,7 @@ export default function ProjectCard({
           transition: { duration: 0.55, ease, delay: revealDelay },
         },
         hover: {
-          y: -4,
+          y: -3,
           transition: { duration: 0.2, ease },
         },
       };
@@ -79,6 +79,8 @@ export default function ProjectCard({
   const dateLabel = formatDate(date, locale);
   const cardImageSrc = imageSrc && imageSrc.trim() !== '' ? imageSrc : projectPlaceholderDataUrl(title, locale);
   const cardImageAlt = imageAlt || title;
+  const stackTone = compact ? 'rgba(187, 154, 247, 0.1)' : 'rgba(125, 207, 255, 0.1)';
+  const stackBorder = compact ? 'rgba(187, 154, 247, 0.3)' : 'rgba(125, 207, 255, 0.3)';
 
   const handleActivate = (event: React.MouseEvent | React.KeyboardEvent) => {
     const target = event.target as HTMLElement | null;
@@ -110,17 +112,19 @@ export default function ProjectCard({
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        borderRadius: 'var(--radius-lg)',
+        borderRadius: 'var(--radius-md)',
         overflow: 'hidden',
         cursor: 'pointer',
         backgroundColor: 'var(--surface)',
         border: '1px solid var(--border)',
         boxShadow: 'var(--shadow-soft)',
+        transition: 'border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease',
         '&:hover': {
-          borderColor: 'rgba(121, 168, 255, 0.35)',
+          borderColor: 'rgba(121, 168, 255, 0.42)',
+          boxShadow: '0 8px 18px rgba(10, 15, 30, 0.22)',
         },
         '&:hover img': {
-          transform: 'scale(1.02)',
+          transform: 'scale(1.015)',
         },
       }}
     >
@@ -150,24 +154,13 @@ export default function ProjectCard({
       <CardContent sx={{ flexGrow: 1, p: 3 }}>
         <Stack spacing={2}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
-            <Chip
-              label={status}
-              size="small"
-              sx={{
-                backgroundColor: 'rgba(125, 207, 255, 0.14)',
-                color: 'var(--text)',
-                border: '1px solid rgba(125, 207, 255, 0.3)',
-              }}
-            />
-            {dateLabel && (
-              <Typography variant="body2" color="text.secondary">
-                {dateLabel}
-              </Typography>
-            )}
+            <Typography variant="body2" sx={{ color: 'var(--text-2)', fontWeight: 600 }}>
+              {dateLabel ? `${status} • ${dateLabel}` : status}
+            </Typography>
           </Box>
 
           <Box>
-            <Typography component="h3" variant="h5" sx={{ color: 'var(--text)', mb: 1 }}>
+            <Typography component="h3" variant="h5" sx={{ color: 'var(--text)', mb: 0.75 }}>
               {title}
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.75 }}>
@@ -180,11 +173,8 @@ export default function ProjectCard({
               <Box
                 key={`${item.value}-${item.label}`}
                 sx={{
-                  borderRadius: '18px',
-                  border: '1px solid var(--border)',
-                  backgroundColor: 'rgba(255,255,255,0.02)',
-                  px: 1.5,
-                  py: 1.25,
+                  borderLeft: '2px solid var(--cyan)',
+                  pl: 1.5,
                 }}
               >
                 <Typography variant="body2" sx={{ color: 'var(--text)', fontWeight: 600, mb: 0.35 }}>
@@ -197,17 +187,17 @@ export default function ProjectCard({
             ))}
           </Stack>
 
-          <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75 }}>
             {tech.slice(0, compact ? 3 : 4).map((item) => (
               <Chip
                 key={item}
                 label={item}
-                variant="outlined"
                 size="small"
+                variant="outlined"
                 sx={{
-                  borderColor: 'rgba(187, 154, 247, 0.28)',
                   color: 'var(--text)',
-                  backgroundColor: 'rgba(187, 154, 247, 0.1)',
+                  borderColor: stackBorder,
+                  backgroundColor: stackTone,
                 }}
               />
             ))}

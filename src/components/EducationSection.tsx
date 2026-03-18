@@ -18,11 +18,6 @@ export default function EducationSection() {
         <Typography component="h2" variant="h4" sx={{ color: 'var(--text)' }}>
           {locale === 'fr' ? 'Formation' : 'Education'}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {locale === 'fr'
-            ? 'Base académique en informatique, réseaux et systèmes.'
-            : 'Academic foundation in software, networks and systems.'}
-        </Typography>
       </Stack>
 
       <Stack spacing={2}>
@@ -36,6 +31,16 @@ export default function EducationSection() {
               backgroundColor: 'var(--surface)',
               p: 3,
               overflow: 'hidden',
+              transition: 'background-color 160ms ease, border-color 160ms ease',
+              '&:hover': {
+                borderColor: tones[index % tones.length],
+                backgroundColor:
+                  tones[index % tones.length] === 'var(--orange)'
+                    ? 'rgba(255, 158, 100, 0.05)'
+                    : tones[index % tones.length] === 'var(--cyan)'
+                      ? 'rgba(125, 207, 255, 0.05)'
+                      : 'rgba(187, 154, 247, 0.05)',
+              },
               '&::before': {
                 content: '""',
                 position: 'absolute',

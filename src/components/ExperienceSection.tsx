@@ -26,11 +26,6 @@ export default function ExperienceSection() {
         <Typography component="h2" variant="h4" sx={{ color: 'var(--text)' }}>
           {locale === 'fr' ? 'Expériences' : 'Experience'}
         </Typography>
-        <Typography variant="body2" color="text.secondary" sx={{ maxWidth: '70ch' }}>
-          {locale === 'fr'
-            ? 'Expériences principales liées au développement full-stack, à l’automatisation et à la livraison.'
-            : 'Main experience related to full-stack development, automation and delivery.'}
-        </Typography>
       </Stack>
 
       <Stack spacing={3}>
@@ -38,20 +33,14 @@ export default function ExperienceSection() {
           <Box
             key={`${experience.company}-${experience.start}`}
             sx={{
-              position: 'relative',
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--border)',
+              borderTop: `2px solid ${accentTones[index % accentTones.length]}`,
               backgroundColor: 'var(--surface)',
               p: { xs: 3, md: 3.5 },
-              overflow: 'hidden',
-              '&::before': {
-                content: '""',
-                position: 'absolute',
-                left: 0,
-                right: 0,
-                top: 0,
-                height: 4,
-                background: `linear-gradient(90deg, ${accentTones[index % accentTones.length]}, transparent 72%)`,
+              transition: 'border-color 160ms ease, background-color 160ms ease',
+              '&:hover': {
+                borderColor: accentTones[index % accentTones.length],
               },
             }}
           >
@@ -74,11 +63,8 @@ export default function ExperienceSection() {
                       gridTemplateColumns: '10px 1fr',
                       gap: 1.25,
                       alignItems: 'start',
-                      borderRadius: 12,
-                      border: '1px solid rgba(125, 207, 255, 0.12)',
-                      backgroundColor: 'var(--surface-2)',
-                      px: 1.5,
-                      py: 1.2,
+                      borderLeft: `2px solid ${accentTones[index % accentTones.length]}`,
+                      pl: 1.5,
                     }}
                   >
                     <Box
@@ -88,7 +74,6 @@ export default function ExperienceSection() {
                         borderRadius: '50%',
                         backgroundColor: accentTones[index % accentTones.length],
                         mt: '0.45rem',
-                        boxShadow: `0 0 0 4px color-mix(in srgb, ${accentTones[index % accentTones.length]} 22%, transparent)`,
                       }}
                     />
                     <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.72 }}>
@@ -105,21 +90,15 @@ export default function ExperienceSection() {
       {supportingExperiences.length > 0 && (
         <Box
           sx={{
-            position: 'relative',
             mt: 4,
             borderRadius: 'var(--radius-md)',
             border: '1px solid var(--border)',
+            borderTop: '2px solid var(--orange)',
             backgroundColor: 'var(--surface)',
             p: 3,
-            overflow: 'hidden',
-            '&::before': {
-              content: '""',
-              position: 'absolute',
-              left: 0,
-              right: 0,
-              top: 0,
-              height: 3,
-              background: 'linear-gradient(90deg, var(--orange), transparent)',
+            transition: 'border-color 160ms ease, background-color 160ms ease',
+            '&:hover': {
+              borderColor: 'var(--orange)',
             },
           }}
         >
@@ -131,11 +110,8 @@ export default function ExperienceSection() {
               <Box
                 key={`${experience.company}-${experience.start}`}
                 sx={{
-                  borderRadius: 12,
-                  backgroundColor: 'var(--surface-2)',
-                  border: '1px solid rgba(255, 158, 100, 0.16)',
-                  px: 1.5,
-                  py: 1.1,
+                  borderLeft: '2px solid var(--orange)',
+                  pl: 1.5,
                 }}
               >
                 <Typography variant="body2" color="text.secondary">

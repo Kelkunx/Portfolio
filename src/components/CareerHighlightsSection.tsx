@@ -40,27 +40,23 @@ export default function CareerHighlightsSection() {
           <Grid key={`${experience.company}-${experience.start}`} size={{ xs: 12, md: 4 }}>
             <Box
               sx={{
-                position: 'relative',
                 borderRadius: 'var(--radius-md)',
                 border: '1px solid var(--border)',
+                borderTop: `2px solid ${tones[index % tones.length]}`,
                 backgroundColor: 'var(--surface)',
                 p: 3,
                 height: '100%',
-                overflow: 'hidden',
-                '&::before': {
-                  content: '""',
-                  position: 'absolute',
-                  left: 0,
-                  right: 0,
-                  top: 0,
-                  height: 3,
-                  background: `linear-gradient(90deg, ${tones[index % tones.length]}, transparent)`,
+                transition: 'transform 180ms ease, border-color 160ms ease, background-color 160ms ease',
+                '&:hover': {
+                  transform: 'translateY(-2px)',
+                  borderColor: tones[index % tones.length],
+                  backgroundColor: 'var(--surface-2)',
                 },
               }}
             >
               <Stack spacing={1.5}>
                 <Box>
-                  <Typography variant="overline" sx={{ color: 'var(--muted)', letterSpacing: '0.08em' }}>
+                  <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.5 }}>
                     {formatRange(experience.start, experience.end, locale)}
                   </Typography>
                   <Typography component="h3" variant="h6" sx={{ color: 'var(--text)' }}>
@@ -71,7 +67,7 @@ export default function CareerHighlightsSection() {
                   </Typography>
                 </Box>
 
-                <Box component="ul" sx={{ m: 0, pl: 2.25 }}>
+                <Stack spacing={1}>
                   {experience.bullets.slice(0, 2).map((bullet) => (
                     <Box
                       key={bullet}
@@ -104,7 +100,7 @@ export default function CareerHighlightsSection() {
                       </Typography>
                     </Box>
                   ))}
-                </Box>
+                </Stack>
               </Stack>
             </Box>
           </Grid>

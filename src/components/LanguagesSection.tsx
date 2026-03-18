@@ -19,9 +19,6 @@ export default function LanguagesSection() {
         <Typography component="h2" variant="h4" sx={{ color: 'var(--text)' }}>
           {locale === 'fr' ? 'Langues' : 'Languages'}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {locale === 'fr' ? 'Niveaux utiles en contexte professionnel.' : 'Useful language levels in professional contexts.'}
-        </Typography>
       </Stack>
 
       <Stack spacing={2}>
@@ -42,6 +39,16 @@ export default function LanguagesSection() {
                 backgroundColor: 'var(--surface)',
                 p: 2.5,
                 overflow: 'hidden',
+                transition: 'background-color 160ms ease, border-color 160ms ease',
+                '&:hover': {
+                  borderColor: accentTone,
+                  backgroundColor:
+                    accentTone === 'var(--cyan)'
+                      ? 'rgba(125, 207, 255, 0.05)'
+                      : accentTone === 'var(--purple)'
+                        ? 'rgba(187, 154, 247, 0.05)'
+                        : 'rgba(158, 206, 106, 0.05)',
+                },
                 '&::before': {
                   content: '""',
                   position: 'absolute',

@@ -22,13 +22,14 @@ export default function FinalCtaSection() {
         mb: { xs: 8, md: 10 },
         borderRadius: 'var(--radius-lg)',
         border: '1px solid var(--border)',
-        background: 'linear-gradient(135deg, rgba(121, 168, 255, 0.1), rgba(199, 164, 106, 0.08))',
+        borderTop: '2px solid var(--orange)',
+        backgroundColor: 'var(--surface)',
         p: { xs: 3, md: 4.5 },
       }}
     >
       <Stack spacing={2} sx={{ maxWidth: 760 }}>
         <Typography component="h2" variant="h4" sx={{ color: 'var(--text)' }}>
-          {locale === 'fr' ? 'Parlons du poste ou du projet' : 'Let’s talk about the role or the project'}
+          {locale === 'fr' ? 'Parlons du poste ou du projet' : "Let's talk about the role or the project"}
         </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.75 }}>
           {profile.contactPitch}

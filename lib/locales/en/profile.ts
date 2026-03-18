@@ -15,8 +15,8 @@ export const profile: Profile = {
   shortBio:
     'I design and ship clear, robust and useful web interfaces and tools, with a strong focus on UX, business logic and quality.',
   contactPitch:
-    'I am available to discuss a full-stack or frontend role, an apprenticeship with growth potential, or a demanding product-oriented project.',
-  availability: 'Available for a full-stack / frontend role',
+    'I am available to discuss a full-stack / frontend / backend role.',
+  availability: 'Available for a full-stack / frontend / backend role',
   targetRoles: ['Full-stack Developer', 'React / Next.js Frontend Developer', 'Junior Frontend Developer'],
   proofPoints: [
     { label: 'Core stack', value: 'React / Next.js / NestJS' },
