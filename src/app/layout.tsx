@@ -46,6 +46,9 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: '/',
     },
+    verification: {
+      google: 'CH9of0A9cGpKrZE3ytv4A6zQrkZEvofWFVkUSWyxjHc',
+    },
     openGraph: {
       title,
       description,
