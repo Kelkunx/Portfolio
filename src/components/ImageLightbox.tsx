@@ -20,6 +20,7 @@ type Props = {
   aspectRatio?: string;
   // optionnel : priorité next/image
   priority?: boolean;
+  sizes?: string;
 };
 
 /**
@@ -33,10 +34,12 @@ export default function ImageLightbox({
   thumbHeight,
   aspectRatio = '16/9',
   priority = false,
+  sizes = '(max-width: 900px) 100vw, 66vw',
 }: Props) {
   const { locale } = useLocale();
   const [open, setOpen] = React.useState(false);
   const sizeSx = thumbHeight ? { height: thumbHeight } : { aspectRatio };
+  const shouldSkipOptimization = src.startsWith('data:') || src.startsWith('blob:');
 
   return (
     <>
@@ -54,7 +57,15 @@ export default function ImageLightbox({
         aria-label={`${locale === 'fr' ? "Agrandir l'image" : 'Open image'} : ${alt}`}
       >
         <Box sx={{ width: '100%', height: '100%', position: 'relative' }}>
-          <Image src={src} alt={alt} fill style={{ objectFit: 'cover' }} priority={priority}/>
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            sizes={sizes}
+            unoptimized={shouldSkipOptimization}
+            style={{ objectFit: 'cover' }}
+            priority={priority}
+          />
         </Box>
       </ButtonBase>
 
@@ -84,7 +95,14 @@ export default function ImageLightbox({
 
         <DialogContent sx={{ p: 0, bgcolor: 'transparent' }}>
           <Box sx={{ width: '100%', height: { xs: '60vh', md: '80vh' }, position: 'relative' }}>
-            <Image src={src} alt={alt} fill style={{ objectFit: 'contain', background: 'var(--bg)' }} />
+            <Image
+              src={src}
+              alt={alt}
+              fill
+              sizes="100vw"
+              unoptimized={shouldSkipOptimization}
+              style={{ objectFit: 'contain', background: 'var(--bg)' }}
+            />
           </Box>
         </DialogContent>
       </Dialog>

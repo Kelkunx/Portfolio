@@ -4,13 +4,13 @@ import React from 'react';
 import { motion, useReducedMotion, type Easing, type Variants } from 'framer-motion';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowOutward, GitHub } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 import { useLocale } from '../context/LocaleContext';
@@ -79,6 +79,8 @@ export default function ProjectCard({
   const dateLabel = formatDate(date, locale);
   const cardImageSrc = imageSrc && imageSrc.trim() !== '' ? imageSrc : projectPlaceholderDataUrl(title, locale);
   const cardImageAlt = imageAlt || title;
+  const shouldSkipOptimization = cardImageSrc.startsWith('data:') || cardImageSrc.startsWith('blob:');
+  const imageSizes = compact ? '(max-width: 900px) 100vw, 50vw' : '(max-width: 900px) 100vw, 33vw';
 
   const handleActivate = (event: React.MouseEvent | React.KeyboardEvent) => {
     const target = event.target as HTMLElement | null;
@@ -133,16 +135,17 @@ export default function ProjectCard({
           overflow: 'hidden',
           backgroundColor: 'var(--surface-2)',
           borderBottom: '1px solid var(--border)',
+          position: 'relative',
         }}
       >
-        <CardMedia
-          component="img"
-          image={cardImageSrc}
+        <Image
+          src={cardImageSrc}
           alt={cardImageAlt}
+          fill
           loading="lazy"
-          sx={{
-            width: '100%',
-            height: '100%',
+          sizes={imageSizes}
+          unoptimized={shouldSkipOptimization}
+          style={{
             objectFit: 'cover',
             transition: 'transform 220ms ease',
           }}
