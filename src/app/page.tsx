@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import Container from '@mui/material/Container';
 import AnimatedSection from '../components/AnimatedSection';
@@ -13,9 +11,7 @@ import FinalCtaSection from '../components/FinalCtaSection';
 export default function HomePage() {
   return (
     <>
-      <AnimatedSection intent="showcase">
         <HeroSection />
-      </AnimatedSection>
 
       <Container maxWidth="lg">
         <AnimatedSection>

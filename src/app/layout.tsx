@@ -33,19 +33,25 @@ export async function generateMetadata(): Promise<Metadata> {
   const description =
     'Portfolio de Léo JEGO. Interfaces web claires, outils métier, React, Next.js, NestJS, CV dynamique et case studies.';
   const base = process.env.SITE_URL ?? 'https://leo-jego.vercel.app';
+  const metadataBase = new URL(base);
 
   const v = process.env.NEXT_PUBLIC_OG_VERSION ?? String(Date.now());
 
   const ogUrl = `${base}/api/og?title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent('Portfolio — projets, CV et contact')}&mode=dark&v=${v}`;
 
   return {
+    metadataBase,
     title,
     description,
+    alternates: {
+      canonical: '/',
+    },
     openGraph: {
       title,
       description,
       url: base,
       siteName: 'Léo JEGO — Portfolio',
+      locale: 'fr_FR',
       type: 'website',
       images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Léo JEGO — Portfolio' }],
     },
