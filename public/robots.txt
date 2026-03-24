@@ -17,5 +17,8 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
+User-agent: Googlebot-Image
+Disallow: /
+
 # Sitemap
 Sitemap: https://leo-jego.vercel.app/sitemap.xml
