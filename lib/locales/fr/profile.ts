@@ -124,6 +124,17 @@ export const profile: Profile = {
   ],
   experiences: [
     {
+      company: 'Armor Vitrerie NETtoyage',
+      role: 'Agent de nettoyage',
+      start: 'Février 2026',
+      end: 'Février 2026',
+      location: 'Morbihan, France',
+      summary: 'Expérience courte hors tech conservée pour la continuité du parcours.',
+      featured: false,
+      kind: 'other',
+      bullets: [],
+    },
+    {
       company: 'Job Staging',
       role: 'Développeur',
       start: 'Novembre 2025',

@@ -43,7 +43,7 @@ function truncateLine(value: string, maxChars: number) {
 
 export function projectPlaceholderDataUrl(title: string, locale: 'fr' | 'en', width = 1200, height = 675) {
   const rawTitle = title.trim();
-  const subtitle = locale === 'fr' ? 'Pas de capture' : 'No screenshot';
+  const subtitle = locale === 'fr' ? 'Capture indisponible' : 'Screenshot unavailable';
   const maxChars = rawTitle.length > 42 ? 20 : 26;
   const lines = wrapText(rawTitle, maxChars);
   const titleLines = lines.slice(0, 2);

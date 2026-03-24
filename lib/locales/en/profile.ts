@@ -124,6 +124,17 @@ export const profile: Profile = {
   ],
   experiences: [
     {
+      company: 'Armor Vitrerie NETtoyage',
+      role: 'Cleaning Operative',
+      start: 'February 2026',
+      end: 'February 2026',
+      location: 'Morbihan, France',
+      summary: 'Short non-tech experience kept only for timeline continuity.',
+      featured: false,
+      kind: 'other',
+      bullets: [],
+    },
+    {
       company: 'Job Staging',
       role: 'Developer',
       start: 'November 2025',
