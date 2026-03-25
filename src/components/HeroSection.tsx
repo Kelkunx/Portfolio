@@ -274,14 +274,14 @@ export default function HeroSection() {
               p: 0,
               '@keyframes scrollCueFloat': {
                 '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(6px)' },
+                '50%': { transform: 'translateY(8px)' },
               },
               '& .MuiSvgIcon-root': {
-                fontSize: 50,
+                fontSize: 75,
                 animation: 'scrollCueFloat 1.4s ease-in-out infinite',
               },
               '&:hover': {
-                backgroundColor: 'rgba(125, 207, 255, 0.08)',
+                backgroundColor: 'var(--surface-2)',
                 color: 'var(--cyan)',
               },
             }}
