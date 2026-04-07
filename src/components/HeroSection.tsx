@@ -153,7 +153,7 @@ export default function HeroSection() {
                     sx={{
                       width: 92,
                       height: 92,
-                      borderRadius: 'var(--radius-md)',
+                      borderRadius: '999px',
                       overflow: 'hidden',
                       border: '1px solid var(--border)',
                       flexShrink: 0,

@@ -51,6 +51,70 @@ export const projects: Project[] = [
       },
     ],
     screens: [],
+    links: [
+      { label: 'View code', url: 'https://github.com/Kelkunx/Shopify-Functions-Workbench', type: 'repo' },
+      { label: 'Contact me about this project', url: '/contact', type: 'contact' },
+    ],
+    repoUrl: 'https://github.com/Kelkunx/Shopify-Functions-Workbench',
+  },
+  {
+    slug: 'shopify-functions-workbench',
+    title: 'Shopify Functions Workbench',
+    tagline:
+      'Open-source local testing tool for Shopify Functions, designed to run a `.wasm` file and inspect the output quickly without going through a full Shopify deployment loop.',
+    short:
+      'Local workbench for testing Shopify Functions `.wasm`, editing JSON inputs and reading the result immediately.',
+    description:
+      'Open-source developer tool built to shorten the feedback loop around Shopify Functions and make local testing much more comfortable.',
+    imageSrc: '/images/capture-shopify-functions.png',
+    imageAlt: 'Screenshot of Shopify Functions Workbench',
+    tech: ['Next.js', 'React', 'NestJS', 'TypeScript', 'Monaco Editor', 'WebAssembly'],
+    date: '2026-03',
+    featured: true,
+    status: 'In progress',
+    role: 'Product design, DX-focused UX, full-stack development and local WebAssembly execution.',
+    context:
+      'Testing a Shopify Function is often too slow and too dependent on a full cycle of build, deploy, connect to a store and inspect the result.',
+    problem:
+      'How do you let a Shopify developer load a `.wasm`, provide a realistic JSON input and immediately understand the output without unnecessary friction or heavy setup?',
+    process: [
+      'Defined an MVP focused on shortening the feedback loop and demonstrating immediate product value.',
+      'Designed a mini-IDE style interface to clearly separate `.wasm` upload, JSON editing, function-type selection and result reading.',
+      'Built a simple monorepo architecture with a Next.js frontend, a NestJS backend and a progression from fast mock execution to a real Shopify runner path.',
+    ],
+    solution: [
+      'Local web app allowing developers to upload a `.wasm`, choose a Shopify function type, edit or import JSON input, and execute locally.',
+      'Monaco JSON editor, reusable templates / fixtures, import-export flows and clear output, error and timing panels.',
+      'NestJS backend exposing a `/run` endpoint, supporting both a fast mock mode and a real mode based on Shopify CLI metadata and `function-runner`.',
+    ],
+    deliverables: [
+      'Frontend / backend monorepo',
+      'Local `.wasm` runner',
+      'Monaco JSON editor',
+      'Saved fixtures with import/export',
+      'Output / error / timing panels',
+    ],
+    results: [
+      {
+        value: 'Shorter feedback loop',
+        label: 'Local testing becomes much faster to trigger than a full Shopify deployment cycle.',
+      },
+      {
+        value: 'Clearer DX',
+        label: 'The tool makes it easier to isolate JSON structure issues, execution problems and input/output contract mismatches.',
+      },
+      {
+        value: 'Demonstrable open-source base',
+        label: 'The MVP is already concrete enough to document, show and extend over time.',
+      },
+    ],
+    screens: [
+      {
+        src: '/images/capture-shopify-functions.png',
+        alt: 'Real screenshot of Shopify Functions Workbench',
+        caption: 'Local testing interface with `.wasm` upload, JSON editing, runner mode selection and result panels.',
+      },
+    ],
     links: [{ label: 'Contact me about this project', url: '/contact', type: 'contact' }],
   },
   {
@@ -65,7 +129,7 @@ export const projects: Project[] = [
     imageAlt: 'Screenshot coming soon for the personal portfolio',
     tech: ['Next.js', 'React', 'TypeScript', 'MUI'],
     date: '2026-03',
-    featured: true,
+    featured: false,
     status: 'Live',
     role: 'Art direction, UI design, frontend implementation and content structuring.',
     context:

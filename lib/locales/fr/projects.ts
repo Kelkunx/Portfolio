@@ -51,6 +51,70 @@ export const projects: Project[] = [
       },
     ],
     screens: [],
+    links: [
+      { label: 'Voir le code', url: 'https://github.com/Kelkunx/Shopify-Functions-Workbench', type: 'repo' },
+      { label: 'Me contacter à propos de ce projet', url: '/contact', type: 'contact' },
+    ],
+    repoUrl: 'https://github.com/Kelkunx/Shopify-Functions-Workbench',
+  },
+  {
+    slug: 'shopify-functions-workbench',
+    title: 'Shopify Functions Workbench',
+    tagline:
+      'Outil open source de test local pour Shopify Functions, pensé pour exécuter un `.wasm` et inspecter rapidement le résultat sans passer par un cycle complet de déploiement.',
+    short:
+      'Workbench local pour tester des Shopify Functions `.wasm`, manipuler des inputs JSON et lire le résultat immédiatement.',
+    description:
+      "Outil développeur open source conçu pour raccourcir la boucle de feedback autour des Shopify Functions et rendre leur test local beaucoup plus confortable.",
+    imageSrc: '/images/capture-shopify-functions.png',
+    imageAlt: 'Capture du projet Shopify Functions Workbench',
+    tech: ['Next.js', 'React', 'NestJS', 'TypeScript', 'Monaco Editor', 'WebAssembly'],
+    date: '2026-03',
+    featured: true,
+    status: 'En cours',
+    role: 'Conception produit, UX orientée DX, développement full-stack, exécution locale WebAssembly.',
+    context:
+      "Tester une Shopify Function reste souvent trop lent et trop dépendant d'un cycle complet de build, déploiement, branchement à une boutique puis vérification du résultat.",
+    problem:
+      "Comment permettre à un développeur Shopify de charger un `.wasm`, fournir un input JSON réaliste et comprendre immédiatement ce que la fonction renvoie, sans friction inutile ni setup lourd ?",
+    process: [
+      "Définition d'un MVP centré sur la réduction de la boucle de feedback et la démonstration rapide de la valeur du produit.",
+      "Conception d'une interface de type mini-IDE pour séparer clairement le chargement du `.wasm`, l'édition du JSON, le choix du type de function et la lecture du résultat.",
+      "Mise en place d'une architecture monorepo simple avec frontend Next.js, backend NestJS et prise en charge d'un mode mock puis d'un chemin d'exécution Shopify réel.",
+    ],
+    solution: [
+      "Web app locale permettant d'uploader un `.wasm`, de choisir un type de function Shopify, d'éditer ou d'importer un input JSON, puis d'exécuter localement.",
+      "Éditeur JSON Monaco, templates / fixtures réutilisables, import-export des cas de test et affichage clair des outputs, erreurs et timings.",
+      "Backend NestJS exposant un endpoint `/run`, capable de gérer un mode mock rapide et un mode réel basé sur les métadonnées Shopify CLI et `function-runner`.",
+    ],
+    deliverables: [
+      'Monorepo frontend / backend',
+      'Runner local `.wasm`',
+      'Éditeur JSON Monaco',
+      'Fixtures sauvegardées et import/export',
+      'Panneaux output / erreurs / timings',
+    ],
+    results: [
+      {
+        value: 'Boucle de feedback réduite',
+        label: "Le test local devient beaucoup plus rapide à lancer qu'un cycle complet de déploiement Shopify.",
+      },
+      {
+        value: 'DX plus claire',
+        label: "L'outil aide à distinguer plus facilement les problèmes de structure JSON, d'exécution et de contrat d'entrée/sortie.",
+      },
+      {
+        value: 'Base open source démontrable',
+        label: 'Le MVP est déjà suffisamment concret pour être montré, documenté et enrichi progressivement.',
+      },
+    ],
+    screens: [
+      {
+        src: '/images/capture-shopify-functions.png',
+        alt: 'Capture réelle du Shopify Functions Workbench',
+        caption: "Interface locale de test avec upload du `.wasm`, édition JSON, mode d'exécution et panneaux de résultat.",
+      },
+    ],
     links: [{ label: 'Me contacter à propos de ce projet', url: '/contact', type: 'contact' }],
   },
   {
@@ -65,7 +129,7 @@ export const projects: Project[] = [
     imageAlt: 'Capture à venir du portfolio personnel',
     tech: ['Next.js', 'React', 'TypeScript', 'MUI'],
     date: '2026-03',
-    featured: true,
+    featured: false,
     status: 'Live',
     role: 'Direction artistique, UI, intégration front, structuration de contenu.',
     context:
