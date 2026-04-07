@@ -51,11 +51,7 @@ export const projects: Project[] = [
       },
     ],
     screens: [],
-    links: [
-      { label: 'View code', url: 'https://github.com/Kelkunx/Shopify-Functions-Workbench', type: 'repo' },
-      { label: 'Contact me about this project', url: '/contact', type: 'contact' },
-    ],
-    repoUrl: 'https://github.com/Kelkunx/Shopify-Functions-Workbench',
+    links: [{ label: 'Contact me about this project', url: '/contact', type: 'contact' }],
   },
   {
     slug: 'shopify-functions-workbench',
@@ -115,7 +111,11 @@ export const projects: Project[] = [
         caption: 'Local testing interface with `.wasm` upload, JSON editing, runner mode selection and result panels.',
       },
     ],
-    links: [{ label: 'Contact me about this project', url: '/contact', type: 'contact' }],
+    links: [
+      { label: 'View code', url: 'https://github.com/Kelkunx/Shopify-Functions-Workbench', type: 'repo' },
+      { label: 'Contact me about this project', url: '/contact', type: 'contact' },
+    ],
+    repoUrl: 'https://github.com/Kelkunx/Shopify-Functions-Workbench',
   },
   {
     slug: 'portfolio',

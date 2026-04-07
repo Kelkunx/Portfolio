@@ -51,11 +51,7 @@ export const projects: Project[] = [
       },
     ],
     screens: [],
-    links: [
-      { label: 'Voir le code', url: 'https://github.com/Kelkunx/Shopify-Functions-Workbench', type: 'repo' },
-      { label: 'Me contacter à propos de ce projet', url: '/contact', type: 'contact' },
-    ],
-    repoUrl: 'https://github.com/Kelkunx/Shopify-Functions-Workbench',
+    links: [{ label: 'Me contacter à propos de ce projet', url: '/contact', type: 'contact' }],
   },
   {
     slug: 'shopify-functions-workbench',
@@ -115,7 +111,11 @@ export const projects: Project[] = [
         caption: "Interface locale de test avec upload du `.wasm`, édition JSON, mode d'exécution et panneaux de résultat.",
       },
     ],
-    links: [{ label: 'Me contacter à propos de ce projet', url: '/contact', type: 'contact' }],
+    links: [
+      { label: 'Voir le code', url: 'https://github.com/Kelkunx/Shopify-Functions-Workbench', type: 'repo' },
+      { label: 'Me contacter à propos de ce projet', url: '/contact', type: 'contact' },
+    ],
+    repoUrl: 'https://github.com/Kelkunx/Shopify-Functions-Workbench',
   },
   {
     slug: 'portfolio',
