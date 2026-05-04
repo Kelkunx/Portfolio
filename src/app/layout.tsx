@@ -46,6 +46,13 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: '/',
     },
+    icons: {
+      icon: [
+        { url: '/favicon.ico', sizes: 'any' },
+        { url: '/favicon.svg', type: 'image/svg+xml' },
+      ],
+      shortcut: '/favicon.ico',
+    },
     verification: {
       google: 'CH9of0A9cGpKrZE3ytv4A6zQrkZEvofWFVkUSWyxjHc',
     },

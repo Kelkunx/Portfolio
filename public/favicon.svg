@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>Léo JEGO portfolio icon</title>
+  <defs>
+    <linearGradient id="accent" x1="16" y1="16" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7dcfff" />
+      <stop offset="1" stop-color="#bb9af7" />
+    </linearGradient>
+  </defs>
+  <style>
+    .bg { fill: #1a1b26; }
+    .panel { fill: #202332; }
+    .glyph { stroke: #c0caf5; }
+
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #edf0f5; }
+      .panel { fill: #ffffff; }
+      .glyph { stroke: #1f2335; }
+    }
+  </style>
+  <rect class="bg" width="64" height="64" rx="16" />
+  <rect class="panel" x="10" y="10" width="44" height="44" rx="13" />
+  <rect x="11.5" y="11.5" width="41" height="41" rx="11.5" fill="none" stroke="url(#accent)" stroke-width="3" />
+  <path class="glyph" d="M26 24 18.5 32 26 40" fill="none" stroke-width="4.75" stroke-linecap="round" stroke-linejoin="round" />
+  <path class="glyph" d="M38 24 45.5 32 38 40" fill="none" stroke-width="4.75" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M34.5 22 29.5 42" fill="none" stroke="url(#accent)" stroke-width="4.75" stroke-linecap="round" />
+</svg>
