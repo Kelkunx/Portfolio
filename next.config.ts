@@ -14,6 +14,17 @@ const nextConfig = {
   async headers() {
     return [
       {
+        // Liens de découverte HTTP pour agents/crawlers, sans annoncer de fausse API publique.
+        source: '/',
+        headers: [
+          {
+            key: 'Link',
+            value:
+              '</>; rel="canonical"; type="text/html", </>; rel="alternate"; type="text/markdown"; title="Version Markdown", </sitemap.xml>; rel="sitemap"; type="application/xml", </cv-leo-jego.pdf>; rel="author"; type="application/pdf"; title="CV Léo JEGO", </projets>; rel="collection"; title="Projets", </contact>; rel="author"; title="Contact"',
+          },
+        ],
+      },
+      {
         // cible les ressources statiques ayant une extension (js, css, images)
         source: '/:path*\\.(js|css|png|jpg|jpeg|svg|webp|avif)',
         headers: [
