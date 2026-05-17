@@ -43,7 +43,7 @@ const nextConfig = {
 
   // autres options (laisse tel quel)
   experimental: {
-    // si tu utilises des features expérimentales, configure ici
+    optimizeCss: true,
   },
 };
 

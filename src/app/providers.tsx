@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useState, useMemo, useEffect } from 'react';
-import { ThemeProvider, createTheme, PaletteMode, CssBaseline } from '@mui/material';
+import { ThemeProvider, createTheme, PaletteMode } from '@mui/material';
 
 type ColorModeContextType = {
   mode: PaletteMode;
@@ -95,15 +95,6 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         },
         shape: { borderRadius: 10 },
         components: {
-          MuiCssBaseline: {
-            styleOverrides: {
-              body: {
-                transition: 'background-color 250ms ease, color 250ms ease',
-                backgroundColor: 'var(--bg)',
-                color: 'var(--text)',
-              },
-            },
-          },
           MuiPaper: {
             styleOverrides: {
               root: {
@@ -241,7 +232,6 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
         {children}
       </ThemeProvider>
     </ColorModeContext.Provider>
