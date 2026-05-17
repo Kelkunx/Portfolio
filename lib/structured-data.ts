@@ -83,7 +83,7 @@ export function buildHomeStructuredData(profile: Profile, featuredProjects: Proj
         position: index + 1,
         url: `${siteUrl}/projets/${project.slug}`,
         name: project.title,
-        description: project.short,
+        description: project.description,
       })),
     },
   ];
@@ -118,7 +118,7 @@ export function buildProjectsStructuredData(projects: Project[]) {
         item: {
           '@type': 'CreativeWork',
           name: project.title,
-          description: project.short,
+          description: project.description,
           url: `${siteUrl}/projets/${project.slug}`,
         },
       })),

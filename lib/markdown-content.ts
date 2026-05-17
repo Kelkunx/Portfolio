@@ -30,9 +30,13 @@ function projectSummary(project: Project, siteUrl: string) {
   return [
     `### ${project.title}`,
     project.tagline,
+    project.description,
     `- Statut: ${project.status}`,
     `- Date: ${project.date ?? 'Non précisée'}`,
+    `- Rôle: ${project.role}`,
     `- Stack: ${project.tech.join(', ')}`,
+    `- Problème traité: ${project.problem}`,
+    `- Résultats: ${project.results.map((result) => `${result.value}: ${result.label}`).join(' | ')}`,
     `- Liens: ${links.join(' | ')}`,
   ].join('\n\n');
 }
