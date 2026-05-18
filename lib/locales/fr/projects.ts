@@ -9,8 +9,8 @@ export const projects: Project[] = [
     short: 'Application Shopify de date de livraison estimée avec logique métier et configuration marchande.',
     description:
       "Produit Shopify pensé pour améliorer la transparence côté boutique et donner aux marchands un contrôle fin sur l'affichage des délais.",
-    imageSrc: '',
-    imageAlt: 'Capture à venir du projet Estimated Delivery Date',
+    imageSrc: '/images/capture-edd.png',
+    imageAlt: 'Capture du projet Estimated Delivery Date',
     tech: ['Shopify CLI', 'React', 'TypeScript', 'Polaris', 'App Bridge'],
     date: '2026-03',
     featured: true,
@@ -50,7 +50,13 @@ export const projects: Project[] = [
         label: 'Produit structuré pour itérer proprement en solo.',
       },
     ],
-    screens: [],
+    screens: [
+      {
+        src: '/images/capture-edd.png',
+        alt: 'Capture réelle du projet Estimated Delivery Date',
+        caption: "Interface d'administration Shopify pour configurer l'affichage des dates de livraison estimées.",
+      },
+    ],
     links: [{ label: 'Me contacter à propos de ce projet', url: '/contact', type: 'contact' }],
   },
   {
@@ -126,8 +132,8 @@ export const projects: Project[] = [
     short: 'Portfolio développeur pensé comme vitrine de projets, page CV et point de contact clair.',
     description:
       'Cas de portfolio développeur conçu pour mieux présenter un profil, des projets et des points de contact sans surcharger la lecture.',
-    imageSrc: '',
-    imageAlt: 'Capture à venir du portfolio personnel',
+    imageSrc: '/images/capture-portfolio.png',
+    imageAlt: 'Capture du portfolio personnel',
     tech: ['Next.js', 'React', 'TypeScript', 'MUI'],
     date: '2026-03',
     featured: false,
@@ -167,7 +173,13 @@ export const projects: Project[] = [
         label: 'Le système de sections et de fiches projet peut évoluer sans refaire toute la structure.',
       },
     ],
-    screens: [],
+    screens: [
+      {
+        src: '/images/capture-portfolio.png',
+        alt: 'Capture réelle du portfolio personnel',
+        caption: 'Aperçu de la homepage avec hero, navigation et présentation structurée du profil.',
+      },
+    ],
     links: [
       { label: 'Voir le site', url: 'https://leo-jego.vercel.app', type: 'demo' },
       { label: 'Voir le code', url: 'https://github.com/Kelkunx/Portfolio', type: 'repo' },
@@ -243,8 +255,8 @@ export const projects: Project[] = [
     short: "Conception d'une baie serveur sécurisée avec réseau, RADIUS, supervision et capteurs.",
     description:
       "Projet de BTS mêlant infrastructure, réseau, sécurité et intégration matérielle dans un scénario d'entreprise fictive.",
-    imageSrc: '',
-    imageAlt: 'Capture à venir du projet baie serveur sécurisée',
+    imageSrc: '/images/capture-baie-serveur.png',
+    imageAlt: 'Capture du projet baie serveur sécurisée',
     tech: ['Active Directory', 'Cisco', 'RADIUS', 'Arduino'],
     date: '2024-06',
     featured: false,
@@ -279,7 +291,18 @@ export const projects: Project[] = [
         label: 'Choix et configuration suffisamment explicités pour être repris et présentés.',
       },
     ],
-    screens: [],
+    screens: [
+      {
+        src: '/images/capture-baie-serveur.png',
+        alt: 'Capture réelle du projet baie serveur sécurisée',
+        caption: 'Vue du projet de baie serveur sécurisée avec infrastructure réseau, sécurité et intégration matérielle.',
+      },
+      {
+        src: '/images/diagramme-baie-serveur.png',
+        alt: 'Diagramme du projet baie serveur sécurisée',
+        caption: "Diagramme d'architecture montrant les principaux éléments réseau, sécurité et supervision du projet.",
+      },
+    ],
     links: [{ label: 'Me contacter à propos de ce projet', url: '/contact', type: 'contact' }],
   },
 ];

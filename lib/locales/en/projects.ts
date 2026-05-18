@@ -9,8 +9,8 @@ export const projects: Project[] = [
     short: 'Shopify delivery-date app with business logic and merchant-side configuration.',
     description:
       'Shopify product built to improve storefront transparency and give merchants granular control over delivery messaging.',
-    imageSrc: '',
-    imageAlt: 'Screenshot coming soon for Estimated Delivery Date',
+    imageSrc: '/images/capture-edd.png',
+    imageAlt: 'Screenshot of Estimated Delivery Date',
     tech: ['Shopify CLI', 'React', 'TypeScript', 'Polaris', 'App Bridge'],
     date: '2026-03',
     featured: true,
@@ -50,7 +50,13 @@ export const projects: Project[] = [
         label: 'Structured to support future product iteration as a solo build.',
       },
     ],
-    screens: [],
+    screens: [
+      {
+        src: '/images/capture-edd.png',
+        alt: 'Real screenshot of Estimated Delivery Date',
+        caption: 'Shopify admin interface for configuring how estimated delivery dates are displayed.',
+      },
+    ],
     links: [{ label: 'Contact me about this project', url: '/contact', type: 'contact' }],
   },
   {
@@ -126,8 +132,8 @@ export const projects: Project[] = [
     short: 'Developer portfolio designed as a project showcase, a CV page and a clear contact point.',
     description:
       'Portfolio case study built to present a profile, projects and contact details more clearly without overloading the reading experience.',
-    imageSrc: '',
-    imageAlt: 'Screenshot coming soon for the personal portfolio',
+    imageSrc: '/images/capture-portfolio.png',
+    imageAlt: 'Screenshot of the personal portfolio',
     tech: ['Next.js', 'React', 'TypeScript', 'MUI'],
     date: '2026-03',
     featured: false,
@@ -167,7 +173,13 @@ export const projects: Project[] = [
         label: 'The section system and case-study model can evolve without reworking the whole structure.',
       },
     ],
-    screens: [],
+    screens: [
+      {
+        src: '/images/capture-portfolio.png',
+        alt: 'Real screenshot of the personal portfolio',
+        caption: 'Homepage preview with hero, navigation and structured profile presentation.',
+      },
+    ],
     links: [
       { label: 'Visit the site', url: 'https://leo-jego.vercel.app', type: 'demo' },
       { label: 'View the code', url: 'https://github.com/Kelkunx/Portfolio', type: 'repo' },
@@ -243,8 +255,8 @@ export const projects: Project[] = [
     short: 'Secure server rack project with networking, RADIUS, monitoring and sensors.',
     description:
       'Academic project mixing infrastructure, networking, security and hardware integration in a fictional company scenario.',
-    imageSrc: '',
-    imageAlt: 'Screenshot coming soon for the secure server rack project',
+    imageSrc: '/images/capture-baie-serveur.png',
+    imageAlt: 'Screenshot of the secure server rack project',
     tech: ['Active Directory', 'Cisco', 'RADIUS', 'Arduino'],
     date: '2024-06',
     featured: false,
@@ -279,7 +291,18 @@ export const projects: Project[] = [
         label: 'Choices and configuration were explicit enough to be presented and reused.',
       },
     ],
-    screens: [],
+    screens: [
+      {
+        src: '/images/capture-baie-serveur.png',
+        alt: 'Real screenshot of the secure server rack project',
+        caption: 'Secure server rack project view with network infrastructure, security and hardware integration.',
+      },
+      {
+        src: '/images/diagramme-baie-serveur.png',
+        alt: 'Diagram of the secure server rack project',
+        caption: 'Architecture diagram showing the main networking, security and monitoring elements of the project.',
+      },
+    ],
     links: [{ label: 'Contact me about this project', url: '/contact', type: 'contact' }],
   },
 ];
