@@ -9,7 +9,6 @@ import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Link from 'next/link';
-import Image from 'next/image';
 import { LinkedIn, Email, GitHub, ArrowOutward, KeyboardArrowDownRounded } from '@mui/icons-material';
 import { useLocale } from '../context/LocaleContext';
 import { getProfile } from '../../lib/content';
@@ -148,37 +147,16 @@ export default function HeroSection() {
               }}
             >
               <Stack spacing={2.5}>
-                <Stack direction="row" spacing={2} alignItems="center">
-                  <Box
-                    sx={{
-                      width: 92,
-                      height: 92,
-                      borderRadius: '999px',
-                      overflow: 'hidden',
-                      border: '1px solid var(--border)',
-                      flexShrink: 0,
-                    }}
-                  >
-                    <Image
-                      src={profile.avatar}
-                      alt={profile.name}
-                      width={92}
-                      height={92}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                      priority
-                    />
-                  </Box>
-                  <Box>
-                    <Typography variant="h5" sx={{ color: 'var(--text)' }}>
-                      {profile.name}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
-                      {profile.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {profile.location}
-                    </Typography>
-                  </Box>
+                <Stack spacing={0.75}>
+                  <Typography variant="h5" sx={{ color: 'var(--text)' }}>
+                    {profile.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {profile.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {profile.location}
+                  </Typography>
                 </Stack>
 
                 <Box
