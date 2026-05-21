@@ -104,7 +104,6 @@ export type Project = {
   imageAlt?: string;
   tech: string[];
   date?: string;
-  featured: boolean;
   status: string;
   role: string;
   context: string;

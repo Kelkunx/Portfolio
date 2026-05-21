@@ -13,7 +13,6 @@ export const projects: Project[] = [
     imageAlt: 'Capture du projet Estimated Delivery Date',
     tech: ['Shopify CLI', 'React', 'TypeScript', 'Polaris', 'App Bridge'],
     date: '2026-03',
-    featured: true,
     status: 'Projet produit',
     role: 'Product design, développement full-stack, UX de configuration, logique de calcul.',
     context:
@@ -72,7 +71,6 @@ export const projects: Project[] = [
     imageAlt: 'Capture du projet Shopify Functions Workbench',
     tech: ['Next.js', 'React', 'NestJS', 'TypeScript', 'Monaco Editor', 'WebAssembly'],
     date: '2026-03',
-    featured: true,
     status: 'En cours',
     role: 'Conception produit, UX orientée DX, développement full-stack, runner Shopify local et benchmark.',
     context:
@@ -136,7 +134,6 @@ export const projects: Project[] = [
     imageAlt: 'Capture du portfolio personnel',
     tech: ['Next.js', 'React', 'TypeScript', 'MUI'],
     date: '2026-03',
-    featured: false,
     status: 'Live',
     role: 'Direction artistique, UI, intégration front, structuration de contenu.',
     context:
@@ -200,7 +197,6 @@ export const projects: Project[] = [
     imageAlt: 'Capture du Dashboard News AI',
     tech: ['React', 'NestJS', 'Tailwind', 'HuggingFace'],
     date: '2025-08',
-    featured: true,
     status: 'Live',
     role: 'Conception du produit, développement frontend/backend et intégration IA.',
     context:
@@ -259,7 +255,6 @@ export const projects: Project[] = [
     imageAlt: 'Capture du projet baie serveur sécurisée',
     tech: ['Active Directory', 'Cisco', 'RADIUS', 'Arduino'],
     date: '2024-06',
-    featured: false,
     status: 'Projet académique',
     role: 'Configuration réseau, serveur RADIUS, intégration capteurs et documentation.',
     context:

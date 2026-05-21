@@ -9,13 +9,13 @@ import Button from '@mui/material/Button';
 import Link from 'next/link';
 import { FolderOpenRounded } from '@mui/icons-material';
 import { useLocale } from '../context/LocaleContext';
-import { getProjects } from '../../lib/content';
+import { getFeaturedProjects } from '../../lib/content';
 import ProjectCard from './ProjectCard';
 import SectionTitle from './SectionTitle';
 
 export default function FeaturedProjectsSection() {
   const { locale } = useLocale();
-  const featuredProjects = getProjects(locale).filter((project) => project.featured).slice(0, 3);
+  const featuredProjects = getFeaturedProjects(locale, 3);
 
   return (
     <Box component="section" id="home-sections-start" sx={{ mt: { xs: 8, md: 12 }, scrollMarginTop: '96px' }}>

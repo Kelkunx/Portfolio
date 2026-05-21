@@ -1,5 +1,5 @@
 import type { ContentLocale } from './content';
-import { getProfile, getProjects } from './content';
+import { getFeaturedProjects, getProfile, getProjects } from './content';
 import type { Project } from './content-types';
 
 type MarkdownDocument = {
@@ -68,8 +68,7 @@ function projectDetail(project: Project, siteUrl: string) {
 
 function buildHomeMarkdown(locale: ContentLocale, siteUrl: string) {
   const profile = getProfile(locale);
-  const projects = getProjects(locale);
-  const featuredProjects = projects.filter((project) => project.featured).slice(0, 3);
+  const featuredProjects = getFeaturedProjects(locale, 3);
 
   return [
     `# ${profile.name} - ${profile.title}`,

@@ -7,14 +7,13 @@ import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import { useLocale } from '../context/LocaleContext';
-import { getProjects } from '../../lib/content';
+import { getArchiveProjects, getFeaturedProjects } from '../../lib/content';
 import ProjectCard from './ProjectCard';
 
 export default function ProjectsPageContent() {
   const { locale } = useLocale();
-  const projects = getProjects(locale);
-  const featuredProjects = projects.filter((project) => project.featured);
-  const archiveProjects = projects.filter((project) => !project.featured);
+  const featuredProjects = getFeaturedProjects(locale);
+  const archiveProjects = getArchiveProjects(locale);
 
   return (
     <Container maxWidth="lg" sx={{ py: { xs: 6, md: 8 } }}>
