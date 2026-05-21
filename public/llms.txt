@@ -1,0 +1,30 @@
+# Léo JEGO — Developer Portfolio
+
+> Portfolio presenting Léo JEGO, a full-stack developer, with selected projects, a structured CV, and direct contact information.
+
+The site is built with React, Next.js, TypeScript, and MUI. Léo works on clear web interfaces, business tools, APIs, automation workflows, Shopify projects, and IoT-related systems.
+
+## Main Pages
+
+- [Home](https://leo-jego.vercel.app/): Landing page introducing Léo JEGO, his positioning, key proof points, featured projects, and contact paths.
+- [Projects](https://leo-jego.vercel.app/projets): Project index with product, web, automation, Shopify, AI, and infrastructure projects.
+- [CV](https://leo-jego.vercel.app/cv): Structured curriculum vitae with experience, skills, certifications, languages, education, and PDF CV access.
+- [Contact](https://leo-jego.vercel.app/contact): Direct contact page with email, phone, LinkedIn, GitHub, and CV download.
+
+## Featured Projects
+
+- [Estimated Delivery Date](https://leo-jego.vercel.app/projets/edd-shopify): Shopify delivery-date app with business logic and merchant-side configuration.
+- [Shopify Functions Workbench](https://leo-jego.vercel.app/projets/shopify-functions-workbench): Open-source local workbench for running, benchmarking, and debugging Shopify Functions before deployment.
+- [Dashboard News AI](https://leo-jego.vercel.app/projets/dashboard-news-ai): News dashboard with custom filters and AI-generated summaries.
+
+## Machine-Readable Resources
+
+- [Sitemap](https://leo-jego.vercel.app/sitemap.xml): XML sitemap for the main public pages.
+- [Markdown version](https://leo-jego.vercel.app/): Send `Accept: text/markdown` to receive a Markdown representation of supported pages.
+- [CV PDF](https://leo-jego.vercel.app/cv-leo-jego.pdf): Downloadable curriculum vitae.
+
+## Contact
+
+- Email: leo.jego56@gmail.com
+- LinkedIn: https://www.linkedin.com/in/leo-jego
+- GitHub: https://github.com/Kelkunx

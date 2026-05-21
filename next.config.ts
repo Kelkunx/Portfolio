@@ -20,7 +20,7 @@ const nextConfig = {
           {
             key: 'Link',
             value:
-              '</>; rel="canonical"; type="text/html", </>; rel="alternate"; type="text/markdown"; title="Version Markdown", </sitemap.xml>; rel="sitemap"; type="application/xml", </cv-leo-jego.pdf>; rel="author"; type="application/pdf"; title="CV Léo JEGO", </projets>; rel="collection"; title="Projets", </contact>; rel="author"; title="Contact"',
+              '</>; rel="canonical"; type="text/html", </llms.txt>; rel="describedby"; type="text/plain"; title="LLMs.txt", </>; rel="alternate"; type="text/markdown"; title="Version Markdown", </sitemap.xml>; rel="sitemap"; type="application/xml", </cv-leo-jego.pdf>; rel="author"; type="application/pdf"; title="CV Léo JEGO", </projets>; rel="collection"; title="Projets", </contact>; rel="author"; title="Contact"',
           },
         ],
       },
