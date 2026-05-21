@@ -133,7 +133,7 @@ export const projects: Project[] = [
     imageSrc: '/images/capture-portfolio.png',
     imageAlt: 'Screenshot of the personal portfolio',
     tech: ['Next.js', 'React', 'TypeScript', 'MUI'],
-    date: '2026-03',
+    date: '2025-09',
     status: 'Live',
     role: 'Art direction, UI design, frontend implementation and content structuring.',
     context:
