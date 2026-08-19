@@ -44,9 +44,9 @@ export default function FeaturedProjectsSection() {
       </Stack>
 
       <Grid container spacing={3}>
-        {featuredProjects.map((project, index) => (
+        {featuredProjects.map((project) => (
           <Grid key={project.slug} size={{ xs: 12, md: 4 }}>
-            <ProjectCard {...project} revealDelay={index * 0.05} />
+            <ProjectCard {...project} />
           </Grid>
         ))}
       </Grid>

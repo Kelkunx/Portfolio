@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { motion, useReducedMotion, type Easing } from 'framer-motion';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
@@ -12,8 +11,6 @@ import { useLocale } from '../context/LocaleContext';
 import { getProfile } from '../../lib/content';
 import SectionTitle from './SectionTitle';
 
-const MotionBox = motion(Box);
-
 type SkillsSectionProps = {
   variant?: 'home' | 'cv';
 };
@@ -21,8 +18,6 @@ type SkillsSectionProps = {
 export default function SkillsSection({ variant = 'home' }: SkillsSectionProps) {
   const { locale } = useLocale();
   const profile = getProfile(locale);
-  const reduce = useReducedMotion();
-  const ease: Easing = [0.22, 1, 0.36, 1];
   const tones = ['var(--cyan)', 'var(--purple)', 'var(--green)', 'var(--orange)'];
 
   if (variant === 'cv') {
@@ -39,22 +34,10 @@ export default function SkillsSection({ variant = 'home' }: SkillsSectionProps) 
         <Grid container spacing={3}>
           {profile.skills.map((group, index) => {
             const tone = tones[index % tones.length];
-            const revealProps = reduce
-              ? {}
-              : {
-                  initial: { opacity: 0, y: 16 },
-                  whileInView: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.5, ease, delay: Math.min(index * 0.05, 0.24) },
-                  },
-                  viewport: { once: true, amount: 0.25 },
-                };
 
             return (
               <Grid key={group.category} size={{ xs: 12, md: 6 }}>
-                <MotionBox
-                  {...revealProps}
+                <Box
                   sx={{
                     borderRadius: 'var(--radius-md)',
                     border: '1px solid var(--border)',
@@ -106,7 +89,7 @@ export default function SkillsSection({ variant = 'home' }: SkillsSectionProps) 
                       </Box>
                     ))}
                   </Box>
-                </MotionBox>
+                </Box>
               </Grid>
             );
           })}
@@ -133,22 +116,10 @@ export default function SkillsSection({ variant = 'home' }: SkillsSectionProps) 
       <Grid container spacing={3}>
         {profile.valuePillars.map((pillar, index) => {
           const tone = tones[index % tones.length];
-          const revealProps = reduce
-            ? {}
-            : {
-                initial: { opacity: 0, y: 18 },
-                whileInView: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration: 0.55, ease, delay: Math.min(index * 0.06, 0.28) },
-                },
-                viewport: { once: true, amount: 0.3 },
-              };
 
           return (
             <Grid key={pillar.title} size={{ xs: 12, md: 6 }}>
-              <MotionBox
-                {...revealProps}
+              <Box
                 sx={{
                   borderRadius: 'var(--radius-md)',
                   border: '1px solid var(--border)',
@@ -190,7 +161,7 @@ export default function SkillsSection({ variant = 'home' }: SkillsSectionProps) 
                     {pillar.tools.join(' • ')}
                   </Typography>
                 </Stack>
-              </MotionBox>
+              </Box>
             </Grid>
           );
         })}

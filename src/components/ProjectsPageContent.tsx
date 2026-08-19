@@ -39,9 +39,9 @@ export default function ProjectsPageContent() {
         </Typography>
 
         <Grid container spacing={3}>
-          {featuredProjects.map((project, index) => (
+          {featuredProjects.map((project) => (
             <Grid key={project.slug} size={{ xs: 12, md: 4 }}>
-              <ProjectCard {...project} revealDelay={index * 0.05} />
+              <ProjectCard {...project} />
             </Grid>
           ))}
         </Grid>
@@ -59,9 +59,9 @@ export default function ProjectsPageContent() {
           </Typography>
 
           <Grid container spacing={3}>
-            {archiveProjects.map((project, index) => (
+            {archiveProjects.map((project) => (
               <Grid key={project.slug} size={{ xs: 12, md: 6 }}>
-                <ProjectCard {...project} compact revealDelay={index * 0.05} />
+                <ProjectCard {...project} compact />
               </Grid>
             ))}
           </Grid>

@@ -1,7 +1,6 @@
 'use client';
 
-import React from 'react';
-import { motion, useReducedMotion, type Easing, type Variants } from 'framer-motion';
+import { motion, useReducedMotion, type Easing } from 'framer-motion';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -12,7 +11,6 @@ import Box from '@mui/material/Box';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowOutward, GitHub } from '@mui/icons-material';
-import { useRouter } from 'next/navigation';
 import { useLocale } from '../context/LocaleContext';
 import {
   formatProjectPeriod,
@@ -24,7 +22,6 @@ import { projectPlaceholderDataUrl } from '../../lib/project-placeholder';
 import TechStackChips from './TechStackChips';
 
 type ProjectCardProps = Project & {
-  revealDelay?: number;
   compact?: boolean;
 };
 
@@ -42,32 +39,11 @@ export default function ProjectCard({
   category,
   highlights,
   links,
-  revealDelay = 0,
   compact = false,
 }: ProjectCardProps) {
-  const router = useRouter();
   const { locale } = useLocale();
   const prefersReducedMotion = useReducedMotion();
   const ease: Easing = [0.22, 1, 0.36, 1];
-
-  const animationVariants: Variants = prefersReducedMotion
-    ? {
-        hidden: { opacity: 1, y: 0 },
-        visible: { opacity: 1, y: 0 },
-        hover: { y: 0 },
-      }
-    : {
-        hidden: { opacity: 0, y: 18 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.55, ease, delay: revealDelay },
-        },
-        hover: {
-          y: -3,
-          transition: { duration: 0.2, ease },
-        },
-      };
 
   const externalLinks = links.filter((item) => item.type === 'demo' || item.type === 'repo');
   const highlightedItems = highlights.slice(0, compact ? 1 : 2);
@@ -81,39 +57,22 @@ export default function ProjectCard({
   const shouldSkipOptimization = cardImageSrc.startsWith('data:') || cardImageSrc.startsWith('blob:');
   const imageSizes = compact ? '(max-width: 900px) 100vw, 50vw' : '(max-width: 900px) 100vw, 33vw';
 
-  const handleActivate = (event: React.MouseEvent | React.KeyboardEvent) => {
-    const target = event.target as HTMLElement | null;
-    // Let buttons and links keep their native behaviour inside the clickable card.
-    if (target?.closest('a,button')) return;
-    router.push(`/projets/${slug}`);
-  };
-
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      handleActivate(event);
-    }
-  };
-
   return (
     <MotionCard
-      variants={animationVariants}
-      initial={prefersReducedMotion ? false : 'hidden'}
-      whileInView={prefersReducedMotion ? undefined : 'visible'}
-      whileHover={prefersReducedMotion ? undefined : 'hover'}
-      viewport={prefersReducedMotion ? undefined : { once: true, amount: 0.25 }}
-      role="link"
-      tabIndex={0}
-      onClick={handleActivate}
-      onKeyDown={handleKeyDown}
-      aria-label={`${locale === 'fr' ? 'Ouvrir le projet' : 'Open project'} ${title}`}
+      whileHover={
+        prefersReducedMotion
+          ? undefined
+          : {
+              y: -3,
+              transition: { duration: 0.2, ease },
+            }
+      }
       sx={{
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
         borderRadius: 'var(--radius-md)',
         overflow: 'hidden',
-        cursor: 'pointer',
         backgroundColor: 'var(--surface)',
         border: '1px solid var(--border)',
         boxShadow: 'var(--shadow-soft)',
@@ -194,10 +153,8 @@ export default function ProjectCard({
       <CardActions sx={{ px: 3, pb: 3, pt: 0, gap: 1, flexWrap: 'wrap' }}>
         <Button
           size="small"
-          onClick={(event) => {
-            event.stopPropagation();
-            router.push(`/projets/${slug}`);
-          }}
+          component={Link}
+          href={`/projets/${slug}`}
           endIcon={<ArrowOutward />}
         >
           {locale === 'fr' ? 'Détails' : 'Details'}
@@ -211,7 +168,6 @@ export default function ProjectCard({
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={(event) => event.stopPropagation()}
             startIcon={link.type === 'repo' ? <GitHub fontSize="small" /> : undefined}
           >
             {link.label}

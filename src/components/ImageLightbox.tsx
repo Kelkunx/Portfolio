@@ -14,20 +14,12 @@ import { useLocale } from '../context/LocaleContext';
 type Props = {
   src: string;
   alt?: string;
-  // taille du thumbnail (hauteur en px), sinon on utilise un ratio responsive
   thumbHeight?: number;
-  // ratio (ex: "16/9") si aucun thumbHeight n'est fourni
   aspectRatio?: string;
-  // optionnel : priorité next/image
   priority?: boolean;
   sizes?: string;
 };
 
-/**
- * ImageLightbox
- * - affiche un thumbnail (button) ; au clic ouvre une Dialog avec l'image en grand (fill).
- * - accessible : bouton focusable, aria-label, Esc pour fermer.
- */
 export default function ImageLightbox({
   src,
   alt = 'Image',
@@ -43,7 +35,6 @@ export default function ImageLightbox({
 
   return (
     <>
-      {/* Thumbnail clickable */}
       <ButtonBase
         onClick={() => setOpen(true)}
         sx={{
@@ -75,8 +66,8 @@ export default function ImageLightbox({
         onClose={() => setOpen(false)}
         fullWidth
         maxWidth="lg"
-        aria-labelledby="image-lightbox"
         PaperProps={{
+          'aria-label': `${locale === 'fr' ? 'Aperçu agrandi' : 'Enlarged preview'} : ${alt}`,
           sx: {
             backgroundColor: 'var(--surface)',
             border: '1px solid var(--border)',

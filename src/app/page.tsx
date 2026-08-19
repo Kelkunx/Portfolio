@@ -1,6 +1,5 @@
 import React from 'react';
 import Container from '@mui/material/Container';
-import AnimatedSection from '../components/AnimatedSection';
 import HeroSection from '../components/HeroSection';
 import FeaturedProjectsSection from '../components/FeaturedProjectsSection';
 import SkillsSection from '../components/SkillsSection';
@@ -21,25 +20,11 @@ export default function HomePage() {
       <HeroSection />
 
       <Container maxWidth="lg">
-        <AnimatedSection>
-          <FeaturedProjectsSection />
-        </AnimatedSection>
-
-        <AnimatedSection>
-          <SkillsSection variant="home" />
-        </AnimatedSection>
-
-        <AnimatedSection>
-          <CareerHighlightsSection />
-        </AnimatedSection>
-
-        <AnimatedSection>
-          <CvSnapshotSection />
-        </AnimatedSection>
-
-        <AnimatedSection>
-          <FinalCtaSection />
-        </AnimatedSection>
+        <FeaturedProjectsSection />
+        <SkillsSection variant="home" />
+        <CareerHighlightsSection />
+        <CvSnapshotSection />
+        <FinalCtaSection />
       </Container>
     </>
   );
