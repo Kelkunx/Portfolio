@@ -23,7 +23,7 @@ export const projects: Project[] = [
     process: [
       'Defined delivery logic able to cover common business constraints without making the tool confusing.',
       'Designed a clear admin experience to configure rules, templates and display options.',
-      'Worked on a maintainable architecture suitable for clean solo product development.',
+      'Separated calculation logic, merchant configuration and Theme App Extension rendering so each part can evolve without unnecessary coupling.',
     ],
     solution: [
       'Embedded Shopify Admin application to configure delivery rules and widget behaviour.',
@@ -38,23 +38,23 @@ export const projects: Project[] = [
     ],
     highlights: [
       {
-        value: 'Business logic',
-        label: 'Estimate calculated from business days, cutoff times and preparation delays.',
+        value: '4 business parameters',
+        label: 'The calculation combines business days, cutoff time, preparation delay and shipping range.',
       },
       {
-        value: 'Clear configuration',
-        label: 'Widget and messaging remain customizable without making setup harder.',
+        value: 'Instant preview',
+        label: 'Merchants see the widget while adjusting colors, title, icon and compact mode.',
       },
       {
-        value: 'Maintainable architecture',
-        label: 'Structured to support future product iteration as a solo build.',
+        value: '2 Shopify surfaces',
+        label: 'An embedded app controls configuration while a Theme App Extension renders the storefront result.',
       },
     ],
     screens: [
       {
         src: '/images/capture-edd.png',
         alt: 'Real screenshot of Estimated Delivery Date',
-        caption: 'Shopify admin interface for configuring how estimated delivery dates are displayed.',
+        caption: 'Shopify configuration screen with widget preview, colors, icon, title and layout options.',
       },
     ],
     links: [{ label: 'Contact me about this project', url: '/contact', type: 'contact' }],
@@ -78,11 +78,11 @@ export const projects: Project[] = [
     context:
       'Testing a Shopify Function is often too slow and too dependent on a full cycle of build, deploy, connect to a store and inspect the result.',
     problem:
-      'How do you let a Shopify developer load a `.wasm`, provide a realistic JSON input and immediately understand the output without unnecessary friction or heavy setup?',
+      'How do you let a Shopify developer load a `.wasm`, provide realistic JSON input and quickly distinguish payload, configuration and execution errors?',
     process: [
-      'Defined an MVP focused on shortening the feedback loop and validating a real Shopify execution path.',
-      'Designed a mini-IDE style interface organized into setup, JSON input and result panels.',
-      'Progressively added local scenarios, import/export, structured diagnostics, benchmarking and official examples for the main Function types.',
+      'Defined a single `/run` contract carrying the Wasm file, JSON input and metadata required by the runner.',
+      'Validated the real Shopify path with three ready-to-run examples: product discount, delivery customization and cart transform.',
+      'Organized the interface into three stable areas — setup, JSON input and result — then added scenarios, diagnostics and benchmarks around that primary flow.',
     ],
     solution: [
       'Local web app allowing developers to upload a `.wasm`, choose a Shopify function type, edit JSON input and launch a run or benchmark.',
@@ -99,23 +99,23 @@ export const projects: Project[] = [
     ],
     highlights: [
       {
-        value: 'Real Shopify runner',
-        label: 'The backend can execute a Function through Shopify CLI metadata and the official `function-runner`.',
+        value: '3 runnable examples',
+        label: 'Product discount, delivery customization and cart transform include a Wasm file and test payload.',
       },
       {
-        value: 'Clearer debugging',
-        label: 'Errors, Shopify diagnostics, outputs and timings are separated to make failed runs easier to understand.',
+        value: 'Run + benchmark',
+        label: 'The same endpoint returns output, structured errors, runner diagnostics and detailed local timings.',
       },
       {
-        value: 'Demonstrable MVP',
-        label: 'Official examples and local scenarios make product discount, delivery customization and cart transform quick to test.',
+        value: 'Portable scenarios',
+        label: 'Test configurations are saved in the browser and can be exported and imported again.',
       },
     ],
     screens: [
       {
         src: '/images/capture-shopify-functions.png',
         alt: 'Real screenshot of Shopify Functions Workbench',
-        caption: 'Three-panel local interface with Shopify setup, Monaco JSON editor, results, diagnostics and timings.',
+        caption: 'Successful local Shopify run with a product discount target, JSON input, structured output, zero errors and diagnostic timing.',
       },
     ],
     links: [
@@ -160,16 +160,16 @@ export const projects: Project[] = [
     ],
     highlights: [
       {
-        value: 'Reusable structure',
-        label: 'The base can be adapted to another portfolio without depending on a very personal context.',
+        value: '4 dedicated journeys',
+        label: 'Home, projects, CV and contact each have their own hierarchy and route metadata.',
       },
       {
-        value: 'Clearer reading flow',
-        label: 'Profile, project and career information are separated more cleanly.',
+        value: 'Typed FR / EN content',
+        label: 'Profile and project data share a TypeScript model that is automatically validated across both languages.',
       },
       {
-        value: 'Extensible base',
-        label: 'The section system and case-study model can evolve without reworking the whole structure.',
+        value: 'Verifiable SEO',
+        label: 'Canonical URLs, sitemap, JSON-LD and Open Graph metadata are generated for the main routes.',
       },
     ],
     screens: [
@@ -217,23 +217,23 @@ export const projects: Project[] = [
     deliverables: ['React interface', 'NestJS API', 'Custom filters', 'AI summaries'],
     highlights: [
       {
-        value: 'Faster reading',
-        label: 'Each article is reduced to a short summary to get to the point quickly.',
+        value: '2 combined filters',
+        label: 'Category and keyword narrow the feed before users inspect individual articles.',
       },
       {
-        value: 'Useful filtering',
-        label: 'Category and keyword filters help focus on relevant topics faster.',
+        value: '1 summary per article',
+        label: 'The generated summary appears beside the source excerpt to preserve reading context.',
       },
       {
-        value: 'Clear architecture',
-        label: 'Frontend and backend separation makes the product easier to evolve.',
+        value: '3 separate layers',
+        label: 'React handles browsing, NestJS handles aggregation and HuggingFace generates summaries.',
       },
     ],
     screens: [
       {
         src: '/images/capture-news.png',
         alt: 'Real screenshot of the News AI Dashboard',
-        caption: 'Dashboard screenshot showing article cards, filters and summary previews.',
+        caption: 'Live feed with category filtering, keyword search, source excerpt and AI summary for each article.',
       },
     ],
     links: [
@@ -274,16 +274,16 @@ export const projects: Project[] = [
     deliverables: ['RADIUS server', 'Arduino sensors', 'Network architecture', 'Documentation'],
     highlights: [
       {
-        value: 'Complete architecture',
-        label: 'Project covering networking, authentication, storage, monitoring and environment sensing.',
+        value: 'RADIUS + Cisco',
+        label: 'Wi-Fi access control relies on a RADIUS server connected to a Cisco access point.',
       },
       {
-        value: 'Cross-disciplinary view',
-        label: 'Connected infrastructure, security and hardware concerns in one project.',
+        value: '3 physical readings',
+        label: 'Arduino sensors monitor motion, temperature and humidity around the rack.',
       },
       {
-        value: 'Documented work',
-        label: 'Choices and configuration were explicit enough to be presented and reused.',
+        value: '1 overview diagram',
+        label: 'The diagram connects network services, storage, camera monitoring and supervision.',
       },
     ],
     screens: [

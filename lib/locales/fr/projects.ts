@@ -23,7 +23,7 @@ export const projects: Project[] = [
     process: [
       "Définition d'une logique de calcul capable de gérer les contraintes métier les plus fréquentes sans rendre l'outil incompréhensible.",
       "Conception d'une interface d'administration claire pour configurer les règles, les templates et les options d'affichage.",
-      'Travail sur une architecture maintenable pour permettre des évolutions futures et un développement solo propre.',
+      "Séparation de la logique de calcul, de la configuration marchande et du rendu Theme App Extension pour faire évoluer chaque partie sans couplage inutile.",
     ],
     solution: [
       'Application embarquée dans Shopify Admin avec configuration des règles de livraison et personnalisation du widget.',
@@ -38,23 +38,23 @@ export const projects: Project[] = [
     ],
     highlights: [
       {
-        value: 'Calcul métier',
-        label: 'Date estimée calculée selon jours ouvrés, heure limite et délais de préparation.',
+        value: '4 paramètres métier',
+        label: 'Le calcul combine jours ouvrés, heure limite, préparation et plage d’expédition.',
       },
       {
-        value: 'Configuration claire',
-        label: 'Personnalisation du rendu et des messages sans complexifier la prise en main.',
+        value: 'Aperçu instantané',
+        label: 'Le marchand visualise le widget pendant le réglage des couleurs, du titre, de l’icône et du mode compact.',
       },
       {
-        value: 'Architecture maintenable',
-        label: 'Produit structuré pour itérer proprement en solo.',
+        value: '2 surfaces Shopify',
+        label: 'Une application embarquée pilote la configuration et une Theme App Extension affiche le résultat en boutique.',
       },
     ],
     screens: [
       {
         src: '/images/capture-edd.png',
         alt: 'Capture réelle du projet Estimated Delivery Date',
-        caption: "Interface d'administration Shopify pour configurer l'affichage des dates de livraison estimées.",
+        caption: "Écran de configuration Shopify avec aperçu du widget, couleurs, icône, titre et options de mise en page.",
       },
     ],
     links: [{ label: 'Me contacter à propos de ce projet', url: '/contact', type: 'contact' }],
@@ -78,11 +78,11 @@ export const projects: Project[] = [
     context:
       "Tester une Shopify Function reste souvent trop lent et trop dépendant d'un cycle complet de build, déploiement, branchement à une boutique puis vérification du résultat.",
     problem:
-      "Comment permettre à un développeur Shopify de charger un `.wasm`, fournir un input JSON réaliste et comprendre immédiatement ce que la fonction renvoie, sans friction inutile ni setup lourd ?",
+      "Comment permettre à un développeur Shopify de charger un `.wasm`, fournir un input JSON réaliste et distinguer rapidement une erreur de payload, de configuration ou d’exécution ?",
     process: [
-      "Définition d'un MVP centré sur la réduction de la boucle de feedback et la validation d'un vrai chemin d'exécution Shopify.",
-      "Conception d'une interface de type mini-IDE organisée en trois zones : setup, input JSON et résultat.",
-      "Ajout progressif de scénarios locaux, import/export, diagnostics structurés, benchmark et exemples officiels pour tester les principaux types de Functions.",
+      "Définition d'un contrat `/run` unique pour envoyer le Wasm, l’input JSON et les métadonnées nécessaires au runner.",
+      "Validation du chemin Shopify réel avec trois exemples prêts à lancer : product discount, delivery customization et cart transform.",
+      "Organisation de l’interface en trois zones stables — setup, input JSON et résultat — puis ajout des scénarios, diagnostics et benchmarks autour de ce flux principal.",
     ],
     solution: [
       "Web app locale permettant d'uploader un `.wasm`, de choisir un type de function Shopify, d'éditer un input JSON et de lancer un run ou un benchmark.",
@@ -99,23 +99,23 @@ export const projects: Project[] = [
     ],
     highlights: [
       {
-        value: 'Runner Shopify réel',
-        label: "Le backend peut exécuter une Function via les métadonnées Shopify CLI et l'outil `function-runner`.",
+        value: '3 exemples exécutables',
+        label: 'Product discount, delivery customization et cart transform incluent un Wasm et un payload prêts à tester.',
       },
       {
-        value: 'Debug plus lisible',
-        label: "Les erreurs, diagnostics Shopify, outputs et timings sont séparés pour mieux comprendre l'échec d'un run.",
+        value: 'Run + benchmark',
+        label: 'Le même endpoint renvoie output, erreurs structurées, diagnostics du runner et timings locaux détaillés.',
       },
       {
-        value: 'MVP démontrable',
-        label: 'Des exemples officiels et des scénarios locaux permettent de tester rapidement product discount, delivery customization et cart transform.',
+        value: 'Scénarios portables',
+        label: 'Les configurations de test sont sauvegardées dans le navigateur, exportables et réimportables.',
       },
     ],
     screens: [
       {
         src: '/images/capture-shopify-functions.png',
         alt: 'Capture réelle du Shopify Functions Workbench',
-        caption: 'Interface locale en trois panneaux avec setup Shopify, éditeur JSON Monaco, résultats, diagnostics et timings.',
+        caption: 'Run Shopify local réussi : cible product discount, input JSON, output structuré, zéro erreur et timing de diagnostic.',
       },
     ],
     links: [
@@ -160,16 +160,16 @@ export const projects: Project[] = [
     ],
     highlights: [
       {
-        value: 'Structure réutilisable',
-        label: "La base peut être adaptée à un autre portfolio sans dépendre d'un contexte trop personnel.",
+        value: '4 parcours dédiés',
+        label: 'Accueil, projets, CV et contact disposent chacun d’une hiérarchie et de métadonnées propres.',
       },
       {
-        value: 'Lecture plus claire',
-        label: 'Les informations de profil, de projets et de parcours sont séparées plus proprement.',
+        value: 'Contenu typé FR / EN',
+        label: 'Le profil et les projets partagent un modèle TypeScript validé automatiquement entre les deux langues.',
       },
       {
-        value: 'Base extensible',
-        label: 'Le système de sections et de fiches projet peut évoluer sans refaire toute la structure.',
+        value: 'SEO vérifiable',
+        label: 'Canonical, sitemap, JSON-LD et métadonnées Open Graph sont générés pour les principales routes.',
       },
     ],
     screens: [
@@ -217,23 +217,23 @@ export const projects: Project[] = [
     deliverables: ['Interface React', 'API NestJS', 'Filtres personnalisés', 'Résumés IA'],
     highlights: [
       {
-        value: 'Lecture accélérée',
-        label: "Chaque article est résumé en quelques lignes pour aller à l'essentiel.",
+        value: '2 filtres combinables',
+        label: 'La catégorie et le mot-clé réduisent le flux avant consultation des articles.',
       },
       {
-        value: 'Filtres utiles',
-        label: 'Navigation par catégories et mots-clés pour cibler rapidement les sujets pertinents.',
+        value: '1 résumé par article',
+        label: 'Le résumé généré est affiché avec l’extrait source pour conserver le contexte de lecture.',
       },
       {
-        value: 'Architecture claire',
-        label: "Séparation front / back facilitant l'évolution du produit.",
+        value: '3 couches séparées',
+        label: 'React gère la consultation, NestJS l’agrégation et HuggingFace la génération des résumés.',
       },
     ],
     screens: [
       {
         src: '/images/capture-news.png',
         alt: 'Capture réelle du Dashboard News AI',
-        caption: 'Capture du dashboard avec cartes articles, filtres et aperçu des résumés.',
+        caption: 'Flux réel avec filtre par catégorie, recherche par mot-clé, extrait source et résumé IA pour chaque article.',
       },
     ],
     links: [
@@ -274,16 +274,16 @@ export const projects: Project[] = [
     deliverables: ['Serveur RADIUS', 'Capteurs Arduino', 'Architecture réseau', 'Documentation'],
     highlights: [
       {
-        value: 'Architecture complète',
-        label: 'Projet couvrant réseau, authentification, stockage, supervision et environnement.',
+        value: 'RADIUS + Cisco',
+        label: 'Le contrôle d’accès Wi-Fi s’appuie sur un serveur RADIUS relié à une borne Cisco.',
       },
       {
-        value: 'Vision transverse',
-        label: 'Mise en relation de problématiques infrastructure, sécurité et matériel.',
+        value: '3 mesures terrain',
+        label: 'Des capteurs Arduino suivent le mouvement, la température et l’humidité autour de la baie.',
       },
       {
-        value: 'Projet documenté',
-        label: 'Choix et configuration suffisamment explicités pour être repris et présentés.',
+        value: '1 schéma de synthèse',
+        label: 'Le diagramme relie les services réseau, le stockage, la vidéosurveillance et la supervision.',
       },
     ],
     screens: [
