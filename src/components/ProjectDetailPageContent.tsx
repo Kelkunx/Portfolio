@@ -191,11 +191,6 @@ export default function ProjectDetailPageContent({ slug }: { slug?: string }) {
               backgroundColor: 'var(--surface)',
               p: { xs: 3, md: 4 },
               mb: 3,
-              transition: 'border-color 160ms ease, background-color 160ms ease',
-              '&:hover': {
-                borderColor: 'var(--cyan)',
-                backgroundColor: 'rgba(125, 207, 255, 0.03)',
-              },
             }}
           >
             <Typography component="h2" variant="h4" sx={{ color: 'var(--text)', mb: 2 }}>
@@ -218,11 +213,6 @@ export default function ProjectDetailPageContent({ slug }: { slug?: string }) {
               backgroundColor: 'var(--surface)',
               p: { xs: 3, md: 4 },
               mb: 3,
-              transition: 'border-color 160ms ease, background-color 160ms ease',
-              '&:hover': {
-                borderColor: 'var(--purple)',
-                backgroundColor: 'rgba(187, 154, 247, 0.03)',
-              },
             }}
           >
             <Typography component="h2" variant="h4" sx={{ color: 'var(--text)', mb: 2 }}>
@@ -273,11 +263,6 @@ export default function ProjectDetailPageContent({ slug }: { slug?: string }) {
                 borderTop: '2px solid var(--green)',
                 backgroundColor: 'var(--surface)',
                 p: 3,
-                transition: 'border-color 160ms ease, background-color 160ms ease',
-                '&:hover': {
-                  borderColor: 'var(--green)',
-                  backgroundColor: 'rgba(158, 206, 106, 0.03)',
-                },
               }}
             >
               <Typography component="h2" variant="h5" sx={{ color: 'var(--text)', mb: 2 }}>

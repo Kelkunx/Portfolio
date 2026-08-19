@@ -127,11 +127,10 @@ export default function SkillsSection({ variant = 'home' }: SkillsSectionProps) 
                   backgroundColor: 'var(--surface)',
                   p: { xs: 3, md: 3.5 },
                   height: '100%',
-                  transition: 'transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease',
+                  transition: 'transform 180ms ease, border-color 180ms ease',
                   '&:hover': {
                     transform: 'translateY(-2px)',
                     borderColor: tone,
-                    backgroundColor: 'var(--surface-2)',
                   },
                 }}
               >

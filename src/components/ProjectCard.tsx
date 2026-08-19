@@ -76,13 +76,9 @@ export default function ProjectCard({
         backgroundColor: 'var(--surface)',
         border: '1px solid var(--border)',
         boxShadow: 'var(--shadow-soft)',
-        transition: 'border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease',
+        transition: 'border-color 180ms ease',
         '&:hover': {
           borderColor: 'rgba(121, 168, 255, 0.42)',
-          boxShadow: '0 8px 18px rgba(10, 15, 30, 0.22)',
-        },
-        '&:hover img': {
-          transform: 'scale(1.015)',
         },
       }}
     >
@@ -105,7 +101,6 @@ export default function ProjectCard({
           unoptimized={shouldSkipOptimization}
           style={{
             objectFit: 'cover',
-            transition: 'transform 220ms ease',
           }}
         />
       </Box>

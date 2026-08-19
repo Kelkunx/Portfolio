@@ -37,12 +37,11 @@ export default function LanguagesSection() {
             <Box
               key={language.name}
               sx={{
-                position: 'relative',
                 borderRadius: 'var(--radius-md)',
                 border: '1px solid var(--border)',
+                borderLeft: `3px solid ${accentTone}`,
                 backgroundColor: 'var(--surface)',
                 p: 2.5,
-                overflow: 'hidden',
                 transition: 'background-color 160ms ease, border-color 160ms ease',
                 '&:hover': {
                   borderColor: accentTone,
@@ -52,15 +51,6 @@ export default function LanguagesSection() {
                       : accentTone === 'var(--purple)'
                         ? 'rgba(187, 154, 247, 0.05)'
                         : 'rgba(158, 206, 106, 0.05)',
-                },
-                '&::before': {
-                  content: '""',
-                  position: 'absolute',
-                  left: 0,
-                  right: 0,
-                  top: 0,
-                  height: 3,
-                  background: `linear-gradient(90deg, ${accentTone}, transparent 72%)`,
                 },
               }}
             >

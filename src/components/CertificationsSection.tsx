@@ -32,12 +32,11 @@ export default function CertificationsSection() {
           <Box
             key={`${certification.name}-${certification.date}`}
             sx={{
-              position: 'relative',
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--border)',
+              borderLeft: `3px solid ${tones[index % tones.length]}`,
               backgroundColor: 'var(--surface)',
               p: 2.5,
-              overflow: 'hidden',
               transition: 'background-color 160ms ease, border-color 160ms ease',
               '&:hover': {
                 borderColor: tones[index % tones.length],
@@ -47,15 +46,6 @@ export default function CertificationsSection() {
                     : tones[index % tones.length] === 'var(--cyan)'
                       ? 'rgba(125, 207, 255, 0.05)'
                       : 'rgba(187, 154, 247, 0.05)',
-              },
-              '&::before': {
-                content: '""',
-                position: 'absolute',
-                left: 0,
-                right: 0,
-                top: 0,
-                height: 3,
-                background: `linear-gradient(90deg, ${tones[index % tones.length]}, transparent 72%)`,
               },
             }}
           >

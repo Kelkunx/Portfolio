@@ -50,11 +50,10 @@ export default function CareerHighlightsSection() {
                 backgroundColor: 'var(--surface)',
                 p: 3,
                 height: '100%',
-                transition: 'transform 180ms ease, border-color 160ms ease, background-color 160ms ease',
+                transition: 'transform 180ms ease, border-color 160ms ease',
                 '&:hover': {
                   transform: 'translateY(-2px)',
                   borderColor: tones[index % tones.length],
-                  backgroundColor: 'var(--surface-2)',
                 },
               }}
             >
@@ -71,29 +70,21 @@ export default function CareerHighlightsSection() {
                   </Typography>
                 </Box>
 
-                <Stack spacing={1}>
+                <Stack spacing={1.25}>
                   {experience.bullets.slice(0, 2).map((bullet) => (
                     <Box
                       key={bullet}
                       sx={{
                         display: 'grid',
-                        gridTemplateColumns: '8px 1fr',
+                        gridTemplateColumns: '7px 1fr',
                         gap: 1.1,
                         alignItems: 'start',
-                        borderRadius: 1,
-                        backgroundColor: 'var(--surface-2)',
-                        border: '1px solid rgba(125, 207, 255, 0.1)',
-                        px: 1.35,
-                        py: 1.1,
-                        '& + &': {
-                          mt: 1,
-                        },
                       }}
                     >
                       <Box
                         sx={{
-                          width: 8,
-                          height: 8,
+                          width: 7,
+                          height: 7,
                           borderRadius: '50%',
                           backgroundColor: tones[index % tones.length],
                           mt: '0.45rem',

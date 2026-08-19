@@ -39,13 +39,9 @@ export default function ExperienceSection() {
             sx={{
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--border)',
-              borderTop: `2px solid ${accentTones[index % accentTones.length]}`,
+              borderLeft: `3px solid ${accentTones[index % accentTones.length]}`,
               backgroundColor: 'var(--surface)',
               p: { xs: 3, md: 3.5 },
-              transition: 'border-color 160ms ease, background-color 160ms ease',
-              '&:hover': {
-                borderColor: accentTones[index % accentTones.length],
-              },
             }}
           >
             <Stack spacing={1.5}>
@@ -64,17 +60,15 @@ export default function ExperienceSection() {
                     key={bullet}
                     sx={{
                       display: 'grid',
-                      gridTemplateColumns: '10px 1fr',
+                      gridTemplateColumns: '7px 1fr',
                       gap: 1.25,
                       alignItems: 'start',
-                      borderLeft: `2px solid ${accentTones[index % accentTones.length]}`,
-                      pl: 1.5,
                     }}
                   >
                     <Box
                       sx={{
-                        width: 10,
-                        height: 10,
+                        width: 7,
+                        height: 7,
                         borderRadius: '50%',
                         backgroundColor: accentTones[index % accentTones.length],
                         mt: '0.45rem',
@@ -97,13 +91,9 @@ export default function ExperienceSection() {
             mt: 4,
             borderRadius: 'var(--radius-md)',
             border: '1px solid var(--border)',
-            borderTop: '2px solid var(--orange)',
+            borderLeft: '3px solid var(--orange)',
             backgroundColor: 'var(--surface)',
             p: 3,
-            transition: 'border-color 160ms ease, background-color 160ms ease',
-            '&:hover': {
-              borderColor: 'var(--orange)',
-            },
           }}
         >
           <Typography component="h3" variant="h6" sx={{ color: 'var(--text)', mb: 1 }}>
@@ -111,18 +101,14 @@ export default function ExperienceSection() {
           </Typography>
           <Stack spacing={0.75}>
             {supportingExperiences.map((experience) => (
-              <Box
+              <Typography
                 key={`${experience.company}-${experience.start}`}
-                sx={{
-                  borderLeft: '2px solid var(--orange)',
-                  pl: 1.5,
-                }}
+                variant="body2"
+                color="text.secondary"
               >
-                <Typography variant="body2" color="text.secondary">
-                  {experience.role} — {experience.company} •{' '}
-                  {formatExperienceRange(experience.start, experience.end, locale)}
-                </Typography>
-              </Box>
+                {experience.role} — {experience.company} •{' '}
+                {formatExperienceRange(experience.start, experience.end, locale)}
+              </Typography>
             ))}
           </Stack>
         </Box>

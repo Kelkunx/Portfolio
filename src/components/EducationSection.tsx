@@ -29,12 +29,11 @@ export default function EducationSection() {
           <Box
             key={`${education.school}-${education.degree}`}
             sx={{
-              position: 'relative',
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--border)',
+              borderLeft: `3px solid ${tones[index % tones.length]}`,
               backgroundColor: 'var(--surface)',
               p: 3,
-              overflow: 'hidden',
               transition: 'background-color 160ms ease, border-color 160ms ease',
               '&:hover': {
                 borderColor: tones[index % tones.length],
@@ -44,15 +43,6 @@ export default function EducationSection() {
                     : tones[index % tones.length] === 'var(--cyan)'
                       ? 'rgba(125, 207, 255, 0.05)'
                       : 'rgba(187, 154, 247, 0.05)',
-              },
-              '&::before': {
-                content: '""',
-                position: 'absolute',
-                left: 0,
-                right: 0,
-                top: 0,
-                height: 3,
-                background: `linear-gradient(90deg, ${tones[index % tones.length]}, transparent 72%)`,
               },
             }}
           >
