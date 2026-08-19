@@ -41,8 +41,8 @@ export default function FinalCtaSection() {
           <Button component={Link} href="/contact" variant="contained" endIcon={<ArrowOutward />}>
             {locale === 'fr' ? 'Me contacter' : 'Contact me'}
           </Button>
-          <Button component="a" href={`mailto:${profile.email}`} variant="outlined">
-            {locale === 'fr' ? 'Envoyer un email' : 'Send an email'}
+          <Button component={Link} href="/cv" variant="outlined">
+            {locale === 'fr' ? 'Voir le CV détaillé' : 'View detailed CV'}
           </Button>
         </Stack>
       </Stack>

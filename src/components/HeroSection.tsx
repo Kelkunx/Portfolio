@@ -12,7 +12,6 @@ import Link from 'next/link';
 import { LinkedIn, Email, GitHub, ArrowOutward, KeyboardArrowDownRounded } from '@mui/icons-material';
 import { useLocale } from '../context/LocaleContext';
 import { getProfile } from '../../lib/content';
-import TechStackChips from './TechStackChips';
 
 export default function HeroSection() {
   const { locale } = useLocale();
@@ -41,12 +40,12 @@ export default function HeroSection() {
       component="section"
       aria-labelledby="hero-heading"
       sx={{
-        pt: { xs: 8, md: 10 },
-        pb: { xs: 4, md: 6 },
+        pt: { xs: 7, md: 9 },
+        pb: { xs: 3, md: 4 },
       }}
     >
       <Container maxWidth="lg">
-        <Grid container spacing={{ xs: 4, md: 6 }} alignItems="stretch">
+        <Grid container spacing={{ xs: 4, md: 6 }} alignItems="center">
           <Grid size={{ xs: 12, md: 7 }}>
             <Stack spacing={3} sx={{ maxWidth: 700, pt: { md: 2 } }}>
               <Typography
@@ -73,62 +72,45 @@ export default function HeroSection() {
                   maxWidth: '58ch',
                 }}
               >
-                {profile.summary}
+                {profile.shortBio}
               </Typography>
 
-              <Grid container spacing={1.5}>
+              <Box
+                component="ul"
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, 1fr)' },
+                  gap: { xs: 1.5, sm: 2 },
+                  p: 0,
+                  m: 0,
+                  listStyle: 'none',
+                }}
+              >
                 {profile.proofPoints.slice(0, 3).map((item, index) => {
                   const tone = index === 0 ? 'var(--cyan)' : index === 1 ? 'var(--purple)' : 'var(--green)';
-                  const bg =
-                    index === 0
-                      ? 'rgba(125, 207, 255, 0.08)'
-                      : index === 1
-                        ? 'rgba(187, 154, 247, 0.08)'
-                        : 'rgba(158, 206, 106, 0.08)';
 
                   return (
-                    <Grid key={`${item.label}-${item.value}`} size={{ xs: 12, sm: 4 }}>
-                      <Box
-                        sx={{
-                          height: '100%',
-                          borderRadius: 'var(--radius-md)',
-                          border: '1px solid var(--border)',
-                          borderTop: `2px solid ${tone}`,
-                          backgroundColor: bg,
-                          px: 2,
-                          py: 1.75,
-                          transition: 'background-color 160ms ease, border-color 160ms ease',
-                          '&:hover': {
-                            borderColor: tone,
-                            backgroundColor:
-                              index === 0
-                                ? 'rgba(125, 207, 255, 0.12)'
-                                : index === 1
-                                  ? 'rgba(187, 154, 247, 0.12)'
-                                  : 'rgba(158, 206, 106, 0.12)',
-                          },
-                        }}
-                      >
-                        <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.5 }}>
-                          {item.label}
-                        </Typography>
-                        <Typography variant="body2" sx={{ color: 'var(--text)', fontWeight: 600, lineHeight: 1.55 }}>
-                          {item.value}
-                        </Typography>
-                      </Box>
-                    </Grid>
+                    <Box
+                      key={`${item.label}-${item.value}`}
+                      component="li"
+                      sx={{ borderLeft: `2px solid ${tone}`, pl: 1.5 }}
+                    >
+                      <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.35 }}>
+                        {item.label}
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: 'var(--text)', fontWeight: 600, lineHeight: 1.5 }}>
+                        {item.value}
+                      </Typography>
+                    </Box>
                   );
                 })}
-              </Grid>
+              </Box>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
                 <Button variant="contained" color="primary" component={Link} href="/projets">
                   {locale === 'fr' ? 'Voir mes projets' : 'View projects'}
                 </Button>
-                <Button variant="outlined" component={Link} href="/cv">
-                  {locale === 'fr' ? 'Voir le CV' : 'View CV'}
-                </Button>
-                <Button variant="text" component={Link} href="/contact" endIcon={<ArrowOutward />}>
+                <Button variant="outlined" component={Link} href="/contact" endIcon={<ArrowOutward />}>
                   {locale === 'fr' ? 'Me contacter' : 'Contact me'}
                 </Button>
               </Stack>
@@ -138,7 +120,6 @@ export default function HeroSection() {
           <Grid size={{ xs: 12, md: 5 }}>
             <Box
               sx={{
-                height: '100%',
                 borderRadius: 'var(--radius-lg)',
                 border: '1px solid var(--border)',
                 backgroundColor: 'var(--surface)',
@@ -152,41 +133,17 @@ export default function HeroSection() {
                     {profile.name}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    {profile.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
                     {profile.location}
                   </Typography>
                 </Stack>
 
-                <Box
-                  sx={{
-                    display: 'grid',
-                    gap: 1.25,
-                  }}
-                >
-                  <Box sx={{ borderLeft: '2px solid var(--cyan)', pl: 1.5 }}>
-                    <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.4 }}>
-                      {locale === 'fr' ? 'Disponibilité' : 'Availability'}
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: 'var(--text)' }}>
-                      {profile.availability}
-                    </Typography>
-                  </Box>
-                  <Box sx={{ borderLeft: '2px solid var(--purple)', pl: 1.5 }}>
-                    <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.4 }}>
-                      {locale === 'fr' ? 'Cibles' : 'Target roles'}
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: 'var(--text)' }}>
-                      {profile.targetRoles.join(' • ')}
-                    </Typography>
-                  </Box>
-                  <Box sx={{ borderLeft: '2px solid var(--green)', pl: 1.5 }}>
-                    <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.4 }}>
-                      {locale === 'fr' ? 'Stack principale' : 'Primary stack'}
-                    </Typography>
-                    <TechStackChips items={profile.primaryStack} />
-                  </Box>
+                <Box sx={{ borderLeft: '2px solid var(--cyan)', pl: 1.5 }}>
+                  <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.4 }}>
+                    {locale === 'fr' ? 'Disponibilité' : 'Availability'}
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: 'var(--text)' }}>
+                    {profile.availability}
+                  </Typography>
                 </Box>
 
                 <Divider />
