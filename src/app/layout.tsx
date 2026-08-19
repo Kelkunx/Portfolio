@@ -8,6 +8,7 @@ import { Space_Grotesk, IBM_Plex_Sans, JetBrains_Mono } from 'next/font/google';
 import type { Metadata } from 'next';
 import { LocaleProvider } from '../context/LocaleContext';
 import { Analytics } from '@vercel/analytics/next';
+import { buildPageMetadata, SITE_URL } from '../../lib/site-metadata';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -28,48 +29,32 @@ const jetBrainsMono = JetBrains_Mono({
   weight: ['400', '500', '600'],
 });
 
-export async function generateMetadata(): Promise<Metadata> {
-  const title = 'Léo JEGO — Développeur full-stack';
-  const description =
-    'Portfolio de Léo JEGO. Interfaces web claires, outils métier, React, Next.js, NestJS, CV dynamique et case studies.';
-  const base = process.env.SITE_URL ?? 'https://leo-jego.vercel.app';
-  const metadataBase = new URL(base);
+const defaultTitle = 'Léo JEGO — Développeur full-stack';
+const defaultDescription =
+  'Portfolio de Léo JEGO. Interfaces web claires, outils métier, React, Next.js, NestJS, CV dynamique et case studies.';
+const rootMetadata = buildPageMetadata({
+  title: defaultTitle,
+  description: defaultDescription,
+  path: '/',
+  socialTitle: defaultTitle,
+  socialSubtitle: 'Portfolio — projets, CV et contact',
+});
 
-  const v = process.env.NEXT_PUBLIC_OG_VERSION ?? String(Date.now());
-
-  const ogUrl = `${base}/api/og?title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent('Portfolio — projets, CV et contact')}&mode=dark&v=${v}`;
-
-  return {
-    metadataBase,
-    title,
-    description,
-    alternates: {
-      canonical: '/',
-    },
-    icons: {
-      icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
-      shortcut: '/favicon.svg',
-    },
-    verification: {
-      google: 'CH9of0A9cGpKrZE3ytv4A6zQrkZEvofWFVkUSWyxjHc',
-    },
-    openGraph: {
-      title,
-      description,
-      url: base,
-      siteName: 'Léo JEGO — Portfolio',
-      locale: 'fr_FR',
-      type: 'website',
-      images: [{ url: ogUrl, width: 1200, height: 630, alt: 'Léo JEGO — Portfolio' }],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: [ogUrl],
-    },
-  };
-}
+export const metadata: Metadata = {
+  ...rootMetadata,
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: defaultTitle,
+    template: '%s | Léo JEGO',
+  },
+  icons: {
+    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
+    shortcut: '/favicon.svg',
+  },
+  verification: {
+    google: 'CH9of0A9cGpKrZE3ytv4A6zQrkZEvofWFVkUSWyxjHc',
+  },
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
