@@ -21,7 +21,8 @@ import { projectPlaceholderDataUrl } from '../../lib/project-placeholder';
 import TechStackChips from './TechStackChips';
 
 type ProjectCardProps = Project & {
-  compact?: boolean;
+  variant?: 'standard' | 'spotlight' | 'compact';
+  imagePriority?: boolean;
 };
 
 export default function ProjectCard({
@@ -36,12 +37,15 @@ export default function ProjectCard({
   category,
   highlights,
   links,
-  compact = false,
+  variant = 'standard',
+  imagePriority = false,
 }: ProjectCardProps) {
   const { locale } = useLocale();
+  const isSpotlight = variant === 'spotlight';
+  const isCompact = variant === 'compact';
 
   const externalLinks = links.filter((item) => item.type === 'demo' || item.type === 'repo');
-  const highlightedItems = highlights.slice(0, compact ? 1 : 2);
+  const highlightedItems = isCompact ? [] : highlights.slice(0, isSpotlight ? 3 : 2);
   const metadataLabel = [
     getProjectCategoryLabel(category, locale),
     getProjectStatusLabel(status, locale),
@@ -50,14 +54,16 @@ export default function ProjectCard({
   const cardImageSrc = imageSrc && imageSrc.trim() !== '' ? imageSrc : projectPlaceholderDataUrl(title, locale);
   const cardImageAlt = imageAlt || title;
   const shouldSkipOptimization = cardImageSrc.startsWith('data:') || cardImageSrc.startsWith('blob:');
-  const imageSizes = compact ? '(max-width: 900px) 100vw, 50vw' : '(max-width: 900px) 100vw, 33vw';
+  const imageSizes = isSpotlight
+    ? '(max-width: 900px) 100vw, 56vw'
+    : '(max-width: 900px) 100vw, 50vw';
 
   return (
     <Card
       sx={{
         height: '100%',
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: { xs: 'column', md: isSpotlight ? 'row' : 'column' },
         borderRadius: 'var(--radius-md)',
         overflow: 'hidden',
         backgroundColor: 'var(--surface)',
@@ -77,11 +83,17 @@ export default function ProjectCard({
     >
       <Box
         sx={{
-          aspectRatio: compact ? '16 / 9' : '16 / 10',
-          width: '100%',
+          aspectRatio: {
+            xs: '16 / 9',
+            md: isSpotlight ? 'auto' : isCompact ? '2 / 1' : '16 / 10',
+          },
+          width: { xs: '100%', md: isSpotlight ? '56%' : '100%' },
+          minHeight: { md: isSpotlight ? 380 : 'auto' },
+          flexShrink: 0,
           overflow: 'hidden',
           backgroundColor: 'var(--surface-2)',
-          borderBottom: '1px solid var(--border)',
+          borderBottom: { xs: '1px solid var(--border)', md: isSpotlight ? 'none' : '1px solid var(--border)' },
+          borderRight: { md: isSpotlight ? '1px solid var(--border)' : 'none' },
           position: 'relative',
         }}
       >
@@ -89,7 +101,7 @@ export default function ProjectCard({
           src={cardImageSrc}
           alt={cardImageAlt}
           fill
-          loading="lazy"
+          priority={imagePriority}
           sizes={imageSizes}
           unoptimized={shouldSkipOptimization}
           style={{
@@ -98,70 +110,83 @@ export default function ProjectCard({
         />
       </Box>
 
-      <CardContent sx={{ flexGrow: 1, p: 3 }}>
-        <Stack spacing={2}>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1, minWidth: 0 }}>
+        <CardContent sx={{ flexGrow: 1, p: isSpotlight ? { xs: 3, md: 4 } : isCompact ? 2.5 : 3 }}>
+          <Stack spacing={isCompact ? 1.5 : 2}>
             <Typography variant="body2" sx={{ color: 'var(--text-2)', fontWeight: 600 }}>
               {metadataLabel}
             </Typography>
-          </Box>
 
-          <Box>
-            <Typography component="h3" variant="h5" sx={{ color: 'var(--text)', mb: 0.75 }}>
-              {title}
-            </Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.75 }}>
-              {short}
-            </Typography>
-          </Box>
-
-          <Stack spacing={1}>
-            {highlightedItems.map((item) => (
-              <Box
-                key={`${item.value}-${item.label}`}
-                sx={{
-                  borderLeft: '2px solid var(--cyan)',
-                  pl: 1.5,
-                }}
+            <Box>
+              <Typography
+                component="h3"
+                variant={isSpotlight ? 'h3' : isCompact ? 'h6' : 'h5'}
+                sx={{ color: 'var(--text)', mb: 0.75 }}
               >
-                <Typography variant="body2" sx={{ color: 'var(--text)', fontWeight: 600, mb: 0.35 }}>
-                  {item.value}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6 }}>
-                  {item.label}
-                </Typography>
-              </Box>
-            ))}
+                {title}
+              </Typography>
+              <Typography
+                variant={isSpotlight ? 'body1' : 'body2'}
+                color="text.secondary"
+                sx={{ lineHeight: 1.75 }}
+              >
+                {short}
+              </Typography>
+            </Box>
+
+            {highlightedItems.length > 0 && (
+              <Stack spacing={1}>
+                {highlightedItems.map((item) => (
+                  <Box
+                    key={`${item.value}-${item.label}`}
+                    sx={{
+                      borderLeft: '2px solid var(--cyan)',
+                      pl: 1.5,
+                    }}
+                  >
+                    <Typography variant="body2" sx={{ color: 'var(--text)', fontWeight: 600, mb: 0.35 }}>
+                      {item.value}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6 }}>
+                      {item.label}
+                    </Typography>
+                  </Box>
+                ))}
+              </Stack>
+            )}
+
+            <TechStackChips items={tech} limit={isSpotlight ? 6 : isCompact ? 3 : 4} />
           </Stack>
+        </CardContent>
 
-          <TechStackChips items={tech} limit={compact ? 3 : 4} />
-        </Stack>
-      </CardContent>
-
-      <CardActions sx={{ px: 3, pb: 3, pt: 0, gap: 1, flexWrap: 'wrap' }}>
-        <Button
-          size="small"
-          component={Link}
-          href={`/projets/${slug}`}
-          endIcon={<ArrowOutward />}
+        <CardActions
+          sx={{
+            px: isSpotlight ? { xs: 3, md: 4 } : isCompact ? 2.5 : 3,
+            pb: isSpotlight ? { xs: 3, md: 4 } : isCompact ? 2.5 : 3,
+            pt: 0,
+            gap: 1,
+            flexWrap: 'wrap',
+          }}
         >
-          {locale === 'fr' ? 'Détails' : 'Details'}
-        </Button>
-
-        {externalLinks.slice(0, compact ? 1 : 2).map((link) => (
-          <Button
-            key={link.url}
-            size="small"
-            component={Link}
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            startIcon={link.type === 'repo' ? <GitHub fontSize="small" /> : undefined}
-          >
-            {link.label}
+          <Button size="small" component={Link} href={`/projets/${slug}`} endIcon={<ArrowOutward />}>
+            {locale === 'fr' ? 'Détails' : 'Details'}
           </Button>
-        ))}
-      </CardActions>
+
+          {externalLinks.slice(0, isCompact ? 1 : 2).map((link) => (
+            <Button
+              key={link.url}
+              size="small"
+              component={Link}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              startIcon={link.type === 'repo' ? <GitHub fontSize="small" /> : undefined}
+            >
+              {link.label}
+            </Button>
+          ))}
+        </CardActions>
+      </Box>
     </Card>
   );
 }

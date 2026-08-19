@@ -14,6 +14,7 @@ export default function ProjectsPageContent() {
   const { locale } = useLocale();
   const featuredProjects = getFeaturedProjects(locale);
   const archiveProjects = getArchiveProjects(locale);
+  const [spotlightProject, ...secondaryProjects] = featuredProjects;
 
   return (
     <Container maxWidth="lg" sx={{ py: { xs: 6, md: 8 } }}>
@@ -38,13 +39,17 @@ export default function ProjectsPageContent() {
             : 'The projects that best represent how I think, structure and deliver.'}
         </Typography>
 
-        <Grid container spacing={3}>
-          {featuredProjects.map((project) => (
-            <Grid key={project.slug} size={{ xs: 12, md: 4 }}>
-              <ProjectCard {...project} />
-            </Grid>
-          ))}
-        </Grid>
+        <Stack spacing={3}>
+          {spotlightProject && <ProjectCard {...spotlightProject} variant="spotlight" imagePriority />}
+
+          <Grid container spacing={3}>
+            {secondaryProjects.map((project) => (
+              <Grid key={project.slug} size={{ xs: 12, md: 6 }}>
+                <ProjectCard {...project} />
+              </Grid>
+            ))}
+          </Grid>
+        </Stack>
       </Box>
 
       {archiveProjects.length > 0 && (
@@ -61,7 +66,7 @@ export default function ProjectsPageContent() {
           <Grid container spacing={3}>
             {archiveProjects.map((project) => (
               <Grid key={project.slug} size={{ xs: 12, md: 6 }}>
-                <ProjectCard {...project} compact />
+                <ProjectCard {...project} variant="compact" />
               </Grid>
             ))}
           </Grid>

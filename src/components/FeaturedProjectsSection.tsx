@@ -16,6 +16,7 @@ import SectionTitle from './SectionTitle';
 export default function FeaturedProjectsSection() {
   const { locale } = useLocale();
   const featuredProjects = getFeaturedProjects(locale, 3);
+  const [spotlightProject, ...secondaryProjects] = featuredProjects;
 
   return (
     <Box component="section" id="home-sections-start" sx={{ mt: { xs: 8, md: 12 }, scrollMarginTop: '96px' }}>
@@ -43,13 +44,17 @@ export default function FeaturedProjectsSection() {
         </Button>
       </Stack>
 
-      <Grid container spacing={3}>
-        {featuredProjects.map((project) => (
-          <Grid key={project.slug} size={{ xs: 12, md: 4 }}>
-            <ProjectCard {...project} />
-          </Grid>
-        ))}
-      </Grid>
+      <Stack spacing={3}>
+        {spotlightProject && <ProjectCard {...spotlightProject} variant="spotlight" />}
+
+        <Grid container spacing={3}>
+          {secondaryProjects.map((project) => (
+            <Grid key={project.slug} size={{ xs: 12, md: 6 }}>
+              <ProjectCard {...project} />
+            </Grid>
+          ))}
+        </Grid>
+      </Stack>
     </Box>
   );
 }
