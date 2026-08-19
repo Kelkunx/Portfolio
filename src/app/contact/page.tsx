@@ -1,7 +1,12 @@
 'use client';
 
 import React from 'react';
-import { Container, Typography, Stack, Button, Box, Grid } from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import { Email, Phone, LinkedIn, GitHub, PictureAsPdf } from '@mui/icons-material';
 import { useLocale } from '../../context/LocaleContext';
 import { getProfile } from '../../../lib/content';

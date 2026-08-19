@@ -1,7 +1,7 @@
 // src/context/LocaleContext.tsx
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode, useMemo } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 type Locale = 'fr' | 'en';
 
@@ -11,22 +11,6 @@ type UIStrings = {
     projects: string;
     cv: string;
     contact: string;
-  };
-  header: {
-    skipToContent: string;
-  };
-  projects: {
-    searchPlaceholder: string;
-    all: string;
-    noResults: string;
-  };
-  buttons: {
-    details: string;
-    demo: string;
-    code: string;
-  };
-  footer: {
-    copyright: string;
   };
 };
 
@@ -41,18 +25,10 @@ const LS_KEY = 'locale';
 
 const fr: UIStrings = {
   nav: { home: 'Accueil', projects: 'Projets', cv: 'CV', contact: 'Contact' },
-  header: { skipToContent: "Aller au contenu" },
-  projects: { searchPlaceholder: "Rechercher un projet (titre, description...)", all: 'Tous', noResults: "Aucune correspondance — essaie d'élargir ta recherche ou désactive le filtre." },
-  buttons: { details: 'Détails', demo: 'Démo', code: 'Code' },
-  footer: { copyright: '© Léo JEGO' },
 };
 
 const en: UIStrings = {
   nav: { home: 'Home', projects: 'Projects', cv: 'CV', contact: 'Contact' },
-  header: { skipToContent: 'Skip to content' },
-  projects: { searchPlaceholder: 'Search projects (title, description...)', all: 'All', noResults: 'No matches — try widening your search or disable the filter.' },
-  buttons: { details: 'Details', demo: 'Demo', code: 'Code' },
-  footer: { copyright: '© Léo JEGO' },
 };
 
 const LocaleContext = createContext<LocaleContextValue | undefined>(undefined);
@@ -88,7 +64,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const t = useMemo(() => (locale === 'fr' ? fr : en), [locale]);
+  const t = locale === 'fr' ? fr : en;
 
   return <LocaleContext.Provider value={{ locale, setLocale, t }}>{children}</LocaleContext.Provider>;
 }

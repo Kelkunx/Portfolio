@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useState, useMemo, useEffect } from 'react';
-import { ThemeProvider, createTheme, PaletteMode } from '@mui/material';
+import { ThemeProvider, createTheme, type PaletteMode } from '@mui/material/styles';
 
 type ColorModeContextType = {
   mode: PaletteMode;

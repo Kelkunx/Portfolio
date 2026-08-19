@@ -1,6 +1,5 @@
 'use client';
 
-import { motion, useReducedMotion, type Easing } from 'framer-motion';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -25,8 +24,6 @@ type ProjectCardProps = Project & {
   compact?: boolean;
 };
 
-const MotionCard = motion(Card);
-
 export default function ProjectCard({
   slug,
   title,
@@ -42,8 +39,6 @@ export default function ProjectCard({
   compact = false,
 }: ProjectCardProps) {
   const { locale } = useLocale();
-  const prefersReducedMotion = useReducedMotion();
-  const ease: Easing = [0.22, 1, 0.36, 1];
 
   const externalLinks = links.filter((item) => item.type === 'demo' || item.type === 'repo');
   const highlightedItems = highlights.slice(0, compact ? 1 : 2);
@@ -58,15 +53,7 @@ export default function ProjectCard({
   const imageSizes = compact ? '(max-width: 900px) 100vw, 50vw' : '(max-width: 900px) 100vw, 33vw';
 
   return (
-    <MotionCard
-      whileHover={
-        prefersReducedMotion
-          ? undefined
-          : {
-              y: -3,
-              transition: { duration: 0.2, ease },
-            }
-      }
+    <Card
       sx={{
         height: '100%',
         display: 'flex',
@@ -79,6 +66,12 @@ export default function ProjectCard({
         transition: 'border-color 180ms ease',
         '&:hover': {
           borderColor: 'rgba(121, 168, 255, 0.42)',
+        },
+        '@media (prefers-reduced-motion: no-preference)': {
+          transition: 'transform 180ms ease, border-color 180ms ease',
+          '&:hover': {
+            transform: 'translateY(-3px)',
+          },
         },
       }}
     >
@@ -169,6 +162,6 @@ export default function ProjectCard({
           </Button>
         ))}
       </CardActions>
-    </MotionCard>
+    </Card>
   );
 }
