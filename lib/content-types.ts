@@ -77,9 +77,18 @@ export type Profile = {
   interests: string[];
 };
 
-export type ProjectResult = {
+export type ProjectHighlight = {
   value: string;
   label: string;
+};
+
+export type ProjectStatus = 'in-progress' | 'live' | 'completed';
+
+export type ProjectCategory = 'open-source' | 'product' | 'personal' | 'academic';
+
+export type ProjectPeriod = {
+  start: string;
+  end?: string;
 };
 
 export type ProjectScreen = {
@@ -103,17 +112,16 @@ export type Project = {
   imageSrc?: string;
   imageAlt?: string;
   tech: string[];
-  date?: string;
-  status: string;
+  period: ProjectPeriod;
+  status: ProjectStatus;
+  category: ProjectCategory;
   role: string;
   context: string;
   problem: string;
   process: string[];
   solution: string[];
   deliverables: string[];
-  results: ProjectResult[];
+  highlights: ProjectHighlight[];
   screens: ProjectScreen[];
   links: ProjectLink[];
-  demoUrl?: string;
-  repoUrl?: string;
 };

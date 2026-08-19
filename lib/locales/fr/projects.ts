@@ -12,8 +12,9 @@ export const projects: Project[] = [
     imageSrc: '/images/capture-edd.png',
     imageAlt: 'Capture du projet Estimated Delivery Date',
     tech: ['Shopify CLI', 'React', 'TypeScript', 'Polaris', 'App Bridge'],
-    date: '2026-03',
-    status: 'Projet produit',
+    period: { start: '2026-03' },
+    status: 'in-progress',
+    category: 'product',
     role: 'Product design, développement full-stack, UX de configuration, logique de calcul.',
     context:
       "Les marchands Shopify utilisent souvent des messages de livraison trop génériques. L'enjeu était de proposer une information plus crédible, tout en gardant une configuration simple côté admin.",
@@ -35,7 +36,7 @@ export const projects: Project[] = [
       'Système de templates',
       'Gestion des plans et options',
     ],
-    results: [
+    highlights: [
       {
         value: 'Calcul métier',
         label: 'Date estimée calculée selon jours ouvrés, heure limite et délais de préparation.',
@@ -70,8 +71,9 @@ export const projects: Project[] = [
     imageSrc: '/images/capture-shopify-functions.png',
     imageAlt: 'Capture du projet Shopify Functions Workbench',
     tech: ['Next.js', 'React', 'NestJS', 'TypeScript', 'Monaco Editor', 'WebAssembly'],
-    date: '2026-03',
-    status: 'En cours',
+    period: { start: '2026-03' },
+    status: 'in-progress',
+    category: 'open-source',
     role: 'Conception produit, UX orientée DX, développement full-stack, runner Shopify local et benchmark.',
     context:
       "Tester une Shopify Function reste souvent trop lent et trop dépendant d'un cycle complet de build, déploiement, branchement à une boutique puis vérification du résultat.",
@@ -95,7 +97,7 @@ export const projects: Project[] = [
       'Benchmark et diagnostics structurés',
       'Exemples Shopify prêts à lancer',
     ],
-    results: [
+    highlights: [
       {
         value: 'Runner Shopify réel',
         label: "Le backend peut exécuter une Function via les métadonnées Shopify CLI et l'outil `function-runner`.",
@@ -120,7 +122,6 @@ export const projects: Project[] = [
       { label: 'Voir le code', url: 'https://github.com/Kelkunx/Shopify-Functions-Workbench', type: 'repo' },
       { label: 'Me contacter à propos de ce projet', url: '/contact', type: 'contact' },
     ],
-    repoUrl: 'https://github.com/Kelkunx/Shopify-Functions-Workbench',
   },
   {
     slug: 'portfolio',
@@ -133,8 +134,9 @@ export const projects: Project[] = [
     imageSrc: '/images/capture-portfolio.png',
     imageAlt: 'Capture du portfolio personnel',
     tech: ['Next.js', 'React', 'TypeScript', 'MUI'],
-    date: '2025-09',
-    status: 'Live',
+    period: { start: '2025-09' },
+    status: 'live',
+    category: 'personal',
     role: 'Direction artistique, UI, intégration front, structuration de contenu.',
     context:
       "Beaucoup de portfolios personnels ressemblent soit à un CV en colonnes, soit à une démonstration visuelle trop chargée. L'objectif ici est de proposer une base plus claire et plus réutilisable.",
@@ -156,7 +158,7 @@ export const projects: Project[] = [
       'Fiches projet détaillées',
       'Page contact simple',
     ],
-    results: [
+    highlights: [
       {
         value: 'Structure réutilisable',
         label: "La base peut être adaptée à un autre portfolio sans dépendre d'un contexte trop personnel.",
@@ -182,8 +184,6 @@ export const projects: Project[] = [
       { label: 'Voir le code', url: 'https://github.com/Kelkunx/Portfolio', type: 'repo' },
       { label: 'Me contacter', url: '/contact', type: 'contact' },
     ],
-    demoUrl: 'https://leo-jego.vercel.app',
-    repoUrl: 'https://github.com/Kelkunx/Portfolio',
   },
   {
     slug: 'dashboard-news-ai',
@@ -196,8 +196,9 @@ export const projects: Project[] = [
     imageSrc: '/images/capture-news.png',
     imageAlt: 'Capture du Dashboard News AI',
     tech: ['React', 'NestJS', 'Tailwind', 'HuggingFace'],
-    date: '2025-08',
-    status: 'Live',
+    period: { start: '2025-08' },
+    status: 'live',
+    category: 'personal',
     role: 'Conception du produit, développement frontend/backend et intégration IA.',
     context:
       "L'idée était de proposer une lecture plus rapide de l'actualité en combinant filtres personnalisés et synthèse automatique des articles.",
@@ -214,7 +215,7 @@ export const projects: Project[] = [
       "Présentation compacte de l'information avec résumé court, métadonnées et catégorisation.",
     ],
     deliverables: ['Interface React', 'API NestJS', 'Filtres personnalisés', 'Résumés IA'],
-    results: [
+    highlights: [
       {
         value: 'Lecture accélérée',
         label: "Chaque article est résumé en quelques lignes pour aller à l'essentiel.",
@@ -240,8 +241,6 @@ export const projects: Project[] = [
       { label: 'Voir le code', url: 'https://github.com/Kelkunx/dashboard-news-ai', type: 'repo' },
       { label: 'Me contacter', url: '/contact', type: 'contact' },
     ],
-    demoUrl: 'https://dashboard-news-ai.vercel.app',
-    repoUrl: 'https://github.com/Kelkunx/dashboard-news-ai',
   },
   {
     slug: 'bts-baie-securisee',
@@ -254,8 +253,9 @@ export const projects: Project[] = [
     imageSrc: '/images/capture-baie-serveur.png',
     imageAlt: 'Capture du projet baie serveur sécurisée',
     tech: ['Active Directory', 'Cisco', 'RADIUS', 'Arduino'],
-    date: '2024-06',
-    status: 'Projet académique',
+    period: { start: '2024-06' },
+    status: 'completed',
+    category: 'academic',
     role: 'Configuration réseau, serveur RADIUS, intégration capteurs et documentation.',
     context:
       "Le projet simulait la mise en place d'une infrastructure sécurisée pour une entreprise fictive avec services réseau, NAS, vidéosurveillance et supervision.",
@@ -272,7 +272,7 @@ export const projects: Project[] = [
       'Intégration dans une architecture incluant Active Directory, NAS et vidéosurveillance.',
     ],
     deliverables: ['Serveur RADIUS', 'Capteurs Arduino', 'Architecture réseau', 'Documentation'],
-    results: [
+    highlights: [
       {
         value: 'Architecture complète',
         label: 'Projet couvrant réseau, authentification, stockage, supervision et environnement.',

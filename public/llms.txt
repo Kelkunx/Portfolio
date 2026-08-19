@@ -14,8 +14,8 @@ The site is built with React, Next.js, TypeScript, and MUI. Léo works on clear 
 ## Featured Projects
 
 - [Shopify Functions Workbench](https://leo-jego.vercel.app/projets/shopify-functions-workbench): Open-source local workbench for running, benchmarking, and debugging Shopify Functions before deployment.
-- [Dashboard News AI](https://leo-jego.vercel.app/projets/dashboard-news-ai): News dashboard with custom filters and AI-generated summaries.
 - [Estimated Delivery Date](https://leo-jego.vercel.app/projets/edd-shopify): Shopify delivery-date app with business logic and merchant-side configuration.
+- [Dashboard News AI](https://leo-jego.vercel.app/projets/dashboard-news-ai): News dashboard with custom filters and AI-generated summaries.
 
 ## Machine-Readable Resources
 

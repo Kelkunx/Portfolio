@@ -2,7 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import ProjectsPageContent from '../../components/ProjectsPageContent';
 import StructuredData from '../../components/StructuredData';
-import { projects as projectsFR } from '../../../lib/locales/fr/projects';
+import { getProjects } from '../../../lib/content';
 import { buildProjectsStructuredData } from '../../../lib/structured-data';
 import { buildPageMetadata } from '../../../lib/site-metadata';
 
@@ -15,9 +15,11 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 export default function ProjectsPage() {
+  const projects = getProjects('fr');
+
   return (
     <>
-      <StructuredData data={buildProjectsStructuredData(projectsFR)} />
+      <StructuredData data={buildProjectsStructuredData(projects)} />
       <ProjectsPageContent />
     </>
   );

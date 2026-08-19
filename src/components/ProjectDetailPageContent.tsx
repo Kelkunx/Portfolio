@@ -12,19 +12,13 @@ import { ArrowOutward } from '@mui/icons-material';
 import ImageLightbox from './ImageLightbox';
 import TechStackChips from './TechStackChips';
 import { useLocale } from '../context/LocaleContext';
-import { getProjects } from '../../lib/content';
+import {
+  formatProjectPeriod,
+  getProjectCategoryLabel,
+  getProjects,
+  getProjectStatusLabel,
+} from '../../lib/content';
 import { projectPlaceholderDataUrl } from '../../lib/project-placeholder';
-
-function formatDate(date?: string, locale = 'fr') {
-  if (!date) return undefined;
-  const value = new Date(date);
-  if (Number.isNaN(value.getTime())) return date;
-
-  return value.toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', {
-    year: 'numeric',
-    month: 'long',
-  });
-}
 
 export default function ProjectDetailPageContent({ slug }: { slug?: string }) {
   const { locale } = useLocale();
@@ -47,7 +41,11 @@ export default function ProjectDetailPageContent({ slug }: { slug?: string }) {
     );
   }
 
-  const published = formatDate(project.date, locale);
+  const metadataLabel = [
+    getProjectCategoryLabel(project.category, locale),
+    getProjectStatusLabel(project.status, locale),
+    formatProjectPeriod(project.period, locale, 'long'),
+  ].join(' • ');
   const fallbackScreen = {
     src: projectPlaceholderDataUrl(project.title, locale),
     alt: project.imageAlt || project.title,
@@ -60,7 +58,7 @@ export default function ProjectDetailPageContent({ slug }: { slug?: string }) {
     <Container maxWidth="lg" sx={{ py: { xs: 6, md: 8 } }}>
       <Stack spacing={2} sx={{ mb: 5, maxWidth: 860 }}>
         <Typography variant="body2" sx={{ color: 'var(--text-2)', fontWeight: 600 }}>
-          {published ? `${project.status} • ${published}` : project.status}
+          {metadataLabel}
         </Typography>
 
         <Typography component="h1" variant="h2" sx={{ color: 'var(--text)', maxWidth: '14ch' }}>
@@ -283,22 +281,22 @@ export default function ProjectDetailPageContent({ slug }: { slug?: string }) {
               }}
             >
               <Typography component="h2" variant="h5" sx={{ color: 'var(--text)', mb: 2 }}>
-                {locale === 'fr' ? 'Résultats' : 'Outcomes'}
+                {locale === 'fr' ? 'Points clés' : 'Highlights'}
               </Typography>
               <Stack spacing={1.5}>
-                {project.results.map((result) => (
+                {project.highlights.map((highlight) => (
                   <Box
-                    key={`${result.value}-${result.label}`}
+                    key={`${highlight.value}-${highlight.label}`}
                     sx={{
                       borderLeft: '2px solid var(--cyan)',
                       pl: 1.5,
                     }}
                   >
                     <Typography variant="body2" sx={{ color: 'var(--text)', fontWeight: 600, mb: 0.4 }}>
-                      {result.value}
+                      {highlight.value}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6 }}>
-                      {result.label}
+                      {highlight.label}
                     </Typography>
                   </Box>
                 ))}

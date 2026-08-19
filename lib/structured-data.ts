@@ -1,4 +1,5 @@
 import type { Project, Profile } from './content-types';
+import { getProjectCategoryLabel } from './content';
 
 function toAbsoluteUrl(path: string, baseUrl: string) {
   if (path.startsWith('http://') || path.startsWith('https://')) return path;
@@ -129,7 +130,7 @@ export function buildProjectsStructuredData(projects: Project[]) {
 export function buildProjectStructuredData(project: Project, profile: Profile) {
   const siteUrl = getSiteUrl();
   const absoluteUrl = `${siteUrl}/projets/${project.slug}`;
-  const publishedDate = formatProjectDate(project.date);
+  const publishedDate = formatProjectDate(project.period.start);
   const imageUrl = project.imageSrc ? toAbsoluteUrl(project.imageSrc, siteUrl) : undefined;
 
   return {
@@ -142,7 +143,7 @@ export function buildProjectStructuredData(project: Project, profile: Profile) {
     headline: project.tagline,
     description: project.description,
     inLanguage: 'fr-FR',
-    genre: project.status,
+    genre: getProjectCategoryLabel(project.category, 'fr'),
     keywords: project.tech,
     author: {
       '@type': 'Person',

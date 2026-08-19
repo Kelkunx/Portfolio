@@ -12,8 +12,9 @@ export const projects: Project[] = [
     imageSrc: '/images/capture-edd.png',
     imageAlt: 'Screenshot of Estimated Delivery Date',
     tech: ['Shopify CLI', 'React', 'TypeScript', 'Polaris', 'App Bridge'],
-    date: '2026-03',
-    status: 'Product project',
+    period: { start: '2026-03' },
+    status: 'in-progress',
+    category: 'product',
     role: 'Product design, full-stack development, configuration UX and delivery logic.',
     context:
       'Many Shopify stores rely on generic shipping messages. The goal was to offer more credible delivery information while keeping the admin experience simple.',
@@ -35,7 +36,7 @@ export const projects: Project[] = [
       'Template system',
       'Plan and options management',
     ],
-    results: [
+    highlights: [
       {
         value: 'Business logic',
         label: 'Estimate calculated from business days, cutoff times and preparation delays.',
@@ -70,8 +71,9 @@ export const projects: Project[] = [
     imageSrc: '/images/capture-shopify-functions.png',
     imageAlt: 'Screenshot of Shopify Functions Workbench',
     tech: ['Next.js', 'React', 'NestJS', 'TypeScript', 'Monaco Editor', 'WebAssembly'],
-    date: '2026-03',
-    status: 'In progress',
+    period: { start: '2026-03' },
+    status: 'in-progress',
+    category: 'open-source',
     role: 'Product design, DX-focused UX, full-stack development, local Shopify runner and benchmarking.',
     context:
       'Testing a Shopify Function is often too slow and too dependent on a full cycle of build, deploy, connect to a store and inspect the result.',
@@ -95,7 +97,7 @@ export const projects: Project[] = [
       'Benchmarking and structured diagnostics',
       'Ready-to-run Shopify examples',
     ],
-    results: [
+    highlights: [
       {
         value: 'Real Shopify runner',
         label: 'The backend can execute a Function through Shopify CLI metadata and the official `function-runner`.',
@@ -120,7 +122,6 @@ export const projects: Project[] = [
       { label: 'View code', url: 'https://github.com/Kelkunx/Shopify-Functions-Workbench', type: 'repo' },
       { label: 'Contact me about this project', url: '/contact', type: 'contact' },
     ],
-    repoUrl: 'https://github.com/Kelkunx/Shopify-Functions-Workbench',
   },
   {
     slug: 'portfolio',
@@ -133,8 +134,9 @@ export const projects: Project[] = [
     imageSrc: '/images/capture-portfolio.png',
     imageAlt: 'Screenshot of the personal portfolio',
     tech: ['Next.js', 'React', 'TypeScript', 'MUI'],
-    date: '2025-09',
-    status: 'Live',
+    period: { start: '2025-09' },
+    status: 'live',
+    category: 'personal',
     role: 'Art direction, UI design, frontend implementation and content structuring.',
     context:
       'Many personal portfolios either read like a static resume or lean too heavily on visual effects. The goal here is to provide a cleaner and more reusable base.',
@@ -156,7 +158,7 @@ export const projects: Project[] = [
       'Detailed project pages',
       'Simple contact page',
     ],
-    results: [
+    highlights: [
       {
         value: 'Reusable structure',
         label: 'The base can be adapted to another portfolio without depending on a very personal context.',
@@ -182,8 +184,6 @@ export const projects: Project[] = [
       { label: 'View the code', url: 'https://github.com/Kelkunx/Portfolio', type: 'repo' },
       { label: 'Contact me', url: '/contact', type: 'contact' },
     ],
-    demoUrl: 'https://leo-jego.vercel.app',
-    repoUrl: 'https://github.com/Kelkunx/Portfolio',
   },
   {
     slug: 'dashboard-news-ai',
@@ -196,8 +196,9 @@ export const projects: Project[] = [
     imageSrc: '/images/capture-news.png',
     imageAlt: 'News AI Dashboard screenshot',
     tech: ['React', 'NestJS', 'Tailwind', 'HuggingFace'],
-    date: '2025-08',
-    status: 'Live',
+    period: { start: '2025-08' },
+    status: 'live',
+    category: 'personal',
     role: 'Product design, frontend/backend development and AI integration.',
     context:
       'The idea was to make news reading faster by combining personalised filters with automatic article summaries.',
@@ -214,7 +215,7 @@ export const projects: Project[] = [
       'Compact information design combining summary, metadata and categorisation.',
     ],
     deliverables: ['React interface', 'NestJS API', 'Custom filters', 'AI summaries'],
-    results: [
+    highlights: [
       {
         value: 'Faster reading',
         label: 'Each article is reduced to a short summary to get to the point quickly.',
@@ -240,8 +241,6 @@ export const projects: Project[] = [
       { label: 'View code', url: 'https://github.com/Kelkunx/dashboard-news-ai', type: 'repo' },
       { label: 'Contact me', url: '/contact', type: 'contact' },
     ],
-    demoUrl: 'https://dashboard-news-ai.vercel.app',
-    repoUrl: 'https://github.com/Kelkunx/dashboard-news-ai',
   },
   {
     slug: 'bts-baie-securisee',
@@ -254,8 +253,9 @@ export const projects: Project[] = [
     imageSrc: '/images/capture-baie-serveur.png',
     imageAlt: 'Screenshot of the secure server rack project',
     tech: ['Active Directory', 'Cisco', 'RADIUS', 'Arduino'],
-    date: '2024-06',
-    status: 'Academic project',
+    period: { start: '2024-06' },
+    status: 'completed',
+    category: 'academic',
     role: 'Network configuration, RADIUS server setup, sensor integration and documentation.',
     context:
       'The project simulated the deployment of a secure infrastructure for a fictional company with networking services, NAS, cameras and environmental monitoring.',
@@ -272,7 +272,7 @@ export const projects: Project[] = [
       'Integrated the work into an architecture including Active Directory, NAS and camera monitoring.',
     ],
     deliverables: ['RADIUS server', 'Arduino sensors', 'Network architecture', 'Documentation'],
-    results: [
+    highlights: [
       {
         value: 'Complete architecture',
         label: 'Project covering networking, authentication, storage, monitoring and environment sensing.',

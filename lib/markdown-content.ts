@@ -1,5 +1,12 @@
 import type { ContentLocale } from './content';
-import { getFeaturedProjects, getProfile, getProjects } from './content';
+import {
+  formatProjectPeriod,
+  getFeaturedProjects,
+  getProfile,
+  getProjectCategoryLabel,
+  getProjects,
+  getProjectStatusLabel,
+} from './content';
 import type { Project } from './content-types';
 
 type MarkdownDocument = {
@@ -21,7 +28,7 @@ function link(label: string, url: string, siteUrl: string) {
   return `[${label}](${href})`;
 }
 
-function projectSummary(project: Project, siteUrl: string) {
+function projectSummary(project: Project, siteUrl: string, locale: ContentLocale) {
   const links = [
     link('Fiche projet', `/projets/${project.slug}`, siteUrl),
     ...project.links.map((item) => link(item.label, item.url, siteUrl)),
@@ -31,22 +38,24 @@ function projectSummary(project: Project, siteUrl: string) {
     `### ${project.title}`,
     project.tagline,
     project.description,
-    `- Statut: ${project.status}`,
-    `- Date: ${project.date ?? 'Non précisée'}`,
+    `- Type: ${getProjectCategoryLabel(project.category, locale)}`,
+    `- Statut: ${getProjectStatusLabel(project.status, locale)}`,
+    `- Période: ${formatProjectPeriod(project.period, locale, 'long')}`,
     `- Rôle: ${project.role}`,
     `- Stack: ${project.tech.join(', ')}`,
     `- Problème traité: ${project.problem}`,
-    `- Résultats: ${project.results.map((result) => `${result.value}: ${result.label}`).join(' | ')}`,
+    `- Points clés: ${project.highlights.map((item) => `${item.value}: ${item.label}`).join(' | ')}`,
     `- Liens: ${links.join(' | ')}`,
   ].join('\n\n');
 }
 
-function projectDetail(project: Project, siteUrl: string) {
+function projectDetail(project: Project, siteUrl: string, locale: ContentLocale) {
   return [
     `# ${project.title}`,
     project.tagline,
-    `- Statut: ${project.status}`,
-    `- Date: ${project.date ?? 'Non précisée'}`,
+    `- Type: ${getProjectCategoryLabel(project.category, locale)}`,
+    `- Statut: ${getProjectStatusLabel(project.status, locale)}`,
+    `- Période: ${formatProjectPeriod(project.period, locale, 'long')}`,
     `- Rôle: ${project.role}`,
     `- Stack: ${project.tech.join(', ')}`,
     section('Description', project.description),
@@ -56,8 +65,8 @@ function projectDetail(project: Project, siteUrl: string) {
     section('Solution', list(project.solution)),
     section('Livrables', list(project.deliverables)),
     section(
-      'Résultats',
-      list(project.results.map((result) => `${result.value}: ${result.label}`)),
+      locale === 'fr' ? 'Points clés' : 'Highlights',
+      list(project.highlights.map((item) => `${item.value}: ${item.label}`)),
     ),
     section(
       'Liens',
@@ -92,7 +101,10 @@ function buildHomeMarkdown(locale: ContentLocale, siteUrl: string) {
         ].join('\n\n'),
       ),
     ),
-    section('Projets sélectionnés', featuredProjects.map((project) => projectSummary(project, siteUrl))),
+    section(
+      'Projets sélectionnés',
+      featuredProjects.map((project) => projectSummary(project, siteUrl, locale)),
+    ),
     section(
       'Contact',
       list([
@@ -111,7 +123,7 @@ function buildProjectsMarkdown(locale: ContentLocale, siteUrl: string) {
   return [
     '# Projets',
     'Sélection de projets web, produits et académiques.',
-    ...projects.map((project) => projectSummary(project, siteUrl)),
+    ...projects.map((project) => projectSummary(project, siteUrl, locale)),
   ].join('\n\n');
 }
 
@@ -216,7 +228,7 @@ export function buildMarkdownForPath(
   const project = projects.find((item) => item.slug === projectSlug);
 
   if (project) {
-    return { body: projectDetail(project, siteUrl) };
+    return { body: projectDetail(project, siteUrl, locale) };
   }
 
   return null;

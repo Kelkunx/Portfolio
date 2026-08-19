@@ -14,6 +14,11 @@ import Image from 'next/image';
 import { ArrowOutward, GitHub } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 import { useLocale } from '../context/LocaleContext';
+import {
+  formatProjectPeriod,
+  getProjectCategoryLabel,
+  getProjectStatusLabel,
+} from '../../lib/content';
 import type { Project } from '../../lib/content-types';
 import { projectPlaceholderDataUrl } from '../../lib/project-placeholder';
 import TechStackChips from './TechStackChips';
@@ -25,17 +30,6 @@ type ProjectCardProps = Project & {
 
 const MotionCard = motion(Card);
 
-function formatDate(date?: string, locale = 'fr') {
-  if (!date) return undefined;
-  const value = new Date(date);
-  if (Number.isNaN(value.getTime())) return date;
-
-  return value.toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', {
-    year: 'numeric',
-    month: 'short',
-  });
-}
-
 export default function ProjectCard({
   slug,
   title,
@@ -43,9 +37,10 @@ export default function ProjectCard({
   imageSrc,
   imageAlt,
   tech,
-  date,
+  period,
   status,
-  results,
+  category,
+  highlights,
   links,
   revealDelay = 0,
   compact = false,
@@ -75,8 +70,12 @@ export default function ProjectCard({
       };
 
   const externalLinks = links.filter((item) => item.type === 'demo' || item.type === 'repo');
-  const highlightedResults = results.slice(0, compact ? 1 : 2);
-  const dateLabel = formatDate(date, locale);
+  const highlightedItems = highlights.slice(0, compact ? 1 : 2);
+  const metadataLabel = [
+    getProjectCategoryLabel(category, locale),
+    getProjectStatusLabel(status, locale),
+    formatProjectPeriod(period, locale),
+  ].join(' • ');
   const cardImageSrc = imageSrc && imageSrc.trim() !== '' ? imageSrc : projectPlaceholderDataUrl(title, locale);
   const cardImageAlt = imageAlt || title;
   const shouldSkipOptimization = cardImageSrc.startsWith('data:') || cardImageSrc.startsWith('blob:');
@@ -156,7 +155,7 @@ export default function ProjectCard({
         <Stack spacing={2}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
             <Typography variant="body2" sx={{ color: 'var(--text-2)', fontWeight: 600 }}>
-              {dateLabel ? `${status} • ${dateLabel}` : status}
+              {metadataLabel}
             </Typography>
           </Box>
 
@@ -170,7 +169,7 @@ export default function ProjectCard({
           </Box>
 
           <Stack spacing={1}>
-            {highlightedResults.map((item) => (
+            {highlightedItems.map((item) => (
               <Box
                 key={`${item.value}-${item.label}`}
                 sx={{

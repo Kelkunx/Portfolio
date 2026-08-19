@@ -4,13 +4,15 @@ import { notFound } from 'next/navigation';
 import ProjectDetailPageContent from '../../../components/ProjectDetailPageContent';
 import StructuredData from '../../../components/StructuredData';
 import { profile as profileFR } from '../../../../lib/locales/fr/profile';
-import { projects as projectsFR } from '../../../../lib/locales/fr/projects';
+import { getProjects } from '../../../../lib/content';
 import { buildProjectStructuredData } from '../../../../lib/structured-data';
 import { buildPageMetadata } from '../../../../lib/site-metadata';
 
 type ProjectPageProps = {
   params: Promise<{ slug: string }>;
 };
+
+const projectsFR = getProjects('fr');
 
 export function generateStaticParams() {
   return projectsFR.map((project) => ({ slug: project.slug }));

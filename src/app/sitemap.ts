@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { projects } from '../../lib/locales/fr/projects';
+import { getProjects } from '../../lib/content';
 import { absoluteSiteUrl } from '../../lib/site-metadata';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -26,9 +26,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const projectRoutes: MetadataRoute.Sitemap = projects.map((project) => ({
+  const projectRoutes: MetadataRoute.Sitemap = getProjects('fr').map((project) => ({
     url: absoluteSiteUrl(`/projets/${project.slug}`),
-    changeFrequency: project.status === 'En cours' ? 'weekly' : 'monthly',
+    changeFrequency: project.status === 'in-progress' ? 'weekly' : 'monthly',
     priority: 0.7,
   }));
 
