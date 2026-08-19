@@ -10,6 +10,7 @@ import { CodeRounded, HandymanRounded } from '@mui/icons-material';
 import { useLocale } from '../context/LocaleContext';
 import { getProfile } from '../../lib/content';
 import SectionTitle from './SectionTitle';
+import TechStackChips from './TechStackChips';
 
 type SkillsSectionProps = {
   variant?: 'home' | 'cv';
@@ -31,7 +32,7 @@ export default function SkillsSection({ variant = 'home' }: SkillsSectionProps) 
           />
         </Stack>
 
-        <Grid container spacing={3}>
+        <Grid container spacing={{ xs: 2.5, md: 3 }}>
           {profile.skills.map((group, index) => {
             const tone = tones[index % tones.length];
 
@@ -39,56 +40,15 @@ export default function SkillsSection({ variant = 'home' }: SkillsSectionProps) 
               <Grid key={group.category} size={{ xs: 12, md: 6 }}>
                 <Box
                   sx={{
-                    borderRadius: 'var(--radius-md)',
-                    border: '1px solid var(--border)',
-                    borderTop: `2px solid ${tone}`,
-                    backgroundColor: 'var(--surface)',
-                    p: 3,
-                    height: '100%',
-                    transition: 'background-color 160ms ease, border-color 160ms ease',
-                    '&:hover': {
-                      borderColor: tone,
-                      backgroundColor:
-                        tone === 'var(--cyan)'
-                          ? 'rgba(125, 207, 255, 0.05)'
-                          : tone === 'var(--purple)'
-                            ? 'rgba(187, 154, 247, 0.05)'
-                            : tone === 'var(--green)'
-                              ? 'rgba(158, 206, 106, 0.05)'
-                              : 'rgba(255, 158, 100, 0.05)',
-                    },
+                    borderLeft: `2px solid ${tone}`,
+                    pl: 2,
+                    py: 0.25,
                   }}
                 >
-                  <Typography component="h3" variant="h6" sx={{ color: 'var(--text)', mb: 2 }}>
+                  <Typography component="h3" variant="h6" sx={{ color: 'var(--text)', mb: 1.25 }}>
                     {group.category}
                   </Typography>
-
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.1 }}>
-                    {group.items.map((item) => (
-                      <Box
-                        key={item}
-                        sx={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 0.75,
-                          pr: 0.9,
-                        }}
-                      >
-                        <Box
-                          sx={{
-                            width: 6,
-                            height: 6,
-                            borderRadius: '50%',
-                            backgroundColor: tone,
-                            flexShrink: 0,
-                          }}
-                        />
-                        <Typography variant="body2" sx={{ color: 'var(--text)', lineHeight: 1.55 }}>
-                          {item}
-                        </Typography>
-                      </Box>
-                    ))}
-                  </Box>
+                  <TechStackChips items={group.items} />
                 </Box>
               </Grid>
             );

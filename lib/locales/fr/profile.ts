@@ -148,10 +148,7 @@ export const profile: Profile = {
         "Optimisation et structuration d'un ATS no-code (interne, client et partenaire) : création et amélioration des champs, statuts, filtres avancés et exports (CV / profils candidats).",
         "Développement de recherches avancées (CV, résumé, géographie, diplôme, école…) afin d'améliorer la qualification et le matching des candidatures.",
         "Mise en place et amélioration de flux automatisés entre les outils (KerIT ↔ ATS, Tactiq, HelloWork, Cal, HubSpot) incluant la récupération et l'exploitation des données candidats.",
-        "Structuration du suivi budgétaire des offres d'emploi : devis (envoyés / signés), acomptes, soldes, statuts des missions et suivi par recruteur.",
-        "Amélioration des interfaces Softr et de l'extranet client : affichage des offres, événements, pages panorama, barres de recherche, carousels et indicateurs clés.",
         'Création de documentations fonctionnelles et techniques (ATS, automatisations, partenaires, backups) pour garantir la pérennité et la transmissibilité des outils.',
-        "Participation à la structuration de partenariats jobboards (HelloWork) : compréhension des flux XML, automatisation de la diffusion des annonces et récupération des candidatures dans l'ATS.",
       ],
     },
     {
@@ -168,9 +165,7 @@ export const profile: Profile = {
         "Développement web full-stack sur la plateforme CGI Retail Suite : création et évolution d'écrans métiers en React.js et développement / extension d'API en NestJS.",
         "Conception de fonctionnalités complètes : gestion des adresses e-mail dans les commandes, import de fichiers CSV (UI/UX, logique métier, affichage d'erreurs, notifications).",
         "Paramétrage avancé des écrans via la configuration d'affichage : ajout / suppression de champs, gestion des droits utilisateurs, optimisation des widgets et harmonisation des interfaces.",
-        "Refonte et amélioration d'écrans existants : meilleure ergonomie, cohérence avec le design system, correction de bugs et performances améliorées.",
         'Contribution à la qualité logicielle : écriture de tests (unitaires, intégration, E2E), participation aux revues de code et respect des normes de qualité (GitLab CI, SonarQube).',
-        "Travail à partir de spécifications techniques et fonctionnelles, échanges réguliers avec PO / analystes et démonstrations des fonctionnalités développées à l'équipe.",
       ],
     },
     {
@@ -195,7 +190,6 @@ export const profile: Profile = {
       featured: true,
       kind: 'tech',
       bullets: [
-        "Stage de 7 semaines consistant à mettre en place une solution de surveillance de la consommation électrique de différents équipements au sein de l'entreprise.",
         "Mise en place d'une base de données de séries temporelles avec InfluxDB et automatisation de la collecte des mesures via Telegraf (SNMP, MQTT).",
         "Développement d'une interface web pour analyser en quasi temps réel la consommation (HTML, CSS, JavaScript, Chart.js, API PHP / Flux).",
         "Intégration du module ZLinky (Zigbee) et centralisation des données dans l'infrastructure domotique (Jeedom, Raspberry Pi, Mosquitto).",

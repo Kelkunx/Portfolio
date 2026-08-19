@@ -12,7 +12,6 @@ import SectionTitle from './SectionTitle';
 export default function LanguagesSection() {
   const { locale } = useLocale();
   const profile = getProfile(locale);
-  const toeicCertification = profile.certifications.find((item) => item.name.toLowerCase().includes('toeic'));
   const accentTones = ['var(--cyan)', 'var(--purple)', 'var(--green)'];
 
   return (
@@ -27,10 +26,6 @@ export default function LanguagesSection() {
 
       <Stack spacing={2}>
         {profile.languages.map((language, index) => {
-          const scoreSuffix =
-            language.name.toLowerCase() === (locale === 'fr' ? 'anglais' : 'english') && toeicCertification
-              ? ` • TOEIC ${toeicCertification.score}`
-              : '';
           const accentTone = accentTones[index % accentTones.length];
 
           return (
@@ -59,7 +54,6 @@ export default function LanguagesSection() {
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 {language.level}
-                {scoreSuffix}
               </Typography>
             </Box>
           );

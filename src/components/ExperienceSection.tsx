@@ -20,6 +20,27 @@ export default function ExperienceSection() {
   const profile = getProfile(locale);
   const featuredExperiences = profile.experiences.filter((item) => item.kind !== 'other');
   const supportingExperiences = profile.experiences.filter((item) => item.kind === 'other');
+  const supportingExperienceGroups = [
+    ...supportingExperiences
+      .reduce((groups, experience) => {
+        const key = `${experience.role}-${experience.company}`;
+        const period = formatExperienceRange(experience.start, experience.end, locale);
+        const existingGroup = groups.get(key);
+
+        if (existingGroup) {
+          existingGroup.periods.push(period);
+        } else {
+          groups.set(key, {
+            company: experience.company,
+            role: experience.role,
+            periods: [period],
+          });
+        }
+
+        return groups;
+      }, new Map<string, { company: string; role: string; periods: string[] }>())
+      .values(),
+  ];
   const accentTones = ['var(--cyan)', 'var(--purple)', 'var(--green)'];
 
   return (
@@ -32,7 +53,7 @@ export default function ExperienceSection() {
         />
       </Stack>
 
-      <Stack spacing={3}>
+      <Stack spacing={2}>
         {featuredExperiences.map((experience, index) => (
           <Box
             key={`${experience.company}-${experience.start}`}
@@ -41,7 +62,7 @@ export default function ExperienceSection() {
               border: '1px solid var(--border)',
               borderLeft: `3px solid ${accentTones[index % accentTones.length]}`,
               backgroundColor: 'var(--surface)',
-              p: { xs: 3, md: 3.5 },
+              p: { xs: 2.5, md: 3 },
             }}
           >
             <Stack spacing={1.5}>
@@ -89,26 +110,26 @@ export default function ExperienceSection() {
         <Box
           sx={{
             mt: 4,
-            borderRadius: 'var(--radius-md)',
-            border: '1px solid var(--border)',
-            borderLeft: '3px solid var(--orange)',
-            backgroundColor: 'var(--surface)',
-            p: 3,
+            borderTop: '1px solid var(--border)',
+            pt: 2.5,
           }}
         >
-          <Typography component="h3" variant="h6" sx={{ color: 'var(--text)', mb: 1 }}>
+          <Typography component="h3" variant="h6" sx={{ color: 'var(--text)', mb: 1.25 }}>
             {locale === 'fr' ? 'Autres expériences' : 'Other experience'}
           </Typography>
-          <Stack spacing={0.75}>
-            {supportingExperiences.map((experience) => (
-              <Typography
-                key={`${experience.company}-${experience.start}`}
-                variant="body2"
-                color="text.secondary"
+          <Stack spacing={1}>
+            {supportingExperienceGroups.map((experience) => (
+              <Box
+                key={`${experience.company}-${experience.role}`}
+                sx={{ display: 'flex', justifyContent: 'space-between', gap: 1.5, flexWrap: 'wrap' }}
               >
-                {experience.role} — {experience.company} •{' '}
-                {formatExperienceRange(experience.start, experience.end, locale)}
-              </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {experience.role} — {experience.company}
+                </Typography>
+                <Typography variant="body2" sx={{ color: 'var(--text-2)' }}>
+                  {experience.periods.join(' • ')}
+                </Typography>
+              </Box>
             ))}
           </Stack>
         </Box>

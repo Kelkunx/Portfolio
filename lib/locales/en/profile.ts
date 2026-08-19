@@ -148,10 +148,7 @@ export const profile: Profile = {
         'Optimised and structured a no-code ATS (internal, client and partner): created and improved fields, statuses, advanced filters and exports (CVs / candidate profiles).',
         'Built advanced search features (CV, summary, location, degree, school, etc.) to improve candidate qualification and matching.',
         'Set up and improved automated data flows between tools (KerIT ↔ ATS, Tactiq, HelloWork, Cal, HubSpot), including candidate data collection and processing.',
-        'Structured budget tracking for job offers: quotes (sent / signed), deposits, balances, mission statuses and recruiter-level tracking.',
-        'Improved Softr interfaces and the client extranet: job listings, events, overview pages, search bars, carousels and key indicators.',
         'Wrote functional and technical documentation (ATS, automations, partners, backups) to ensure long-term maintainability and handover.',
-        'Contributed to structuring job board partnerships (HelloWork): understood XML flows, automated job posting and candidate retrieval into the ATS.',
       ],
     },
     {
@@ -168,9 +165,7 @@ export const profile: Profile = {
         'Full-stack development on CGI Retail Suite: business screens in React.js and API development/extensions in NestJS.',
         'Designed end-to-end features: email management on orders, CSV file import (UI/UX, business logic, error handling, notifications).',
         'Advanced UI configuration: display configuration, dynamic fields, user rights management, widget optimisation and interface consistency.',
-        'Refactored and improved existing screens to enhance ergonomics, align with the design system and fix functional and visual bugs.',
         'Contributed to code quality: unit, integration and E2E tests, code reviews and adherence to quality standards (GitLab CI, SonarQube).',
-        'Worked from functional and technical specifications, collaborated with POs/analysts and presented completed features in team demos.',
       ],
     },
     {
@@ -195,7 +190,6 @@ export const profile: Profile = {
       featured: true,
       kind: 'tech',
       bullets: [
-        '7-week internship to build a solution to monitor the electrical consumption of various devices within the company.',
         'Set up a time-series database with InfluxDB and automated data collection using Telegraf (SNMP, MQTT).',
         'Developed a web interface to analyse consumption almost in real time (HTML, CSS, JavaScript, Chart.js, PHP API / Flux queries).',
         'Integrated the ZLinky module (Zigbee) and centralised data in the home automation stack (Jeedom, Raspberry Pi, Mosquitto).',

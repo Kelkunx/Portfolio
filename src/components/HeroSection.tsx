@@ -42,10 +42,12 @@ export default function HeroSection() {
       sx={{
         pt: { xs: 7, md: 9 },
         pb: { xs: 3, md: 4 },
+        minHeight: { md: 'calc(100svh - 80px)' },
+        display: 'flex',
       }}
     >
-      <Container maxWidth="lg">
-        <Grid container spacing={{ xs: 4, md: 6 }} alignItems="center">
+      <Container maxWidth="lg" sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+        <Grid container spacing={{ xs: 4, md: 6 }} alignItems="center" sx={{ flex: 1 }}>
           <Grid size={{ xs: 12, md: 7 }}>
             <Stack spacing={3} sx={{ maxWidth: 700, pt: { md: 2 } }}>
               <Typography
