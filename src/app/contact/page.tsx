@@ -24,7 +24,7 @@ export default function ContactPage() {
   const phoneHref = getPhoneHref(profile.phone);
 
   return (
-    <Container maxWidth="md" sx={{ py: { xs: 6, md: 10 } }}>
+    <Container maxWidth="md" sx={{ py: { xs: 6, md: 8 } }}>
       <Box component="header" sx={{ mb: 4, maxWidth: 760 }}>
         <Typography component="h1" variant="h2" sx={{ color: 'var(--text)', mb: 1.5 }}>
           {locale === 'fr' ? 'Parlons du poste ou du projet' : "Let's talk about the role or the project"}

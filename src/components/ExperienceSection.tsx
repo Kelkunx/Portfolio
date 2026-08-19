@@ -41,7 +41,6 @@ export default function ExperienceSection() {
       }, new Map<string, { company: string; role: string; periods: string[] }>())
       .values(),
   ];
-  const accentTones = ['var(--cyan)', 'var(--purple)', 'var(--green)'];
 
   return (
     <Box sx={{ mt: 8 }}>
@@ -54,13 +53,13 @@ export default function ExperienceSection() {
       </Stack>
 
       <Stack spacing={2}>
-        {featuredExperiences.map((experience, index) => (
+        {featuredExperiences.map((experience) => (
           <Box
             key={`${experience.company}-${experience.start}`}
             sx={{
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--border)',
-              borderLeft: `3px solid ${accentTones[index % accentTones.length]}`,
+              borderLeft: '3px solid var(--green)',
               backgroundColor: 'var(--surface)',
               p: { xs: 2.5, md: 3 },
             }}
@@ -91,7 +90,7 @@ export default function ExperienceSection() {
                         width: 7,
                         height: 7,
                         borderRadius: '50%',
-                        backgroundColor: accentTones[index % accentTones.length],
+                        backgroundColor: 'var(--green)',
                         mt: '0.45rem',
                       }}
                     />

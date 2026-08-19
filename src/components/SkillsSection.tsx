@@ -33,26 +33,22 @@ export default function SkillsSection({ variant = 'home' }: SkillsSectionProps) 
         </Stack>
 
         <Grid container spacing={{ xs: 2.5, md: 3 }}>
-          {profile.skills.map((group, index) => {
-            const tone = tones[index % tones.length];
-
-            return (
-              <Grid key={group.category} size={{ xs: 12, md: 6 }}>
-                <Box
-                  sx={{
-                    borderLeft: `2px solid ${tone}`,
-                    pl: 2,
-                    py: 0.25,
-                  }}
-                >
-                  <Typography component="h3" variant="h6" sx={{ color: 'var(--text)', mb: 1.25 }}>
-                    {group.category}
-                  </Typography>
-                  <TechStackChips items={group.items} />
-                </Box>
-              </Grid>
-            );
-          })}
+          {profile.skills.map((group) => (
+            <Grid key={group.category} size={{ xs: 12, md: 6 }}>
+              <Box
+                sx={{
+                  borderLeft: '2px solid var(--purple)',
+                  pl: 2,
+                  py: 0.25,
+                }}
+              >
+                <Typography component="h3" variant="h6" sx={{ color: 'var(--text)', mb: 1.25 }}>
+                  {group.category}
+                </Typography>
+                <TechStackChips items={group.items} />
+              </Box>
+            </Grid>
+          ))}
         </Grid>
       </Box>
     );
@@ -87,11 +83,6 @@ export default function SkillsSection({ variant = 'home' }: SkillsSectionProps) 
                   backgroundColor: 'var(--surface)',
                   p: { xs: 3, md: 3.5 },
                   height: '100%',
-                  transition: 'transform 180ms ease, border-color 180ms ease',
-                  '&:hover': {
-                    transform: 'translateY(-2px)',
-                    borderColor: tone,
-                  },
                 }}
               >
                 <Stack spacing={2}>

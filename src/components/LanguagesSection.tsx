@@ -12,7 +12,6 @@ import SectionTitle from './SectionTitle';
 export default function LanguagesSection() {
   const { locale } = useLocale();
   const profile = getProfile(locale);
-  const accentTones = ['var(--cyan)', 'var(--purple)', 'var(--green)'];
 
   return (
     <Box sx={{ mt: 8 }}>
@@ -25,39 +24,30 @@ export default function LanguagesSection() {
       </Stack>
 
       <Stack spacing={2}>
-        {profile.languages.map((language, index) => {
-          const accentTone = accentTones[index % accentTones.length];
-
-          return (
-            <Box
-              key={language.name}
-              sx={{
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid var(--border)',
-                borderLeft: `3px solid ${accentTone}`,
-                backgroundColor: 'var(--surface)',
-                p: 2.5,
-                transition: 'background-color 160ms ease, border-color 160ms ease',
-                '&:hover': {
-                  borderColor: accentTone,
-                  backgroundColor:
-                    accentTone === 'var(--cyan)'
-                      ? 'rgba(125, 207, 255, 0.05)'
-                      : accentTone === 'var(--purple)'
-                        ? 'rgba(187, 154, 247, 0.05)'
-                        : 'rgba(158, 206, 106, 0.05)',
-                },
-              }}
-            >
-              <Typography variant="subtitle1" sx={{ color: 'var(--text)' }}>
-                {language.name}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {language.level}
-              </Typography>
-            </Box>
-          );
-        })}
+        {profile.languages.map((language) => (
+          <Box
+            key={language.name}
+            sx={{
+              borderRadius: 'var(--radius-md)',
+              border: '1px solid var(--border)',
+              borderLeft: '3px solid var(--cyan)',
+              backgroundColor: 'var(--surface)',
+              p: 2.5,
+              transition: 'background-color 160ms ease, border-color 160ms ease',
+              '&:hover': {
+                borderColor: 'rgba(125, 207, 255, 0.42)',
+                backgroundColor: 'rgba(125, 207, 255, 0.05)',
+              },
+            }}
+          >
+            <Typography variant="subtitle1" sx={{ color: 'var(--text)' }}>
+              {language.name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {language.level}
+            </Typography>
+          </Box>
+        ))}
       </Stack>
     </Box>
   );

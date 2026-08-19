@@ -12,7 +12,6 @@ import SectionTitle from './SectionTitle';
 export default function EducationSection() {
   const { locale } = useLocale();
   const profile = getProfile(locale);
-  const tones = ['var(--orange)', 'var(--cyan)', 'var(--purple)'];
 
   return (
     <Box sx={{ mt: 8, mb: { xs: 4, md: 6 } }}>
@@ -25,24 +24,19 @@ export default function EducationSection() {
       </Stack>
 
       <Stack spacing={2}>
-        {profile.education.map((education, index) => (
+        {profile.education.map((education) => (
           <Box
             key={`${education.school}-${education.degree}`}
             sx={{
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--border)',
-              borderLeft: `3px solid ${tones[index % tones.length]}`,
+              borderLeft: '3px solid var(--orange)',
               backgroundColor: 'var(--surface)',
               p: 3,
               transition: 'background-color 160ms ease, border-color 160ms ease',
               '&:hover': {
-                borderColor: tones[index % tones.length],
-                backgroundColor:
-                  tones[index % tones.length] === 'var(--orange)'
-                    ? 'rgba(255, 158, 100, 0.05)'
-                    : tones[index % tones.length] === 'var(--cyan)'
-                      ? 'rgba(125, 207, 255, 0.05)'
-                      : 'rgba(187, 154, 247, 0.05)',
+                borderColor: 'rgba(255, 158, 100, 0.42)',
+                backgroundColor: 'rgba(255, 158, 100, 0.05)',
               },
             }}
           >

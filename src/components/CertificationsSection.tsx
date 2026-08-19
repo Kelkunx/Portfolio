@@ -13,7 +13,6 @@ import SectionTitle from './SectionTitle';
 export default function CertificationsSection() {
   const { locale } = useLocale();
   const profile = getProfile(locale);
-  const tones = ['var(--green)', 'var(--cyan)', 'var(--purple)'];
 
   if (profile.certifications.length === 0) return null;
 
@@ -28,24 +27,19 @@ export default function CertificationsSection() {
       </Stack>
 
       <Stack spacing={2}>
-        {profile.certifications.map((certification, index) => (
+        {profile.certifications.map((certification) => (
           <Box
             key={`${certification.name}-${certification.date}`}
             sx={{
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--border)',
-              borderLeft: `3px solid ${tones[index % tones.length]}`,
+              borderLeft: '3px solid var(--green)',
               backgroundColor: 'var(--surface)',
               p: 2.5,
               transition: 'background-color 160ms ease, border-color 160ms ease',
               '&:hover': {
-                borderColor: tones[index % tones.length],
-                backgroundColor:
-                  tones[index % tones.length] === 'var(--green)'
-                    ? 'rgba(158, 206, 106, 0.05)'
-                    : tones[index % tones.length] === 'var(--cyan)'
-                      ? 'rgba(125, 207, 255, 0.05)'
-                      : 'rgba(187, 154, 247, 0.05)',
+                borderColor: 'rgba(158, 206, 106, 0.42)',
+                backgroundColor: 'rgba(158, 206, 106, 0.05)',
               },
             }}
           >

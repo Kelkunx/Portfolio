@@ -77,7 +77,7 @@ export default function CvPage() {
       <ExperienceSection />
       <SkillsSection variant="cv" />
 
-      <Grid container spacing={3} sx={{ mt: 2 }}>
+      <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 6 }}>
           <LanguagesSection />
         </Grid>

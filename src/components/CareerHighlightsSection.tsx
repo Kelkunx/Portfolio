@@ -22,7 +22,6 @@ export default function CareerHighlightsSection() {
   const { locale } = useLocale();
   const profile = getProfile(locale);
   const experiences = profile.experiences.filter((item) => item.featured && item.kind !== 'other').slice(0, 3);
-  const tones = ['var(--cyan)', 'var(--purple)', 'var(--green)'];
 
   return (
     <Box component="section" sx={{ mt: { xs: 8, md: 12 } }}>
@@ -40,21 +39,16 @@ export default function CareerHighlightsSection() {
       </Stack>
 
       <Grid container spacing={3}>
-        {experiences.map((experience, index) => (
+        {experiences.map((experience) => (
           <Grid key={`${experience.company}-${experience.start}`} size={{ xs: 12, md: 4 }}>
             <Box
               sx={{
                 borderRadius: 'var(--radius-md)',
                 border: '1px solid var(--border)',
-                borderTop: `2px solid ${tones[index % tones.length]}`,
+                borderTop: '2px solid var(--purple)',
                 backgroundColor: 'var(--surface)',
                 p: 3,
                 height: '100%',
-                transition: 'transform 180ms ease, border-color 160ms ease',
-                '&:hover': {
-                  transform: 'translateY(-2px)',
-                  borderColor: tones[index % tones.length],
-                },
               }}
             >
               <Stack spacing={1.5}>
@@ -86,7 +80,7 @@ export default function CareerHighlightsSection() {
                           width: 7,
                           height: 7,
                           borderRadius: '50%',
-                          backgroundColor: tones[index % tones.length],
+                          backgroundColor: 'var(--purple)',
                           mt: '0.45rem',
                         }}
                       />
