@@ -41,5 +41,8 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Validate localized content
+        run: npm run validate:content
+
       - name: Build
         run: npm run build
