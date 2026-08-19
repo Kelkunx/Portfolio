@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
@@ -16,24 +16,6 @@ import { getProfile } from '../../lib/content';
 export default function HeroSection() {
   const { locale } = useLocale();
   const profile = getProfile(locale);
-  const [showScrollCue, setShowScrollCue] = useState(true);
-
-  useEffect(() => {
-    const onScroll = () => setShowScrollCue(window.scrollY < 48);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  const handleScrollCueClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-
-    const nextSection = document.getElementById('home-sections-start');
-    if (!nextSection) return;
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    nextSection.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
-  };
 
   return (
     <Box
@@ -186,20 +168,16 @@ export default function HeroSection() {
         </Grid>
 
         <Box
+          className="hero-scroll-cue"
           sx={{
             display: 'flex',
             justifyContent: 'center',
             mt: { xs: 4, md: 5 },
-            opacity: showScrollCue ? 1 : 0,
-            transform: showScrollCue ? 'translateY(0)' : 'translateY(8px)',
-            pointerEvents: showScrollCue ? 'auto' : 'none',
-            transition: 'opacity 180ms ease, transform 180ms ease',
           }}
         >
           <Button
             component="a"
             href="#home-sections-start"
-            onClick={handleScrollCueClick}
             aria-label={locale === 'fr' ? 'Descendre vers les sections suivantes' : 'Scroll to the next sections'}
             variant="text"
             sx={{

@@ -1,10 +1,10 @@
 // src/components/ThemeToggle.tsx
 'use client';
 
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import { LightMode, DarkMode } from '@mui/icons-material';
+import LightMode from '@mui/icons-material/LightMode';
+import DarkMode from '@mui/icons-material/DarkMode';
 import { ColorModeContext } from '../app/providers';
 import { useLocale } from '../context/LocaleContext';
 
@@ -29,14 +29,13 @@ export default function ThemeToggle() {
         : 'Enable light mode';
 
   return (
-    <Tooltip title={title}>
-      <IconButton
-        onClick={toggleColorMode}
-        aria-label={ariaLabel}
-        size="large"
-      >
-        {mode === 'light' ? <DarkMode /> : <LightMode />}
-      </IconButton>
-    </Tooltip>
+    <IconButton
+      onClick={toggleColorMode}
+      aria-label={ariaLabel}
+      title={title}
+      size="large"
+    >
+      {mode === 'light' ? <DarkMode /> : <LightMode />}
+    </IconButton>
   );
 }

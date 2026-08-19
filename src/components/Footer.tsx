@@ -6,7 +6,6 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
-import Tooltip from '@mui/material/Tooltip';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import EmailIcon from '@mui/icons-material/Email';
@@ -62,50 +61,51 @@ export default function Footer() {
             </Box>
 
             <Stack direction="row" spacing={1} alignItems="center">
-              <Tooltip title={ariaLinkedIn}>
-                <IconButton
-                  component="a"
-                  href={profile.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  size="small"
-                  aria-label={ariaLinkedIn}
-                >
-                  <LinkedInIcon fontSize="small" />
-                </IconButton>
-              </Tooltip>
+              <IconButton
+                component="a"
+                href={profile.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                size="small"
+                aria-label={ariaLinkedIn}
+                title={ariaLinkedIn}
+              >
+                <LinkedInIcon fontSize="small" />
+              </IconButton>
 
-              <Tooltip title={ariaGithub}>
-                <IconButton
-                  component="a"
-                  href={profile.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  size="small"
-                  aria-label={ariaGithub}
-                >
-                  <GitHubIcon fontSize="small" />
-                </IconButton>
-              </Tooltip>
+              <IconButton
+                component="a"
+                href={profile.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                size="small"
+                aria-label={ariaGithub}
+                title={ariaGithub}
+              >
+                <GitHubIcon fontSize="small" />
+              </IconButton>
 
-              <Tooltip title={ariaEmail}>
-                <IconButton component="a" href={`mailto:${profile.email}`} size="small" aria-label={ariaEmail}>
-                  <EmailIcon fontSize="small" />
-                </IconButton>
-              </Tooltip>
+              <IconButton
+                component="a"
+                href={`mailto:${profile.email}`}
+                size="small"
+                aria-label={ariaEmail}
+                title={ariaEmail}
+              >
+                <EmailIcon fontSize="small" />
+              </IconButton>
 
-              <Tooltip title={ariaCv}>
-                <IconButton
-                  component="a"
-                  href={profile.cvPdf}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  size="small"
-                  aria-label={ariaCv}
-                >
-                  <DescriptionIcon fontSize="small" />
-                </IconButton>
-              </Tooltip>
+              <IconButton
+                component="a"
+                href={profile.cvPdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                size="small"
+                aria-label={ariaCv}
+                title={ariaCv}
+              >
+                <DescriptionIcon fontSize="small" />
+              </IconButton>
             </Stack>
           </Box>
         </Container>

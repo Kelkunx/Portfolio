@@ -1,7 +1,7 @@
 // src/context/LocaleContext.tsx
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 
 type Locale = 'fr' | 'en';
 
@@ -55,18 +55,19 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const setLocale = (l: Locale) => {
+  const setLocale = useCallback((l: Locale) => {
     setLocaleState(l);
     try {
       localStorage.setItem(LS_KEY, l);
     } catch {
       // ignore
     }
-  };
+  }, []);
 
   const t = locale === 'fr' ? fr : en;
+  const contextValue = useMemo(() => ({ locale, setLocale, t }), [locale, setLocale, t]);
 
-  return <LocaleContext.Provider value={{ locale, setLocale, t }}>{children}</LocaleContext.Provider>;
+  return <LocaleContext.Provider value={contextValue}>{children}</LocaleContext.Provider>;
 }
 
 export function useLocale() {

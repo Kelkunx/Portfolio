@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useRef } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
@@ -10,27 +10,15 @@ import Box from '@mui/material/Box';
 import Link from 'next/link';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
 import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
 import { useLocale } from '../context/LocaleContext';
 import LanguageToggle from './LanguageToggle';
 
 export default function Header() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const mobileMenuRef = useRef<HTMLDialogElement>(null);
   const { t } = useLocale();
   const pathname = usePathname();
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   const navLinks = [
     { key: 'home', label: t.nav.home, href: '/' },
@@ -56,12 +44,11 @@ export default function Header() {
       >
         <Container maxWidth="lg">
           <Toolbar
+            className="site-header-toolbar"
             sx={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              minHeight: scrolled ? 66 : 80,
-              transition: 'min-height 200ms ease',
               px: { xs: 2, md: 0 },
             }}
           >
@@ -73,13 +60,13 @@ export default function Header() {
               }}
             >
               <Box
+                className="site-header-surface"
                 sx={{
                   border: '1px solid var(--border)',
                   borderRadius: '10px',
                   backgroundColor: 'var(--surface)',
                   px: 1.5,
                   py: 1,
-                  boxShadow: scrolled ? 'var(--shadow-soft)' : 'none',
                   transition: 'box-shadow 160ms ease, border-color 160ms ease, background-color 160ms ease',
                   '&:hover': {
                     borderColor: 'rgba(125, 207, 255, 0.24)',
@@ -110,6 +97,7 @@ export default function Header() {
             </Box>
 
             <Box
+              className="site-header-surface"
               component="nav"
               aria-label="Primary navigation"
               sx={{
@@ -120,7 +108,6 @@ export default function Header() {
                 borderRadius: '10px',
                 backgroundColor: 'var(--surface)',
                 px: 1.25,
-                boxShadow: scrolled ? 'var(--shadow-soft)' : 'none',
                 transition: 'box-shadow 160ms ease, border-color 160ms ease, background-color 160ms ease',
               }}
             >
@@ -213,6 +200,7 @@ export default function Header() {
             </Box>
 
             <Box
+              className="site-header-surface"
               sx={{
                 display: { xs: 'flex', md: 'none' },
                 alignItems: 'center',
@@ -221,15 +209,15 @@ export default function Header() {
                 borderRadius: '10px',
                 backgroundColor: 'var(--surface)',
                 p: 0.5,
-                boxShadow: scrolled ? 'var(--shadow-soft)' : 'none',
                 transition: 'box-shadow 160ms ease, border-color 160ms ease, background-color 160ms ease',
               }}
             >
               <LanguageToggle />
               <ThemeToggle />
               <IconButton
-                onClick={() => setMobileOpen((open) => !open)}
-                aria-label="open menu"
+                onClick={() => mobileMenuRef.current?.showModal()}
+                aria-label={t.nav.home === 'Accueil' ? 'Ouvrir le menu' : 'Open menu'}
+                aria-haspopup="dialog"
                 sx={{
                   border: '1px solid var(--border)',
                   borderRadius: '8px',
@@ -250,21 +238,25 @@ export default function Header() {
         </Container>
       </AppBar>
 
-      <Drawer
-        anchor="right"
-        open={mobileOpen}
-        onClose={() => setMobileOpen(false)}
-        PaperProps={{
-          sx: {
-            width: 260,
-            backgroundColor: 'var(--surface)',
-            color: 'var(--text)',
-            borderLeft: '1px solid var(--border)',
-          },
+      <dialog
+        ref={mobileMenuRef}
+        className="mobile-nav-dialog"
+        aria-label={t.nav.home === 'Accueil' ? 'Navigation principale' : 'Primary navigation'}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) event.currentTarget.close();
         }}
       >
-        <Box sx={{ p: 2 }}>
-          <List>
+        <button
+          type="button"
+          className="mobile-nav-close"
+          onClick={() => mobileMenuRef.current?.close()}
+          aria-label={t.nav.home === 'Accueil' ? 'Fermer le menu' : 'Close menu'}
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+        <nav>
+          <ul className="mobile-nav-list">
             {navLinks.map((link, index) => {
               const active = isActiveLink(link.href);
               const tone =
@@ -277,31 +269,23 @@ export default function Header() {
                       : 'var(--yellow)';
 
               return (
-              <ListItem key={link.key} disablePadding>
-                <ListItemButton
-                  component={Link}
+                <li key={link.key}>
+                  <Link
                   href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  sx={{
-                    borderRadius: '8px',
-                    mb: 0.5,
-                    color: active ? 'var(--text)' : 'var(--text-2)',
-                    borderLeft: active ? `2px solid ${tone}` : '2px solid transparent',
-                    backgroundColor: active ? 'rgba(125, 207, 255, 0.06)' : 'transparent',
-                    '&:hover': {
-                      backgroundColor: active ? 'rgba(125, 207, 255, 0.08)' : 'var(--surface-2)',
-                      color: 'var(--text)',
-                    },
+                  onClick={() => mobileMenuRef.current?.close()}
+                  className={`mobile-nav-link${active ? ' mobile-nav-link-active' : ''}`}
+                  style={{
+                    borderLeftColor: active ? tone : 'transparent',
                   }}
                 >
-                  <ListItemText primary={link.label} />
-                </ListItemButton>
-              </ListItem>
+                    {link.label}
+                  </Link>
+                </li>
               );
             })}
-          </List>
-        </Box>
-      </Drawer>
+          </ul>
+        </nav>
+      </dialog>
     </>
   );
 }
