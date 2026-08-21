@@ -32,15 +32,15 @@ export default function HeroSection() {
           display: 'flex',
           flex: 1,
           flexDirection: 'column',
-          py: { xs: 5, md: 4 },
+          py: { xs: 4, md: 2.5 },
         }}
       >
         <Grid
           container
           columnSpacing={{ md: 7, lg: 10 }}
           rowSpacing={{ xs: 5, md: 0 }}
-          alignItems="center"
-          sx={{ flex: 1 }}
+          alignItems="flex-start"
+          sx={{ flex: 1, pt: { md: 4, lg: 5 } }}
         >
           <Grid size={{ xs: 12, md: 7 }}>
             <Stack spacing={{ xs: 2.5, md: 3 }} sx={{ maxWidth: 790 }}>
@@ -93,7 +93,7 @@ export default function HeroSection() {
                 pb: { md: 2 },
                 pl: { md: 6, lg: 7 },
                 minHeight: { md: 330 },
-                justifyContent: 'center',
+                justifyContent: 'flex-start',
               }}
             >
               <Box sx={{ borderLeft: '3px solid var(--blue)', pl: 2 }}>

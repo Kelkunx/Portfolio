@@ -71,7 +71,7 @@ function ProjectMedia({ project, locale, sizes }: ProjectMediaProps) {
       fill
       sizes={sizes}
       unoptimized={skipOptimization}
-      style={{ objectFit: 'contain' }}
+      style={{ objectFit: 'cover', objectPosition: 'top left' }}
     />
   );
 }
@@ -98,7 +98,7 @@ function SpotlightProject({ project, locale }: { project: Project; locale: Conte
         sx={{
           position: 'relative',
           aspectRatio: { xs: '2453 / 1448', lg: 'auto' },
-          minHeight: { lg: 430 },
+          minHeight: { lg: 380 },
           overflow: 'hidden',
           borderBottom: { xs: '1px solid var(--border)', lg: 0 },
           borderRight: { lg: '1px solid var(--border)' },
@@ -115,7 +115,7 @@ function SpotlightProject({ project, locale }: { project: Project; locale: Conte
         />
       </Box>
 
-      <Stack spacing={2.5} justifyContent="center" sx={{ p: { xs: 3, md: 4, lg: 5 }, minWidth: 0 }}>
+      <Stack spacing={2} justifyContent="center" sx={{ p: { xs: 2.5, md: 3, lg: 4 }, minWidth: 0 }}>
         <ProjectMetadata project={project} locale={locale} tone="var(--cyan)" />
 
         <Box>
@@ -125,7 +125,7 @@ function SpotlightProject({ project, locale }: { project: Project; locale: Conte
               color: 'var(--text)',
               mb: 1.25,
               fontFamily: 'var(--font-display)',
-              fontSize: { xs: '1.8rem', lg: '2.2rem' },
+              fontSize: { xs: '1.75rem', lg: '2rem' },
               fontWeight: 700,
               lineHeight: 1.12,
               letterSpacing: '-0.035em',
@@ -133,18 +133,18 @@ function SpotlightProject({ project, locale }: { project: Project; locale: Conte
           >
             {project.title}
           </Typography>
-          <Typography variant="body1" sx={{ color: 'var(--text-2)', lineHeight: 1.75 }}>
+          <Typography variant="body1" sx={{ color: 'var(--text-2)', lineHeight: 1.65 }}>
             {project.short}
           </Typography>
         </Box>
 
-        <Stack component="ul" spacing={1.25} sx={{ p: 0, m: 0, listStyle: 'none' }}>
+        <Stack component="ul" spacing={1} sx={{ p: 0, m: 0, listStyle: 'none' }}>
           {project.highlights.slice(0, 2).map((highlight) => (
             <Box key={`${highlight.value}-${highlight.label}`} component="li" sx={{ borderLeft: '2px solid var(--cyan)', pl: 1.5 }}>
               <Typography variant="body2" sx={{ color: 'var(--text)', fontWeight: 600, mb: 0.25 }}>
                 {highlight.value}
               </Typography>
-              <Typography variant="body2" sx={{ color: 'var(--text-2)', lineHeight: 1.55 }}>
+              <Typography variant="body2" sx={{ color: 'var(--text-2)', lineHeight: 1.45 }}>
                 {highlight.label}
               </Typography>
             </Box>
@@ -200,7 +200,7 @@ function SecondaryProject({
       sx={{
         display: 'grid',
         gridTemplateColumns: { xs: '1fr', sm: 'minmax(0, 1.12fr) minmax(220px, 0.88fr)' },
-        minHeight: { sm: 300 },
+        minHeight: { sm: 260 },
         overflow: 'hidden',
         border: '1px solid var(--border)',
         borderRadius: 'var(--radius-md)',
@@ -217,7 +217,7 @@ function SecondaryProject({
         sx={{
           position: 'relative',
           aspectRatio: { xs: '2453 / 1448', sm: 'auto' },
-          minHeight: { sm: 280 },
+          minHeight: { sm: 240 },
           overflow: 'hidden',
           borderBottom: { xs: '1px solid var(--border)', sm: 0 },
           borderRight: { sm: '1px solid var(--border)' },
@@ -234,13 +234,13 @@ function SecondaryProject({
         />
       </Box>
 
-      <Stack spacing={2} justifyContent="center" sx={{ p: { xs: 2.5, lg: 3 }, minWidth: 0 }}>
+      <Stack spacing={1.5} justifyContent="center" sx={{ p: 2.5, minWidth: 0 }}>
         <ProjectMetadata project={project} locale={locale} tone={tone.color} />
         <Box>
           <Typography component="h3" variant="h5" sx={{ color: 'var(--text)', mb: 0.75 }}>
             {project.title}
           </Typography>
-          <Typography variant="body2" sx={{ color: 'var(--text-2)', lineHeight: 1.7 }}>
+          <Typography variant="body2" sx={{ color: 'var(--text-2)', lineHeight: 1.6 }}>
             {project.short}
           </Typography>
         </Box>
@@ -264,7 +264,7 @@ export default function FeaturedProjectsSection() {
   const [spotlightProject, ...secondaryProjects] = getFeaturedProjects(locale, 3);
 
   return (
-    <Box component="section" id="home-sections-start" sx={{ py: { xs: 8, md: 11 }, scrollMarginTop: '96px' }}>
+    <Box component="section" id="home-sections-start" sx={{ py: { xs: 8, md: 9 }, scrollMarginTop: '96px' }}>
       <SiteContainer>
         <Stack
           direction={{ xs: 'column', sm: 'row' }}
@@ -287,19 +287,19 @@ export default function FeaturedProjectsSection() {
           </Button>
         </Stack>
 
-        <Stack spacing={3}>
+        <Stack spacing={2.5}>
           {spotlightProject && <SpotlightProject project={spotlightProject} locale={locale} />}
 
           <Box
             sx={{
               display: 'grid',
               gridTemplateColumns: { xs: '1fr', lg: 'minmax(0, 1.12fr) minmax(0, 0.88fr)' },
-              gap: 3,
+              gap: 2.5,
               alignItems: 'start',
             }}
           >
             {secondaryProjects.map((project, index) => (
-              <Box key={project.slug} sx={{ mt: { lg: index === 1 ? 4 : 0 } }}>
+              <Box key={project.slug} sx={{ mt: { lg: index === 1 ? 3 : 0 } }}>
                 <SecondaryProject project={project} locale={locale} index={index} />
               </Box>
             ))}
