@@ -97,7 +97,6 @@ export default function SkillsSection({ variant = 'home' }: SkillsSectionProps) 
                   py: { xs: 2.5, md: 2.75 },
                   borderTop: '1px solid var(--border)',
                   transition: 'background-color 160ms ease',
-                  '&:last-child': { borderBottom: '1px solid var(--border)' },
                   '&:hover': { backgroundColor: tone.background },
                 }}
               >

@@ -40,7 +40,7 @@ export default function HeroSection() {
           columnSpacing={{ md: 7, lg: 10 }}
           rowSpacing={{ xs: 5, md: 0 }}
           alignItems="flex-start"
-          sx={{ flex: 1, pt: { md: 4, lg: 5 } }}
+          sx={{ pt: { md: 8, lg: 12 } }}
         >
           <Grid size={{ xs: 12, md: 7 }}>
             <Stack spacing={{ xs: 2.5, md: 3 }} sx={{ maxWidth: 790 }}>
@@ -131,7 +131,7 @@ export default function HeroSection() {
             gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, minmax(0, 1fr))' },
             gap: { xs: 2, sm: 4, lg: 7 },
             p: 0,
-            mt: { xs: 5, md: 3 },
+            mt: { xs: 5, md: 15 },
             mb: 0,
             listStyle: 'none',
           }}
@@ -152,7 +152,10 @@ export default function HeroSection() {
           ))}
         </Box>
 
-        <Box className="hero-scroll-cue" sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+        <Box
+          className="hero-scroll-cue"
+          sx={{ display: 'flex', justifyContent: 'center', mt: { xs: 2, md: 10 } }}
+        >
           <Button
             component="a"
             href="#home-sections-start"
