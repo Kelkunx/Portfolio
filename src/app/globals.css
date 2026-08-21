@@ -413,14 +413,61 @@ main {
   transition: transform 200ms cubic-bezier(.2, .8, .2, 1);
 }
 
-.project-thumbnail-link {
+.project-thumbnail-frame {
   display: block;
   min-width: 0;
-  color: inherit;
-  text-decoration: none;
+}
+
+.project-card-clickable {
+  position: relative;
+  cursor: pointer;
+}
+
+.project-card-navigation {
+  display: inline-flex;
+  align-self: flex-start;
+}
+
+.project-card-overlay-link {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.project-card-overlay-link:focus-visible {
+  outline: 3px solid var(--project-card-link-tone, var(--accent));
+  outline-offset: -3px;
+}
+
+.project-card-detail-cue {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  padding: 4px 0;
+  color: var(--project-card-link-tone, var(--blue));
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.75;
+  pointer-events: none;
+}
+
+.project-card-detail-arrow {
+  transition: transform 160ms ease;
+}
+
+.project-card-clickable:is(:hover, :focus-within) .project-card-detail-arrow {
+  transform: translate(4px, -2px);
+}
+
+.project-card-secondary-action {
+  position: relative;
+  z-index: 2;
 }
 
 .projects-spotlight {
+  --project-card-link-tone: var(--purple);
+
   display: grid;
   overflow: hidden;
   grid-template-columns: minmax(0, 1.6fr) minmax(340px, 1fr);
@@ -431,7 +478,7 @@ main {
   transition: border-color 160ms ease;
 }
 
-.projects-spotlight > .project-thumbnail-link {
+.projects-spotlight > .project-thumbnail-frame {
   border-right: 1px solid var(--border);
 }
 
@@ -461,6 +508,8 @@ main {
 }
 
 .projects-secondary {
+  --project-card-link-tone: var(--project-secondary-tone);
+
   display: flex;
   height: 100%;
   overflow: hidden;
@@ -492,6 +541,8 @@ main {
 }
 
 .projects-archive-row {
+  --project-card-link-tone: var(--cyan);
+
   display: grid;
   grid-template-columns: 240px minmax(0, 1fr) auto;
   gap: 28px;
@@ -503,14 +554,6 @@ main {
 
 .projects-archive-row:is(:hover, :focus-within) {
   background: rgba(125, 207, 255, 0.035);
-}
-
-.projects-archive-row .MuiButton-endIcon {
-  transition: transform 160ms ease;
-}
-
-.projects-archive-row .MuiButton-root:is(:hover, :focus-visible) .MuiButton-endIcon {
-  transform: translateX(4px);
 }
 
 .project-detail-header,
@@ -739,24 +782,72 @@ main {
   border-top: 1px solid var(--border);
 }
 
-.cv-skills-grid {
+.cv-skills-directory {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px 32px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.cv-skills-column {
+  min-width: 0;
+}
+
+.cv-skills-column:first-child {
+  padding-right: 24px;
+  border-right: 1px solid var(--border);
+}
+
+.cv-skills-column:last-child {
+  padding-left: 24px;
 }
 
 .cv-skill-group {
+  position: relative;
   display: grid;
-  gap: 14px;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 12px;
   align-content: start;
+  align-items: center;
   min-width: 0;
-  padding: 16px 12px 18px;
-  border-top: 2px solid var(--skill-tone);
+  padding: 18px 16px;
+  border-bottom: 1px solid var(--border);
   transition: background-color 160ms ease;
 }
 
+.cv-skill-group:last-child {
+  border-bottom: 0;
+}
+
+.cv-skill-group::before {
+  position: absolute;
+  top: 18px;
+  bottom: 18px;
+  left: 0;
+  width: 2px;
+  background: var(--skill-tone);
+  content: '';
+}
+
 .cv-skill-group:hover {
-  background: var(--skill-tint);
+  background: color-mix(in srgb, var(--skill-tone) 6%, transparent);
+}
+
+.cv-skill-icon {
+  display: inline-flex;
+  color: var(--skill-tone);
+}
+
+.cv-skill-icon svg {
+  font-size: 1.25rem;
+}
+
+.cv-skill-title {
+  color: var(--skill-tone);
+}
+
+.cv-skill-tools {
+  grid-column: 2;
 }
 
 .cv-certification-row {
@@ -937,7 +1028,7 @@ main {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .projects-spotlight > .project-thumbnail-link {
+  .projects-spotlight > .project-thumbnail-frame {
     border-right: 0;
     border-bottom: 1px solid var(--border);
   }
@@ -1076,8 +1167,22 @@ main {
     gap: 14px;
   }
 
-  .cv-skills-grid {
+  .cv-skills-directory {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cv-skills-column:first-child,
+  .cv-skills-column:last-child {
+    padding: 0;
+    border-right: 0;
+  }
+
+  .cv-skills-column:first-child .cv-skill-group:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cv-skill-group {
+    padding-inline: 14px 6px;
   }
 
   .cv-supporting-experience,
@@ -1092,7 +1197,7 @@ main {
   .projects-spotlight:is(:hover, :focus-within) .project-thumbnail-image,
   .projects-secondary:is(:hover, :focus-within),
   .projects-secondary:is(:hover, :focus-within) .project-thumbnail-image,
-  .projects-archive-row .MuiButton-root:is(:hover, :focus-visible) .MuiButton-endIcon,
+  .project-card-clickable:is(:hover, :focus-within) .project-card-detail-arrow,
   .next-project-link:is(:hover, :focus-visible) .next-project-arrow,
   .contact-action:is(:hover, :focus-visible) .contact-action-arrow {
     transform: none;

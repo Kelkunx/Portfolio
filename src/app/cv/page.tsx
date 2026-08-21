@@ -1,9 +1,17 @@
 'use client';
 
 import ArrowOutward from '@mui/icons-material/ArrowOutward';
+import ApiRounded from '@mui/icons-material/ApiRounded';
+import BoltRounded from '@mui/icons-material/BoltRounded';
 import BusinessCenterRounded from '@mui/icons-material/BusinessCenterRounded';
+import CloudDoneRounded from '@mui/icons-material/CloudDoneRounded';
 import CodeRounded from '@mui/icons-material/CodeRounded';
+import FactCheckRounded from '@mui/icons-material/FactCheckRounded';
 import SchoolRounded from '@mui/icons-material/SchoolRounded';
+import SecurityRounded from '@mui/icons-material/SecurityRounded';
+import SensorsRounded from '@mui/icons-material/SensorsRounded';
+import StorageRounded from '@mui/icons-material/StorageRounded';
+import WebRounded from '@mui/icons-material/WebRounded';
 import WorkspacePremiumRounded from '@mui/icons-material/WorkspacePremiumRounded';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -13,7 +21,7 @@ import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { getProfile } from '../../../lib/content';
-import type { ExperienceItem } from '../../../lib/content-types';
+import type { ExperienceItem, SkillGroup } from '../../../lib/content-types';
 import LocalSectionNav, { type LocalSectionNavItem } from '../../components/LocalSectionNav';
 import SiteContainer from '../../components/SiteContainer';
 import TechStackChips from '../../components/TechStackChips';
@@ -33,11 +41,15 @@ const experienceTones = [
   { color: 'var(--green)', tint: 'rgba(158, 206, 106, 0.045)' },
 ];
 
-const skillTones = [
-  { color: 'var(--cyan)', tint: 'rgba(125, 207, 255, 0.04)' },
-  { color: 'var(--purple)', tint: 'rgba(187, 154, 247, 0.04)' },
-  { color: 'var(--green)', tint: 'rgba(158, 206, 106, 0.04)' },
-  { color: 'var(--orange)', tint: 'rgba(255, 158, 100, 0.04)' },
+const skillVisuals = [
+  { color: 'var(--cyan)', Icon: WebRounded },
+  { color: 'var(--orange)', Icon: ApiRounded },
+  { color: 'var(--blue)', Icon: StorageRounded },
+  { color: 'var(--green)', Icon: FactCheckRounded },
+  { color: 'var(--purple)', Icon: CloudDoneRounded },
+  { color: 'var(--teal)', Icon: SensorsRounded },
+  { color: 'var(--yellow)', Icon: BoltRounded },
+  { color: 'var(--red)', Icon: SecurityRounded },
 ];
 
 function formatExperienceRange(experience: ExperienceItem, locale: 'fr' | 'en') {
@@ -57,6 +69,25 @@ function CvSection({ id, title, icon, tone, children }: CvSectionProps) {
         </Typography>
       </Box>
       {children}
+    </Box>
+  );
+}
+
+function CvSkillGroup({ group, index }: { group: SkillGroup; index: number }) {
+  const visual = skillVisuals[index % skillVisuals.length];
+  const SkillIcon = visual.Icon;
+
+  return (
+    <Box component="article" className="cv-skill-group" sx={{ '--skill-tone': visual.color }}>
+      <Box component="span" className="cv-skill-icon" aria-hidden="true">
+        <SkillIcon />
+      </Box>
+      <Typography component="h3" variant="h6" className="cv-skill-title">
+        {group.category}
+      </Typography>
+      <Box className="cv-skill-tools">
+        <TechStackChips items={group.items} />
+      </Box>
     </Box>
   );
 }
@@ -87,6 +118,8 @@ export default function CvPage() {
       }, new Map<string, { company: string; role: string; periods: string[] }>())
       .values(),
   ];
+  const skillColumnBreak = Math.ceil(profile.skills.length / 2);
+  const skillColumns = [profile.skills.slice(0, skillColumnBreak), profile.skills.slice(skillColumnBreak)];
   const navigationItems: LocalSectionNavItem[] = [
     { id: 'experience', label: locale === 'fr' ? 'Expériences' : 'Experience' },
     { id: 'skills', label: locale === 'fr' ? 'Compétences' : 'Skills' },
@@ -233,25 +266,20 @@ export default function CvPage() {
             id="skills"
             title={locale === 'fr' ? 'Compétences' : 'Skills'}
             icon={<CodeRounded />}
-            tone="var(--purple)"
+            tone="var(--magenta)"
           >
-            <Box className="cv-skills-grid">
-              {profile.skills.map((group, index) => {
-                const tone = skillTones[index % skillTones.length];
-
-                return (
-                  <Box
-                    key={group.category}
-                    className="cv-skill-group"
-                    sx={{ '--skill-tone': tone.color, '--skill-tint': tone.tint }}
-                  >
-                    <Typography component="h3" variant="h6" sx={{ color: 'var(--skill-tone)' }}>
-                      {group.category}
-                    </Typography>
-                    <TechStackChips items={group.items} />
-                  </Box>
-                );
-              })}
+            <Box className="cv-skills-directory">
+              {skillColumns.map((column, columnIndex) => (
+                <Box className="cv-skills-column" key={columnIndex}>
+                  {column.map((group, groupIndex) => (
+                    <CvSkillGroup
+                      key={group.category}
+                      group={group}
+                      index={columnIndex * skillColumnBreak + groupIndex}
+                    />
+                  ))}
+                </Box>
+              ))}
             </Box>
           </CvSection>
 

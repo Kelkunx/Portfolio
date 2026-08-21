@@ -17,6 +17,7 @@ import {
 import type { Project } from '../../lib/content-types';
 import { projectPlaceholderDataUrl } from '../../lib/project-placeholder';
 import { useLocale } from '../context/LocaleContext';
+import ProjectCardLink from './ProjectCardLink';
 import SiteContainer from './SiteContainer';
 import TechStackChips from './TechStackChips';
 
@@ -82,7 +83,9 @@ function SpotlightProject({ project, locale }: { project: Project; locale: Conte
   return (
     <Box
       component="article"
+      className="project-card-clickable"
       sx={{
+        '--project-card-link-tone': 'var(--cyan)',
         display: 'grid',
         gridTemplateColumns: { xs: '1fr', lg: 'minmax(0, 1.75fr) minmax(320px, 1fr)' },
         overflow: 'hidden',
@@ -154,15 +157,11 @@ function SpotlightProject({ project, locale }: { project: Project; locale: Conte
         <TechStackChips items={project.tech} limit={6} />
 
         <Stack direction="row" spacing={1.5} useFlexGap flexWrap="wrap">
-          <Button
-            component={Link}
+          <ProjectCardLink
             href={`/projets/${project.slug}`}
-            variant="text"
-            endIcon={<ArrowOutward className="home-link-arrow" />}
-            sx={{ px: 0, '&:hover': { backgroundColor: 'transparent' } }}
-          >
-            {locale === 'fr' ? 'Voir le projet' : 'View project'}
-          </Button>
+            label={locale === 'fr' ? 'Voir le projet' : 'View project'}
+            ariaLabel={`${locale === 'fr' ? 'Voir le projet' : 'View project'} ${project.title}`}
+          />
           {repository && (
             <Button
               component="a"
@@ -172,6 +171,7 @@ function SpotlightProject({ project, locale }: { project: Project; locale: Conte
               variant="text"
               startIcon={<GitHub />}
               endIcon={<ArrowOutward className="home-link-arrow" />}
+              className="project-card-secondary-action"
               sx={{ px: 0, '&:hover': { backgroundColor: 'transparent' } }}
             >
               {locale === 'fr' ? 'Voir le code' : 'View code'}
@@ -197,7 +197,9 @@ function SecondaryProject({
   return (
     <Box
       component="article"
+      className="project-card-clickable"
       sx={{
+        '--project-card-link-tone': tone.color,
         display: 'grid',
         gridTemplateColumns: { xs: '1fr', sm: 'minmax(0, 1.12fr) minmax(220px, 0.88fr)' },
         minHeight: { sm: 260 },
@@ -245,15 +247,11 @@ function SecondaryProject({
           </Typography>
         </Box>
         <TechStackChips items={project.tech} limit={4} />
-        <Button
-          component={Link}
+        <ProjectCardLink
           href={`/projets/${project.slug}`}
-          variant="text"
-          endIcon={<ArrowOutward className="home-link-arrow" />}
-          sx={{ alignSelf: 'flex-start', px: 0, '&:hover': { backgroundColor: 'transparent' } }}
-        >
-          {locale === 'fr' ? 'Voir le projet' : 'View project'}
-        </Button>
+          label={locale === 'fr' ? 'Voir le projet' : 'View project'}
+          ariaLabel={`${locale === 'fr' ? 'Voir le projet' : 'View project'} ${project.title}`}
+        />
       </Stack>
     </Box>
   );

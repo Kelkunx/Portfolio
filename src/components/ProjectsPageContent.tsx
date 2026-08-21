@@ -1,13 +1,11 @@
 'use client';
 
-import ArrowOutward from '@mui/icons-material/ArrowOutward';
 import GitHub from '@mui/icons-material/GitHub';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
 import {
   formatProjectPeriod,
   getArchiveProjects,
@@ -17,6 +15,7 @@ import {
 } from '../../lib/content';
 import type { Project } from '../../lib/content-types';
 import { useLocale } from '../context/LocaleContext';
+import ProjectCardLink from './ProjectCardLink';
 import ProjectThumbnail from './ProjectThumbnail';
 import SiteContainer from './SiteContainer';
 import TechStackChips from './TechStackChips';
@@ -42,14 +41,11 @@ function ProjectActions({ project, compact = false }: { project: Project; compac
 
   return (
     <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
-      <Button
-        component={Link}
+      <ProjectCardLink
         href={`/projets/${project.slug}`}
-        size="small"
-        endIcon={<ArrowOutward fontSize="small" />}
-      >
-        {locale === 'fr' ? 'Voir le détail' : 'View details'}
-      </Button>
+        label={locale === 'fr' ? 'Voir le détail' : 'View details'}
+        ariaLabel={`${locale === 'fr' ? 'Voir le projet' : 'View project'} ${project.title}`}
+      />
       {!compact &&
         externalLinks.slice(0, 2).map((link) => (
           <Button
@@ -60,6 +56,7 @@ function ProjectActions({ project, compact = false }: { project: Project; compac
             rel="noopener noreferrer"
             size="small"
             startIcon={link.type === 'repo' ? <GitHub fontSize="small" /> : undefined}
+            className="project-card-secondary-action"
           >
             {link.label}
           </Button>
@@ -72,12 +69,9 @@ function SpotlightProject({ project }: { project: Project }) {
   const { locale } = useLocale();
 
   return (
-    <Box component="article" className="projects-spotlight">
+    <Box component="article" className="projects-spotlight project-card-clickable">
       <Box
-        component={Link}
-        href={`/projets/${project.slug}`}
-        aria-label={`${locale === 'fr' ? 'Voir le projet' : 'View project'} ${project.title}`}
-        className="project-thumbnail-link"
+        className="project-thumbnail-frame"
       >
         <ProjectThumbnail
           src={project.imageSrc}
@@ -125,12 +119,9 @@ function SecondaryProject({ project, tone }: { project: Project; tone: 'green' |
   const { locale } = useLocale();
 
   return (
-    <Box component="article" className={`projects-secondary projects-secondary--${tone}`}>
+    <Box component="article" className={`projects-secondary projects-secondary--${tone} project-card-clickable`}>
       <Box
-        component={Link}
-        href={`/projets/${project.slug}`}
-        aria-label={`${locale === 'fr' ? 'Voir le projet' : 'View project'} ${project.title}`}
-        className="project-thumbnail-link"
+        className="project-thumbnail-frame"
       >
         <ProjectThumbnail
           src={project.imageSrc}
@@ -164,12 +155,9 @@ function ArchiveProject({ project }: { project: Project }) {
   const { locale } = useLocale();
 
   return (
-    <Box component="article" className="projects-archive-row">
+    <Box component="article" className="projects-archive-row project-card-clickable">
       <Box
-        component={Link}
-        href={`/projets/${project.slug}`}
-        aria-label={`${locale === 'fr' ? 'Voir le projet' : 'View project'} ${project.title}`}
-        className="project-thumbnail-link"
+        className="project-thumbnail-frame"
       >
         <ProjectThumbnail
           src={project.imageSrc}
