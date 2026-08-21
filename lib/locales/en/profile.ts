@@ -19,8 +19,8 @@ export const profile: Profile = {
   availability: 'Available for a full-stack / frontend / backend role',
   targetRoles: ['Full-stack Developer', 'React / Next.js Frontend Developer', 'Junior Frontend Developer'],
   proofPoints: [
-    { label: 'Primary stack', value: 'React / Next.js / NestJS' },
-    { label: 'Delivered products', value: 'Retail Suite, ATS and IoT tools' },
+    { label: 'Software quality', value: 'Unit, integration and E2E testing' },
+    { label: 'Hands-on experience', value: 'Retail Suite, ATS and IoT tools' },
     { label: 'Certified English', value: 'TOEIC 990 / 990' },
   ],
   valuePillars: [

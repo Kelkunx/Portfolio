@@ -1,16 +1,14 @@
 'use client';
 
-import React from 'react';
+import { ArrowOutward } from '@mui/icons-material';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import Link from 'next/link';
-import { WorkHistoryRounded } from '@mui/icons-material';
-import { useLocale } from '../context/LocaleContext';
+import type { CSSProperties } from 'react';
 import { getProfile } from '../../lib/content';
-import SectionTitle from './SectionTitle';
+import { useLocale } from '../context/LocaleContext';
+import SiteContainer from './SiteContainer';
 
 function formatRange(start?: string, end?: string, locale = 'fr') {
   if (!start) return '';
@@ -18,87 +16,80 @@ function formatRange(start?: string, end?: string, locale = 'fr') {
   return end ? `${start} — ${end}` : `${start} — ${present}`;
 }
 
+const timelineTones = ['var(--cyan)', 'var(--green)', 'var(--purple)'];
+
 export default function CareerHighlightsSection() {
   const { locale } = useLocale();
   const profile = getProfile(locale);
-  const experiences = profile.experiences.filter((item) => item.featured && item.kind !== 'other').slice(0, 3);
+  const experiences = profile.experiences
+    .filter((item) => item.featured && item.kind !== 'other')
+    .slice(0, 3)
+    .reverse();
 
   return (
-    <Box component="section" sx={{ mt: { xs: 8, md: 12 } }}>
-      <Stack spacing={1} sx={{ mb: 4 }}>
-        <SectionTitle
-          title={locale === 'fr' ? 'Parcours en bref' : 'Career highlights'}
-          icon={<WorkHistoryRounded />}
-          tone="purple"
-        />
-        <Typography variant="body1" color="text.secondary" sx={{ maxWidth: '70ch' }}>
-          {locale === 'fr'
-            ? 'Des expériences qui relient développement full-stack, automatisation et qualité logicielle.'
-            : 'Experience spanning full-stack development, automation and software quality.'}
-        </Typography>
-      </Stack>
+    <Box component="section" sx={{ py: { xs: 8, md: 11 }, borderTop: '1px solid var(--border)' }}>
+      <SiteContainer>
+        <Box sx={{ mb: { xs: 4, md: 5 } }}>
+          <Typography component="h2" variant="h3" sx={{ color: 'var(--text)', mb: 1 }}>
+            {locale === 'fr' ? 'Parcours en bref' : 'Career highlights'}
+          </Typography>
+          <Typography variant="body1" color="text.secondary" sx={{ maxWidth: '70ch' }}>
+            {locale === 'fr'
+              ? 'Trois contextes complémentaires, des systèmes connectés aux outils métier full-stack.'
+              : 'Three complementary contexts, from connected systems to full-stack business tools.'}
+          </Typography>
+        </Box>
 
-      <Grid container spacing={3}>
-        {experiences.map((experience) => (
-          <Grid key={`${experience.company}-${experience.start}`} size={{ xs: 12, md: 4 }}>
-            <Box
-              sx={{
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid var(--border)',
-                borderTop: '2px solid var(--purple)',
-                backgroundColor: 'var(--surface)',
-                p: 3,
-                height: '100%',
-              }}
-            >
-              <Stack spacing={1.5}>
-                <Box>
-                  <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.5 }}>
+        <Box className="home-career-grid">
+          <Box className="home-career-rail" aria-hidden="true" />
+          {experiences.map((experience, index) => {
+            const isFeatured = experience.company === 'CGI';
+            const positionClass = index === 0 ? 'first' : index === experiences.length - 1 ? 'last' : 'middle';
+            const tone = timelineTones[index % timelineTones.length];
+
+            return (
+              <Box
+                key={`${experience.company}-${experience.start}`}
+                component={Link}
+                href="/cv"
+                className={`home-career-item home-career-item--${positionClass}${isFeatured ? ' home-career-item--featured' : ''}`}
+                style={{ '--career-tone': tone } as CSSProperties}
+                aria-label={
+                  locale === 'fr'
+                    ? `Voir l'expérience ${experience.company} dans le CV`
+                    : `View the ${experience.company} experience in the CV`
+                }
+              >
+                <Box className="home-career-content">
+                  <Typography className="home-career-period" variant="body2">
                     {formatRange(experience.start, experience.end, locale)}
                   </Typography>
-                  <Typography component="h3" variant="h6" sx={{ color: 'var(--text)' }}>
+                  <Typography className="home-career-title" component="h3">
+                    {experience.company}
+                  </Typography>
+                  <Typography variant="body1" sx={{ color: 'var(--text)', mb: 0.75 }}>
                     {experience.role}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {experience.company} • {experience.location}
+                  <Typography variant="body2" sx={{ color: 'var(--text-2)', lineHeight: 1.65 }}>
+                    {experience.summary}
                   </Typography>
                 </Box>
+                <Box className="home-career-dot" aria-hidden="true" />
+              </Box>
+            );
+          })}
+        </Box>
 
-                <Stack spacing={1.25}>
-                  {experience.bullets.slice(0, 2).map((bullet) => (
-                    <Box
-                      key={bullet}
-                      sx={{
-                        display: 'grid',
-                        gridTemplateColumns: '7px 1fr',
-                        gap: 1.1,
-                        alignItems: 'start',
-                      }}
-                    >
-                      <Box
-                        sx={{
-                          width: 7,
-                          height: 7,
-                          borderRadius: '50%',
-                          backgroundColor: 'var(--purple)',
-                          mt: '0.45rem',
-                        }}
-                      />
-                      <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.68 }}>
-                        {bullet}
-                      </Typography>
-                    </Box>
-                  ))}
-                </Stack>
-              </Stack>
-            </Box>
-          </Grid>
-        ))}
-      </Grid>
-
-      <Button component={Link} href="/cv" variant="text" sx={{ mt: 3, px: 0 }}>
-        {locale === 'fr' ? 'Voir le CV complet' : 'View full CV'}
-      </Button>
+        <Button
+          component={Link}
+          href="/cv"
+          variant="text"
+          endIcon={<ArrowOutward className="home-link-arrow" />}
+          sx={{ mt: { xs: 3, md: 2 }, px: 0, '&:hover': { backgroundColor: 'transparent' } }}
+        >
+          {locale === 'fr' ? 'Voir le CV complet' : 'View full CV'}
+        </Button>
+      </SiteContainer>
     </Box>
   );
 }

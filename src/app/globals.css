@@ -195,6 +195,24 @@ main {
   flex: 1 0 auto;
 }
 
+.site-container {
+  width: calc(100% - 40px);
+  max-width: 1440px;
+  margin-inline: auto;
+}
+
+@media (min-width: 600px) {
+  .site-container {
+    width: calc(100% - 64px);
+  }
+}
+
+@media (min-width: 1200px) {
+  .site-container {
+    width: calc(100% - 96px);
+  }
+}
+
 .site-header-toolbar {
   min-height: 80px;
 }
@@ -206,6 +224,177 @@ main {
 .hero-scroll-cue {
   opacity: 1;
   transform: translateY(0);
+}
+
+@keyframes scrollCueFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.home-link-arrow {
+  transition: transform 160ms ease;
+}
+
+.MuiButton-root:hover .home-link-arrow,
+.MuiButton-root:focus-visible .home-link-arrow {
+  transform: translateX(4px);
+}
+
+.home-career-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr 1fr;
+  min-width: 0;
+  transition: grid-template-columns 220ms cubic-bezier(.2, .8, .2, 1);
+}
+
+.home-career-rail {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: var(--border);
+}
+
+.home-career-item {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  min-width: 0;
+  min-height: 380px;
+  padding-inline: 24px;
+  grid-template-rows: 1fr 48px 1fr;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.home-career-content {
+  width: 100%;
+  max-width: 42ch;
+  margin-inline: auto;
+  padding-block: 12px;
+  align-self: end;
+  grid-row: 1;
+  text-align: center;
+}
+
+.home-career-item--middle .home-career-content {
+  align-self: start;
+  grid-row: 3;
+}
+
+.home-career-period {
+  color: var(--career-tone);
+  font-weight: 600;
+}
+
+.home-career-title {
+  margin-block: 4px;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  transition: color 160ms ease, font-size 220ms cubic-bezier(.2, .8, .2, 1);
+}
+
+.home-career-item--featured .home-career-title,
+.home-career-item:is(:hover, :focus-visible) .home-career-title {
+  color: var(--career-tone);
+  font-size: 1.85rem;
+}
+
+.home-career-grid:has(.home-career-item:is(:hover, :focus-visible))
+  .home-career-item--featured:not(:is(:hover, :focus-visible))
+  .home-career-title {
+  color: var(--text);
+  font-size: 1.25rem;
+}
+
+.home-career-dot {
+  width: 18px;
+  height: 18px;
+  margin: auto;
+  border: 3px solid var(--career-tone);
+  border-radius: 50%;
+  background: var(--bg);
+  grid-row: 2;
+  transition: background-color 160ms ease, transform 220ms cubic-bezier(.2, .8, .2, 1);
+}
+
+.home-career-item--featured .home-career-dot,
+.home-career-item:is(:hover, :focus-visible) .home-career-dot {
+  background: var(--career-tone);
+  transform: scale(1.08);
+}
+
+@media (min-width: 1024px) {
+  .home-career-grid:has(.home-career-item--first:is(:hover, :focus-visible)) {
+    grid-template-columns: 1.3fr 1fr 1fr;
+  }
+
+  .home-career-grid:has(.home-career-item--middle:is(:hover, :focus-visible)) {
+    grid-template-columns: 1fr 1.3fr 1fr;
+  }
+
+  .home-career-grid:has(.home-career-item--last:is(:hover, :focus-visible)) {
+    grid-template-columns: 1fr 1fr 1.3fr;
+  }
+}
+
+@media (max-width: 1023px) {
+  .home-career-grid {
+    display: flex;
+    gap: 16px;
+    margin-inline: -20px;
+    padding: 0 20px 12px;
+    overflow-x: auto;
+    scroll-padding-inline: 20px;
+    scroll-snap-type: x mandatory;
+  }
+
+  .home-career-rail,
+  .home-career-dot {
+    display: none;
+  }
+
+  .home-career-item {
+    display: block;
+    flex: 0 0 min(82vw, 380px);
+    min-height: 0;
+    padding: 24px;
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--career-tone);
+    border-radius: var(--radius-md);
+    background: var(--surface-3);
+    scroll-snap-align: start;
+  }
+
+  .home-career-content,
+  .home-career-item--middle .home-career-content {
+    max-width: none;
+    padding: 0;
+    text-align: left;
+  }
+
+  .home-career-title,
+  .home-career-item--featured .home-career-title,
+  .home-career-item:is(:hover, :focus-visible) .home-career-title,
+  .home-career-grid:has(.home-career-item:is(:hover, :focus-visible))
+    .home-career-item--featured:not(:is(:hover, :focus-visible))
+    .home-career-title {
+    color: var(--career-tone);
+    font-size: 1.4rem;
+  }
 }
 
 .lightbox-thumbnail {

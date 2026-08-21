@@ -3,7 +3,6 @@
 import { useRef } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -14,6 +13,7 @@ import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
 import { useLocale } from '../context/LocaleContext';
 import LanguageToggle from './LanguageToggle';
+import SiteContainer from './SiteContainer';
 
 export default function Header() {
   const mobileMenuRef = useRef<HTMLDialogElement>(null);
@@ -42,14 +42,14 @@ export default function Header() {
           transition: 'background-color 180ms ease, border-color 180ms ease',
         }}
       >
-        <Container maxWidth="lg">
+        <SiteContainer>
           <Toolbar
             className="site-header-toolbar"
             sx={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              px: { xs: 2, md: 0 },
+              px: 0,
             }}
           >
             <Box
@@ -235,7 +235,7 @@ export default function Header() {
               </IconButton>
             </Box>
           </Toolbar>
-        </Container>
+        </SiteContainer>
       </AppBar>
 
       <dialog
