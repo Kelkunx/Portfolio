@@ -142,6 +142,7 @@ export const profile: Profile = {
       location: 'Vannes, France',
       summary:
         'Optimised a no-code ATS, automated tool-to-tool workflows and improved the client extranet.',
+      technologies: ['Airtable', 'Make', 'Zapier', 'HubSpot'],
       featured: true,
       kind: 'tech',
       bullets: [
@@ -159,6 +160,8 @@ export const profile: Profile = {
       location: 'Larmor-Plage, France',
       summary:
         'Built full-stack business features on CGI Retail Suite, with React, NestJS and strong quality requirements.',
+      technologies: ['React', 'NestJS', 'TypeScript', 'GitLab CI', 'SonarQube'],
+      highlighted: true,
       featured: true,
       kind: 'tech',
       bullets: [
@@ -187,6 +190,7 @@ export const profile: Profile = {
       location: 'Lorient, France',
       summary:
         'Built an energy monitoring solution combining real-time data collection, web visualisation and sensor integration.',
+      technologies: ['InfluxDB', 'Telegraf', 'MQTT', 'Raspberry Pi', 'Nginx'],
       featured: true,
       kind: 'tech',
       bullets: [

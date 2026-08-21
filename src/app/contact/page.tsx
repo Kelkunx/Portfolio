@@ -1,13 +1,17 @@
 'use client';
 
+import ArrowOutward from '@mui/icons-material/ArrowOutward';
+import Email from '@mui/icons-material/Email';
+import GitHub from '@mui/icons-material/GitHub';
+import LinkedIn from '@mui/icons-material/LinkedIn';
+import Phone from '@mui/icons-material/Phone';
+import PictureAsPdf from '@mui/icons-material/PictureAsPdf';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { Email, GitHub, LinkedIn, Phone, PictureAsPdf } from '@mui/icons-material';
+import type { ReactNode } from 'react';
 import { getProfile } from '../../../lib/content';
+import SiteContainer from '../../components/SiteContainer';
 import { useLocale } from '../../context/LocaleContext';
 
 function getPhoneHref(phone: string) {
@@ -18,89 +22,115 @@ function getPhoneHref(phone: string) {
   return `tel:${normalizedPhone}`;
 }
 
+type ContactLinkProps = {
+  href: string;
+  label: string;
+  value: string;
+  icon: ReactNode;
+  variant?: 'primary' | 'secondary' | 'quiet';
+  external?: boolean;
+};
+
+function ContactLink({ href, label, value, icon, variant = 'quiet', external = false }: ContactLinkProps) {
+  return (
+    <Box
+      component="a"
+      href={href}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener noreferrer' : undefined}
+      className={`contact-action contact-action--${variant}`}
+    >
+      <Box aria-hidden="true" className="contact-action-icon">
+        {icon}
+      </Box>
+      <Box sx={{ minWidth: 0 }}>
+        <Typography component="span" variant="body2" className="contact-action-label">
+          {label}
+        </Typography>
+        <Typography component="span" variant={variant === 'primary' ? 'h6' : 'body1'} className="contact-action-value">
+          {value}
+        </Typography>
+      </Box>
+      <ArrowOutward className="contact-action-arrow" aria-hidden="true" />
+    </Box>
+  );
+}
+
 export default function ContactPage() {
   const { locale } = useLocale();
   const profile = getProfile(locale);
   const phoneHref = getPhoneHref(profile.phone);
 
   return (
-    <Container maxWidth="md" sx={{ py: { xs: 6, md: 8 } }}>
-      <Box component="header" sx={{ mb: 4, maxWidth: 760 }}>
-        <Typography component="h1" variant="h2" sx={{ color: 'var(--text)', mb: 1.5 }}>
-          {locale === 'fr' ? 'Parlons du poste ou du projet' : "Let's talk about the role or the project"}
-        </Typography>
-        <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.8, maxWidth: '58ch' }}>
-          {profile.contactPitch}
-        </Typography>
-      </Box>
+    <SiteContainer sx={{ py: { xs: 6, md: 10 } }}>
+      <Box className="contact-layout">
+        <Box component="header">
+          <Typography
+            component="h1"
+            variant="h2"
+            sx={{ color: 'var(--text)', fontSize: { xs: '2.65rem', sm: '3.5rem' }, mb: 2, maxWidth: '13ch' }}
+          >
+            {locale === 'fr' ? 'Parlons du poste ou du projet' : "Let's talk about the role or the project"}
+          </Typography>
+          <Typography variant="body1" sx={{ color: 'var(--text-2)', lineHeight: 1.85, maxWidth: '52ch' }}>
+            {profile.contactPitch}
+          </Typography>
+        </Box>
 
-      <Box
-        component="address"
-        sx={{
-          borderRadius: 'var(--radius-lg)',
-          border: '1px solid var(--border)',
-          borderTop: '2px solid var(--cyan)',
-          backgroundColor: 'var(--surface)',
-          p: { xs: 3, md: 4 },
-          fontStyle: 'normal',
-        }}
-      >
-        <Stack spacing={3}>
-          <Box>
-            <Typography component="h2" variant="h5" sx={{ color: 'var(--text)', mb: 0.75 }}>
+        <Box component="address" className="contact-address">
+          <Stack spacing={1.5} sx={{ mb: 3 }}>
+            <Typography component="h2" variant="h5" sx={{ color: 'var(--text)' }}>
               {locale === 'fr' ? 'Contact direct' : 'Direct contact'}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" sx={{ color: 'var(--text-2)', lineHeight: 1.7 }}>
               {locale === 'fr'
                 ? 'L’email est le moyen le plus simple de me transmettre le contexte d’un poste ou d’un projet.'
                 : 'Email is the easiest way to share the context of a role or project.'}
             </Typography>
-          </Box>
+          </Stack>
 
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
-            <Button variant="contained" startIcon={<Email />} href={`mailto:${profile.email}`}>
-              {profile.email}
-            </Button>
-            <Button
-              variant="outlined"
-              startIcon={<LinkedIn />}
+          <Stack spacing={1.25}>
+            <ContactLink
+              href={`mailto:${profile.email}`}
+              label="Email"
+              value={profile.email}
+              icon={<Email fontSize="small" />}
+              variant="primary"
+            />
+            <ContactLink
               href={profile.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {locale === 'fr' ? 'Échanger sur LinkedIn' : 'Connect on LinkedIn'}
-            </Button>
+              label="LinkedIn"
+              value={locale === 'fr' ? 'Échanger sur LinkedIn' : 'Connect on LinkedIn'}
+              icon={<LinkedIn fontSize="small" />}
+              variant="secondary"
+              external
+            />
           </Stack>
 
-          <Divider />
-
-          <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
-            <Button variant="text" size="small" startIcon={<Phone />} href={phoneHref}>
-              {profile.phone}
-            </Button>
-            <Button
-              variant="text"
-              size="small"
-              startIcon={<GitHub />}
+          <Box sx={{ mt: 3, borderBottom: '1px solid var(--border)' }}>
+            <ContactLink
+              href={phoneHref}
+              label={locale === 'fr' ? 'Téléphone' : 'Phone'}
+              value={profile.phone}
+              icon={<Phone fontSize="small" />}
+            />
+            <ContactLink
               href={profile.github}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GitHub
-            </Button>
-            <Button
-              variant="text"
-              size="small"
-              startIcon={<PictureAsPdf />}
+              label="GitHub"
+              value="Kelkunx"
+              icon={<GitHub fontSize="small" />}
+              external
+            />
+            <ContactLink
               href={profile.cvPdf}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {locale === 'fr' ? 'CV PDF' : 'PDF CV'}
-            </Button>
-          </Stack>
-        </Stack>
+              label={locale === 'fr' ? 'CV' : 'Resume'}
+              value={locale === 'fr' ? 'Ouvrir le CV PDF' : 'Open PDF resume'}
+              icon={<PictureAsPdf fontSize="small" />}
+              external
+            />
+          </Box>
+        </Box>
       </Box>
-    </Container>
+    </SiteContainer>
   );
 }

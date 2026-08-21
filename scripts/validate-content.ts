@@ -231,6 +231,21 @@ function checkProfile(profile: Profile, locale: Locale) {
   Object.entries(collections).forEach(([field, items]) => {
     checkNonEmptyList(items, `${profileLabel} : ${field}`);
   });
+
+  profile.experiences.forEach((experience) => {
+    if (experience.kind !== 'tech') return;
+
+    checkNonEmptyList(
+      experience.technologies ?? [],
+      `${profileLabel} : technologies de l'expérience ${experience.company}`,
+    );
+    experience.technologies?.forEach((technology, index) => {
+      check(
+        isNonEmptyText(technology),
+        `${profileLabel} : technologie vide pour ${experience.company} à l'index ${index}.`,
+      );
+    });
+  });
 }
 
 function checkProfileParity() {
@@ -266,6 +281,11 @@ function checkProfileParity() {
     JSON.stringify(profileFR.experiences.map(({ company }) => company)) ===
       JSON.stringify(profileEN.experiences.map(({ company }) => company)),
     'Profil : les expériences ne correspondent pas entre FR et EN.',
+  );
+  check(
+    JSON.stringify(profileFR.experiences.map(({ technologies, highlighted }) => ({ technologies, highlighted }))) ===
+      JSON.stringify(profileEN.experiences.map(({ technologies, highlighted }) => ({ technologies, highlighted }))),
+    "Profil : les technologies ou la mise en avant des expériences diffèrent entre FR et EN.",
   );
   check(
     JSON.stringify(profileFR.education.map(({ school }) => school)) ===

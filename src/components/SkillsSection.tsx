@@ -1,22 +1,13 @@
 'use client';
 
-import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
-import Grid from '@mui/material/Grid';
-import { CodeRounded } from '@mui/icons-material';
 import { useLocale } from '../context/LocaleContext';
 import { getProfile } from '../../lib/content';
-import SectionTitle from './SectionTitle';
 import SiteContainer from './SiteContainer';
 import TechStackChips from './TechStackChips';
 
-type SkillsSectionProps = {
-  variant?: 'home' | 'cv';
-};
-
-export default function SkillsSection({ variant = 'home' }: SkillsSectionProps) {
+export default function SkillsSection() {
   const { locale } = useLocale();
   const profile = getProfile(locale);
   const tones = [
@@ -25,39 +16,6 @@ export default function SkillsSection({ variant = 'home' }: SkillsSectionProps) 
     { color: 'var(--purple)', background: 'rgba(187, 154, 247, 0.045)' },
     { color: 'var(--orange)', background: 'rgba(255, 158, 100, 0.045)' },
   ];
-
-  if (variant === 'cv') {
-    return (
-      <Box sx={{ mt: 8 }}>
-        <Stack spacing={1} sx={{ mb: 3 }}>
-          <SectionTitle
-            title={locale === 'fr' ? 'Compétences' : 'Skills'}
-            icon={<CodeRounded />}
-            tone="purple"
-          />
-        </Stack>
-
-        <Grid container spacing={{ xs: 2.5, md: 3 }}>
-          {profile.skills.map((group) => (
-            <Grid key={group.category} size={{ xs: 12, md: 6 }}>
-              <Box
-                sx={{
-                  borderLeft: '2px solid var(--purple)',
-                  pl: 2,
-                  py: 0.25,
-                }}
-              >
-                <Typography component="h3" variant="h6" sx={{ color: 'var(--text)', mb: 1.25 }}>
-                  {group.category}
-                </Typography>
-                <TechStackChips items={group.items} />
-              </Box>
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
-    );
-  }
 
   return (
     <Box component="section" sx={{ py: { xs: 8, md: 11 }, borderTop: '1px solid var(--border)' }}>

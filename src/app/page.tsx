@@ -17,7 +17,7 @@ export default function HomePage() {
       <StructuredData data={buildHomeStructuredData(profileFR, featuredProjects)} />
       <HeroSection />
       <FeaturedProjectsSection />
-      <SkillsSection variant="home" />
+      <SkillsSection />
       <CareerHighlightsSection />
       <FinalCtaSection />
     </>

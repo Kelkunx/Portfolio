@@ -142,6 +142,7 @@ export const profile: Profile = {
       location: 'Vannes, France',
       summary:
         "Optimisation d'un ATS no-code, automatisations entre outils et amélioration de l'extranet client.",
+      technologies: ['Airtable', 'Make', 'Zapier', 'HubSpot'],
       featured: true,
       kind: 'tech',
       bullets: [
@@ -159,6 +160,8 @@ export const profile: Profile = {
       location: 'Larmor-Plage, France',
       summary:
         "Développement web full-stack sur CGI Retail Suite, avec création d'écrans métier, API et amélioration continue de la qualité logicielle.",
+      technologies: ['React', 'NestJS', 'TypeScript', 'GitLab CI', 'SonarQube'],
+      highlighted: true,
       featured: true,
       kind: 'tech',
       bullets: [
@@ -187,6 +190,7 @@ export const profile: Profile = {
       location: 'Lorient, France',
       summary:
         "Mise en place d'une solution de suivi énergétique avec collecte temps réel, visualisation web et intégration de capteurs.",
+      technologies: ['InfluxDB', 'Telegraf', 'MQTT', 'Raspberry Pi', 'Nginx'],
       featured: true,
       kind: 'tech',
       bullets: [
