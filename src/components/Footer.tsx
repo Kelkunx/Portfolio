@@ -1,115 +1,71 @@
 'use client';
 
-import React from 'react';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+import GitHub from '@mui/icons-material/GitHub';
+import LinkedIn from '@mui/icons-material/LinkedIn';
+import PictureAsPdf from '@mui/icons-material/PictureAsPdf';
 import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import EmailIcon from '@mui/icons-material/Email';
-import DescriptionIcon from '@mui/icons-material/Description';
-import { useLocale } from '../context/LocaleContext';
+import Typography from '@mui/material/Typography';
 import { getProfile } from '../../lib/content';
+import { useLocale } from '../context/LocaleContext';
+import SiteContainer from './SiteContainer';
 
 export default function Footer() {
   const { locale } = useLocale();
   const profile = getProfile(locale);
 
-  const ariaLinkedIn = locale === 'fr' ? 'Ouvrir LinkedIn' : 'Open LinkedIn';
-  const ariaGithub = locale === 'fr' ? 'Ouvrir GitHub' : 'Open GitHub';
-  const ariaEmail = locale === 'fr' ? 'Envoyer un email' : 'Send an email';
-  const ariaCv = locale === 'fr' ? 'Télécharger le CV' : 'Download CV';
-
   return (
-    <footer>
-      <Box
+    <Box component="footer" sx={{ backgroundColor: 'var(--bg-2)' }}>
+      <SiteContainer
         sx={{
-          position: 'relative',
-          borderTop: '1px solid var(--border)',
-          backgroundColor: 'var(--bg-2)',
-          '&::before': {
-            content: '""',
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            top: 0,
-            height: '1px',
-            background: 'var(--grad-border)',
-            opacity: 0.35,
-          },
+          display: 'flex',
+          flexDirection: { xs: 'column', sm: 'row' },
+          alignItems: { xs: 'flex-start', sm: 'center' },
+          justifyContent: 'space-between',
+          gap: 2,
+          py: 3.5,
         }}
       >
-        <Container maxWidth="lg" sx={{ py: 4 }}>
+        <Typography variant="body2" sx={{ color: 'var(--text-2)' }}>
+          © {new Date().getFullYear()} Léo JEGO
+        </Typography>
+
+        <Stack direction="row" spacing={0.75}>
           <Box
-            sx={{
-              display: 'flex',
-              flexDirection: { xs: 'column', md: 'row' },
-              alignItems: { xs: 'flex-start', md: 'center' },
-              justifyContent: 'space-between',
-              gap: 2,
-            }}
+            component="a"
+            href={profile.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-icon-link footer-icon-link--linkedin"
+            aria-label={locale === 'fr' ? 'Voir mon profil LinkedIn' : 'View my LinkedIn profile'}
+            title="LinkedIn"
           >
-            <Box>
-              <Typography variant="body2" sx={{ color: 'var(--text)' }}>
-                © {new Date().getFullYear()} Léo JEGO
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {profile.focus} • {profile.location}
-              </Typography>
-            </Box>
-
-            <Stack direction="row" spacing={1} alignItems="center">
-              <IconButton
-                component="a"
-                href={profile.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                size="small"
-                aria-label={ariaLinkedIn}
-                title={ariaLinkedIn}
-              >
-                <LinkedInIcon fontSize="small" />
-              </IconButton>
-
-              <IconButton
-                component="a"
-                href={profile.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                size="small"
-                aria-label={ariaGithub}
-                title={ariaGithub}
-              >
-                <GitHubIcon fontSize="small" />
-              </IconButton>
-
-              <IconButton
-                component="a"
-                href={`mailto:${profile.email}`}
-                size="small"
-                aria-label={ariaEmail}
-                title={ariaEmail}
-              >
-                <EmailIcon fontSize="small" />
-              </IconButton>
-
-              <IconButton
-                component="a"
-                href={profile.cvPdf}
-                target="_blank"
-                rel="noopener noreferrer"
-                size="small"
-                aria-label={ariaCv}
-                title={ariaCv}
-              >
-                <DescriptionIcon fontSize="small" />
-              </IconButton>
-            </Stack>
+            <LinkedIn />
           </Box>
-        </Container>
-      </Box>
-    </footer>
+          <Box
+            component="a"
+            href={profile.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-icon-link footer-icon-link--github"
+            aria-label={locale === 'fr' ? 'Voir mon profil GitHub' : 'View my GitHub profile'}
+            title="GitHub"
+          >
+            <GitHub />
+          </Box>
+          <Box
+            component="a"
+            href={profile.cvPdf}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-icon-link footer-icon-link--cv"
+            aria-label={locale === 'fr' ? 'Ouvrir mon CV PDF' : 'Open my PDF resume'}
+            title={locale === 'fr' ? 'CV PDF' : 'PDF resume'}
+          >
+            <PictureAsPdf />
+          </Box>
+        </Stack>
+      </SiteContainer>
+    </Box>
   );
 }

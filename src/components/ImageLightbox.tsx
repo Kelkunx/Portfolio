@@ -11,6 +11,8 @@ type Props = {
   aspectRatio?: string;
   priority?: boolean;
   sizes?: string;
+  thumbnailFit?: 'cover' | 'contain';
+  thumbnailPosition?: string;
 };
 
 export default function ImageLightbox({
@@ -20,6 +22,8 @@ export default function ImageLightbox({
   aspectRatio = '16/9',
   priority = false,
   sizes = '(max-width: 900px) 100vw, 66vw',
+  thumbnailFit = 'cover',
+  thumbnailPosition = 'center',
 }: Props) {
   const { locale } = useLocale();
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -43,7 +47,7 @@ export default function ImageLightbox({
           fill
           sizes={sizes}
           unoptimized={shouldSkipOptimization}
-          style={{ objectFit: 'cover' }}
+          style={{ objectFit: thumbnailFit, objectPosition: thumbnailPosition }}
           priority={priority}
         />
       </button>

@@ -37,6 +37,7 @@ export type ExperienceItem = {
   location: string;
   summary: string;
   bullets: string[];
+  technologies?: string[];
   featured?: boolean;
   kind?: 'tech' | 'other';
 };
