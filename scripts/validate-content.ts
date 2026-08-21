@@ -283,9 +283,9 @@ function checkProfileParity() {
     'Profil : les expériences ne correspondent pas entre FR et EN.',
   );
   check(
-    JSON.stringify(profileFR.experiences.map(({ technologies, highlighted }) => ({ technologies, highlighted }))) ===
-      JSON.stringify(profileEN.experiences.map(({ technologies, highlighted }) => ({ technologies, highlighted }))),
-    "Profil : les technologies ou la mise en avant des expériences diffèrent entre FR et EN.",
+    JSON.stringify(profileFR.experiences.map(({ technologies }) => technologies)) ===
+      JSON.stringify(profileEN.experiences.map(({ technologies }) => technologies)),
+    'Profil : les technologies des expériences diffèrent entre FR et EN.',
   );
   check(
     JSON.stringify(profileFR.education.map(({ school }) => school)) ===

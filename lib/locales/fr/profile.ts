@@ -161,7 +161,6 @@ export const profile: Profile = {
       summary:
         "Développement web full-stack sur CGI Retail Suite, avec création d'écrans métier, API et amélioration continue de la qualité logicielle.",
       technologies: ['React', 'NestJS', 'TypeScript', 'GitLab CI', 'SonarQube'],
-      highlighted: true,
       featured: true,
       kind: 'tech',
       bullets: [

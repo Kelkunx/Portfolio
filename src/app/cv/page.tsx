@@ -1,6 +1,10 @@
 'use client';
 
 import ArrowOutward from '@mui/icons-material/ArrowOutward';
+import BusinessCenterRounded from '@mui/icons-material/BusinessCenterRounded';
+import CodeRounded from '@mui/icons-material/CodeRounded';
+import SchoolRounded from '@mui/icons-material/SchoolRounded';
+import WorkspacePremiumRounded from '@mui/icons-material/WorkspacePremiumRounded';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
@@ -18,20 +22,40 @@ import { useLocale } from '../../context/LocaleContext';
 type CvSectionProps = {
   id: string;
   title: string;
+  icon: ReactNode;
+  tone: string;
   children: ReactNode;
 };
+
+const experienceTones = [
+  { color: 'var(--purple)', tint: 'rgba(187, 154, 247, 0.045)' },
+  { color: 'var(--cyan)', tint: 'rgba(125, 207, 255, 0.045)' },
+  { color: 'var(--green)', tint: 'rgba(158, 206, 106, 0.045)' },
+];
+
+const skillTones = [
+  { color: 'var(--cyan)', tint: 'rgba(125, 207, 255, 0.04)' },
+  { color: 'var(--purple)', tint: 'rgba(187, 154, 247, 0.04)' },
+  { color: 'var(--green)', tint: 'rgba(158, 206, 106, 0.04)' },
+  { color: 'var(--orange)', tint: 'rgba(255, 158, 100, 0.04)' },
+];
 
 function formatExperienceRange(experience: ExperienceItem, locale: 'fr' | 'en') {
   const present = locale === 'fr' ? 'présent' : 'present';
   return `${experience.start} — ${experience.end || present}`;
 }
 
-function CvSection({ id, title, children }: CvSectionProps) {
+function CvSection({ id, title, icon, tone, children }: CvSectionProps) {
   return (
     <Box component="section" id={id} className="cv-section">
-      <Typography component="h2" variant="h4" sx={{ color: 'var(--text)', mb: { xs: 3, md: 4 } }}>
-        {title}
-      </Typography>
+      <Box className="cv-section-heading" sx={{ '--cv-section-tone': tone }}>
+        <Box component="span" className="cv-section-icon" aria-hidden="true">
+          {icon}
+        </Box>
+        <Typography component="h2" variant="h4" sx={{ color: 'var(--text)' }}>
+          {title}
+        </Typography>
+      </Box>
       {children}
     </Box>
   );
@@ -132,46 +156,58 @@ export default function CvPage() {
         <LocalSectionNav items={navigationItems} ariaLabel={locale === 'fr' ? 'Sommaire du CV' : 'Resume contents'} />
 
         <Box>
-          <CvSection id="experience" title={locale === 'fr' ? 'Expériences' : 'Experience'}>
+          <CvSection
+            id="experience"
+            title={locale === 'fr' ? 'Expériences' : 'Experience'}
+            icon={<BusinessCenterRounded />}
+            tone="var(--green)"
+          >
             <Box sx={{ borderBottom: '1px solid var(--border)' }}>
-              {techExperiences.map((experience) => (
-                <Box
-                  component="article"
-                  key={`${experience.company}-${experience.start}`}
-                  className={`cv-experience-row${experience.highlighted ? ' cv-experience-row--highlighted' : ''}`}
-                >
-                  <Box>
-                    <Typography variant="body2" sx={{ color: experience.highlighted ? 'var(--cyan)' : 'var(--text-2)', fontWeight: 700 }}>
-                      {formatExperienceRange(experience, locale)}
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: 'var(--muted)', mt: 0.5 }}>
-                      {experience.location}
-                    </Typography>
-                  </Box>
+              {techExperiences.map((experience, index) => {
+                const tone = experienceTones[index % experienceTones.length];
 
-                  <Stack spacing={2.25}>
+                return (
+                  <Box
+                    component="article"
+                    key={`${experience.company}-${experience.start}`}
+                    className="cv-experience-row"
+                    tabIndex={0}
+                    aria-label={`${experience.role}, ${experience.company}`}
+                    sx={{ '--experience-tone': tone.color, '--experience-tint': tone.tint }}
+                  >
                     <Box>
-                      <Typography component="h3" variant="h5" sx={{ color: 'var(--text)', mb: 0.5 }}>
-                        {experience.role}
+                      <Typography variant="body2" sx={{ color: 'var(--experience-tone)', fontWeight: 700 }}>
+                        {formatExperienceRange(experience, locale)}
                       </Typography>
-                      <Typography variant="body1" sx={{ color: experience.highlighted ? 'var(--green)' : 'var(--purple)', fontWeight: 700 }}>
-                        {experience.company}
+                      <Typography variant="body2" sx={{ color: 'var(--muted)', mt: 0.5 }}>
+                        {experience.location}
                       </Typography>
                     </Box>
-                    <Typography variant="body1" sx={{ color: 'var(--text-2)', lineHeight: 1.8, maxWidth: '72ch' }}>
-                      {experience.summary}
-                    </Typography>
-                    <Box component="ul" className="cv-experience-list">
-                      {experience.bullets.map((bullet) => (
-                        <Typography component="li" key={bullet} variant="body2" sx={{ color: 'var(--text-2)', lineHeight: 1.75 }}>
-                          {bullet}
+
+                    <Stack spacing={2.25}>
+                      <Box>
+                        <Typography component="h3" variant="h5" sx={{ color: 'var(--text)', mb: 0.5 }}>
+                          {experience.role}
                         </Typography>
-                      ))}
-                    </Box>
-                    {experience.technologies && <TechStackChips items={experience.technologies} />}
-                  </Stack>
-                </Box>
-              ))}
+                        <Typography variant="body1" sx={{ color: 'var(--experience-tone)', fontWeight: 700 }}>
+                          {experience.company}
+                        </Typography>
+                      </Box>
+                      <Typography variant="body1" sx={{ color: 'var(--text-2)', lineHeight: 1.8, maxWidth: '72ch' }}>
+                        {experience.summary}
+                      </Typography>
+                      <Box component="ul" className="cv-experience-list">
+                        {experience.bullets.map((bullet) => (
+                          <Typography component="li" key={bullet} variant="body2" sx={{ color: 'var(--text-2)', lineHeight: 1.75 }}>
+                            {bullet}
+                          </Typography>
+                        ))}
+                      </Box>
+                      {experience.technologies && <TechStackChips items={experience.technologies} />}
+                    </Stack>
+                  </Box>
+                );
+              })}
             </Box>
 
             {supportingExperienceGroups.length > 0 && (
@@ -193,20 +229,38 @@ export default function CvPage() {
             )}
           </CvSection>
 
-          <CvSection id="skills" title={locale === 'fr' ? 'Compétences' : 'Skills'}>
-            <Box sx={{ borderBottom: '1px solid var(--border)' }}>
-              {profile.skills.map((group) => (
-                <Box key={group.category} className="cv-skill-row">
-                  <Typography component="h3" variant="h6" sx={{ color: 'var(--text)' }}>
-                    {group.category}
-                  </Typography>
-                  <TechStackChips items={group.items} />
-                </Box>
-              ))}
+          <CvSection
+            id="skills"
+            title={locale === 'fr' ? 'Compétences' : 'Skills'}
+            icon={<CodeRounded />}
+            tone="var(--purple)"
+          >
+            <Box className="cv-skills-grid">
+              {profile.skills.map((group, index) => {
+                const tone = skillTones[index % skillTones.length];
+
+                return (
+                  <Box
+                    key={group.category}
+                    className="cv-skill-group"
+                    sx={{ '--skill-tone': tone.color, '--skill-tint': tone.tint }}
+                  >
+                    <Typography component="h3" variant="h6" sx={{ color: 'var(--skill-tone)' }}>
+                      {group.category}
+                    </Typography>
+                    <TechStackChips items={group.items} />
+                  </Box>
+                );
+              })}
             </Box>
           </CvSection>
 
-          <CvSection id="education" title={locale === 'fr' ? 'Formation' : 'Education'}>
+          <CvSection
+            id="education"
+            title={locale === 'fr' ? 'Formation' : 'Education'}
+            icon={<SchoolRounded />}
+            tone="var(--orange)"
+          >
             <Box sx={{ borderBottom: '1px solid var(--border)' }}>
               {profile.education.map((education) => (
                 <Box component="article" key={`${education.school}-${education.degree}`} className="cv-education-row">
@@ -235,6 +289,8 @@ export default function CvPage() {
           <CvSection
             id="qualifications"
             title={locale === 'fr' ? 'Langues & certifications' : 'Languages & certifications'}
+            icon={<WorkspacePremiumRounded />}
+            tone="var(--cyan)"
           >
             <Grid container spacing={{ xs: 6, md: 8 }}>
               <Grid size={{ xs: 12, md: 5 }}>

@@ -121,11 +121,11 @@ function SpotlightProject({ project }: { project: Project }) {
   );
 }
 
-function SecondaryProject({ project, offset = false }: { project: Project; offset?: boolean }) {
+function SecondaryProject({ project, tone }: { project: Project; tone: 'green' | 'cyan' }) {
   const { locale } = useLocale();
 
   return (
-    <Box component="article" className={`projects-secondary${offset ? ' projects-secondary--offset' : ''}`}>
+    <Box component="article" className={`projects-secondary projects-secondary--${tone}`}>
       <Box
         component={Link}
         href={`/projets/${project.slug}`}
@@ -138,9 +138,10 @@ function SecondaryProject({ project, offset = false }: { project: Project; offse
           title={project.title}
           locale={locale}
           sizes="(max-width: 599px) calc(100vw - 40px), (max-width: 899px) calc(100vw - 64px), 48vw"
+          aspectRatio="2 / 1"
         />
       </Box>
-      <Stack spacing={2} sx={{ p: { xs: 2.5, md: 3 } }}>
+      <Stack spacing={2} sx={{ p: { xs: 2.5, md: 3 }, flexGrow: 1 }}>
         <ProjectMetadata project={project} />
         <Box>
           <Typography component="h3" variant="h5" sx={{ color: 'var(--text)', mb: 0.75 }}>
@@ -151,7 +152,9 @@ function SecondaryProject({ project, offset = false }: { project: Project; offse
           </Typography>
         </Box>
         <TechStackChips items={project.tech} limit={5} />
-        <ProjectActions project={project} />
+        <Box sx={{ mt: 'auto' }}>
+          <ProjectActions project={project} />
+        </Box>
       </Stack>
     </Box>
   );
@@ -230,10 +233,10 @@ export default function ProjectsPageContent() {
 
         <Stack spacing={{ xs: 3, md: 4 }}>
           {spotlightProject && <SpotlightProject project={spotlightProject} />}
-          <Grid container spacing={{ xs: 3, md: 4 }} alignItems="start">
+          <Grid container spacing={{ xs: 3, md: 4 }} alignItems="stretch">
             {secondaryProjects.map((project, index) => (
-              <Grid key={project.slug} size={{ xs: 12, md: index === 0 ? 7 : 5 }}>
-                <SecondaryProject project={project} offset={index === 1} />
+              <Grid key={project.slug} size={{ xs: 12, md: 6 }}>
+                <SecondaryProject project={project} tone={index === 0 ? 'green' : 'cyan'} />
               </Grid>
             ))}
           </Grid>

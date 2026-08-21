@@ -1,20 +1,14 @@
 'use client';
 
+import GitHub from '@mui/icons-material/GitHub';
+import LinkedIn from '@mui/icons-material/LinkedIn';
+import PictureAsPdf from '@mui/icons-material/PictureAsPdf';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { getProfile } from '../../lib/content';
 import { useLocale } from '../context/LocaleContext';
 import SiteContainer from './SiteContainer';
-
-const footerLinkStyles = {
-  color: 'var(--text-2)',
-  fontSize: '0.9rem',
-  fontWeight: 500,
-  textDecoration: 'none',
-  transition: 'color 160ms ease',
-  '&:hover': { color: 'var(--blue)' },
-};
 
 export default function Footer() {
   const { locale } = useLocale();
@@ -36,15 +30,39 @@ export default function Footer() {
           © {new Date().getFullYear()} Léo JEGO
         </Typography>
 
-        <Stack direction="row" spacing={{ xs: 2.5, sm: 3.5 }} useFlexGap flexWrap="wrap">
-          <Box component="a" href={profile.linkedin} target="_blank" rel="noopener noreferrer" sx={footerLinkStyles}>
-            LinkedIn
+        <Stack direction="row" spacing={0.75}>
+          <Box
+            component="a"
+            href={profile.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-icon-link footer-icon-link--linkedin"
+            aria-label={locale === 'fr' ? 'Voir mon profil LinkedIn' : 'View my LinkedIn profile'}
+            title="LinkedIn"
+          >
+            <LinkedIn />
           </Box>
-          <Box component="a" href={profile.github} target="_blank" rel="noopener noreferrer" sx={footerLinkStyles}>
-            GitHub
+          <Box
+            component="a"
+            href={profile.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-icon-link footer-icon-link--github"
+            aria-label={locale === 'fr' ? 'Voir mon profil GitHub' : 'View my GitHub profile'}
+            title="GitHub"
+          >
+            <GitHub />
           </Box>
-          <Box component="a" href={profile.cvPdf} target="_blank" rel="noopener noreferrer" sx={footerLinkStyles}>
-            CV
+          <Box
+            component="a"
+            href={profile.cvPdf}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-icon-link footer-icon-link--cv"
+            aria-label={locale === 'fr' ? 'Ouvrir mon CV PDF' : 'Open my PDF resume'}
+            title={locale === 'fr' ? 'CV PDF' : 'PDF resume'}
+          >
+            <PictureAsPdf />
           </Box>
         </Stack>
       </SiteContainer>

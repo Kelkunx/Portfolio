@@ -27,18 +27,19 @@ type ContactLinkProps = {
   label: string;
   value: string;
   icon: ReactNode;
+  tone: 'email' | 'linkedin' | 'phone' | 'github' | 'pdf';
   variant?: 'primary' | 'secondary' | 'quiet';
   external?: boolean;
 };
 
-function ContactLink({ href, label, value, icon, variant = 'quiet', external = false }: ContactLinkProps) {
+function ContactLink({ href, label, value, icon, tone, variant = 'quiet', external = false }: ContactLinkProps) {
   return (
     <Box
       component="a"
       href={href}
       target={external ? '_blank' : undefined}
       rel={external ? 'noopener noreferrer' : undefined}
-      className={`contact-action contact-action--${variant}`}
+      className={`contact-action contact-action--${variant} contact-action--${tone}`}
     >
       <Box aria-hidden="true" className="contact-action-icon">
         {icon}
@@ -95,6 +96,7 @@ export default function ContactPage() {
               label="Email"
               value={profile.email}
               icon={<Email fontSize="small" />}
+              tone="email"
               variant="primary"
             />
             <ContactLink
@@ -102,6 +104,7 @@ export default function ContactPage() {
               label="LinkedIn"
               value={locale === 'fr' ? 'Échanger sur LinkedIn' : 'Connect on LinkedIn'}
               icon={<LinkedIn fontSize="small" />}
+              tone="linkedin"
               variant="secondary"
               external
             />
@@ -113,12 +116,14 @@ export default function ContactPage() {
               label={locale === 'fr' ? 'Téléphone' : 'Phone'}
               value={profile.phone}
               icon={<Phone fontSize="small" />}
+              tone="phone"
             />
             <ContactLink
               href={profile.github}
               label="GitHub"
               value="Kelkunx"
               icon={<GitHub fontSize="small" />}
+              tone="github"
               external
             />
             <ContactLink
@@ -126,6 +131,7 @@ export default function ContactPage() {
               label={locale === 'fr' ? 'CV' : 'Resume'}
               value={locale === 'fr' ? 'Ouvrir le CV PDF' : 'Open PDF resume'}
               icon={<PictureAsPdf fontSize="small" />}
+              tone="pdf"
               external
             />
           </Box>

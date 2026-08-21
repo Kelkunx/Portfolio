@@ -161,7 +161,6 @@ export const profile: Profile = {
       summary:
         'Built full-stack business features on CGI Retail Suite, with React, NestJS and strong quality requirements.',
       technologies: ['React', 'NestJS', 'TypeScript', 'GitLab CI', 'SonarQube'],
-      highlighted: true,
       featured: true,
       kind: 'tech',
       bullets: [

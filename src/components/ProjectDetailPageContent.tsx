@@ -104,6 +104,11 @@ export default function ProjectDetailPageContent({ slug }: { slug?: string }) {
       : []),
     { id: 'resources', label: locale === 'fr' ? 'Ressources' : 'Resources' },
   ];
+  const solutionTones = [
+    { color: 'var(--purple)', tint: 'rgba(187, 154, 247, 0.045)' },
+    { color: 'var(--cyan)', tint: 'rgba(125, 207, 255, 0.045)' },
+    { color: 'var(--green)', tint: 'rgba(158, 206, 106, 0.045)' },
+  ];
 
   return (
     <SiteContainer component="article" sx={{ py: { xs: 6, md: 9 } }}>
@@ -247,15 +252,25 @@ export default function ProjectDetailPageContent({ slug }: { slug?: string }) {
 
           <CaseStudySection id="solution" title="Solution">
             <Grid container columnSpacing={4} rowSpacing={3}>
-              {project.solution.map((item) => (
-                <Grid key={item} size={{ xs: 12, md: 6 }}>
-                  <Box sx={{ borderTop: '2px solid var(--purple)', pt: 2 }}>
-                    <Typography variant="body1" sx={{ color: 'var(--text-2)', lineHeight: 1.8 }}>
-                      {item}
-                    </Typography>
-                  </Box>
-                </Grid>
-              ))}
+              {project.solution.map((item, index) => {
+                const tone = solutionTones[index % solutionTones.length];
+
+                return (
+                  <Grid key={item} size={{ xs: 12, md: 6 }}>
+                    <Box
+                      className="case-study-solution"
+                      sx={{ '--solution-tone': tone.color, '--solution-tint': tone.tint }}
+                    >
+                      <Typography aria-hidden="true" variant="h5" sx={{ color: 'var(--solution-tone)' }}>
+                        {String(index + 1).padStart(2, '0')}
+                      </Typography>
+                      <Typography variant="body1" sx={{ color: 'var(--text-2)', lineHeight: 1.8 }}>
+                        {item}
+                      </Typography>
+                    </Box>
+                  </Grid>
+                );
+              })}
             </Grid>
           </CaseStudySection>
 
