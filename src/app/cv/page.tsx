@@ -64,7 +64,11 @@ function CvSection({ id, title, icon, tone, children }: CvSectionProps) {
         <Box component="span" className="cv-section-icon" aria-hidden="true">
           {icon}
         </Box>
-        <Typography component="h2" variant="h4" sx={{ color: 'var(--text)' }}>
+        <Typography
+          component="h2"
+          variant="h4"
+          sx={{ color: 'var(--text)', fontSize: { xs: '1.75rem', sm: '2rem', md: '2.125rem' } }}
+        >
           {title}
         </Typography>
       </Box>
@@ -138,7 +142,7 @@ export default function CvPage() {
             <Typography
               component="h1"
               variant="h2"
-              sx={{ color: 'var(--text)', fontSize: { xs: '2.75rem', sm: '3.5rem' }, mb: 0.75 }}
+              sx={{ color: 'var(--text)', fontSize: { xs: '2.5rem', sm: '3.5rem' }, mb: 0.75 }}
             >
               {profile.name}
             </Typography>
@@ -149,7 +153,19 @@ export default function CvPage() {
           <Typography variant="body1" sx={{ color: 'var(--text-2)', maxWidth: '68ch', lineHeight: 1.85 }}>
             {profile.summary}
           </Typography>
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.25} sx={{ alignItems: { sm: 'flex-start' } }}>
+          <Stack
+            direction="row"
+            spacing={1.25}
+            useFlexGap
+            flexWrap="wrap"
+            sx={{
+              alignItems: 'flex-start',
+              '@media (max-width: 359px)': {
+                flexDirection: 'column',
+                '& > *': { width: '100%' },
+              },
+            }}
+          >
             <Button component="a" href={profile.cvPdf} target="_blank" rel="noopener noreferrer" variant="contained">
               {locale === 'fr' ? 'Télécharger le CV PDF' : 'Download PDF CV'}
             </Button>
@@ -159,7 +175,7 @@ export default function CvPage() {
           </Stack>
         </Stack>
 
-        <Stack spacing={3} className="cv-header-meta">
+        <Box className="cv-header-meta">
           <Box>
             <Typography variant="body2" sx={{ color: 'var(--muted)', mb: 0.5 }}>
               {locale === 'fr' ? 'Disponibilité' : 'Availability'}
@@ -182,7 +198,7 @@ export default function CvPage() {
             </Typography>
             <TechStackChips items={profile.primaryStack} />
           </Box>
-        </Stack>
+        </Box>
       </Box>
 
       <Box className="editorial-document-layout cv-document-layout">
@@ -204,7 +220,6 @@ export default function CvPage() {
                     component="article"
                     key={`${experience.company}-${experience.start}`}
                     className="cv-experience-row"
-                    tabIndex={0}
                     aria-label={`${experience.role}, ${experience.company}`}
                     sx={{ '--experience-tone': tone.color, '--experience-tint': tone.tint }}
                   >

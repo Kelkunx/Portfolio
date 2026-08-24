@@ -32,7 +32,15 @@ type CaseStudySectionProps = {
 function CaseStudySection({ id, title, children }: CaseStudySectionProps) {
   return (
     <Box component="section" id={id} className="case-study-section">
-      <Typography component="h2" variant="h4" sx={{ color: 'var(--text)', mb: { xs: 2.5, md: 3.5 } }}>
+      <Typography
+        component="h2"
+        variant="h4"
+        sx={{
+          color: 'var(--text)',
+          mb: { xs: 2.5, md: 3.5 },
+          fontSize: { xs: '1.75rem', sm: '2rem', md: '2.125rem' },
+        }}
+      >
         {title}
       </Typography>
       {children}
@@ -120,7 +128,7 @@ export default function ProjectDetailPageContent({ slug }: { slug?: string }) {
           <Typography
             component="h1"
             variant="h2"
-            sx={{ color: 'var(--text)', fontSize: { xs: '2.65rem', sm: '3.5rem' }, maxWidth: '16ch', mb: 2 }}
+            sx={{ color: 'var(--text)', fontSize: { xs: '2.5rem', sm: '3.5rem' }, maxWidth: '16ch', mb: 2 }}
           >
             {project.title}
           </Typography>
@@ -129,7 +137,7 @@ export default function ProjectDetailPageContent({ slug }: { slug?: string }) {
           </Typography>
         </Box>
 
-        <Stack spacing={3} className="project-detail-meta">
+        <Box className="project-detail-meta">
           <Box>
             <Typography variant="body2" sx={{ color: 'var(--muted)', mb: 0.5 }}>
               {locale === 'fr' ? 'Rôle' : 'Role'}
@@ -159,7 +167,7 @@ export default function ProjectDetailPageContent({ slug }: { slug?: string }) {
           >
             {locale === 'fr' ? 'Voir les liens du projet' : 'View project links'} →
           </Box>
-        </Stack>
+        </Box>
       </Box>
 
       {primaryScreen && (
@@ -229,7 +237,15 @@ export default function ProjectDetailPageContent({ slug }: { slug?: string }) {
 
           <CaseStudySection id="problem" title={locale === 'fr' ? 'Problème' : 'Problem'}>
             <Box sx={{ borderLeft: '3px solid var(--orange)', pl: { xs: 2.5, md: 3.5 }, py: 0.5 }}>
-              <Typography variant="h4" sx={{ color: 'var(--text)', lineHeight: 1.5, maxWidth: '32ch' }}>
+              <Typography
+                variant="h4"
+                sx={{
+                  color: 'var(--text)',
+                  fontSize: { xs: '1.45rem', sm: '1.75rem', md: '2.125rem' },
+                  lineHeight: 1.5,
+                  maxWidth: '32ch',
+                }}
+              >
                 {project.problem}
               </Typography>
             </Box>
@@ -325,7 +341,11 @@ export default function ProjectDetailPageContent({ slug }: { slug?: string }) {
               <Typography variant="body2" sx={{ color: 'var(--purple)', fontWeight: 700, mb: 1 }}>
                 {locale === 'fr' ? 'Projet suivant' : 'Next project'}
               </Typography>
-              <Typography component="h2" variant="h3" sx={{ color: 'var(--text)', mb: 1 }}>
+              <Typography
+                component="h2"
+                variant="h3"
+                sx={{ color: 'var(--text)', mb: 1, fontSize: { xs: '1.75rem', sm: '2.25rem', md: '3rem' } }}
+              >
                 {nextProject.title}
               </Typography>
               <Typography variant="body1" sx={{ color: 'var(--text-2)', maxWidth: '58ch', lineHeight: 1.75 }}>

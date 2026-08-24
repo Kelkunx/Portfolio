@@ -29,7 +29,10 @@ function ProjectMetadata({ project }: { project: Project }) {
   ];
 
   return (
-    <Typography variant="body2" sx={{ color: 'var(--text-2)', fontWeight: 600 }}>
+    <Typography
+      variant="body2"
+      sx={{ color: 'var(--text-2)', fontWeight: 600, fontSize: { xs: '0.76rem', sm: '0.875rem' } }}
+    >
       {metadata.join(' • ')}
     </Typography>
   );
@@ -87,7 +90,11 @@ function SpotlightProject({ project }: { project: Project }) {
       <Stack spacing={2.5} sx={{ p: { xs: 2.5, md: 4 }, minWidth: 0, justifyContent: 'center' }}>
         <ProjectMetadata project={project} />
         <Box>
-          <Typography component="h3" variant="h3" sx={{ color: 'var(--text)', mb: 1.25 }}>
+          <Typography
+            component="h3"
+            variant="h3"
+            sx={{ color: 'var(--text)', mb: 1.25, fontSize: { xs: '1.75rem', sm: '2.25rem', md: '3rem' } }}
+          >
             {project.title}
           </Typography>
           <Typography variant="body1" sx={{ color: 'var(--text-2)', lineHeight: 1.75 }}>
@@ -128,17 +135,24 @@ function SecondaryProject({ project, tone }: { project: Project; tone: 'green' |
           alt={project.imageAlt}
           title={project.title}
           locale={locale}
-          sizes="(max-width: 599px) calc(100vw - 40px), (max-width: 899px) calc(100vw - 64px), 48vw"
+          sizes="(max-width: 599px) calc(100vw - 40px), (max-width: 699px) calc(100vw - 64px), (max-width: 899px) 38vw, 48vw"
           aspectRatio="2 / 1"
         />
       </Box>
-      <Stack spacing={2} sx={{ p: { xs: 2.5, md: 3 }, flexGrow: 1 }}>
+      <Stack
+        className="projects-secondary-content"
+        spacing={{ xs: 1.25, sm: 1.75, md: 2 }}
+        sx={{ p: { xs: 2, sm: 2.5, md: 3 }, minWidth: 0, flexGrow: 1 }}
+      >
         <ProjectMetadata project={project} />
         <Box>
           <Typography component="h3" variant="h5" sx={{ color: 'var(--text)', mb: 0.75 }}>
             {project.title}
           </Typography>
-          <Typography variant="body2" sx={{ color: 'var(--text-2)', lineHeight: 1.7 }}>
+          <Typography
+            variant="body2"
+            sx={{ color: 'var(--text-2)', lineHeight: 1.65, fontSize: { xs: '0.82rem', sm: '0.875rem' } }}
+          >
             {project.short}
           </Typography>
         </Box>
@@ -164,7 +178,7 @@ function ArchiveProject({ project }: { project: Project }) {
           alt={project.imageAlt}
           title={project.title}
           locale={locale}
-          sizes="(max-width: 599px) calc(100vw - 40px), (max-width: 899px) 200px, 240px"
+          sizes="(max-width: 599px) calc(100vw - 40px), (max-width: 699px) calc(100vw - 64px), (max-width: 899px) 200px, 240px"
         />
       </Box>
 
@@ -197,7 +211,11 @@ export default function ProjectsPageContent() {
   return (
     <SiteContainer sx={{ py: { xs: 6, md: 9 } }}>
       <Box component="header" sx={{ maxWidth: 760, mb: { xs: 6, md: 8 } }}>
-        <Typography component="h1" variant="h2" sx={{ color: 'var(--text)', mb: 1.5 }}>
+        <Typography
+          component="h1"
+          variant="h2"
+          sx={{ color: 'var(--text)', mb: 1.5, fontSize: { xs: '2.5rem', sm: '3.25rem', md: '3.75rem' } }}
+        >
           {locale === 'fr' ? 'Projets' : 'Projects'}
         </Typography>
         <Typography variant="body1" sx={{ color: 'var(--text-2)', lineHeight: 1.8 }}>
@@ -209,7 +227,12 @@ export default function ProjectsPageContent() {
 
       <Box component="section" aria-labelledby="featured-projects-title" sx={{ mb: { xs: 8, md: 12 } }}>
         <Box sx={{ mb: 3 }}>
-          <Typography id="featured-projects-title" component="h2" variant="h4" sx={{ color: 'var(--text)', mb: 0.75 }}>
+          <Typography
+            id="featured-projects-title"
+            component="h2"
+            variant="h4"
+            sx={{ color: 'var(--text)', mb: 0.75, fontSize: { xs: '1.75rem', sm: '2rem', md: '2.125rem' } }}
+          >
             {locale === 'fr' ? 'Projets phares' : 'Featured work'}
           </Typography>
           <Typography variant="body2" sx={{ color: 'var(--text-2)' }}>
@@ -234,7 +257,12 @@ export default function ProjectsPageContent() {
       {archiveProjects.length > 0 && (
         <Box component="section" aria-labelledby="archive-projects-title">
           <Box sx={{ mb: 2.5 }}>
-            <Typography id="archive-projects-title" component="h2" variant="h4" sx={{ color: 'var(--text)', mb: 0.75 }}>
+            <Typography
+              id="archive-projects-title"
+              component="h2"
+              variant="h4"
+              sx={{ color: 'var(--text)', mb: 0.75, fontSize: { xs: '1.75rem', sm: '2rem', md: '2.125rem' } }}
+            >
               {locale === 'fr' ? 'Autres projets' : 'Other projects'}
             </Typography>
             <Typography variant="body2" sx={{ color: 'var(--text-2)' }}>

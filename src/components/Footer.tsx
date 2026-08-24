@@ -19,11 +19,15 @@ export default function Footer() {
       <SiteContainer
         sx={{
           display: 'flex',
-          flexDirection: { xs: 'column', sm: 'row' },
-          alignItems: { xs: 'flex-start', sm: 'center' },
+          flexDirection: 'row',
+          alignItems: 'center',
           justifyContent: 'space-between',
           gap: 2,
           py: 3.5,
+          '@media (max-width: 359px)': {
+            alignItems: 'flex-start',
+            flexDirection: 'column',
+          },
         }}
       >
         <Typography variant="body2" sx={{ color: 'var(--text-2)' }}>

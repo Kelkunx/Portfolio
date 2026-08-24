@@ -69,7 +69,7 @@ export default function ContactPage() {
           <Typography
             component="h1"
             variant="h2"
-            sx={{ color: 'var(--text)', fontSize: { xs: '2.65rem', sm: '3.5rem' }, mb: 2, maxWidth: '13ch' }}
+            sx={{ color: 'var(--text)', fontSize: { xs: '2.5rem', sm: '3.5rem' }, mb: 2, maxWidth: '13ch' }}
           >
             {locale === 'fr' ? 'Parlons du poste ou du projet' : "Let's talk about the role or the project"}
           </Typography>

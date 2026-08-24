@@ -27,10 +27,14 @@ export default function CareerHighlightsSection() {
     .reverse();
 
   return (
-    <Box component="section" sx={{ py: { xs: 8, md: 11 }, borderTop: '1px solid var(--border)' }}>
+    <Box component="section" sx={{ py: { xs: 7, md: 11 }, borderTop: '1px solid var(--border)' }}>
       <SiteContainer>
         <Box sx={{ mb: { xs: 4, md: 5 } }}>
-          <Typography component="h2" variant="h3" sx={{ color: 'var(--text)', mb: 1 }}>
+          <Typography
+            component="h2"
+            variant="h3"
+            sx={{ color: 'var(--text)', mb: 1, fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' } }}
+          >
             {locale === 'fr' ? 'Parcours en bref' : 'Career highlights'}
           </Typography>
           <Typography variant="body1" color="text.secondary" sx={{ maxWidth: '70ch' }}>

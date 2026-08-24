@@ -23,7 +23,7 @@ export default function HeroSection() {
       component="section"
       aria-labelledby="hero-heading"
       sx={{
-        minHeight: { md: 'calc(100svh - 80px)' },
+        minHeight: { xs: 'calc(100svh - 72px)', md: 'calc(100svh - 80px)' },
         display: 'flex',
       }}
     >
@@ -32,13 +32,13 @@ export default function HeroSection() {
           display: 'flex',
           flex: 1,
           flexDirection: 'column',
-          py: { xs: 4, md: 2.5 },
+          py: { xs: 3, md: 2.5 },
         }}
       >
         <Grid
           container
           columnSpacing={{ md: 7, lg: 10 }}
-          rowSpacing={{ xs: 5, md: 0 }}
+          rowSpacing={{ xs: 4, md: 0 }}
           alignItems="flex-start"
           sx={{ pt: { md: 8, lg: 12 } }}
         >
@@ -51,7 +51,7 @@ export default function HeroSection() {
                   color: 'var(--text)',
                   maxWidth: '10ch',
                   fontFamily: 'var(--font-display)',
-                  fontSize: { xs: '3.35rem', sm: '4.25rem', md: 'clamp(4.7rem, 7vw, 6.5rem)' },
+                  fontSize: { xs: 'clamp(2.9rem, 13.5vw, 3.35rem)', sm: '4.25rem', md: 'clamp(4.7rem, 7vw, 6.5rem)' },
                   fontWeight: 700,
                   lineHeight: 0.98,
                   letterSpacing: '-0.055em',
@@ -64,15 +64,22 @@ export default function HeroSection() {
                 component="p"
                 sx={{
                   color: 'var(--text-2)',
-                  fontSize: { xs: '1.05rem', md: '1.2rem' },
-                  lineHeight: 1.75,
+                  fontSize: { xs: '1rem', md: '1.2rem' },
+                  lineHeight: { xs: 1.7, md: 1.75 },
                   maxWidth: '59ch',
                 }}
               >
                 {profile.shortBio}
               </Typography>
 
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} alignItems={{ sm: 'center' }}>
+              <Stack
+                className="hero-actions"
+                direction="row"
+                spacing={1.25}
+                useFlexGap
+                flexWrap="wrap"
+                alignItems="center"
+              >
                 <Button variant="contained" component={Link} href="/projets" size="large">
                   {locale === 'fr' ? 'Voir mes projets' : 'View projects'}
                 </Button>
@@ -85,11 +92,11 @@ export default function HeroSection() {
 
           <Grid size={{ xs: 12, md: 5 }}>
             <Stack
-              spacing={3.5}
+              spacing={{ xs: 2.5, md: 3.5 }}
               sx={{
                 borderTop: { xs: '1px solid var(--border)', md: 0 },
                 borderLeft: { md: '1px solid var(--border)' },
-                pt: { xs: 3.5, md: 2 },
+                pt: { xs: 2.5, md: 2 },
                 pb: { md: 2 },
                 pl: { md: 6, lg: 7 },
                 minHeight: { md: 330 },
@@ -128,10 +135,10 @@ export default function HeroSection() {
           component="ul"
           sx={{
             display: 'grid',
-            gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, minmax(0, 1fr))' },
-            gap: { xs: 2, sm: 4, lg: 7 },
+            gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+            gap: { xs: 1.5, sm: 4, lg: 7 },
             p: 0,
-            mt: { xs: 5, md: 15 },
+            mt: { xs: 4, md: 15 },
             mb: 0,
             listStyle: 'none',
           }}
@@ -142,10 +149,16 @@ export default function HeroSection() {
               component="li"
               sx={{ borderTop: `2px solid ${proofTones[index]}`, pt: 1.75, minWidth: 0 }}
             >
-              <Typography variant="body2" sx={{ color: 'var(--text-2)', mb: 0.45 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: 'var(--text-2)', mb: 0.45, fontSize: { xs: '0.74rem', sm: '0.875rem' } }}
+              >
                 {item.label}
               </Typography>
-              <Typography variant="body1" sx={{ color: 'var(--text)', fontWeight: 500, lineHeight: 1.55 }}>
+              <Typography
+                variant="body1"
+                sx={{ color: 'var(--text)', fontWeight: 500, lineHeight: 1.55, fontSize: { xs: '0.82rem', sm: '1rem' } }}
+              >
                 {item.value}
               </Typography>
             </Box>
@@ -154,7 +167,7 @@ export default function HeroSection() {
 
         <Box
           className="hero-scroll-cue"
-          sx={{ display: 'flex', justifyContent: 'center', mt: { xs: 2, md: 10 } }}
+          sx={{ display: 'flex', justifyContent: 'center', mt: { xs: 3, md: 10 } }}
         >
           <Button
             component="a"

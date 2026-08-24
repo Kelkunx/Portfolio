@@ -219,6 +219,8 @@ export default function Header() {
                 aria-label={t.nav.home === 'Accueil' ? 'Ouvrir le menu' : 'Open menu'}
                 aria-haspopup="dialog"
                 sx={{
+                  width: 44,
+                  height: 44,
                   border: '1px solid var(--border)',
                   borderRadius: '8px',
                   backgroundColor: 'var(--surface)',

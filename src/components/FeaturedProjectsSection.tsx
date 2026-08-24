@@ -40,20 +40,26 @@ const secondaryTones = [
 
 function ProjectMetadata({ project, locale, tone }: ProjectMetadataProps) {
   return (
-    <Stack direction="row" spacing={0.8} useFlexGap flexWrap="wrap" alignItems="center">
-      <Typography variant="body2" sx={{ color: 'var(--text-2)' }}>
+    <Stack
+      direction="row"
+      spacing={0.8}
+      useFlexGap
+      flexWrap="wrap"
+      alignItems="center"
+    >
+      <Typography variant="body2" sx={{ color: 'var(--text-2)', fontSize: { xs: '0.76rem', sm: '0.875rem' } }}>
         {getProjectCategoryLabel(project.category, locale)}
       </Typography>
-      <Typography aria-hidden="true" variant="body2" sx={{ color: 'var(--muted)' }}>
+      <Typography aria-hidden="true" variant="body2" sx={{ color: 'var(--muted)', fontSize: { xs: '0.76rem', sm: '0.875rem' } }}>
         ·
       </Typography>
-      <Typography variant="body2" sx={{ color: tone, fontWeight: 600 }}>
+      <Typography variant="body2" sx={{ color: tone, fontWeight: 600, fontSize: { xs: '0.76rem', sm: '0.875rem' } }}>
         {getProjectStatusLabel(project.status, locale)}
       </Typography>
-      <Typography aria-hidden="true" variant="body2" sx={{ color: 'var(--muted)' }}>
+      <Typography aria-hidden="true" variant="body2" sx={{ color: 'var(--muted)', fontSize: { xs: '0.76rem', sm: '0.875rem' } }}>
         ·
       </Typography>
-      <Typography variant="body2" sx={{ color: 'var(--text-2)' }}>
+      <Typography variant="body2" sx={{ color: 'var(--text-2)', fontSize: { xs: '0.76rem', sm: '0.875rem' } }}>
         {formatProjectPeriod(project.period, locale)}
       </Typography>
     </Stack>
@@ -94,7 +100,10 @@ function SpotlightProject({ project, locale }: { project: Project; locale: Conte
         backgroundColor: 'var(--surface)',
         transition: 'border-color 160ms ease',
         '&:hover, &:focus-within': { borderColor: 'rgba(125, 207, 255, 0.46)' },
-        '&:hover .home-project-image, &:focus-within .home-project-image': { transform: 'scale(1.008)' },
+        '@media (hover: hover) and (pointer: fine)': {
+          '&:hover .home-project-image': { transform: 'scale(1.008)' },
+        },
+        '&:has(.project-card-overlay-link:focus-visible) .home-project-image': { transform: 'scale(1.008)' },
       }}
     >
       <Box
@@ -201,29 +210,39 @@ function SecondaryProject({
       sx={{
         '--project-card-link-tone': tone.color,
         display: 'grid',
-        gridTemplateColumns: { xs: '1fr', sm: 'minmax(0, 1.12fr) minmax(220px, 0.88fr)' },
-        minHeight: { sm: 260 },
+        gridTemplateColumns: 'minmax(0, 1fr)',
+        '@media (min-width: 700px)': {
+          gridTemplateColumns: 'minmax(0, 1.12fr) minmax(220px, 0.88fr)',
+          minHeight: 260,
+        },
         overflow: 'hidden',
         border: '1px solid var(--border)',
         borderRadius: 'var(--radius-md)',
         backgroundColor: 'var(--surface-3)',
         transition: 'transform 220ms cubic-bezier(.2,.8,.2,1), border-color 160ms ease',
         '&:hover, &:focus-within': { borderColor: tone.border },
-        '&:hover .home-project-image, &:focus-within .home-project-image': { transform: 'scale(1.015)' },
-        '@media (prefers-reduced-motion: no-preference)': {
-          '&:hover, &:focus-within': { transform: 'translateY(-3px)' },
+        '@media (hover: hover) and (pointer: fine)': {
+          '&:hover .home-project-image': { transform: 'scale(1.015)' },
+        },
+        '&:has(.project-card-overlay-link:focus-visible) .home-project-image': { transform: 'scale(1.015)' },
+        '@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)': {
+          '&:hover': { transform: 'translateY(-3px)' },
         },
       }}
     >
       <Box
         sx={{
           position: 'relative',
-          aspectRatio: { xs: '2453 / 1448', sm: 'auto' },
-          minHeight: { sm: 240 },
+          aspectRatio: '2 / 1',
           overflow: 'hidden',
-          borderBottom: { xs: '1px solid var(--border)', sm: 0 },
-          borderRight: { sm: '1px solid var(--border)' },
+          borderBottom: '1px solid var(--border)',
           backgroundColor: 'var(--surface-2)',
+          '@media (min-width: 700px)': {
+            aspectRatio: 'auto',
+            minHeight: 240,
+            borderRight: '1px solid var(--border)',
+            borderBottom: 0,
+          },
           '& .home-project-image': {
             transition: 'transform 220ms cubic-bezier(.2,.8,.2,1)',
           },
@@ -232,17 +251,20 @@ function SecondaryProject({
         <ProjectMedia
           project={project}
           locale={locale}
-          sizes="(max-width: 599px) calc(100vw - 40px), (max-width: 1199px) 55vw, 420px"
+          sizes="(max-width: 599px) calc(100vw - 40px), (max-width: 699px) calc(100vw - 64px), (max-width: 1199px) 55vw, 420px"
         />
       </Box>
 
-      <Stack spacing={1.5} justifyContent="center" sx={{ p: 2.5, minWidth: 0 }}>
+      <Stack spacing={{ xs: 1.15, sm: 1.5 }} justifyContent="center" sx={{ p: { xs: 2, sm: 2.5 }, minWidth: 0 }}>
         <ProjectMetadata project={project} locale={locale} tone={tone.color} />
         <Box>
           <Typography component="h3" variant="h5" sx={{ color: 'var(--text)', mb: 0.75 }}>
             {project.title}
           </Typography>
-          <Typography variant="body2" sx={{ color: 'var(--text-2)', lineHeight: 1.6 }}>
+          <Typography
+            variant="body2"
+            sx={{ color: 'var(--text-2)', lineHeight: 1.6, fontSize: { xs: '0.82rem', sm: '0.875rem' } }}
+          >
             {project.short}
           </Typography>
         </Box>
@@ -262,7 +284,7 @@ export default function FeaturedProjectsSection() {
   const [spotlightProject, ...secondaryProjects] = getFeaturedProjects(locale, 3);
 
   return (
-    <Box component="section" id="home-sections-start" sx={{ py: { xs: 8, md: 9 }, scrollMarginTop: '96px' }}>
+    <Box component="section" id="home-sections-start" sx={{ py: { xs: 7, md: 9 }, scrollMarginTop: '96px' }}>
       <SiteContainer>
         <Stack
           direction={{ xs: 'column', sm: 'row' }}
@@ -271,7 +293,11 @@ export default function FeaturedProjectsSection() {
           spacing={2}
           sx={{ mb: 4 }}
         >
-          <Typography component="h2" variant="h3" sx={{ color: 'var(--text)' }}>
+          <Typography
+            component="h2"
+            variant="h3"
+            sx={{ color: 'var(--text)', fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' } }}
+          >
             {locale === 'fr' ? 'Projets sélectionnés' : 'Selected projects'}
           </Typography>
           <Button

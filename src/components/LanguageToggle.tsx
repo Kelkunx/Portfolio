@@ -21,6 +21,7 @@ export default function LanguageToggle() {
       startIcon={<LanguageIcon fontSize="small" />}
       sx={{
         minWidth: 0,
+        minHeight: 44,
         px: 1,
         color: 'var(--text-2)',
         '&:hover': { color: 'var(--cyan)' },

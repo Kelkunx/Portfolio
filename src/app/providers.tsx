@@ -126,6 +126,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
                 borderRadius: 10,
                 transition:
                   'background-color 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease',
+                '@media (max-width: 899px)': {
+                  minHeight: 44,
+                },
               },
               containedPrimary: {
                 backgroundImage: 'none',

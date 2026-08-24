@@ -54,7 +54,7 @@ export default function TechStackChips({ items, limit, size = 'small' }: TechSta
   const chipFontSize = size === 'small' ? '0.86rem' : '0.96rem';
 
   return (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.6 }}>
+    <Box sx={{ display: 'flex', minWidth: 0, flexWrap: 'wrap', gap: 0.6 }}>
       {visibleItems.map((item, index) => {
         const tone = resolveTechTone(item, index);
 
@@ -66,17 +66,19 @@ export default function TechStackChips({ items, limit, size = 'small' }: TechSta
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              minHeight: chipHeight,
-              px: chipPaddingX,
+              minHeight: { xs: size === 'small' ? 25 : 30, sm: chipHeight },
+              px: { xs: size === 'small' ? 0.95 : 1.2, sm: chipPaddingX },
               borderRadius: '999px',
               border: `1px solid color-mix(in srgb, ${tone} 34%, transparent)`,
               backgroundColor: `color-mix(in srgb, ${tone} 12%, transparent)`,
               color: tone,
-              fontSize: chipFontSize,
+              fontSize: { xs: size === 'small' ? '0.8rem' : '0.9rem', sm: chipFontSize },
               fontWeight: 600,
-              lineHeight: 1,
+              lineHeight: { xs: 1.25, sm: 1 },
               letterSpacing: '-0.01em',
-              whiteSpace: 'nowrap',
+              maxWidth: '100%',
+              textAlign: 'center',
+              whiteSpace: { xs: 'normal', sm: 'nowrap' },
             }}
           >
             {item}
