@@ -47,7 +47,6 @@ export default function CareerHighlightsSection() {
         <Box className="home-career-grid">
           <Box className="home-career-rail" aria-hidden="true" />
           {experiences.map((experience, index) => {
-            const isFeatured = experience.company === 'CGI';
             const positionClass = index === 0 ? 'first' : index === experiences.length - 1 ? 'last' : 'middle';
             const tone = timelineTones[index % timelineTones.length];
 
@@ -56,7 +55,7 @@ export default function CareerHighlightsSection() {
                 key={`${experience.company}-${experience.start}`}
                 component={Link}
                 href="/cv"
-                className={`home-career-item home-career-item--${positionClass}${isFeatured ? ' home-career-item--featured' : ''}`}
+                className={`home-career-item home-career-item--${positionClass}`}
                 style={{ '--career-tone': tone } as CSSProperties}
                 aria-label={
                   locale === 'fr'

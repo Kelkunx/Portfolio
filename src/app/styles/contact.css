@@ -1,0 +1,220 @@
+.contact-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(360px, 5fr);
+  gap: clamp(64px, 9vw, 128px);
+  align-items: start;
+}
+
+.contact-address {
+  padding-top: 28px;
+  border-top: 2px solid var(--cyan);
+  font-style: normal;
+}
+
+.contact-action {
+  --contact-tone: var(--cyan);
+  --contact-tint: color-mix(in srgb, var(--contact-tone) 7%, transparent);
+
+  display: grid;
+  min-width: 0;
+  grid-template-columns: 24px minmax(0, 1fr) 24px;
+  gap: 14px;
+  align-items: center;
+  color: var(--text);
+  text-decoration: none;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.contact-action--email {
+  --contact-tone: var(--orange);
+}
+
+.contact-action--linkedin {
+  --contact-tone: var(--blue);
+}
+
+.contact-action--phone {
+  --contact-tone: var(--green);
+}
+
+.contact-action--github {
+  --contact-tone: var(--purple);
+}
+
+.contact-action--pdf {
+  --contact-tone: var(--red);
+}
+
+.contact-action--primary,
+.contact-action--secondary {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.contact-action--primary {
+  border-color: var(--contact-tone);
+  background: var(--contact-tone);
+  color: #10131d;
+}
+
+[data-theme='light'] .contact-action--primary {
+  color: #fff;
+}
+
+.contact-action--primary:focus-visible {
+  border-color: var(--contact-tone);
+  background: color-mix(in srgb, var(--contact-tone) 88%, white);
+}
+
+[data-theme='light'] .contact-action--primary:focus-visible {
+  background: color-mix(in srgb, var(--contact-tone) 88%, black);
+}
+
+.contact-action--secondary:focus-visible,
+.contact-action--quiet:focus-visible {
+  border-color: var(--contact-tone);
+  background: var(--contact-tint);
+  color: var(--contact-tone);
+}
+
+.contact-action--quiet {
+  padding: 18px 4px;
+  border-top: 1px solid var(--border);
+}
+
+.contact-action-icon {
+  color: var(--contact-tone);
+}
+
+.contact-action--primary .contact-action-icon {
+  color: currentColor;
+}
+
+.contact-action-label,
+.contact-action-value {
+  display: block;
+  color: currentColor;
+}
+
+.contact-action-label {
+  margin-bottom: 2px;
+  opacity: 0.78;
+}
+
+.contact-action-value {
+  overflow-wrap: anywhere;
+  font-weight: 600;
+}
+
+.contact-action-arrow {
+  justify-self: end;
+  transition: transform 160ms ease;
+}
+
+.contact-action:focus-visible .contact-action-arrow {
+  transform: translateX(4px);
+}
+
+.footer-icon-link {
+  --footer-tone: var(--text);
+  --footer-tint: color-mix(in srgb, var(--footer-tone) 8%, transparent);
+
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 8px;
+  color: var(--text-2);
+  text-decoration: none;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.footer-icon-link--linkedin {
+  --footer-tone: var(--blue);
+}
+
+.footer-icon-link--github {
+  --footer-tone: var(--purple);
+}
+
+.footer-icon-link--cv {
+  --footer-tone: var(--red);
+}
+
+.footer-icon-link:focus-visible {
+  background: var(--footer-tint);
+  color: var(--footer-tone);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .contact-action--primary:hover {
+    border-color: var(--contact-tone);
+    background: color-mix(in srgb, var(--contact-tone) 88%, white);
+  }
+
+  [data-theme='light'] .contact-action--primary:hover {
+    background: color-mix(in srgb, var(--contact-tone) 88%, black);
+  }
+
+  .contact-action--secondary:hover,
+  .contact-action--quiet:hover {
+    border-color: var(--contact-tone);
+    background: var(--contact-tint);
+    color: var(--contact-tone);
+  }
+
+  .contact-action:hover .contact-action-arrow {
+    transform: translateX(4px);
+  }
+
+  .footer-icon-link:hover {
+    background: var(--footer-tint);
+    color: var(--footer-tone);
+  }
+}
+
+@media (max-width: 899px) {
+  .contact-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+
+  .footer-icon-link {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 599px) {
+  .contact-layout {
+    gap: 32px;
+  }
+}
+
+@media (max-width: 430px) {
+  .contact-action {
+    grid-template-columns: 22px minmax(0, 1fr) 22px;
+    gap: 10px;
+  }
+
+  .contact-action--primary,
+  .contact-action--secondary {
+    padding: 14px;
+  }
+
+  .contact-action--quiet {
+    padding: 16px 2px;
+  }
+
+  .contact-action--primary .contact-action-value {
+    font-size: 0.95rem;
+    line-height: 1.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-action:is(:hover, :focus-visible) .contact-action-arrow {
+    transform: none;
+  }
+}

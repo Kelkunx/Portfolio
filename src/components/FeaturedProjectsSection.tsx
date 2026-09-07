@@ -123,7 +123,7 @@ function SpotlightProject({ project, locale }: { project: Project; locale: Conte
         <ProjectMedia
           project={project}
           locale={locale}
-          sizes="(max-width: 1199px) calc(100vw - 64px), 900px"
+          sizes="(max-width: 599px) calc(100vw - 40px), (max-width: 1199px) calc(100vw - 64px), 900px"
         />
       </Box>
 

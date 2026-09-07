@@ -64,6 +64,10 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
+  useEffect(() => {
+    document.documentElement.lang = locale;
+  }, [locale]);
+
   const t = locale === 'fr' ? fr : en;
   const contextValue = useMemo(() => ({ locale, setLocale, t }), [locale, setLocale, t]);
 

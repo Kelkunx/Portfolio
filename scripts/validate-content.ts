@@ -3,6 +3,7 @@ import { resolve, sep } from 'node:path';
 
 import { getFeaturedProjects, getProjects } from '../lib/content';
 import type { Profile, Project } from '../lib/content-types';
+import { buildMarkdownForPath } from '../lib/markdown-content';
 import { profile as profileEN } from '../lib/locales/en/profile';
 import { projects as projectsEN } from '../lib/locales/en/projects';
 import { profile as profileFR } from '../lib/locales/fr/profile';
@@ -299,6 +300,41 @@ function checkProfileParity() {
   );
 }
 
+function checkMarkdownLocalization() {
+  const paths = [
+    '/',
+    '/projets',
+    '/cv',
+    '/contact',
+    ...projectsEN.map((project) => `/projets/${project.slug}`),
+  ];
+  const englishDocuments = paths.map((path) => ({
+    path,
+    document: buildMarkdownForPath(path, 'en', 'https://example.com'),
+  }));
+  const untranslatedLabels = [
+    'Localisation:',
+    'Disponibilité:',
+    'Rôles cibles:',
+    'Stack principale:',
+    'Fiche projet',
+    'Statut:',
+    'Période:',
+    'Rôle:',
+    'Problème traité:',
+    'Télécharger le CV',
+  ];
+
+  englishDocuments.forEach(({ path, document }) => {
+    check(document !== null, `[en] Markdown introuvable pour ${path}.`);
+    if (!document) return;
+
+    untranslatedLabels.forEach((label) => {
+      check(!document.body.includes(label), `[en] Markdown ${path} contient encore le libellé « ${label} ».`);
+    });
+  });
+}
+
 checkUniqueSlugs(projectsFR, 'fr');
 checkUniqueSlugs(projectsEN, 'en');
 projectsFR.forEach((project) => checkProject(project, 'fr'));
@@ -307,6 +343,7 @@ checkProjectParity();
 checkProfile(profileFR, 'fr');
 checkProfile(profileEN, 'en');
 checkProfileParity();
+checkMarkdownLocalization();
 
 if (errors.length > 0) {
   console.error(`Validation du contenu échouée (${errors.length} erreur${errors.length > 1 ? 's' : ''}) :`);

@@ -238,6 +238,7 @@ export default function ProjectDetailPageContent({ slug }: { slug?: string }) {
           <CaseStudySection id="problem" title={locale === 'fr' ? 'Problème' : 'Problem'}>
             <Box sx={{ borderLeft: '3px solid var(--orange)', pl: { xs: 2.5, md: 3.5 }, py: 0.5 }}>
               <Typography
+                component="p"
                 variant="h4"
                 sx={{
                   color: 'var(--text)',

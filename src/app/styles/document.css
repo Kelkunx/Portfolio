@@ -1,0 +1,116 @@
+.editorial-document-layout {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: clamp(48px, 6vw, 88px);
+  align-items: start;
+  margin-top: 80px;
+}
+
+.local-section-nav {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+}
+
+.local-section-nav-list {
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid var(--border);
+  list-style: none;
+}
+
+.local-section-nav-item {
+  margin: 0;
+  padding: 0;
+}
+
+.local-section-nav-link {
+  display: block;
+  margin-left: -1px;
+  padding: 10px 16px;
+  border-left: 2px solid transparent;
+  color: var(--text-2);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: border-color 160ms ease, color 160ms ease;
+}
+
+.local-section-nav-link:is(:hover, :focus-visible) {
+  color: var(--text);
+}
+
+.local-section-nav-link--active {
+  border-left-color: var(--cyan);
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+.case-study-section,
+.cv-section {
+  padding: 64px 0;
+  border-top: 1px solid var(--border);
+  scroll-margin-top: 108px;
+}
+
+.case-study-section:first-child,
+.cv-section:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+@media (max-width: 899px) {
+  .editorial-document-layout {
+    display: block;
+    margin-top: 40px;
+  }
+
+  .local-section-nav {
+    z-index: 5;
+    top: 64px;
+    margin: 0 -20px 36px;
+    padding: 0 20px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    scrollbar-width: none;
+  }
+
+  .local-section-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .local-section-nav-list {
+    display: flex;
+    width: max-content;
+    border-left: 0;
+  }
+
+  .local-section-nav-link {
+    margin: 0;
+    padding: 14px 12px 12px;
+    border-bottom: 2px solid transparent;
+    border-left: 0;
+    white-space: nowrap;
+  }
+
+  .local-section-nav-link--active {
+    border-bottom-color: var(--cyan);
+  }
+
+  .case-study-section,
+  .cv-section {
+    padding: 40px 0;
+    scroll-margin-top: 118px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 899px) {
+  .local-section-nav {
+    margin-inline: -32px;
+    padding-inline: 32px;
+  }
+}

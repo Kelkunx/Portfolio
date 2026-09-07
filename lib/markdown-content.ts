@@ -14,6 +14,133 @@ type MarkdownDocument = {
   status?: number;
 };
 
+type MarkdownLabels = {
+  projectPage: string;
+  type: string;
+  status: string;
+  period: string;
+  role: string;
+  stack: string;
+  problem: string;
+  highlights: string;
+  links: string;
+  description: string;
+  context: string;
+  process: string;
+  solution: string;
+  deliverables: string;
+  location: string;
+  availability: string;
+  targetRoles: string;
+  primaryStack: string;
+  strengths: string;
+  areas: string;
+  evidence: string;
+  tools: string;
+  selectedProjects: string;
+  contact: string;
+  email: string;
+  phone: string;
+  cvPdf: string;
+  downloadCv: string;
+  projectsTitle: string;
+  projectsIntro: string;
+  cvTitle: string;
+  skills: string;
+  experience: string;
+  education: string;
+  certifications: string;
+  languages: string;
+  contactTitle: string;
+  projectsPage: string;
+  viewProjects: string;
+};
+
+const labelsByLocale: Record<ContentLocale, MarkdownLabels> = {
+  fr: {
+    projectPage: 'Fiche projet',
+    type: 'Type',
+    status: 'Statut',
+    period: 'Période',
+    role: 'Rôle',
+    stack: 'Stack',
+    problem: 'Problème traité',
+    highlights: 'Points clés',
+    links: 'Liens',
+    description: 'Description',
+    context: 'Contexte',
+    process: 'Process',
+    solution: 'Solution',
+    deliverables: 'Livrables',
+    location: 'Localisation',
+    availability: 'Disponibilité',
+    targetRoles: 'Rôles cibles',
+    primaryStack: 'Stack principale',
+    strengths: 'Points forts',
+    areas: 'Domaines',
+    evidence: 'Preuve',
+    tools: 'Outils',
+    selectedProjects: 'Projets sélectionnés',
+    contact: 'Contact',
+    email: 'Email',
+    phone: 'Téléphone',
+    cvPdf: 'CV PDF',
+    downloadCv: 'Télécharger le CV',
+    projectsTitle: 'Projets',
+    projectsIntro: 'Sélection de projets web, produits et académiques.',
+    cvTitle: 'CV',
+    skills: 'Compétences',
+    experience: 'Expériences',
+    education: 'Formation',
+    certifications: 'Certifications',
+    languages: 'Langues',
+    contactTitle: 'Contact',
+    projectsPage: 'Page projets',
+    viewProjects: 'Voir les projets',
+  },
+  en: {
+    projectPage: 'Project page',
+    type: 'Type',
+    status: 'Status',
+    period: 'Period',
+    role: 'Role',
+    stack: 'Stack',
+    problem: 'Problem addressed',
+    highlights: 'Highlights',
+    links: 'Links',
+    description: 'Description',
+    context: 'Context',
+    process: 'Process',
+    solution: 'Solution',
+    deliverables: 'Deliverables',
+    location: 'Location',
+    availability: 'Availability',
+    targetRoles: 'Target roles',
+    primaryStack: 'Primary stack',
+    strengths: 'Key strengths',
+    areas: 'Areas of expertise',
+    evidence: 'Evidence',
+    tools: 'Tools',
+    selectedProjects: 'Selected projects',
+    contact: 'Contact',
+    email: 'Email',
+    phone: 'Phone',
+    cvPdf: 'PDF resume',
+    downloadCv: 'Download resume',
+    projectsTitle: 'Projects',
+    projectsIntro: 'Selected web, product and academic projects.',
+    cvTitle: 'Resume',
+    skills: 'Skills',
+    experience: 'Experience',
+    education: 'Education',
+    certifications: 'Certifications',
+    languages: 'Languages',
+    contactTitle: 'Contact',
+    projectsPage: 'Projects page',
+    viewProjects: 'View projects',
+  },
+};
+
 function list(items: string[]) {
   return items.map((item) => `- ${item}`).join('\n');
 }
@@ -29,8 +156,9 @@ function link(label: string, url: string, siteUrl: string) {
 }
 
 function projectSummary(project: Project, siteUrl: string, locale: ContentLocale) {
+  const labels = labelsByLocale[locale];
   const links = [
-    link('Fiche projet', `/projets/${project.slug}`, siteUrl),
+    link(labels.projectPage, `/projets/${project.slug}`, siteUrl),
     ...project.links.map((item) => link(item.label, item.url, siteUrl)),
   ];
 
@@ -38,113 +166,113 @@ function projectSummary(project: Project, siteUrl: string, locale: ContentLocale
     `### ${project.title}`,
     project.tagline,
     project.description,
-    `- Type: ${getProjectCategoryLabel(project.category, locale)}`,
-    `- Statut: ${getProjectStatusLabel(project.status, locale)}`,
-    `- Période: ${formatProjectPeriod(project.period, locale, 'long')}`,
-    `- Rôle: ${project.role}`,
-    `- Stack: ${project.tech.join(', ')}`,
-    `- Problème traité: ${project.problem}`,
-    `- Points clés: ${project.highlights.map((item) => `${item.value}: ${item.label}`).join(' | ')}`,
-    `- Liens: ${links.join(' | ')}`,
+    list([
+      `${labels.type}: ${getProjectCategoryLabel(project.category, locale)}`,
+      `${labels.status}: ${getProjectStatusLabel(project.status, locale)}`,
+      `${labels.period}: ${formatProjectPeriod(project.period, locale, 'long')}`,
+      `${labels.role}: ${project.role}`,
+      `${labels.stack}: ${project.tech.join(', ')}`,
+      `${labels.problem}: ${project.problem}`,
+      `${labels.highlights}: ${project.highlights.map((item) => `${item.value}: ${item.label}`).join(' | ')}`,
+      `${labels.links}: ${links.join(' | ')}`,
+    ]),
   ].join('\n\n');
 }
 
 function projectDetail(project: Project, siteUrl: string, locale: ContentLocale) {
+  const labels = labelsByLocale[locale];
+
   return [
     `# ${project.title}`,
     project.tagline,
-    `- Type: ${getProjectCategoryLabel(project.category, locale)}`,
-    `- Statut: ${getProjectStatusLabel(project.status, locale)}`,
-    `- Période: ${formatProjectPeriod(project.period, locale, 'long')}`,
-    `- Rôle: ${project.role}`,
-    `- Stack: ${project.tech.join(', ')}`,
-    section('Description', project.description),
-    section('Contexte', project.context),
-    section('Problème', project.problem),
-    section('Process', list(project.process)),
-    section('Solution', list(project.solution)),
-    section('Livrables', list(project.deliverables)),
-    section(
-      locale === 'fr' ? 'Points clés' : 'Highlights',
-      list(project.highlights.map((item) => `${item.value}: ${item.label}`)),
-    ),
-    section(
-      'Liens',
-      list(project.links.map((item) => link(item.label, item.url, siteUrl))),
-    ),
+    list([
+      `${labels.type}: ${getProjectCategoryLabel(project.category, locale)}`,
+      `${labels.status}: ${getProjectStatusLabel(project.status, locale)}`,
+      `${labels.period}: ${formatProjectPeriod(project.period, locale, 'long')}`,
+      `${labels.role}: ${project.role}`,
+      `${labels.stack}: ${project.tech.join(', ')}`,
+    ]),
+    section(labels.description, project.description),
+    section(labels.context, project.context),
+    section(labels.problem, project.problem),
+    section(labels.process, list(project.process)),
+    section(labels.solution, list(project.solution)),
+    section(labels.deliverables, list(project.deliverables)),
+    section(labels.highlights, list(project.highlights.map((item) => `${item.value}: ${item.label}`))),
+    section(labels.links, list(project.links.map((item) => link(item.label, item.url, siteUrl)))),
   ].join('\n\n');
 }
 
 function buildHomeMarkdown(locale: ContentLocale, siteUrl: string) {
   const profile = getProfile(locale);
+  const labels = labelsByLocale[locale];
   const featuredProjects = getFeaturedProjects(locale, 3);
 
   return [
     `# ${profile.name} - ${profile.title}`,
     profile.summary,
-    `- Localisation: ${profile.location}`,
-    `- Disponibilité: ${profile.availability}`,
-    `- Rôles cibles: ${profile.targetRoles.join(', ')}`,
-    `- Stack principale: ${profile.primaryStack.join(', ')}`,
+    list([
+      `${labels.location}: ${profile.location}`,
+      `${labels.availability}: ${profile.availability}`,
+      `${labels.targetRoles}: ${profile.targetRoles.join(', ')}`,
+      `${labels.primaryStack}: ${profile.primaryStack.join(', ')}`,
+    ]),
+    section(labels.strengths, list(profile.proofPoints.map((item) => `${item.label}: ${item.value}`))),
     section(
-      'Points forts',
-      list(profile.proofPoints.map((item) => `${item.label}: ${item.value}`)),
-    ),
-    section(
-      'Domaines',
+      labels.areas,
       profile.valuePillars.map((pillar) =>
         [
           `### ${pillar.title}`,
           pillar.description,
-          `Preuve: ${pillar.proof}`,
-          `Outils: ${pillar.tools.join(', ')}`,
+          `${labels.evidence}: ${pillar.proof}`,
+          `${labels.tools}: ${pillar.tools.join(', ')}`,
         ].join('\n\n'),
       ),
     ),
     section(
-      'Projets sélectionnés',
+      labels.selectedProjects,
       featuredProjects.map((project) => projectSummary(project, siteUrl, locale)),
     ),
     section(
-      'Contact',
+      labels.contact,
       list([
-        `Email: ${profile.email}`,
+        `${labels.email}: ${profile.email}`,
         `LinkedIn: ${profile.linkedin}`,
         `GitHub: ${profile.github}`,
-        `CV PDF: ${link('Télécharger le CV', profile.cvPdf, siteUrl)}`,
+        `${labels.cvPdf}: ${link(labels.downloadCv, profile.cvPdf, siteUrl)}`,
       ]),
     ),
   ].join('\n\n');
 }
 
 function buildProjectsMarkdown(locale: ContentLocale, siteUrl: string) {
-  const projects = getProjects(locale);
+  const labels = labelsByLocale[locale];
 
   return [
-    '# Projets',
-    'Sélection de projets web, produits et académiques.',
-    ...projects.map((project) => projectSummary(project, siteUrl, locale)),
+    `# ${labels.projectsTitle}`,
+    labels.projectsIntro,
+    ...getProjects(locale).map((project) => projectSummary(project, siteUrl, locale)),
   ].join('\n\n');
 }
 
 function buildCvMarkdown(locale: ContentLocale, siteUrl: string) {
   const profile = getProfile(locale);
+  const labels = labelsByLocale[locale];
 
   return [
-    `# CV - ${profile.name}`,
+    `# ${labels.cvTitle} - ${profile.name}`,
     profile.summary,
-    `- Localisation: ${profile.location}`,
-    `- Email: ${profile.email}`,
-    `- Téléphone: ${profile.phone}`,
-    `- LinkedIn: ${profile.linkedin}`,
-    `- GitHub: ${profile.github}`,
-    `- CV PDF: ${link('Télécharger le CV', profile.cvPdf, siteUrl)}`,
+    list([
+      `${labels.location}: ${profile.location}`,
+      `${labels.email}: ${profile.email}`,
+      `${labels.phone}: ${profile.phone}`,
+      `LinkedIn: ${profile.linkedin}`,
+      `GitHub: ${profile.github}`,
+      `${labels.cvPdf}: ${link(labels.downloadCv, profile.cvPdf, siteUrl)}`,
+    ]),
+    section(labels.skills, profile.skills.map((group) => `### ${group.category}\n\n${list(group.items)}`)),
     section(
-      'Compétences',
-      profile.skills.map((group) => `### ${group.category}\n\n${list(group.items)}`),
-    ),
-    section(
-      'Expériences',
+      labels.experience,
       profile.experiences.map((experience) =>
         [
           `### ${experience.role} - ${experience.company}`,
@@ -157,7 +285,7 @@ function buildCvMarkdown(locale: ContentLocale, siteUrl: string) {
       ),
     ),
     section(
-      'Formation',
+      labels.education,
       profile.education.map((item) =>
         [
           `### ${item.degree}`,
@@ -169,33 +297,31 @@ function buildCvMarkdown(locale: ContentLocale, siteUrl: string) {
       ),
     ),
     section(
-      'Certifications',
+      labels.certifications,
       list(
         profile.certifications.map((item) =>
           [item.name, item.issuer, item.date, item.score, item.url].filter(Boolean).join(' - '),
         ),
       ),
     ),
-    section(
-      'Langues',
-      list(profile.languages.map((item) => `${item.name}: ${item.level}`)),
-    ),
+    section(labels.languages, list(profile.languages.map((item) => `${item.name}: ${item.level}`))),
   ].join('\n\n');
 }
 
 function buildContactMarkdown(locale: ContentLocale, siteUrl: string) {
   const profile = getProfile(locale);
+  const labels = labelsByLocale[locale];
 
   return [
-    '# Contact',
+    `# ${labels.contactTitle}`,
     profile.contactPitch,
     list([
-      `Email: ${profile.email}`,
-      `Téléphone: ${profile.phone}`,
+      `${labels.email}: ${profile.email}`,
+      `${labels.phone}: ${profile.phone}`,
       `LinkedIn: ${profile.linkedin}`,
       `GitHub: ${profile.github}`,
-      `CV PDF: ${link('Télécharger le CV', profile.cvPdf, siteUrl)}`,
-      `Page projets: ${link('Voir les projets', '/projets', siteUrl)}`,
+      `${labels.cvPdf}: ${link(labels.downloadCv, profile.cvPdf, siteUrl)}`,
+      `${labels.projectsPage}: ${link(labels.viewProjects, '/projets', siteUrl)}`,
     ]),
   ].join('\n\n');
 }
@@ -208,30 +334,15 @@ export function buildMarkdownForPath(
   const path = pathname === '/' ? '/' : pathname.replace(/\/+$/, '');
   const projects = getProjects(locale);
 
-  if (path === '/') {
-    return { body: buildHomeMarkdown(locale, siteUrl) };
-  }
-
-  if (path === '/projets') {
-    return { body: buildProjectsMarkdown(locale, siteUrl) };
-  }
-
-  if (path === '/cv') {
-    return { body: buildCvMarkdown(locale, siteUrl) };
-  }
-
-  if (path === '/contact') {
-    return { body: buildContactMarkdown(locale, siteUrl) };
-  }
+  if (path === '/') return { body: buildHomeMarkdown(locale, siteUrl) };
+  if (path === '/projets') return { body: buildProjectsMarkdown(locale, siteUrl) };
+  if (path === '/cv') return { body: buildCvMarkdown(locale, siteUrl) };
+  if (path === '/contact') return { body: buildContactMarkdown(locale, siteUrl) };
 
   const projectSlug = path.match(/^\/projets\/([^/]+)$/)?.[1];
   const project = projects.find((item) => item.slug === projectSlug);
 
-  if (project) {
-    return { body: projectDetail(project, siteUrl, locale) };
-  }
-
-  return null;
+  return project ? { body: projectDetail(project, siteUrl, locale) } : null;
 }
 
 export function estimateMarkdownTokens(markdown: string) {

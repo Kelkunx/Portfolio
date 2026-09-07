@@ -1,5 +1,11 @@
 // app/layout.tsx
 import './globals.css';
+import './styles/navigation.css';
+import './styles/home.css';
+import './styles/document.css';
+import './styles/projects.css';
+import './styles/cv.css';
+import './styles/contact.css';
 import React from 'react';
 import Providers from './providers';
 import Header from '../components/Header';
@@ -8,7 +14,9 @@ import { Space_Grotesk, IBM_Plex_Sans } from 'next/font/google';
 import type { Metadata } from 'next';
 import { LocaleProvider } from '../context/LocaleContext';
 import { Analytics } from '@vercel/analytics/next';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { buildPageMetadata, SITE_URL } from '../../lib/site-metadata';
+import SkipLink from '../components/SkipLink';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -53,14 +61,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr">
       <body className={`${spaceGrotesk.variable} ${ibmPlexSans.variable}`}>
-        <Providers>
-          <LocaleProvider>
-            <a href="#main-content" className="skip-link">Aller au contenu</a>
-            <Header />
-            <main id="main-content">{children}</main>
-            <Footer />
-          </LocaleProvider>
-        </Providers>
+        <AppRouterCacheProvider>
+          <Providers>
+            <LocaleProvider>
+              <SkipLink />
+              <Header />
+              <main id="main-content">{children}</main>
+              <Footer />
+            </LocaleProvider>
+          </Providers>
+        </AppRouterCacheProvider>
         <Analytics />
       </body>
     </html>

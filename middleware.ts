@@ -8,15 +8,31 @@ function acceptsMarkdown(request: NextRequest) {
     .map((entry) => entry.trim().toLowerCase())
     .some((entry) => {
       const [type, ...params] = entry.split(';').map((part) => part.trim());
-      const q = params.find((param) => param.startsWith('q='));
+      const qualityParameter = params.find((param) => param.startsWith('q='));
+      const quality = qualityParameter ? Number(qualityParameter.slice(2)) : 1;
 
-      return type === 'text/markdown' && q !== 'q=0' && q !== 'q=0.0';
+      return type === 'text/markdown' && Number.isFinite(quality) && quality > 0;
     });
 }
 
 function preferredLocale(request: NextRequest) {
   const language = request.headers.get('accept-language')?.toLowerCase() ?? '';
-  return language.startsWith('en') ? 'en' : 'fr';
+
+  const preferredLanguage = language
+    .split(',')
+    .map((entry, index) => {
+      const [tag, ...params] = entry.split(';').map((part) => part.trim());
+      const qualityParameter = params.find((param) => param.startsWith('q='));
+      const quality = qualityParameter ? Number(qualityParameter.slice(2)) : 1;
+
+      return { locale: tag.split('-')[0], quality, index };
+    })
+    .filter(({ locale, quality }) =>
+      (locale === 'fr' || locale === 'en') && Number.isFinite(quality) && quality > 0,
+    )
+    .sort((a, b) => b.quality - a.quality || a.index - b.index)[0];
+
+  return preferredLanguage?.locale === 'en' ? 'en' : 'fr';
 }
 
 function shouldSkip(pathname: string) {
@@ -53,3 +69,7 @@ export function middleware(request: NextRequest) {
     },
   });
 }
+
+export const config = {
+  matcher: ['/', '/projets/:path*', '/cv', '/contact'],
+};

@@ -14,12 +14,12 @@ export const ColorModeContext = createContext<ColorModeContextType>({
 });
 
 const premiumLight = {
-  primary: { main: '#2e7de9' },
-  secondary: { main: '#7b5cf6' },
-  info: { main: '#0087a8' },
-  success: { main: '#3e8a5b' },
-  warning: { main: '#b7791f' },
-  error: { main: '#d64d63' },
+  primary: { main: '#1d63be' },
+  secondary: { main: '#6948d7' },
+  info: { main: '#006a80' },
+  success: { main: '#24673e' },
+  warning: { main: '#8a5a12' },
+  error: { main: '#aa2d46' },
   background: { default: '#e1e2e7', paper: '#ffffff' },
   text: { primary: '#1f2335', secondary: '#2f3555' },
   divider: '#d2d6e3',
@@ -95,30 +95,6 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         },
         shape: { borderRadius: 10 },
         components: {
-          MuiPaper: {
-            styleOverrides: {
-              root: {
-                backgroundImage: 'none',
-              },
-            },
-          },
-          MuiCard: {
-            styleOverrides: {
-              root: {
-                backgroundColor: 'var(--surface)',
-                border: '1px solid var(--border)',
-                boxShadow: 'var(--shadow-soft)',
-                transition: 'border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease',
-              },
-            },
-          },
-          MuiDivider: {
-            styleOverrides: {
-              root: {
-                borderColor: 'var(--border)',
-              },
-            },
-          },
           MuiButton: {
             defaultProps: { disableElevation: true },
             styleOverrides: {
@@ -132,11 +108,11 @@ export default function Providers({ children }: { children: React.ReactNode }) {
               },
               containedPrimary: {
                 backgroundImage: 'none',
-                backgroundColor: mode === 'light' ? '#2e7de9' : '#7aa2f7',
+                backgroundColor: mode === 'light' ? '#1d63be' : '#7aa2f7',
                 color: mode === 'light' ? '#ffffff' : '#10131d',
                 '&:hover': {
                   backgroundImage: 'none',
-                  backgroundColor: mode === 'light' ? '#236fd2' : '#6f98f0',
+                  backgroundColor: mode === 'light' ? '#174f99' : '#6f98f0',
                 },
               },
               outlinedPrimary: {
@@ -163,66 +139,6 @@ export default function Providers({ children }: { children: React.ReactNode }) {
                 transition: 'background-color 160ms ease',
                 '&:hover': {
                   backgroundColor: 'rgba(125, 207, 255, 0.08)',
-                },
-              },
-            },
-          },
-          MuiChip: {
-            defaultProps: {
-              size: 'small',
-            },
-            styleOverrides: {
-              root: {
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                height: 'auto',
-                borderRadius: 10,
-                paddingTop: 0,
-                paddingBottom: 0,
-                fontWeight: 500,
-                '&.MuiChip-sizeSmall': {
-                  minHeight: 28,
-                },
-                '&.MuiChip-sizeMedium': {
-                  minHeight: 34,
-                },
-              },
-              label: {
-                display: 'flex',
-                alignItems: 'center',
-                lineHeight: 1.25,
-                paddingLeft: 12,
-                paddingRight: 12,
-                paddingTop: 6,
-                paddingBottom: 6,
-              },
-            },
-          },
-          MuiOutlinedInput: {
-            styleOverrides: {
-              root: {
-                backgroundColor: 'var(--surface-2)',
-                borderRadius: 10,
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: 'var(--border)',
-                },
-                '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: 'var(--blue)',
-                },
-                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: 'var(--accent)',
-                  boxShadow: '0 0 0 3px var(--ring)',
-                },
-              },
-            },
-          },
-          MuiInputLabel: {
-            styleOverrides: {
-              root: {
-                color: 'var(--muted)',
-                '&.Mui-focused': {
-                  color: 'var(--accent)',
                 },
               },
             },

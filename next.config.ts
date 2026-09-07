@@ -1,50 +1,43 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
+import type { NextConfig } from 'next';
 
-  // Images : remotePatterns remplace images.domains pour Next 14+ / 15.x
+const discoveryLinks = [
+  '</llms.txt>; rel="describedby"; type="text/plain"',
+  '</>; rel="alternate"; type="text/markdown"',
+  '</sitemap.xml>; rel="sitemap"; type="application/xml"',
+].join(', ');
+
+const securityHeaders = [
+  { key: 'X-Content-Type-Options', value: 'nosniff' },
+  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+  { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+  { key: 'X-Frame-Options', value: 'DENY' },
+];
+
+const nextConfig: NextConfig = {
+  reactStrictMode: true,
+  poweredByHeader: false,
+
   images: {
     formats: ['image/avif', 'image/webp'],
-    // Si tu n'as pas d'images externes, laisse remotePatterns vide
-    // ou ajoute ici les hôtes autorisés :
     remotePatterns: [],
   },
 
-  // Headers : patterns compatibles ; attention aux backslashes
   async headers() {
     return [
       {
-        // Liens de découverte HTTP pour agents/crawlers, sans annoncer de fausse API publique.
         source: '/',
-        headers: [
-          {
-            key: 'Link',
-            value:
-              '</>; rel="canonical"; type="text/html", </llms.txt>; rel="describedby"; type="text/plain"; title="LLMs.txt", </>; rel="alternate"; type="text/markdown"; title="Version Markdown", </sitemap.xml>; rel="sitemap"; type="application/xml", </cv-leo-jego.pdf>; rel="author"; type="application/pdf"; title="CV Léo JEGO", </projets>; rel="collection"; title="Projets", </contact>; rel="author"; title="Contact"',
-          },
-        ],
+        headers: [{ key: 'Link', value: discoveryLinks }],
       },
       {
-        // cible les ressources statiques ayant une extension (js, css, images)
-        source: '/:path*\\.(js|css|png|jpg|jpeg|svg|webp|avif)',
-        headers: [
-          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
-        ],
-      },
-      {
-        // toutes les routes API -> no-store
-        source: '/api/:path*',
-        headers: [
-          { key: 'Cache-Control', value: 'no-store' },
-        ],
+        source: '/:path*',
+        headers: securityHeaders,
       },
     ];
   },
 
-  // autres options (laisse tel quel)
   experimental: {
     optimizeCss: true,
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;

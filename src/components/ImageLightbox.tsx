@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useLocale } from '../context/LocaleContext';
 
@@ -27,10 +27,17 @@ export default function ImageLightbox({
 }: Props) {
   const { locale } = useLocale();
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
   const shouldSkipOptimization = src.startsWith('data:') || src.startsWith('blob:');
 
   const openLabel = `${locale === 'fr' ? "Agrandir l'image" : 'Open image'} : ${alt}`;
   const closeLabel = locale === 'fr' ? 'Fermer' : 'Close';
+
+  useEffect(() => {
+    if (isOpen && !dialogRef.current?.open) {
+      dialogRef.current?.showModal();
+    }
+  }, [isOpen]);
 
   return (
     <>
@@ -38,7 +45,7 @@ export default function ImageLightbox({
         type="button"
         className="lightbox-thumbnail"
         style={thumbHeight ? { height: thumbHeight } : { aspectRatio }}
-        onClick={() => dialogRef.current?.showModal()}
+        onClick={() => setIsOpen(true)}
         aria-label={openLabel}
       >
         <Image
@@ -56,6 +63,7 @@ export default function ImageLightbox({
         ref={dialogRef}
         className="lightbox-dialog"
         aria-label={`${locale === 'fr' ? 'Aperçu agrandi' : 'Enlarged preview'} : ${alt}`}
+        onClose={() => setIsOpen(false)}
         onClick={(event) => {
           if (event.target === event.currentTarget) event.currentTarget.close();
         }}
@@ -69,17 +77,18 @@ export default function ImageLightbox({
         >
           <span aria-hidden="true">&times;</span>
         </button>
-
-        <div className="lightbox-image">
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            sizes="100vw"
-            unoptimized={shouldSkipOptimization}
-            style={{ objectFit: 'contain' }}
-          />
-        </div>
+        {isOpen && (
+          <div className="lightbox-image">
+            <Image
+              src={src}
+              alt={alt}
+              fill
+              sizes="100vw"
+              unoptimized={shouldSkipOptimization}
+              style={{ objectFit: 'contain' }}
+            />
+          </div>
+        )}
       </dialog>
     </>
   );

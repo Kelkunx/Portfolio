@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -17,7 +17,8 @@ import SiteContainer from './SiteContainer';
 
 export default function Header() {
   const mobileMenuRef = useRef<HTMLDialogElement>(null);
-  const { t } = useLocale();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { locale, t } = useLocale();
   const pathname = usePathname();
 
   const navLinks = [
@@ -99,7 +100,7 @@ export default function Header() {
             <Box
               className="site-header-surface"
               component="nav"
-              aria-label="Primary navigation"
+              aria-label={locale === 'fr' ? 'Navigation principale' : 'Primary navigation'}
               sx={{
                 display: { xs: 'none', md: 'flex' },
                 alignItems: 'center',
@@ -135,6 +136,7 @@ export default function Header() {
                     key={link.key}
                     component={Link}
                     href={link.href}
+                    aria-current={active ? 'page' : undefined}
                     variant="text"
                     sx={{
                       position: 'relative',
@@ -215,9 +217,14 @@ export default function Header() {
               <LanguageToggle />
               <ThemeToggle />
               <IconButton
-                onClick={() => mobileMenuRef.current?.showModal()}
-                aria-label={t.nav.home === 'Accueil' ? 'Ouvrir le menu' : 'Open menu'}
+                onClick={() => {
+                  mobileMenuRef.current?.showModal();
+                  setIsMobileMenuOpen(true);
+                }}
+                aria-label={locale === 'fr' ? 'Ouvrir le menu' : 'Open menu'}
                 aria-haspopup="dialog"
+                aria-controls="mobile-navigation"
+                aria-expanded={isMobileMenuOpen}
                 sx={{
                   width: 44,
                   height: 44,
@@ -241,9 +248,11 @@ export default function Header() {
       </AppBar>
 
       <dialog
+        id="mobile-navigation"
         ref={mobileMenuRef}
         className="mobile-nav-dialog"
-        aria-label={t.nav.home === 'Accueil' ? 'Navigation principale' : 'Primary navigation'}
+        aria-label={locale === 'fr' ? 'Navigation principale' : 'Primary navigation'}
+        onClose={() => setIsMobileMenuOpen(false)}
         onClick={(event) => {
           if (event.target === event.currentTarget) event.currentTarget.close();
         }}
@@ -252,7 +261,7 @@ export default function Header() {
           type="button"
           className="mobile-nav-close"
           onClick={() => mobileMenuRef.current?.close()}
-          aria-label={t.nav.home === 'Accueil' ? 'Fermer le menu' : 'Close menu'}
+          aria-label={locale === 'fr' ? 'Fermer le menu' : 'Close menu'}
         >
           <span aria-hidden="true">&times;</span>
         </button>
@@ -273,13 +282,14 @@ export default function Header() {
               return (
                 <li key={link.key}>
                   <Link
-                  href={link.href}
-                  onClick={() => mobileMenuRef.current?.close()}
-                  className={`mobile-nav-link${active ? ' mobile-nav-link-active' : ''}`}
-                  style={{
-                    borderLeftColor: active ? tone : 'transparent',
-                  }}
-                >
+                    href={link.href}
+                    onClick={() => mobileMenuRef.current?.close()}
+                    className={`mobile-nav-link${active ? ' mobile-nav-link-active' : ''}`}
+                    aria-current={active ? 'page' : undefined}
+                    style={{
+                      borderLeftColor: active ? tone : 'transparent',
+                    }}
+                  >
                     {link.label}
                   </Link>
                 </li>
